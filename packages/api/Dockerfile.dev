@@ -1,0 +1,25 @@
+FROM node:20.0-alpine3.17
+
+# setting eviroment variables
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
+
+# make the 'app' folder the current working directory
+WORKDIR /usr/src/app
+
+# install python and g++ usefull for some nodejs dependecies
+RUN apk --no-cache add  \
+    git \
+    python3 \
+    make \
+    g++
+
+# copy project files and folders to the current working directory (i.e. 'app' folder)
+COPY . .
+
+# install project dependencies
+RUN yarn install
+
+EXPOSE 3000
+
+CMD ["yarn", "watch"]

@@ -1,0 +1,8 @@
+{
+  "idx": 0,
+  "5": { "es": "Totalmente de acuerdo", "en": "Completely agree" },
+  "4": { "es": "De acuerdo", "en": "Agree" },
+  "3": { "es": "Ni de acuerdo ni en desacuerdo", "en": "Neither agree nor disagree" },
+  "2": { "es": "En Desacuerdo", "en": "Disagree" },
+  "1": { "es": "Totalmente en Desacuerdo", "en": "Completely disagree" }
+}

@@ -1,0 +1,9 @@
+
+{
+  "productName": "CC180",
+  "clientUrl": "http://localhost",
+  "clientPort": 8084,
+  "serverUrl": "172.17.0.1",
+  "serverPort": 3004,
+  "reference": 4
+}

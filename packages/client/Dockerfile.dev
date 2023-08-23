@@ -1,0 +1,28 @@
+FROM node:14.17.6-alpine3.14
+
+# setting eviroment variables
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
+
+# make the 'app' folder the current working directory
+WORKDIR /usr/src/app
+
+# install python and g++ usefull for some nodejs dependecies
+RUN apk --no-cache add \
+    git \
+    python2 \
+    python3 \
+    make \
+    g++
+
+# add global vue-cli 
+RUN yarn global add @vue/cli -g
+
+
+# copy project files and folders to the current working directory (i.e. 'app' folder)
+COPY . .
+
+# install project dependencies
+RUN yarn
+
+CMD ["yarn", "serve"]

@@ -1,0 +1,46 @@
+version: "3.7"
+services:
+    client:
+        container_name: occ_deip_client
+        build:
+          context: ./packages/client
+          dockerfile: Dockerfile.dev
+        ports:
+            - "8088:8080"
+        volumes:
+            - ./packages/client/src:/usr/src/app/src
+            #- /usr/src/app/node_modules
+        depends_on:
+            - api
+        networks:
+            - occdeip
+    api:
+        container_name: occ_deip_api
+        build:
+          context: ./packages/api
+          dockerfile: Dockerfile.dev
+        ports:
+            - "3008:3000"
+        volumes:
+            - ./packages/api/src:/usr/src/app/src
+            #- /usr/src/app/node_modules
+        depends_on:
+            - mongodb
+        networks:
+            - occdeip
+    mongodb:
+        container_name: occ_deip_mongodb
+        image: mongo
+        restart: always
+        volumes:
+            - /data/db
+        ports:
+            - 34017:27017
+        networks:
+            - occdeip
+networks:
+    occdeip:
+        driver: bridge
+
+volumes:
+  mongodb:

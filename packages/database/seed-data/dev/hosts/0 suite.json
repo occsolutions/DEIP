@@ -1,0 +1,9 @@
+
+{
+  "productName": "Suite",
+  "clientUrl": "http://localhost",
+  "clientPort": 8080,
+  "serverUrl": "172.17.0.1",
+  "serverPort": 3000,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiJPQ0MtU3lzdGVtLUdlbmVyYXRlZCIsInZhbGlkYXRlIjoxNjUyODIxNzM2MjQ5fSwicm5kIjowLjY5NjE5NDA1NDM5ODcxMjQsImlhdCI6MTY1MjgyMTczNiwiZXhwIjoxNzE1OTM2OTM2fQ.ot7Ap1C2yDVif0Z4x_0CmdjkxmjZlkikDpDabUTYZfc"
+}

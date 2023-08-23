@@ -1,0 +1,9 @@
+
+{
+  "productName": "Pulse",
+  "clientUrl": "https://pulse.occ-solutions.com",
+  "clientPort": 443,
+  "serverUrl": "https://serverpulse.azurewebsites.net",
+  "serverPort": 443,
+  "reference": 1
+}

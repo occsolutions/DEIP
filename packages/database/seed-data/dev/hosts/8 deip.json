@@ -1,0 +1,10 @@
+
+{
+  "productName": "DEIP",
+  "clientUrl": "http://localhost",
+  "clientPort": 8088,
+  "serverUrl": "172.17.0.1",
+  "serverPort": 3008,
+  "code":"oHVyMS",
+  "reference": 8
+}

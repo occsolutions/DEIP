@@ -1,0 +1,9 @@
+
+{
+  "productName": "Suite",
+  "clientUrl": "https://suite.occ-solutions.com/",
+  "clientPort": 443,
+  "serverUrl": "https://occsuiteserver.azurewebsites.net/",
+  "serverPort": 443,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiJPQ0MtU3lzdGVtLUdlbmVyYXRlZCIsInZhbGlkYXRlIjoxNjUyODIxNzM2MjQ5fSwicm5kIjowLjY5NjE5NDA1NDM5ODcxMjQsImlhdCI6MTY1MjgyMTczNiwiZXhwIjoxNzE1OTM2OTM2fQ.ot7Ap1C2yDVif0Z4x_0CmdjkxmjZlkikDpDabUTYZfc"
+}

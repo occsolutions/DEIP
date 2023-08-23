@@ -1,0 +1,10 @@
+
+{
+  "productName": "LIDERAZGO360",
+  "clientUrl": "http://localhost",
+  "clientPort": 8086,
+  "serverUrl": "172.17.0.1",
+  "serverPort": 3006,
+  "token":"nkaKrB4DWKL8WKTxJaTtSrkgNcmFMpQ7HF75CXh7Mt6FjucKMHREsAewgg5jj5d22dqXsKDd7MX5b6w7PVA6N",
+  "reference": 6
+}

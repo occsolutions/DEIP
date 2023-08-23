@@ -1,0 +1,9 @@
+
+{
+  "productName": "DML",
+  "clientUrl": "https://dml360.occ-solutions.com/",
+  "clientPort": 443,
+  "serverUrl": "https://occdml360server.azurewebsites.net/",
+  "serverPort": 443,
+  "reference": 3
+}

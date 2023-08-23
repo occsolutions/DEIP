@@ -1,0 +1,9 @@
+
+{
+  "productName": "CC180",
+  "clientUrl": "https://cc180.occ-solutions.com/",
+  "clientPort": 443,
+  "serverUrl": "https://occcc180server.azurewebsites.net/",
+  "serverPort": 443,
+  "reference": 4
+}

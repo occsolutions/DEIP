@@ -1,0 +1,64 @@
+
+@font-face {
+  font-family: 'OpenSans';
+  font-weight: normal;
+  font-style: normal;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'),
+    url('/fonts/open-sans-regular.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+/* @font-face {
+  font-family: 'MuliRegular';
+  font-weight: normal;
+  font-style: normal;
+  src: local('Josefin Sans Regular'), local('Muli-Regular'),
+    url('/fonts/muli-regular.ttf') format('truetype'); /* Safari, Android, iOS 
+} */
+
+* {
+  font-family: 'OpenSans';
+  font-size: 16px;
+}
+
+table.v-table tbody td {
+  font-size: 16px !important;
+}
+
+h1, h2, h3, h4, h5, h6, th, .v-toolbar__title {
+  font-family: 'OpenSans';
+}
+
+.background {
+  background-color: #f6f6f6;
+  background-image: url('/img/background-auth.jpg');
+  background-size: cover;
+}
+.background > .v-content__wrap{
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+section.enterprise-logo,
+.v-navigation-drawer article section{
+  border: 3px solid #51c7af;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  padding: 5px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  overflow: hidden;
+}
+
+section.enterprise-logo img,
+.v-navigation-drawer article section img{
+  max-width: 80%;
+  max-height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}

@@ -1,0 +1,9 @@
+
+{
+  "productName": "Pulse",
+  "clientUrl": "https://clientpulse-qa.azurewebsites.net",
+  "clientPort": 443,
+  "serverUrl": "https://serverpulse-qa.azurewebsites.net",
+  "serverPort": 443,
+  "reference": 1
+}

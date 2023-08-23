@@ -1,0 +1,10 @@
+
+{
+  "productName": "ENERGY COMPASS",
+  "clientUrl": "http://localhost",
+  "clientPort": 8087,
+  "serverUrl": "172.17.0.1",
+  "serverPort": 3007,
+  "code":"LiPKmX",
+  "reference": 7
+}

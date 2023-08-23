@@ -1,0 +1,34 @@
+
+<template>
+  <v-app>
+    <v-main>
+      <v-container style="backgorund-coler: grey;">
+        <v-row justify="end" class="mt-2" align="end" style="height: 300px;">
+          <v-col md="6">
+            <img src="img/2-404-OCC.svg" alt="404 Suite Error">
+          </v-col>
+        </v-row>
+        <v-row justify="end" class="mt-2">
+          <v-col md="6" class="text-end">
+            <p>
+              <strong>{{ $t('errors.apology') }}</strong>
+              <br>
+              {{ $t('errors.not_found') }}
+            </p>
+          </v-col>
+        </v-row>
+        <v-row justify="end" class="mt-2">
+          <v-col md="6" class="text-end">
+            <v-btn to="/" color="primary" small>{{ $t('errors.back_home') }}</v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
+<script>
+import Vue from 'vue'
+
+export default Vue.extend()
+</script>

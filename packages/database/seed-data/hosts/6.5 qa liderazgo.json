@@ -1,0 +1,9 @@
+
+{
+  "productName": "LIDERAZGO360",
+  "clientUrl": "https://occliderazgoclient-occliderazgoqa.azurewebsites.net/",
+  "clientPort": 443,
+  "serverUrl": "https://occliderazgoserver-occliderazgoqaserver.azurewebsites.net/",
+  "serverPort": 443,
+  "reference": 6
+}

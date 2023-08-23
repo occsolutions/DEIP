@@ -1,0 +1,9 @@
+
+{
+  "productName": "Cultura",
+  "clientUrl": "http://localhost",
+  "clientPort": 8082,
+  "serverUrl": "172.17.0.1",
+  "serverPort": 3002,
+  "reference": 2
+}

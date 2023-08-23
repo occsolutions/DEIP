@@ -1,0 +1,9 @@
+
+{
+  "productName": "DML",
+  "clientUrl": "http://localhost",
+  "clientPort": 8083,
+  "serverUrl": "172.17.0.1",
+  "serverPort": 3003,
+  "reference": 3
+}

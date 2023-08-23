@@ -1,0 +1,9 @@
+
+{
+  "productName": "POR",
+  "clientUrl": "https://occporclient-qa.azurewebsites.net/",
+  "clientPort": 443,
+  "serverUrl": "https://occporserver-qa.azurewebsites.net/",
+  "serverPort": 443,
+  "reference": 5
+}

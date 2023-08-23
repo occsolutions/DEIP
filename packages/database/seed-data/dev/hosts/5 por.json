@@ -1,0 +1,9 @@
+
+{
+  "productName": "POR",
+  "clientUrl": "http://localhost",
+  "clientPort": 8085,
+  "serverUrl": "172.17.0.1",
+  "serverPort": 3005,
+  "reference": 5
+}

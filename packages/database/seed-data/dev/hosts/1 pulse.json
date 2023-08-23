@@ -1,0 +1,9 @@
+
+{
+  "productName": "Pulse",
+  "clientUrl": "http://localhost",
+  "clientPort": 8081,
+  "serverUrl": "172.17.0.1",
+  "serverPort": 3001,
+  "reference": 1
+}
