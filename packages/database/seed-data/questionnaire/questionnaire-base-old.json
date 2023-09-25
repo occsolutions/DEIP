@@ -1,0 +1,621 @@
+{
+  "name": "Cuestionario DEIP",
+  "slug": "base-questionnaire",
+  "active": true,
+  "isBase": true,
+  "assignationType": "",
+  "assignationFor" : null,
+  "createdAt": "2022-05-11T15:45:55.057Z",
+  "updatedAt": "2022-05-11T15:45:55.057Z",
+  "deletedAt": null,
+  "evaluations": {
+    "physical": {
+      "nutrition": {
+        "dietQuality": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Dieta saludable y balanceada",
+            "en": "Healthy and balanced diet"
+          },
+          "question": {
+            "es": "Considero que mi dieta es muy saludable y balanceada",
+            "en": "I believe that my diet is very healthy and balanced"
+          }
+        },
+        "quantityOfFood": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Cuidado en cantidad de comida consumida",
+            "en": "Being aware of the amount and quality of the food consumed"
+          },
+          "question": {
+            "es": "Siempre soy muy cuidadoso con las porciones / tamaño de mis comidas, evitando excesos",
+            "en": "I am always very careful with the portions / size of my meals, avoiding any excess"
+          }
+        },
+        "foodKnowledge": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Conocimiento de ingredientes  y orígenes de los alimentos",
+            "en": "Learn about the food’s ingredients and origin"
+          },
+          "question": {
+            "es": "Conozco bien los ingredientes, orígenes y características de los alimentos que consumo (soy crítico y curioso)",
+            "en": "I am well aware of the ingredients, origin, and characteristics of the food I eat (I am critical and curious)"
+          }
+        },
+        "hydration": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Cantidad de líquidos consumidos",
+            "en": "Being aware of daily fluids’ intake"
+          },
+          "question": {
+            "es": "Tomo suficiente líquido durante el día (al menos el equivalente a 2.5 litros de agua)",
+            "en": "I drink enough fluids during the day (at least, the equivalent to 2.5 liters of water)"
+          }
+        }
+      },
+      "physicalActivity": {
+        "cardiovascularExercise": {
+          "index": [],
+          "answers": 1,
+          "reference": {
+            "es": "Frecuencia de ejercicios cardiovasculares",
+            "en": "Frequency of cardiovascular exercises"
+          },
+          "question": {
+            "es": "Número aproximado de veces que hago ejercicios cardiovasculares a la semana",
+            "en": "Approximate number of times I do cardio exercises per week"
+          }
+        },
+        "strengtheningExercise": {
+          "index": [],
+          "answers": 1,
+          "reference": {
+            "es": "Frecuencia de ejercicios de fortalecimiento / estiramiento",
+            "en": "Frequency of strengthening/stretching exercises"
+          },
+          "question": {
+            "es": "Número aproximado de veces que hago ejercicios de fortalecimiento / estiramiento a la semana",
+            "en": "Approximate number of times I do strengthening/stretching exercises per week"
+          }
+        },
+        "movement": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Nivel de actividad y movimiento en rutina diaria",
+            "en": "Activity and movement levels during the daily routine"
+          },
+          "question": {
+            "es": "En general mi rutina en días laborales es activa, con movimiento permanente",
+            "en": "In general, my routine on working days is active and I constantly move"
+          }
+        },
+        "exerciseDiscipline": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Metas para mejorar desempeño físico",
+            "en": "Goals to improve physical performance"
+          },
+          "question": {
+            "es": "Tengo metas concretas para mejorar mi desempeño en actividades físicas / deportivas",
+            "en": "I have concrete goals to improve my performance in physical activities / sports"
+          }
+        }
+      },
+      "recovery": {
+        "amountOfSleep": {
+          "index": [],
+          "answers": 2,
+          "reference": {
+            "es": "Número aproximado de horas de sueño",
+            "en": "Approximate number of hours of sleep"
+          },
+          "question": {
+            "es": "El número aproximado de mis horas de sueño en la noche es",
+            "en": "My approximate number of my hours of sleep at night is"
+          }
+        },
+        "dailyEnergy": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Nivel de energía al terminar jornada laboral",
+            "en": "Energy level at the end of the working day"
+          },
+          "question": {
+            "es": "Siempre termino mi jornada laboral diaria con buenos niveles de energía",
+            "en": "I always have good energy levels at the end of my daily workday"
+          }
+        },
+        "activeBreaks": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Realización de pausas activas ",
+            "en": "Active breaks"
+          },
+          "question": {
+            "es": "Siempre hago varias pausas activas durante el día para renovar mi energía",
+            "en": "I always take several active breaks during the day to renew my energy"
+          }
+        },
+        "sleepQuality": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Calidad del sueño y nivel de reparación",
+            "en": "Sleep quality and level of repair"
+          },
+          "question": {
+            "es": "Tengo un sueño muy reparador que me permite levantarme siempre totalmente renovado",
+            "en": "I have a very restful sleep, enabling me to always wake up completely refreshed"
+          }
+        }
+      }
+    },
+    "mental": {
+      "stress": {
+        "workStress": {
+          "index": ["generalHealth", "burnoutIndividual"],
+          "answers": 0,
+          "reference": {
+            "es": "Impacto en salud física y mental del estrés laboral ",
+            "en": "Work-related stress’s impact on physical and mental health"
+          },
+          "question": {
+            "es": "Mi nivel de estrés laboral actual no afecta mi salud física ni mental",
+            "en": "My current level of work stress does not affect my physical or mental health"
+          }
+        },
+        "personalStress": {
+          "index": ["burnoutIndividual"],
+          "answers": 0,
+          "reference": {
+            "es": "Nivel de estrés por relaciones personales y familiares",
+            "en": "Stress level from personal and family relationships"
+          },
+          "question": {
+            "es": "Mis relaciones personales (pareja, hijos, familia, amigos) actualmente no me generen alto estrés",
+            "en": "My personal relationships (partner, children, family, friends) do not currently generate high stress"
+          }
+        },
+        "financialHealth": {
+          "index": ["burnoutIndividual"],
+          "answers": 0,
+          "reference": {
+            "es": "Nivel de estrés por situación financiera",
+            "en": "Stress level from finance"
+          },
+          "question": {
+            "es": "Mi situación financiera actual no me genera preocupación ni ansiedad",
+            "en": "My current financial situation does not cause me concern or anxiety"
+          }
+        },
+        "stressResponse": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Respuesta en situaciones de crisis y estrés",
+            "en": "Reaction under crisis and stress"
+          },
+          "question": {
+            "es": "En situaciones de crisis y alto estrés, siempre respondo con calma y asertividad (sin ansiedad)",
+            "en": "Under crisis and high stress situations, I always react calmly and assertively (without anxiety)"
+          }
+        }
+      },
+      "mindfulness": {
+        "focus": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Presencia y foco en conversaciones con los demás",
+            "en": "Presence and focus while speaking with others"
+          },
+          "question": {
+            "es": "En mis conversaciones, siempre estoy prestando total atención a mis interlocutores",
+            "en": "In my conversations, I am always paying full attention to my counterparty"
+          }
+        },
+        "meditation": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Realización de actividades de concentración y reflexión",
+            "en": "Activities demanding concentration, contemplation, and/or reflection"
+          },
+          "question": {
+            "es": "Realizo actividades de reflexión y concentración profunda como meditar u otras equivalentes",
+            "en": "I engage in activities demanding reflection, contemplation, and/or deep concentration such as meditating or other equivalents"
+          }
+        },
+        "humor": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Aproximación con humor a diferentes aspectos de la vida",
+            "en": "Humorous and optimistic approach to different aspects of life"
+          },
+          "question": {
+            "es": "Me reconocen por imprimirle buen humor a los diferentes aspectos de la vida",
+            "en": "I am recognized for being optimistic and imprinting good humor on the different aspects of life"
+          }
+        },
+        "presence": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Presencia plena en relaciones familiares",
+            "en": "Mindfulness in family relationships"
+          },
+          "question": {
+            "es": "Cuando estoy con mi familia estoy 100% presente",
+            "en": "When I am with my family, I am 100% present"
+          }
+        }
+      },
+      "productivity": {
+        "concentration": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Profundidad y duración de actividades de concentración",
+            "en": "Depth and duration of activities demanding concentration, contemplation, and/or reflection"
+          },
+          "question": {
+            "es": "En mi trabajo se me facilita sostener un alto nivel de concentración en un tema en particular, por amplios espacios de tiempo",
+            "en": "In my work, it is easy for me to maintain a high level of concentration on any particular issue for long periods of time"
+          }
+        },
+        "multitask": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Foco en tarea principal evitando la multitarea",
+            "en": "Focus on main task, avoiding multitasking"
+          },
+          "question": {
+            "es": "Realizo mi trabajo focalizado en un tema a la vez, evitando la multitarea",
+            "en": "I never end up multitasking, without having planned it first"
+          }
+        },
+        "laborJourneys": {
+          "index": ["burnoutIndividual"],
+          "answers": 0,
+          "reference": {
+            "es": "Trabajo en límites del horario laboral",
+            "en": "Work beyond business hours"
+          },
+          "question": {
+            "es": "Salvo contadas excepciones, solo trabajo en días y horarios de mi jornada laboral",
+            "en": "With few exceptions, I only work on my working days and schedules"
+          }
+        },
+        "psychologicalSafety": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Seguridad Psicológica",
+            "en": "Psychological Safety"
+          },
+          "question": {
+            "es": "En mi trabajo, me siento seguro al expresar todas mis opiniones, proponer nuevas ideas y aceptar mis errores",
+            "en": "At work, I feel comfortable expressing all of my opinions, proposing new ideas, and accepting my mistakes"
+          }
+        }
+      }
+    },
+    "emotional": {
+      "purpose": {
+        "personalPurpose": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Propósito de vida claro y alineado con el trabajo",
+            "en": "A clear life purpose aligned with work"
+          },
+          "question": {
+            "es": "Tengo un propósito de vida claro y mi trabajo actual está alineado con éste",
+            "en": "I have a clear life purpose and my current job is aligned with it"
+          }
+        },
+        "socialImpact": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Inversión de tiempo y energía en actividades con impacto social",
+            "en": "Investing time and energy in activities with a social impact"
+          },
+          "question": {
+            "es": "Invierto tiempo y energía suficientes para marcar una diferencia positiva en la vida de otras personas",
+            "en": "I invest enough time and energy to make a positive impact on the lives of others"
+          }
+        },
+        "passions": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Dedicación de tiempo a actividades que generan pasión",
+            "en": "Devoting time to activities that I am passionate for"
+          },
+          "question": {
+            "es": "Dedico tiempo suficiente a las actividades que me apasionan",
+            "en": "I devote enough time to activities that I am passionate about"
+          }
+        },
+        "resilience": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Resiliencia ante adversidades y fracasos",
+            "en": "Resilience in the face of adversity and failure"
+          },
+          "question": {
+            "es": "Soy persistente ante las adversidades y fracasos que enfrento",
+            "en": "I am persistent in the face of adversity and failures"
+          }
+        }
+      },
+      "constructiveRelationships": {
+        "socialization": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Invertir tiempo y energía en personas importantes",
+            "en": "Investing time and energy in important people"
+          },
+          "question": {
+            "es": "Estoy satisfecho con el tiempo y energía que invierto en las personas que quiero y aprecio",
+            "en": "I am satisfied with the time and energy I invest in the people I love and care for"
+          }
+        },
+        "laborRelations": {
+          "index": ["burnoutIndividual"],
+          "answers": 0,
+          "reference": {
+            "es": "Buenas relaciones con compañeras de trabajo",
+            "en": "Good relations with co-workers"
+          },
+          "question": {
+            "es": "Las relaciones con mis compañeros de trabajo siempre son transparentes, constructivas y cordiales",
+            "en": "Relations with my co-workers are always transparent, constructive, and amiable"
+          }
+        },
+        "feedback": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Aceptación humilde de críticas y comentarios",
+            "en": "Humble acceptance of criticism and feedback"
+          },
+          "question": {
+            "es": "Acepto críticas y retroalimentación de manera humilde (no a la defensiva)",
+            "en": "I accept criticism and feedback humbly (not defensively)"
+          }
+        },
+        "relationship": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Construyendo relaciones constructivas en el trabajo",
+            "en": "Building constructive relations at work"
+          },
+          "question": {
+            "es": "Se me facilita construir las relaciones profesionales que necesito en el trabajo para ser exitoso (jefes, pares, subalternos, clientes, etc.)",
+            "en": "It is easy for me to build at work the professional relationships (bosses, peers, subordinates, clients, etc.) I need to be successful"
+          }
+        }
+      },
+      "emotionalIntelligence": {
+        "attitude": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Autoconocimiento Emocional",
+            "en": "Emotional self-awareness"
+          },
+          "question": {
+            "es": "Tengo conciencia plena de mis emociones y sé regularlas cuando es necesario",
+            "en": "I am fully aware of my emotions and know how to regulate them when necessary"
+          }
+        },
+        "conflictManagement": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Manejo asertivo de conflictos",
+            "en": "Assertive conflict management"
+          },
+          "question": {
+            "es": "Siempre manejo los conflictos asertivamente buscando soluciones y evitando escalarlos",
+            "en": "I always handle conflicts assertively, striving to find solutions, and avoiding escalations"
+          }
+        },
+        "empathy": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Empatía",
+            "en": "Empathy"
+          },
+          "question": {
+            "es": "Soy empático y sensible a lo que piensan y sienten las personas que me rodean",
+            "en": "I am empathetic and sensible to what other people believe and feel"
+          }
+        },
+        "gratitude": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Expresión de agradecimiento con los demás",
+            "en": "Expresses appreciation toward others"
+          },
+          "question": {
+            "es": "Me tomo el tiempo para expresar agradecimiento con los demás y celebrar mis logros ",
+            "en": "I take time to express appreciation toward others and celebrate my accomplishments"
+          }
+        }
+      }
+    },
+    "professional": {
+      "professionalHabits": {
+        "habits": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Aplicación disciplinada de hábitos positivos",
+            "en": "Disciplined application of positive habits"
+          },
+          "question": {
+            "es": "Tengo excelentes hábitos profesionales (diarios, semanales, mensuales) que aplico con disciplina",
+            "en": "I have excellent professional habits (daily, weekly, monthly) that I apply with discipline"
+          }
+        },
+        "weather": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Manejo óptimo de tiempo y agenda",
+            "en": "Optimal time and schedule management"
+          },
+          "question": {
+            "es": "Manejo de manera óptima mi tiempo y agenda",
+            "en": "I optimally manage my time and agenda"
+          }
+        },
+        "meetings": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Número y frecuencia adecuada de reuniones",
+            "en": "Appropriate number and frequency of meetings"
+          },
+          "question": {
+            "es": "Las reuniones (número / duración) e indicadores de seguimiento que uso en mi trabajo son óptimos para ser altamente eficiente",
+            "en": "My work meetings (number/duration) and methods to follow-up on my tasks are optimal and thus highly efficient"
+          }
+        },
+        "compliance": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Cumplimiento oportuno y con calidad de compromisos",
+            "en": "Fulfilling commitments timely and with quality"
+          },
+          "question": {
+            "es": "Cumplo en tiempo y calidad con todos los compromisos adquiridos",
+            "en": "I comply timely and with quality all my commitments"
+          }
+        }
+      },
+      "personalDevelopment": {
+        "careerGoals": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Plan de carrera claro y alineado con el trabajo actual",
+            "en": "Clear career plan aligned with current job"
+          },
+          "question": {
+            "es": "Tengo un plan de carrera claro y mi trabajo actual hace parte del mismo",
+            "en": "I have a clear career plan and my current job is part of it"
+          }
+        },
+        "developing": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Documentación anual de plan de desarrollo",
+            "en": "Documentation of the annual development plan"
+          },
+          "question": {
+            "es": "Todos los años documento un plan personal de desarrollo para mejorar mi desempeño profesional",
+            "en": "Every year I document a personal development plan to improve my professional performance"
+          }
+        },
+        "weather": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Inversión de tiempo en desarrollo de nuevas habilidades y conocimientos",
+            "en": "Investing time in the development of new skills and knowledge"
+          },
+          "question": {
+            "es": "Invierto suficiente tiempo para desarrollar nuevas habilidades y conocimientos útiles en mi trabajo y vida personal",
+            "en": "I invest sufficient time in developing new skills and acquiring knowledge useful in my work and personal life"
+          }
+        },
+        "selfKnowledge": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Retroalimentación del líder",
+            "en": "Leader's feedback"
+          },
+          "question": {
+            "es": "Recibo retroalimentación frecuente y abierta de mi líder, que me permite entender mis áreas de oportunidad",
+            "en": "I receive frequent and open feedback from my leader, allowing me to understand my areas of opportunity"
+          }
+        }
+      },
+      "distractionManagement": {
+        "screenTime": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Afectación de productividad por tiempo en pantalla",
+            "en": "Screentime’s impact on productivity"
+          },
+          "question": {
+            "es": "El tiempo que invierto en redes sociales, whatsapp y otros medios digitales no afecta mi productividad",
+            "en": "The time I spend on social networks, WhatsApp, and other digital media does not affect my productivity"
+          }
+        },
+        "procrastination": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Procrastinación de tareas y proyectos",
+            "en": "Procrastination of tasks and projects"
+          },
+          "question": {
+            "es": "Rara vez aplazo tareas y proyectos importantes que tengo planeados de tiempo atrás",
+            "en": "I rarely postpone any important tasks and projects that I have planned to do ahead of time."
+          }
+        },
+        "distractorsStrategy": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Estrategia para evitar distracciones",
+            "en": "Strategies to avoid distractions"
+          },
+          "question": {
+            "es": "Tengo estrategias implementadas para bloquear distracciones y lograr el foco que requiero",
+            "en": "I have strategies in place to block out distractions and achieve the focus I require"
+          }
+        },
+        "balance": {
+          "index": [],
+          "answers": 0,
+          "reference": {
+            "es": "Satisfacción por balance de tiempo entre trabajo y temas personales",
+            "en": "Satisfaction from time balance between work and personal issues"
+          },
+          "question": {
+            "es": "Estoy satisfecho(a) con el balance de tiempo que destino a mi trabajo y a otros temas personales",
+            "en": "I am satisfied with the balance of time I devote to my work and other personal matters"
+          }
+        }
+      }
+    }
+  }
+}
