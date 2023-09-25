@@ -223,6 +223,7 @@ class EvaluationsController {
         populationSelectionType: input.selectionType,
         populationSelectionDetails: criteria,
         populationCount: input.populationCount,
+        populationLeaders: input.leaders,
         populationCompletedCount: 0,
         additionalSegmentation: input.additionalSegmentation
       };
@@ -254,7 +255,6 @@ class EvaluationsController {
 
       res.send(evaluation);
     } catch (error) {
-      console.log(error);
       res.send({
         msg: error,
         status: 400
@@ -723,7 +723,8 @@ class EvaluationsController {
     } catch (error) {
       resp.status(404).send({
         msg: 'Not found',
-        status: 404
+        status: 404,
+        error
       });
     }
   }
@@ -738,6 +739,11 @@ class EvaluationsController {
 
     const examples = [];
     for (const enterpriseEmployee of employeesRequest.res.items) {
+      if (req.body.filters && req.body.filters.length) {
+        if (req.body.filters.indexOf(enterpriseEmployee.id) === -1) {
+          continue;
+        }
+      }
       if (enterpriseEmployee.employee.email) {
         examples.push([enterpriseEmployee.employee.email]);
       }
