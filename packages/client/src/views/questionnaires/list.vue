@@ -23,7 +23,7 @@
             :parent-fetch-data="getQuestionnaires"
             :options="options"
             :reload="reloadTable"
-            no-data="questionnaires.no_data"
+            no-data="Views.Questionnaires.list.no_data"
             @offReload="offReload"
           >
             <template v-slot:structure="prop">
