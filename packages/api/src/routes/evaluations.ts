@@ -74,7 +74,7 @@ export default (middlewares, services) => {
     }
   );
 
-  EvaluationsRouter.get(
+  EvaluationsRouter.post(
     '/generate-template',
     EvaluationsController.generateTemplate
   );

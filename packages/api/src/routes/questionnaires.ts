@@ -56,5 +56,15 @@ export default () => {
     QuestionnairesController.editIndexQuestion
   );
 
+  QuestionnairesRouter.get(
+    '/questions-types',
+    QuestionnairesController.questionsTypes
+  );
+
+  QuestionnairesRouter.post(
+    '/edit/:slug/options',
+    QuestionnairesController.updateOptions
+  );
+
   return QuestionnairesRouter;
 };
