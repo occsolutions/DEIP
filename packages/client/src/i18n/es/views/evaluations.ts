@@ -77,6 +77,7 @@ export default {
     questionnaire_e: 'Cuestionario DEIP',
     pdf_explained: 'Este archivo contiene las preguntas del cuestionario "{name}" agrupadas por dimensión.',
     questionnaire_title: 'OCC - Reporte DEIP',
+    leader: 'Líder con personas a cargo',
     copyright: 'Copyright por OCC - Todos los derechos reservados',
     autoEvaluation: 'Autovaloración',
     generalEvaluation: 'Valoración del equipo',
