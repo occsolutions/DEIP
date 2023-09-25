@@ -29,6 +29,7 @@ export interface Evaluation {
   customEmailReminder: CustomEmail;
   populationSelectionType: string,
   populationSelectionDetails: any,
+  populationLeaders: Array<number>;
   populationCount: number,
   populationCompletedCount: number,
   additionalSegmentation: any,
