@@ -1,0 +1,51 @@
+{
+  "type": "likert",
+  "title": {
+    "es": "Escala de likert",
+    "en": "Likert scale"
+  },
+  "descriptions": {
+    "es": "Puede elegir el grado de aceptación de la escala",
+    "en": "You can choose the degree of acceptance of the scale."
+  },
+  "editable": [],
+  "limit": 1,
+  "min": 1,
+  "options": [
+    {
+      "label": {
+        "es": "Totalmente en desacuerdo",
+        "en": "Totally disagree"
+      },
+      "value": "1"
+    },
+    {
+      "label": {
+        "es": "En desacuerdo",
+        "en": "In disagreement"
+      },
+      "value": "2"
+    },
+    {
+      "label": {
+        "es": "Ni de acuerdo ni en desacuerdo",
+        "en": "Neither agree nor disagree"
+      },
+      "value": "3"
+    },
+    {
+      "label": {
+        "es": "De acuerdo",
+        "en": "Agree"
+      },
+      "value": "4"
+    },
+    {
+      "label": {
+        "es": "totalmente de acuerdo",
+        "en": "totally agree"
+      },
+      "value": "5"
+    }
+  ]
+}

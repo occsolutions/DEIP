@@ -1,0 +1,14 @@
+{
+  "type": "options",
+  "title": {
+    "es": "Opción Múltiple",
+    "en": "Multiple choice"
+  },
+  "descriptions": {
+    "es": "Puede elegir una o más de las opciones disponibles, las opciones son definidas para esta pregunta",
+    "en": "You can choose one or more of the available options, the options are defined for this question"
+  },
+  "editable": ["options", "min", "limit"],
+  "min": 1,
+  "limit": 1
+}

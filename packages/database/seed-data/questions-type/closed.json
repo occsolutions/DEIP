@@ -1,0 +1,37 @@
+{
+  "type": "closed",
+  "title": {
+    "es": "Cerrada",
+    "en": "Closed"
+  },
+  "descriptions": {
+    "es": "Puede elegir una de las opciones disponible, todas las preguntas cerradas comparten las mismas opciones",
+    "en": "You can choose one of the available options, all closed questions share the same options"
+  },
+  "editable": [],
+  "limit": 1,
+  "min": 1,
+  "options": [
+    {
+      "label": {
+        "es": "Sí",
+        "en": "Yes"
+      },
+      "value": "1"
+    },
+    {
+      "label": {
+        "es": "No",
+        "en": "No"
+      },
+      "value": "2"
+    },
+    {
+      "label": {
+        "es": "No responde",
+        "en": "Does not respond"
+      },
+      "value": "0"
+    }
+  ]
+}
