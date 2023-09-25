@@ -1,6 +1,5 @@
 
-import { Dimention } from './dimention';
-import { Question } from './question';
+import { Evaluations } from './evaluations';
 
 export interface Questionnaire {
   name: string;
@@ -8,7 +7,7 @@ export interface Questionnaire {
   active: boolean;
   isBase: boolean;
   baseQuestionnaire?: string;
-  evaluations: Dimention<Question>;
+  evaluations: Evaluations;
   assignationType?: string;
   assignationFor?: number;
   createdAt?: Date;
