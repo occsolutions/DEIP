@@ -147,6 +147,8 @@ export default Vue.extend({
       ],
       evaluation: {
         evaluated: [],
+        toLeaders: [],
+        leaders: [],
         reviewMassive: false,
         errors: null,
         name: '',
@@ -289,6 +291,7 @@ export default Vue.extend({
       data.enterprise.customer = this.user.customer
 
       data.evaluated = data.evaluated.map(emp => emp.id)
+      data.leaders = data.leaders.map(emp => emp.id)
 
       // Clean Payload
       delete data.active
@@ -296,6 +299,7 @@ export default Vue.extend({
       delete data.demographicItems
       delete data.questionnaireName
       delete data.reviewMassive
+      delete data.toLeaders
 
       return evaluationsService.create(data)
         .then((res) => {
