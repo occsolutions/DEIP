@@ -1,6 +1,8 @@
 
 import { Questionnaire } from '../models/questionnaire';
+import { QuestionsType } from '../models/question-type';
 import QuestionnaireRepository, { QuestionnairesType } from '../schemas/questionnaires.schema';
+import QuestionTypeRepository, { QuestionsTypeType } from '../schemas/question-type.schema';
 
 /**
  * @class QuestionnaireService
@@ -72,6 +74,16 @@ class QuestionnaireService {
   async toggle(slug: string, active: boolean): Promise<Questionnaire> {
     const questionnaire: Questionnaire = await QuestionnaireRepository.findOneAndUpdate({ slug: slug }, { active: active }, { new: true });
     return questionnaire;
+  }
+
+  async getQuestionsType(): Promise<QuestionsType[]> {
+    const questionsType: QuestionsTypeType[] = await QuestionTypeRepository.find();
+    return questionsType;
+  }
+
+  async getQuestionType(type: string): Promise<QuestionsType> {
+    const questionType: QuestionsTypeType = await QuestionTypeRepository.findOne({ type });
+    return questionType;
   }
 }
 
