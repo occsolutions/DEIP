@@ -33,6 +33,9 @@ export default {
   edit: (slug: string, questionnaire: any) => {
     return service.post(`edit/${slug}`, { questionnaire })
   },
+  editOptions: (slug: string, questionnaire: any) => {
+    return service.post(`edit/${slug}/options`, { questionnaire })
+  },
   toggle: (slug: string, active: boolean) => {
     return service.post(`toggle/${slug}`, { active })
   },
@@ -44,5 +47,8 @@ export default {
   },
   editIndexQuestion: (data: any) => {
     return service.put('edit-index-question', { data })
+  },
+  questionsTypes: () => {
+    return service.get('questions-types')
   }
 }

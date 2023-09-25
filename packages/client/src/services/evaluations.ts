@@ -84,8 +84,8 @@ export default {
   massiveUpload: (file: File) => {
     return service.form('massive-upload', { file: file })
   },
-  generateTemplate: () => {
-    return service.get('generate-template')
+  generateTemplate: (filters: Array<number | string>) => {
+    return service.post('generate-template', { filters })
   },
   sendReminders: (slug: string) => {
     return service.post('send-reminders', { slug })
