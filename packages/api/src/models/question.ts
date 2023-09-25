@@ -2,8 +2,12 @@
 import { Translations } from './translations';
 
 export interface Question {
-  index: String[];
-  answers: Number;
-  reference: Translations;
-  question: Translations;
+  label: Translations,
+  type: 'options' | 'closed' | 'likert', 'open',
+  limit?: null | number,
+  min?: number,
+  options?: Array<{
+    label: Translations,
+    value: string
+  }>
 }
