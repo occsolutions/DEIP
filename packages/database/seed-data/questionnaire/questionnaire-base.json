@@ -9,612 +9,869 @@
   "updatedAt": "2022-05-11T15:45:55.057Z",
   "deletedAt": null,
   "evaluations": {
-    "physical": {
-      "nutrition": {
-        "dietQuality": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Dieta saludable y balanceada",
-            "en": "Healthy and balanced diet"
-          },
-          "question": {
-            "es": "Considero que mi dieta es muy saludable y balanceada",
-            "en": "I believe that my diet is very healthy and balanced"
-          }
-        },
-        "quantityOfFood": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Cuidado en cantidad de comida consumida",
-            "en": "Being aware of the amount and quality of the food consumed"
-          },
-          "question": {
-            "es": "Siempre soy muy cuidadoso con las porciones / tamaño de mis comidas, evitando excesos",
-            "en": "I am always very careful with the portions / size of my meals, avoiding any excess"
-          }
-        },
-        "foodKnowledge": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Conocimiento de ingredientes  y orígenes de los alimentos",
-            "en": "Learn about the food’s ingredients and origin"
-          },
-          "question": {
-            "es": "Conozco bien los ingredientes, orígenes y características de los alimentos que consumo (soy crítico y curioso)",
-            "en": "I am well aware of the ingredients, origin, and characteristics of the food I eat (I am critical and curious)"
-          }
-        },
-        "hydration": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Cantidad de líquidos consumidos",
-            "en": "Being aware of daily fluids’ intake"
-          },
-          "question": {
-            "es": "Tomo suficiente líquido durante el día (al menos el equivalente a 2.5 litros de agua)",
-            "en": "I drink enough fluids during the day (at least, the equivalent to 2.5 liters of water)"
-          }
-        }
+    "d1": {
+      "label": {
+        "es": "Estrategia y Compromiso",
+        "en": "Strategy and Commitment"
       },
-      "physicalActivity": {
-        "cardiovascularExercise": {
-          "index": [],
-          "answers": 1,
-          "reference": {
-            "es": "Frecuencia de ejercicios cardiovasculares",
-            "en": "Frequency of cardiovascular exercises"
+      "attrs": {
+        "d1_attr1": {
+          "label": {
+            "es": "Propósito Superior",
+            "en": "Higher Purpose"
           },
-          "question": {
-            "es": "Número aproximado de veces que hago ejercicios cardiovasculares a la semana",
-            "en": "Approximate number of times I do cardio exercises per week"
+          "questions": {
+            "d1_attr1_q1": {
+              "label":{
+                "es": "¿Conoce el propósito superior  (la razón por la cual existe y el legado que desea dejar más allá de lo económico)  de su organización?",
+                "en": "Do you know the higher purpose (the reason why you exist and the legacy you want to leave beyond the economic) of your organization?"
+              },
+              "type": "closed"
+            },
+            "d1_attr1_q2": {
+              "label":{
+                "es": "Si su organización tiene un propósito superior por escrito ¿cuáles de los siguientes aspectos considera que incluye?",
+                "en": "If your organization has a higher purpose in writing, which of the following aspects do you consider it includes?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            },
+            "d1_attr1_q3": {
+              "label":{
+                "es": "¿Considera que el propósito de la organización está alineado  con su propósito personal?",
+                "en": "Do you think the organization's purpose is aligned with your personal purpose?"
+              },
+              "type": "likert"
+            }
           }
         },
-        "strengtheningExercise": {
-          "index": [],
-          "answers": 1,
-          "reference": {
-            "es": "Frecuencia de ejercicios de fortalecimiento / estiramiento",
-            "en": "Frequency of strengthening/stretching exercises"
+        "d1_attr2": {
+          "label": {
+            "es": "Conexión con sostenibilidad",
+            "en": "Connection with sustainability"
           },
-          "question": {
-            "es": "Número aproximado de veces que hago ejercicios de fortalecimiento / estiramiento a la semana",
-            "en": "Approximate number of times I do strengthening/stretching exercises per week"
+          "questions": {
+            "d1_attr2_q1": {
+              "label":{
+                "es": "¿Con cuáles de las siguientes opciones, considera que su organización está comprometida en relación con la sostenibilidad/triple impacto(cuidar las necesidades de la generación actual y las generaciones futuras)?",
+                "en": "Which of the following options do you consider your organization to be committed to in relation to sustainability/triple impact (caring for the needs of the current generation and future generations)?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            },
+            "d1_attr2_q2": {
+              "label":{
+                "es": "¿Qué tipo de impacto social (resultado o consecuencia de una acción sobre la sociedad/comunidad) considera que ha generado su organización?",
+                "en": "What type of social impact (result or consequence of an action on society/community) do you consider your organization has generated?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         },
-        "movement": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Nivel de actividad y movimiento en rutina diaria",
-            "en": "Activity and movement levels during the daily routine"
+        "d1_attr3": {
+          "label": {
+            "es": "Caso de Negocio (aristas de la diversidad)",
+            "en": "Business Case (edges of diversity)"
           },
-          "question": {
-            "es": "En general mi rutina en días laborales es activa, con movimiento permanente",
-            "en": "In general, my routine on working days is active and I constantly move"
+          "questions": {
+            "d1_attr3_q1": {
+              "label":{
+                "es": "¿En cuáles aristas de la diversidad (todas las posibles diferencias entre los seres humanos: género, diversidad sexual, etnia, origen, nivel socioeconómico, disCapacidad, entre otras), se enfocan las acciones de su organización?",
+                "en": "On which aspects of diversity (all possible differences between human beings: gender, sexual diversity, ethnicity, origin, socioeconomic level, disability, among others), do your organization's actions focus?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         },
-        "exerciseDiscipline": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Metas para mejorar desempeño físico",
-            "en": "Goals to improve physical performance"
+        "d1_attr4": {
+          "label": {
+            "es": "Declaración Compromiso/Política DDHH",
+            "en": "Declaration of Commitment/HR Policy"
           },
-          "question": {
-            "es": "Tengo metas concretas para mejorar mi desempeño en actividades físicas / deportivas",
-            "en": "I have concrete goals to improve my performance in physical activities / sports"
-          }
-        }
-      },
-      "recovery": {
-        "amountOfSleep": {
-          "index": [],
-          "answers": 2,
-          "reference": {
-            "es": "Número aproximado de horas de sueño",
-            "en": "Approximate number of hours of sleep"
-          },
-          "question": {
-            "es": "El número aproximado de mis horas de sueño en la noche es",
-            "en": "My approximate number of my hours of sleep at night is"
+          "questions": {
+            "d1_attr4_q1": {
+              "label":{
+                "es": "¿Su organización está comprometida formalmente y respeta los Derechos Humanos?",
+                "en": "Is your organization formally committed to and respects Human Rights?"
+              },
+              "type": "closed"
+            }
           }
         },
-        "dailyEnergy": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Nivel de energía al terminar jornada laboral",
-            "en": "Energy level at the end of the working day"
+        "d1_attr5": {
+          "label": {
+            "es": "Conciliación Vida - Trabajo",
+            "en": "Work-Life Balance"
           },
-          "question": {
-            "es": "Siempre termino mi jornada laboral diaria con buenos niveles de energía",
-            "en": "I always have good energy levels at the end of my daily workday"
+          "questions": {
+            "d1_attr5_q1": {
+              "label":{
+                "es": "¿El balance vida laboral - personal (equilibrio/armonía en la cotidianidad) está basada en?",
+                "en": "Is the work-life balance (balance/harmony in everyday life) based on?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            },
+            "d1_attr5_q2": {
+              "label":{
+                "es": "¿Considera que las condiciones de flexibilidad laboral que le brinda su organización fomentan un  equilibrio real entre lo laboral y lo personal?",
+                "en": "Do you consider that the flexible working conditions offered by your organization encourage a real balance between work and personal life?"
+              },
+              "type": "likert"
+            }
           }
         },
-        "activeBreaks": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Realización de pausas activas ",
-            "en": "Active breaks"
+        "d1_attr6": {
+          "label": {
+            "es": "Impacto Marca Empleadora",
+            "en": "Employer Brand Impact"
           },
-          "question": {
-            "es": "Siempre hago varias pausas activas durante el día para renovar mi energía",
-            "en": "I always take several active breaks during the day to renew my energy"
-          }
-        },
-        "sleepQuality": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Calidad del sueño y nivel de reparación",
-            "en": "Sleep quality and level of repair"
-          },
-          "question": {
-            "es": "Tengo un sueño muy reparador que me permite levantarme siempre totalmente renovado",
-            "en": "I have a very restful sleep, enabling me to always wake up completely refreshed"
+          "questions": {
+            "d1_attr6_q1": {
+              "label":{
+                "es": "¿Cuáles de las siguientes iniciativas en Diversidad, Equidad e Inclusión, que ha implementado su organización, le hacen sentirse orgulloso(a) de trabajar en ella?",
+                "en": "Which of the following Diversity, Equity and Inclusion initiatives that your organization has implemented make you proud to work there?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            },
+            "d1_attr6_q2": {
+              "label":{
+                "es": "¿Ha escuchado si su organización es referente como una organización incluyente en su industria o país?",
+                "en": "Have you heard if your organization is a benchmark as an inclusive organization in your industry or country?"
+              },
+              "type": "closed"
+            }
           }
         }
       }
     },
-    "mental": {
-      "stress": {
-        "workStress": {
-          "index": ["generalHealth", "burnoutIndividual"],
-          "answers": 0,
-          "reference": {
-            "es": "Impacto en salud física y mental del estrés laboral ",
-            "en": "Work-related stress’s impact on physical and mental health"
-          },
-          "question": {
-            "es": "Mi nivel de estrés laboral actual no afecta mi salud física ni mental",
-            "en": "My current level of work stress does not affect my physical or mental health"
-          }
-        },
-        "personalStress": {
-          "index": ["burnoutIndividual"],
-          "answers": 0,
-          "reference": {
-            "es": "Nivel de estrés por relaciones personales y familiares",
-            "en": "Stress level from personal and family relationships"
-          },
-          "question": {
-            "es": "Mis relaciones personales (pareja, hijos, familia, amigos) actualmente no me generen alto estrés",
-            "en": "My personal relationships (partner, children, family, friends) do not currently generate high stress"
-          }
-        },
-        "financialHealth": {
-          "index": ["burnoutIndividual"],
-          "answers": 0,
-          "reference": {
-            "es": "Nivel de estrés por situación financiera",
-            "en": "Stress level from finance"
-          },
-          "question": {
-            "es": "Mi situación financiera actual no me genera preocupación ni ansiedad",
-            "en": "My current financial situation does not cause me concern or anxiety"
-          }
-        },
-        "stressResponse": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Respuesta en situaciones de crisis y estrés",
-            "en": "Reaction under crisis and stress"
-          },
-          "question": {
-            "es": "En situaciones de crisis y alto estrés, siempre respondo con calma y asertividad (sin ansiedad)",
-            "en": "Under crisis and high stress situations, I always react calmly and assertively (without anxiety)"
-          }
-        }
+    "d2": {
+      "label": {
+        "es": "Gobernanza / Liderazgo CSI* (Concepto de InspirandoT SAS BIC)",
+        "en": "Governance / Leadership CSI* (InspirandoT SAS BIC Concept)"
       },
-      "mindfulness": {
-        "focus": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Presencia y foco en conversaciones con los demás",
-            "en": "Presence and focus while speaking with others"
+      "attrs": {
+        "d2_attr1": {
+          "label": {
+            "es": "Áreas Gestoras",
+            "en": "Management Areas"
           },
-          "question": {
-            "es": "En mis conversaciones, siempre estoy prestando total atención a mis interlocutores",
-            "en": "In my conversations, I am always paying full attention to my counterparty"
+          "questions": {
+            "d2_attr1_q1": {
+              "label":{
+                "es": "¿Existe un rol o cargo específico  responsable de la estrategia de Diversidad, Equidad e Inclusión, en su organización?",
+                "en": "Is there a specific role or position responsible for the Diversity, Equity and Inclusion strategy in your organization?"
+              },
+              "type": "closed"
+            }
           }
         },
-        "meditation": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Realización de actividades de concentración y reflexión",
-            "en": "Activities demanding concentration, contemplation, and/or reflection"
+        "d2_attr2": {
+          "label": {
+            "es": "Sponsorship",
+            "en": "Sponsorship"
           },
-          "question": {
-            "es": "Realizo actividades de reflexión y concentración profunda como meditar u otras equivalentes",
-            "en": "I engage in activities demanding reflection, contemplation, and/or deep concentration such as meditating or other equivalents"
+          "questions": {
+            "d2_attr2_q2": {
+              "label":{
+                "es": "¿A qué áreas de su organización pertenecen los sponsors (líderes del equipo directivo para la estrategia de Diversidad, Equidad e Inclusión) de la estrategia de Diversidad, Equidad e Inclusión?",
+                "en": "To which areas of your organization do the sponsors (leaders of the management team for the Diversity, Equity and Inclusion strategy) of the Diversity, Equity and Inclusion strategy belong?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         },
-        "humor": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Aproximación con humor a diferentes aspectos de la vida",
-            "en": "Humorous and optimistic approach to different aspects of life"
+        "d2_attr3": {
+          "label": {
+            "es": "Comité DEIP",
+            "en": "DEIP Committee"
           },
-          "question": {
-            "es": "Me reconocen por imprimirle buen humor a los diferentes aspectos de la vida",
-            "en": "I am recognized for being optimistic and imprinting good humor on the different aspects of life"
+          "questions": {
+            "d2_attr3_q1": {
+              "label":{
+                "es": "¿Conoce si en su organización se ejecuta un plan de acción en Diversidad, Equidad e Inclusión?",
+                "en": "Do you know if your organization implements an action plan on Diversity, Equity and Inclusion?"
+              },
+              "type": "closed"
+            },
+            "d2_attr3_q2": {
+              "label":{
+                "es": "¿Existe un comité conformado por los colaboradores(as) que se encargue de liderar y ejecutar el plan de acción Diversidad, Equidad e Inclusión?",
+                "en": "Is there a committee made up of employees that is responsible for leading and executing the Diversity, Equity and Inclusion action plan?"
+              },
+              "type": "closed"
+            },
+            "d2_attr3_q3": {
+              "label":{
+                "es": "¿Le gustaría ser parte del comité de Diversidad, Equidad e Inclusión?",
+                "en": "Would you like to be part of the Diversity, Equity and Inclusion committee?"
+              },
+              "type": "closed"
+            },
+            "d2_attr3_q4": {
+              "label":{
+                "es": "¿Qué acciones recomendaría a este comité para un mayor impacto de su gestión en la organización?",
+                "en": "What actions would you recommend to this committee for a greater impact of its management on the organization?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         },
-        "presence": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Presencia plena en relaciones familiares",
-            "en": "Mindfulness in family relationships"
+        "d2_attr4": {
+          "label": {
+            "es": "Voluntariado  Corporativo/Impacto Comunidad",
+            "en": "Corporate Volunteering/Community Impact"
           },
-          "question": {
-            "es": "Cuando estoy con mi familia estoy 100% presente",
-            "en": "When I am with my family, I am 100% present"
-          }
-        }
-      },
-      "productivity": {
-        "concentration": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Profundidad y duración de actividades de concentración",
-            "en": "Depth and duration of activities demanding concentration, contemplation, and/or reflection"
-          },
-          "question": {
-            "es": "En mi trabajo se me facilita sostener un alto nivel de concentración en un tema en particular, por amplios espacios de tiempo",
-            "en": "In my work, it is easy for me to maintain a high level of concentration on any particular issue for long periods of time"
-          }
-        },
-        "multitask": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Foco en tarea principal evitando la multitarea",
-            "en": "Focus on main task, avoiding multitasking"
-          },
-          "question": {
-            "es": "Realizo mi trabajo focalizado en un tema a la vez, evitando la multitarea",
-            "en": "I never end up multitasking, without having planned it first"
+          "questions": {
+            "d2_attr4_q1": {
+              "label":{
+                "es": "¿Su organización cuenta con un programa formal de voluntariado corporativo (participación directa de los(as) colaboradores(as))?",
+                "en": "Does your organization have a formal corporate volunteering program (direct participation of collaborators)?"
+              },
+              "type": "closed"
+            },
+            "d2_attr4_q2": {
+              "label":{
+                "es": "Si su respuesta fue afirmativa ¿Qué tipo de iniciativas de impacto social promueve el voluntariado corporativo de su organización?",
+                "en": "If your answer was affirmative, what type of social impact initiatives does your organization's corporate volunteering promote?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         },
-        "laborJourneys": {
-          "index": ["burnoutIndividual"],
-          "answers": 0,
-          "reference": {
-            "es": "Trabajo en límites del horario laboral",
-            "en": "Work beyond business hours"
+        "d2_attr5": {
+          "label": {
+            "es": "Líderes y Responsabilidad de Triple Impacto/DEIP",
+            "en": "Triple Impact/DRIP Leaders and Accountability"
           },
-          "question": {
-            "es": "Salvo contadas excepciones, solo trabajo en días y horarios de mi jornada laboral",
-            "en": "With few exceptions, I only work on my working days and schedules"
+          "questions": {
+            "d2_attr5_q1": {
+              "label":{
+                "es": "¿Considera que los líderes de la organización están realmente comprometidos e involucrados con la estrategia de sostenibilidad?",
+                "en": "Do you consider that the organization's leaders are really committed and involved with the sustainability strategy?"
+              },
+              "type": "likert"
+            }
           }
         },
-        "psychologicalSafety": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Seguridad Psicológica",
-            "en": "Psychological Safety"
+        "d2_attr6": {
+          "label": {
+            "es": "Perfil y Atributos de Liderazgo  CSI",
+            "en": "CSI Leadership Profile and Attributes"
           },
-          "question": {
-            "es": "En mi trabajo, me siento seguro al expresar todas mis opiniones, proponer nuevas ideas y aceptar mis errores",
-            "en": "At work, I feel comfortable expressing all of my opinions, proposing new ideas, and accepting my mistakes"
+          "questions": {
+            "d2_attr6_q1": {
+              "label":{
+                "es": "¿Escoja los 3 atributos que considera que son parte del perfil del líder de su organización?",
+                "en": "Choose the 3 attributes that you consider to be part of the leader profile of your organization?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            },
+            "d2_attr6_q2": {
+              "label":{
+                "es": "¿Considera que los líderes de la organización son ejemplo de inclusión y equidad?",
+                "en": "Do you consider that the organization's leaders are an example of inclusion and equity?"
+              },
+              "type": "likert"
+            }
+          }
+        },
+        "d2_attr7": {
+          "label": {
+            "es": "Acciones Afirmativas",
+            "en": "Affirmative Actions"
+          },
+          "questions": {
+            "d2_attr7_q1": {
+              "label":{
+                "es": "¿Escoja 3 acciones afirmativas (acciones/comportamientos en pro de la inclusión y la equidad), que considera que define el perfil del líder de su organización?",
+                "en": "Choose 3 affirmative actions (actions/behaviors in favor of inclusion and equity), that you consider define the profile of the leader of your organization?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         }
       }
     },
-    "emotional": {
-      "purpose": {
-        "personalPurpose": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Propósito de vida claro y alineado con el trabajo",
-            "en": "A clear life purpose aligned with work"
-          },
-          "question": {
-            "es": "Tengo un propósito de vida claro y mi trabajo actual está alineado con éste",
-            "en": "I have a clear life purpose and my current job is aligned with it"
-          }
-        },
-        "socialImpact": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Inversión de tiempo y energía en actividades con impacto social",
-            "en": "Investing time and energy in activities with a social impact"
-          },
-          "question": {
-            "es": "Invierto tiempo y energía suficientes para marcar una diferencia positiva en la vida de otras personas",
-            "en": "I invest enough time and energy to make a positive impact on the lives of others"
-          }
-        },
-        "passions": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Dedicación de tiempo a actividades que generan pasión",
-            "en": "Devoting time to activities that I am passionate for"
-          },
-          "question": {
-            "es": "Dedico tiempo suficiente a las actividades que me apasionan",
-            "en": "I devote enough time to activities that I am passionate about"
-          }
-        },
-        "resilience": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Resiliencia ante adversidades y fracasos",
-            "en": "Resilience in the face of adversity and failure"
-          },
-          "question": {
-            "es": "Soy persistente ante las adversidades y fracasos que enfrento",
-            "en": "I am persistent in the face of adversity and failures"
-          }
-        }
+    "d3": {
+      "label": {
+        "es": "Cultura CSI*  (Concepto de InspirandoT SAS BIC)",
+        "en": "CSI Culture* (InspirandoT SAS BIC Concept)"
       },
-      "constructiveRelationships": {
-        "socialization": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Invertir tiempo y energía en personas importantes",
-            "en": "Investing time and energy in important people"
+      "attrs": {
+        "d3_attr1": {
+          "label": {
+            "es": "Valores Corporativos",
+            "en": "Corporate values"
           },
-          "question": {
-            "es": "Estoy satisfecho con el tiempo y energía que invierto en las personas que quiero y aprecio",
-            "en": "I am satisfied with the time and energy I invest in the people I love and care for"
+          "questions": {
+            "d3_attr1_q1": {
+              "label":{
+                "es": "Conozco y me identifico con los valores y principios corporativos de la organización",
+                "en": "I know and identify with the corporate values and principles of the organization"
+              },
+              "type": "likert"
+            },
+            "d3_attr1_q2": {
+              "label":{
+                "es": "Escoja los 3 atributos que considera que son parte de la cultura de su organización",
+                "en": "Choose the 3 attributes that you consider to be part of your organization's culture"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         },
-        "laborRelations": {
-          "index": ["burnoutIndividual"],
-          "answers": 0,
-          "reference": {
-            "es": "Buenas relaciones con compañeras de trabajo",
-            "en": "Good relations with co-workers"
+        "d3_attr2": {
+          "label": {
+            "es": "Nivel de Conocimiento DEIP",
+            "en": "DRIP Knowledge Level"
           },
-          "question": {
-            "es": "Las relaciones con mis compañeros de trabajo siempre son transparentes, constructivas y cordiales",
-            "en": "Relations with my co-workers are always transparent, constructive, and amiable"
+          "questions": {
+            "d3_attr2_q1": {
+              "label":{
+                "es": "¿En el último año, su organización ha realizado programas de sensibilización sobre diversidad e inclusión?",
+                "en": "In the last year, has your organization carried out awareness programs on diversity and inclusion?"
+              },
+              "type": "closed"
+            },
+            "d3_attr2_q2": {
+              "label":{
+                "es": "En las capacitaciones realizadas por la organización ¿cuáles de los siguientes temas se han abordado?",
+                "en": "In the training carried out by the organization, which of the following topics have been addressed?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            },
+            "d3_attr2_q3": {
+              "label":{
+                "es": "¿Ha recibido capacitaciones en sesgos inconscientes (creencias automáticas y etiquetas con referencia a una persona)?",
+                "en": "Have you received training on unconscious bias (automatic beliefs and labels regarding a person)?"
+              },
+              "type": "closed"
+            },
+            "d3_attr2_q4": {
+              "label":{
+                "es": "Si su respuesta fue afirmativa ¿En cuáles de estas aristas de la diversidad su organización ha realizado un especial énfasis?",
+                "en": "If your answer was affirmative, which of these aspects of diversity has your organization placed special emphasis on?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         },
-        "feedback": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Aceptación humilde de críticas y comentarios",
-            "en": "Humble acceptance of criticism and feedback"
+        "d3_attr3": {
+          "label": {
+            "es": "Estrategia de Comunicación DEIP (Interna/Externa)",
+            "en": "DEIP Communication Strategy (Internal/External)"
           },
-          "question": {
-            "es": "Acepto críticas y retroalimentación de manera humilde (no a la defensiva)",
-            "en": "I accept criticism and feedback humbly (not defensively)"
+          "questions": {
+            "d3_attr3_q1": {
+              "label":{
+                "es": "¿A través de qué vehículos de comunicación se ha socializado la estrategia de Diversidad, Equidad e Inclusión en su organización?",
+                "en": "Through what communication vehicles has the Diversity, Equity and Inclusion strategy been socialized in your organization?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            },
+            "d3_attr3_q2": {
+              "label":{
+                "es": "¿Considera que la comunicación interna de su organización maneja un lenguaje de igualdad y no discriminación?",
+                "en": "Do you consider that your organization's internal communication uses language of equality and non-discrimination?"
+              },
+              "type": "likert"
+            },
+            "d3_attr3_q3": {
+              "label":{
+                "es": "¿Considera que la comunicación externa y la publicidad de su organización maneja un lenguaje de igualdad y no discriminación?",
+                "en": "Do you consider that your organization's external communication and advertising uses language of equality and non-discrimination?"
+              },
+              "type": "likert"
+            }
           }
         },
-        "relationship": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Construyendo relaciones constructivas en el trabajo",
-            "en": "Building constructive relations at work"
+        "d3_attr4": {
+          "label": {
+            "es": "Comportamientos Deseados DEIP",
+            "en": "DRIP Desired Behaviors"
           },
-          "question": {
-            "es": "Se me facilita construir las relaciones profesionales que necesito en el trabajo para ser exitoso (jefes, pares, subalternos, clientes, etc.)",
-            "en": "It is easy for me to build at work the professional relationships (bosses, peers, subordinates, clients, etc.) I need to be successful"
-          }
-        }
-      },
-      "emotionalIntelligence": {
-        "attitude": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Autoconocimiento Emocional",
-            "en": "Emotional self-awareness"
-          },
-          "question": {
-            "es": "Tengo conciencia plena de mis emociones y sé regularlas cuando es necesario",
-            "en": "I am fully aware of my emotions and know how to regulate them when necessary"
-          }
-        },
-        "conflictManagement": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Manejo asertivo de conflictos",
-            "en": "Assertive conflict management"
-          },
-          "question": {
-            "es": "Siempre manejo los conflictos asertivamente buscando soluciones y evitando escalarlos",
-            "en": "I always handle conflicts assertively, striving to find solutions, and avoiding escalations"
+          "questions": {
+            "d3_attr4_q1": {
+              "label":{
+                "es": "¿Considera que en su equipo de trabajo se respira un ambiente incluyente (espacio donde todas las personas son valoradas y respetadas)?",
+                "en": "Do you consider that your work team has an inclusive environment (a space where all people are valued and respected)?"
+              },
+              "type": "likert"
+            },
+            "d3_attr4_q2": {
+              "label":{
+                "es": "¿En su organización existen normas de conducta claras para vivir un ambiente libre de discriminación?",
+                "en": "In your organization, are there clear standards of conduct to live an environment free of discrimination?"
+              },
+              "type": "closed"
+            },
+            "d3_attr4_q3": {
+              "label":{
+                "es": "¿Ha experimentado situaciones en las que se ha sentido discriminado(a) o excluido(a) por su diversidad?",
+                "en": "Have you experienced situations in which you have felt discriminated against or excluded because of your diversity?"
+              },
+              "type": "closed"
+            }
           }
         },
-        "empathy": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Empatía",
-            "en": "Empathy"
+        "d3_attr5": {
+          "label": {
+            "es": "Plan de Reconocimiento",
+            "en": "Recognition Plan"
           },
-          "question": {
-            "es": "Soy empático y sensible a lo que piensan y sienten las personas que me rodean",
-            "en": "I am empathetic and sensible to what other people believe and feel"
+          "questions": {
+            "d3_attr5_q1": {
+              "label":{
+                "es": "En su organización, los comportamientos y conductas incluyentes se reconocen y se recompensan",
+                "en": "In your organization, inclusive behaviors and behaviors are recognized and rewarded"
+              },
+              "type": "likert"
+            }
           }
         },
-        "gratitude": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Expresión de agradecimiento con los demás",
-            "en": "Expresses appreciation toward others"
+        "d3_attr6": {
+          "label": {
+            "es": "Grupos de Afinidad",
+            "en": "Affinity Groups"
           },
-          "question": {
-            "es": "Me tomo el tiempo para expresar agradecimiento con los demás y celebrar mis logros ",
-            "en": "I take time to express appreciation toward others and celebrate my accomplishments"
+          "questions": {
+            "d3_attr6_q1": {
+              "label":{
+                "es": "¿La organización cuenta con alguno de los siguientes grupos de afinidad (comparten características, experiencias de vida y movilizan cultura incluyente)?",
+                "en": "Does the organization have any of the following affinity groups (do they share characteristics, life experiences and mobilize inclusive culture)?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
+          }
+        },
+        "d3_attr7": {
+          "label": {
+            "es": "Acciones Afirmativas",
+            "en": "Affirmative Actions"
+          },
+          "questions": {
+            "d3_attr7_q1": {
+              "label":{
+                "es": "¿Elija 3 acciones afirmativas que considera que definen la cultura de su organización?",
+                "en": "Choose 3 affirmative actions that you consider define the culture of your organization?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         }
       }
     },
-    "professional": {
-      "professionalHabits": {
-        "habits": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Aplicación disciplinada de hábitos positivos",
-            "en": "Disciplined application of positive habits"
-          },
-          "question": {
-            "es": "Tengo excelentes hábitos profesionales (diarios, semanales, mensuales) que aplico con disciplina",
-            "en": "I have excellent professional habits (daily, weekly, monthly) that I apply with discipline"
-          }
-        },
-        "weather": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Manejo óptimo de tiempo y agenda",
-            "en": "Optimal time and schedule management"
-          },
-          "question": {
-            "es": "Manejo de manera óptima mi tiempo y agenda",
-            "en": "I optimally manage my time and agenda"
-          }
-        },
-        "meetings": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Número y frecuencia adecuada de reuniones",
-            "en": "Appropriate number and frequency of meetings"
-          },
-          "question": {
-            "es": "Las reuniones (número / duración) e indicadores de seguimiento que uso en mi trabajo son óptimos para ser altamente eficiente",
-            "en": "My work meetings (number/duration) and methods to follow-up on my tasks are optimal and thus highly efficient"
-          }
-        },
-        "compliance": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Cumplimiento oportuno y con calidad de compromisos",
-            "en": "Fulfilling commitments timely and with quality"
-          },
-          "question": {
-            "es": "Cumplo en tiempo y calidad con todos los compromisos adquiridos",
-            "en": "I comply timely and with quality all my commitments"
-          }
-        }
+    "d4": {
+      "label": {
+        "es": "Ciclo de Talento Incluyente",
+        "en": "Inclusive Talent Cycle"
       },
-      "personalDevelopment": {
-        "careerGoals": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Plan de carrera claro y alineado con el trabajo actual",
-            "en": "Clear career plan aligned with current job"
+      "attrs": {
+        "d4_attr1": {
+          "label": {
+            "es": "Proceso de Atracción Incluyente",
+            "en": "Inclusive Attraction Process"
           },
-          "question": {
-            "es": "Tengo un plan de carrera claro y mi trabajo actual hace parte del mismo",
-            "en": "I have a clear career plan and my current job is part of it"
+          "questions": {
+            "d4_attr1_q1": {
+              "label":{
+                "es": "¿Su organización busca atraer talentos independientemente de su sexo, étnia, orientación sexual, origen, situación de discapacidad, entre otras diversidades?",
+                "en": "Does your organization seek to attract talent regardless of their sex, ethnicity, sexual orientation, origin, disability status, among other diversities?"
+              },
+              "type": "likert"
+            },
+            "d4_attr1_q2": {
+              "label":{
+                "es": "¿En su organización se invita de manera explícita a comunidades o poblaciones vulnerables (poblaciones que enfrentan a desafíos sociales y/o discriminación) a las convocatorias de empleo?",
+                "en": "Does your organization explicitly invite vulnerable communities or populations (populations that face social challenges and/or discrimination) to job applications?"
+              },
+              "type": "closed"
+            }
           }
         },
-        "developing": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Documentación anual de plan de desarrollo",
-            "en": "Documentation of the annual development plan"
+        "d4_attr2": {
+          "label": {
+            "es": "Proceso de Selección Incluyente",
+            "en": "Inclusive Selection Process"
           },
-          "question": {
-            "es": "Todos los años documento un plan personal de desarrollo para mejorar mi desempeño profesional",
-            "en": "Every year I document a personal development plan to improve my professional performance"
+          "questions": {
+            "d4_attr2_q1": {
+              "label":{
+                "es": "¿Considera que todas las personas, independientemente de su diversidad, pueden acceder a las mismas oportunidades en su proceso de entrevista y selección?",
+                "en": "Do you consider that all people, regardless of their diversity, can access the same opportunities in their interview and selection process?"
+              },
+              "type": "likert"
+            }
           }
         },
-        "weather": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Inversión de tiempo en desarrollo de nuevas habilidades y conocimientos",
-            "en": "Investing time in the development of new skills and knowledge"
+        "d4_attr3": {
+          "label": {
+            "es": "Proceso de Inducción Incluyente",
+            "en": "Inclusive Induction Process"
           },
-          "question": {
-            "es": "Invierto suficiente tiempo para desarrollar nuevas habilidades y conocimientos útiles en mi trabajo y vida personal",
-            "en": "I invest sufficient time in developing new skills and acquiring knowledge useful in my work and personal life"
+          "questions": {
+            "d4_attr3_q1": {
+              "label":{
+                "es": "¿Cuáles considera que son las 3 estrategias más efectivas para asegurar que los procesos de inducción sean inclusivos con el talento diverso?",
+                "en": "What do you consider to be the 3 most effective strategies to ensure that induction processes are inclusive of diverse talent?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         },
-        "selfKnowledge": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Retroalimentación del líder",
-            "en": "Leader's feedback"
+        "d4_attr4": {
+          "label": {
+            "es": "Proceso de Desarrollo de Carrera Incluyente",
+            "en": "Inclusive Career Development Process"
           },
-          "question": {
-            "es": "Recibo retroalimentación frecuente y abierta de mi líder, que me permite entender mis áreas de oportunidad",
-            "en": "I receive frequent and open feedback from my leader, allowing me to understand my areas of opportunity"
+          "questions": {
+            "d4_attr4_q1": {
+              "label":{
+                "es": "¿Puede desarrollar su carrera en la organización, siendo una persona auténtica y en un ambiente seguro?",
+                "en": "Can you develop your career in the organization, being an authentic person and in a safe environment?"
+              },
+              "type": "closed"
+            }
+          }
+        },
+        "d4_attr5": {
+          "label": {
+            "es": "Beneficios Incluyentes",
+            "en": "Inclusive Benefits"
+          },
+          "questions": {
+            "d4_attr5_q1": {
+              "label":{
+                "es": "¿Considera que los procesos de promoción/ascenso basado en el mérito, son equitativos para todas las personas, independiente de su diversidad?",
+                "en": "Do you consider that promotion/promotion processes based on merit are equitable for all people, regardless of their diversity?"
+              },
+              "type": "closed"
+            }
+          }
+        },
+        "d4_attr6": {
+          "label": {
+            "es": "Momentos de la Verdad (Fidelización-Engagement)",
+            "en": "Moments of Truth (Loyalty-Engagement)"
+          },
+          "questions": {
+            "d4_attr6_q1": {
+              "label":{
+                "es": "¿Cuáles de las siguietes afirmaciones lo hacen sentir incluído(a) y valorado(a) en su organización?",
+                "en": "Which of the following statements make you feel uncomfortable and valued in your organization?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
+          }
+        },
+        "d4_attr7": {
+          "label": {
+            "es": "Acciones Afirmativas",
+            "en": "Affirmative Actions"
+          },
+          "questions": {
+            "d4_attr7_q1": {
+              "label":{
+                "es": "¿En su organización se toman medidas para asegurar que todas las personas se sientan incluidas, además de brindarles las mismas oportunidades?",
+                "en": "Does your organization take steps to ensure that all people feel included, as well as providing them with the same opportunities?"
+              },
+              "type": "likert"
+            },
+            "d4_attr7_q2": {
+              "label":{
+                "es": "Elija 3 acciones habilitadoras que apoyan el desarrollo del talento diverso, en cualquier momento de la carrera del colaborador(a)",
+                "en": "Choose 3 enabling actions that support the development of diverse talent, at any point in the employee's career."
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         }
+      }
+    },
+    "d5": {
+      "label": {
+        "es": "Ecosisistema DI* (Concepto de InspirandoT SAS BIC)",
+        "en": "DI Ecosystem* (InspirandoT SAS BIC Concept)"
       },
-      "distractionManagement": {
-        "screenTime": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Afectación de productividad por tiempo en pantalla",
-            "en": "Screentime’s impact on productivity"
+      "attrs": {
+        "d5_attr1": {
+          "label": {
+            "es": "Productos y Servicios Incluyentes",
+            "en": "Inclusive Products and Services"
           },
-          "question": {
-            "es": "El tiempo que invierto en redes sociales, whatsapp y otros medios digitales no afecta mi productividad",
-            "en": "The time I spend on social networks, WhatsApp, and other digital media does not affect my productivity"
+          "questions": {
+            "d5_attr1_q1": {
+              "label":{
+                "es": "¿Su organización cuenta con productos y servicios inclusivos?",
+                "en": "Does your organization have inclusive products and services?"
+              },
+              "type": "closed"
+            }
           }
         },
-        "procrastination": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Procrastinación de tareas y proyectos",
-            "en": "Procrastination of tasks and projects"
+        "d5_attr2": {
+          "label": {
+            "es": "Declaraciones y Políticas",
+            "en": "Statements and Policies"
           },
-          "question": {
-            "es": "Rara vez aplazo tareas y proyectos importantes que tengo planeados de tiempo atrás",
-            "en": "I rarely postpone any important tasks and projects that I have planned to do ahead of time."
+          "questions": {
+            "d5_attr2_q1": {
+              "label":{
+                "es": "¿Recuerda si en su organización se han socializado los siguientes lineamientos/declaraciones/compromisos?",
+                "en": "Do you remember if the following guidelines/declarations/commitments have been socialized in your organization?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            },
+            "d5_attr2_q2": {
+              "label":{
+                "es": "Si la organización cuenta con una Política de Diversidad, Equidad e Inclusión, la misma, manifiesta su compromiso con:",
+                "en": "If the organization has a Diversity, Equity and Inclusion Policy, it expresses its commitment to:"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         },
-        "distractorsStrategy": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Estrategia para evitar distracciones",
-            "en": "Strategies to avoid distractions"
+        "d5_attr3": {
+          "label": {
+            "es": "Protocolos de Violencias",
+            "en": "Violence Protocols"
           },
-          "question": {
-            "es": "Tengo estrategias implementadas para bloquear distracciones y lograr el foco que requiero",
-            "en": "I have strategies in place to block out distractions and achieve the focus I require"
+          "questions": {
+            "d5_attr3_q1": {
+              "label":{
+                "es": "Su organización cuenta con los siguientes protocolos:",
+                "en": "Your organization has the following protocols:"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            },
+            "d5_attr3_q2": {
+              "label":{
+                "es": "¿Conoce si en su organización existen canales de denuncia anónima para identificar situaciones de acoso sexual laboral o violencias?",
+                "en": "Do you know if there are anonymous reporting channels in your organization to identify situations of workplace sexual harassment or violence?"
+              },
+              "type": "closed"
+            },
+            "d5_attr3_q3": {
+              "label":{
+                "es": "Si su respuesta es afirmativa ¿Cuáles de los canales de denuncia anónima para identificar situaciones de acoso sexual laboral conoce?",
+                "en": "If your answer is affirmative, which of the anonymous reporting channels to identify situations of workplace sexual harassment are you familiar with?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         },
-        "balance": {
-          "index": [],
-          "answers": 0,
-          "reference": {
-            "es": "Satisfacción por balance de tiempo entre trabajo y temas personales",
-            "en": "Satisfaction from time balance between work and personal issues"
+        "d5_attr4": {
+          "label": {
+            "es": "Reputación Corporativa",
+            "en": "Corporate reputation"
           },
-          "question": {
-            "es": "Estoy satisfecho(a) con el balance de tiempo que destino a mi trabajo y a otros temas personales",
-            "en": "I am satisfied with the balance of time I devote to my work and other personal matters"
+          "questions": {
+            "d5_attr4_q1": {
+              "label":{
+                "es": "¿Sabe si su organización cuenta con un sello/certificación que la avale como incluyente?",
+                "en": "Do you know if your organization has a seal/certification that endorses it as inclusive?"
+              },
+              "type": "closed"
+            },
+            "d5_attr4_q2": {
+              "label":{
+                "es": "Su organización es reconocida en su industria como referente por ser diversa, incluyente y equitativa?",
+                "en": "Is your organization recognized in your industry as a benchmark for being diverse, inclusive and equitable?"
+              },
+              "type": "likert"
+            }
+          }
+        },
+        "d5_attr5": {
+          "label": {
+            "es": "Acciones Afirmativas",
+            "en": "Affirmative Actions"
+          },
+          "questions": {
+            "d5_attr5_q1": {
+              "label":{
+                "es": "¿Elija 3 de las siguientes acciones afirmativas que considere definen el trabajo que la organización ha realizado con sus grupos de interés (individuos y organizaciones que tienen relación con la misión y el propósito de su organización)?",
+                "en": "Choose 3 of the following affirmative actions that you believe define the work the organization has done with its stakeholders (individuals and organizations that have a relationship with the mission and purpose of your organization)?"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": []
+            }
           }
         }
+      }
+    },
+    "leader": {
+      "leader_q1": {
+        "label":{
+          "es": "La razón por la cuál su organización está interesada en la Diversidad, Equidad e Inclusión es por qué:",
+          "en": "The reason your organization is interested in Diversity, Equity and Inclusion is because:"
+        },
+        "type": "options",
+        "limit": null,
+        "min": 1,
+        "options": []
+      },
+      "leader_q2": {
+        "label":{
+          "es": "En la organización existe una verdadera cultura incluyente",
+          "en": "There is a true inclusive culture in the organization"
+        },
+        "type": "likert"
+      },
+      "leader_q3": {
+        "label":{
+          "es": "¿Su organización atrae, desarrolla y fideliza personas, independientemente de su diversidad?",
+          "en": "Does your organization attract, develop and retain people, regardless of their diversity?"
+        },
+        "type": "closed"
+      },
+      "leader_q4": {
+        "label":{
+          "es": "En sus palabras, ¿cómo se vive la inclusión en su organización?",
+          "en": "In your words, how do you experience inclusion in your organization?"
+        },
+        "type": "open",
+        "limit": null
+      },
+      "leader_q5": {
+        "label":{
+          "es": "¿Qué tipo de indicadores tiene su organización para medir el progreso de la inclusión y las diversidades?",
+          "en": "What type of indicators does your organization have to measure the progress of inclusion and diversities?"
+        },
+        "type": "options",
+        "limit": null,
+        "min": 1,
+        "options": []
+      },
+      "leader_q6": {
+        "label":{
+          "es": "¿Elija 3 opciones que considere que la organización implementa para fomentar un ambiente inclusivo?",
+          "en": "Choose 3 options that you think the organization implements to foster an inclusive environment?"
+        },
+        "type": "options",
+        "limit": null,
+        "min": 1,
+        "options": []
+      },
+      "leader_q7": {
+        "label":{
+          "es": "¿Qué medidas ha implementado para asegurarse de que todas las personas tengan igualdad de oportunidades para su desarrollo profesional?",
+          "en": "What measures have you implemented to ensure that all people have equal opportunities for their professional development?"
+        },
+        "type": "options",
+        "limit": null,
+        "min": 1,
+        "options": []
+      },
+      "leader_q8": {
+        "label":{
+          "es": "Las voces de los colaboradores pertenecientes a comunidades o poblaciones vulnerables, son escuchados y tienen un impacto real en la toma de decisiones",
+          "en": "The voices of collaborators belonging to vulnerable communities or populations are heard and have a real impact on decision-making"
+        },
+        "type": "likert"
+      },
+      "leader_q9": {
+        "label":{
+          "es": "¿Como líder, se siente en capacidad para apoyar el desarrollo del talento diverso que tiene a su cargo?",
+          "en": "As a leader, do you feel capable of supporting the development of the diverse talent under your supervision?"
+        },
+        "type": "closed"
+      },
+      "leader_q10": {
+        "label":{
+          "es": "En la organización  se dan los espacios para que exista diversidad en cargos de liderazgo",
+          "en": "In the organization there are spaces for diversity in leadership positions"
+        },
+        "type": "likert"
+      },
+      "leader_q11": {
+        "label":{
+          "es": "¿La organización cuenta con prácticas o políticas que apoyen  las compras de proveedores, pertenecientes a comunidades o poblaciones vulnerables?",
+          "en": "Does the organization have practices or policies that support purchases from suppliers belonging to vulnerable communities or populations?"
+        },
+        "type": "closed"
+      },
+      "leader_q12": {
+        "label":{
+          "es": "¿En cuáles de los siguientes programas de medición o evaluación de diversidad e inclusión ha participado su organización?",
+          "en": "In which of the following diversity and inclusion measurement or evaluation programs has your organization participated?"
+        },
+        "type": "options",
+        "limit": null,
+        "min": 1,
+        "options": []
       }
     }
   }
