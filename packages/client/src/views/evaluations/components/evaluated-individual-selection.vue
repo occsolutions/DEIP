@@ -41,7 +41,7 @@
           <v-row>
             <v-col align="end">
               <x-generate-instructive class="mr-2"/>
-              <x-generate-template :emplooyes="evaluation.evaluated" :edit="evaluation.edit"/>
+              <x-generate-template />
             </v-col>
           </v-row>
           <v-row>
@@ -170,11 +170,13 @@ export default Vue.extend({
     },
     backToMassive () {
       this.evaluation.evaluated = []
+      this.evaluation.toLeaders = []
       this.evaluation.reviewMassive = false
     },
     deleteEvaluated () {
       const evaluatedLeft = this.evaluation.evaluated.filter((e) => e.id !== this.modalDel.item.id)
       this.evaluation.evaluated = evaluatedLeft
+      this.evaluation.toLeaders = evaluatedLeft
       return Promise.resolve()
     },
     massiveUpload () {
@@ -200,6 +202,7 @@ export default Vue.extend({
         const emp = evaluated.find((it) => ev.id === it.id)
         if (!emp) {
           evaluated.push(ev)
+          this.evaluation.toLeaders.push(ev)
         } else {
           this.evaluatedErrors.evaluatedDuplicated.push(ev)
           exists.push(ev)
