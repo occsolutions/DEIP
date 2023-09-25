@@ -60,6 +60,17 @@
     />
 
     <!------------------------------------->
+    <!------------- LEADERS --------------->
+    <!------------------------------------->
+    <x-evaluated-leaders-selection v-if="evaluation.populationCount"
+      :is-edit="isEdit"
+      :employees="evaluation.toLeaders"
+      :evaluation="evaluation"
+      :identify-types="identifyTypes"
+      @editingZeroEvaluated="($event) => editHasCeroEvaluated = $event"
+    />
+
+    <!------------------------------------->
     <!---------- Actions Buttons ---------->
     <!------------------------------------->
     <v-row>
@@ -91,11 +102,13 @@ import { mapState } from 'vuex'
 
 import XEvaluatedIndividualSelection from '../components/evaluated-individual-selection.vue'
 import XEvaluatedByDemographicSelection from '../components/evaluated-by-demographic-selection.vue'
+import XEvaluatedLeadersSelection from '../components/evaluated-leaders-selection.vue'
 
 export default Vue.extend({
   components: {
     XEvaluatedIndividualSelection,
-    XEvaluatedByDemographicSelection
+    XEvaluatedByDemographicSelection,
+    XEvaluatedLeadersSelection
   },
   props: {
     isEdit: Boolean,
@@ -135,9 +148,12 @@ export default Vue.extend({
             // Reset
             this.evaluation.populationCount = 0
             this.evaluation.evaluated = []
+            this.evaluation.leaders = []
+            this.evaluation.toLeaders = []
 
             // Check type
             if (val === 'everybody') {
+              this.evaluation.toLeaders = this.employees
               this.evaluation.populationCount = this.employees.length
               this.evaluation.totalPrice = this.evaluation.populationCount * this.evaluation.price
             }
