@@ -246,7 +246,7 @@ export default {
   data () {
     return {
       questionnaires: [],
-      indexes: {},
+      // indexes: {},
       minOpenQuestion: 1,
       maxOpenQuestion: 3,
       minOptionOpenQuestion: 2,
@@ -377,68 +377,91 @@ export default {
       this.$store.dispatch('loading/show')
       const details = []
       let dimensionsCount = 0
-      for (const [dimensionKey, variables] of Object.entries(questionnaire.evaluations)) {
+      const getLabel = (label) => {
+        return label && typeof label === 'object' ? label[this.user.lang] || '' : ''
+      }
+      const evaluations = JSON.parse(JSON.stringify(questionnaire.evaluations))
+      const leader = JSON.parse(JSON.stringify(evaluations.leader))
+      delete evaluations.leader
+
+      for (const dimentionKey in evaluations) {
+        const dimention = evaluations[dimentionKey]
         details.push({
-          text: this.$t(`Views.Questionnaires.edit.d_${dimensionKey}`).toUpperCase(),
+          text: getLabel(dimention.label).toUpperCase(),
           bold: true,
           fontSize: 16,
           pageBreak: dimensionsCount > 0 ? 'before' : '',
           margin: [0, (dimensionsCount > 0 ? 20 : 10), 0, 5]
         })
 
-        for (const [variableKey, variableItems] of Object.entries(variables)) {
-          const variablesData = {
-            ul: []
-          }
-
+        for (const attrKey in dimention.attrs) {
+          const attr = dimention.attrs[attrKey]
+          const variablesData = { ul: [] }
           variablesData.ul.push({
-            text: this.$t(`Views.Questionnaires.edit.v_${variableKey}`),
+            text: getLabel(attr.label),
             bold: true,
             fontSize: 14,
             pageBreak: '',
             margin: [8, 15, 20, 10]
           })
-
           details.push(variablesData)
-
-          details.push({
-            ul: Object.entries(variableItems).map(vItem => ({
-              text: vItem[1].question[this.user.lang],
+          const qUl = { ul: [] }
+          for (const questionKey in attr.questions) {
+            const question = attr.questions[questionKey]
+            qUl.ul.push({
+              text: getLabel(question.label),
               bold: false,
               fontSize: 11,
               margin: [16, 5, 20, 0]
-            }))
-          })
+            })
+          }
+          details.push(qUl)
         }
         dimensionsCount++
       }
 
+      // details.push({
+      //   text: this.$t('Views.Indices.list.title').toUpperCase(),
+      //   bold: true,
+      //   fontSize: 16,
+      //   pageBreak: 'before',
+      //   margin: [0, 20, 0, 5]
+      // })
+      // for (const [indexKey, indexItems] of Object.entries(this.indexes)) {
+      //   details.push({
+      //     text: this.$t(`Views.Indices.list.i_${indexKey}`),
+      //     bold: true,
+      //     fontSize: 14,
+      //     margin: [0, 10, 0, 5]
+      //   })
+
+      //   details.push({
+      //     ul: Object.entries(indexItems).map(iItem => ({
+      //       text: iItem[1].question[this.user.lang],
+      //       bold: false,
+      //       fontSize: 12,
+      //       margin: [16, 5, 20, 0]
+      //     }))
+      //   })
+      // }
+
       details.push({
-        text: this.$t('Views.Indices.list.title').toUpperCase(),
+        text: this.$t('Views.Evaluations.stepQuestion.leader'),
         bold: true,
         fontSize: 16,
-        pageBreak: 'before',
-        margin: [0, 20, 0, 5]
+        pageBreak: dimensionsCount > 0 ? 'before' : '',
+        margin: [0, (dimensionsCount > 0 ? 20 : 10), 0, 5]
       })
-
-      for (const [indexKey, indexItems] of Object.entries(this.indexes)) {
-        details.push({
-          text: this.$t(`Views.Indices.list.i_${indexKey}`),
-          bold: true,
-          fontSize: 14,
-          margin: [0, 10, 0, 5]
-        })
-
-        details.push({
-          ul: Object.entries(indexItems).map(iItem => ({
-            text: iItem[1].question[this.user.lang],
-            bold: false,
-            fontSize: 12,
-            margin: [16, 5, 20, 0]
-          }))
+      const qUl = { ul: [] }
+      for (const questionKey in leader) {
+        qUl.ul.push({
+          text: getLabel(leader[questionKey].label),
+          bold: false,
+          fontSize: 11,
+          margin: [16, 5, 20, 0]
         })
       }
-
+      details.push(qUl)
       const configuration = {
         pageSize: 'A4',
         info: {
@@ -525,10 +548,11 @@ export default {
   },
   created () {
     Promise.all([
-      this.getQuestionnaires(),
-      this.getIndexes()
+      this.getQuestionnaires()
+      // this.getIndexes()
     ]).then(resp => {
-      const [questionnaires, indexes] = resp
+      const [questionnaires] = resp
+      // const [questionnaires, indexes] = resp
       this.questionnaires = questionnaires.items
       if (!this.$route.params.slug && this.questionnaires.length) {
         this.evaluation.questionnaire = this.questionnaires[0].slug
@@ -537,7 +561,7 @@ export default {
           this.evaluation.questionnaire = this.evaluation.questionnaire.slug
         }
       }
-      this.indexes = indexes
+      // this.indexes = indexes
       this.$store.dispatch('loading/hide')
     })
   },
