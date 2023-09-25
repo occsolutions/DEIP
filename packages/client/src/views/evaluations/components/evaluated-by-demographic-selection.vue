@@ -497,9 +497,11 @@ export default Vue.extend({
 
       if (flag) {
         this.$store.dispatch('loading/show')
-        await employeesServices.getDemographicParticipants(this.demographicRefs)
+        await employeesServices.getByCriteria(this.demographicRefs)
           .then((res) => {
-            this.totalFilteredEmployees = res.total
+            this.totalFilteredEmployees = res.items.length
+            this.evaluation.toLeaders = res.items
+            // this.totalFilteredEmployees = res.total
           })
           .finally(() => {
             this.$store.dispatch('loading/hide')
