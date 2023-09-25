@@ -45,6 +45,7 @@ const EvaluationsSchema = new mongoose.Schema({
   },
   populationSelectionType: String,
   populationSelectionDetails: Object,
+  populationLeaders: Array,
   populationCount: Number,
   populationCompletedCount: Number,
   additionalSegmentation: Object,
