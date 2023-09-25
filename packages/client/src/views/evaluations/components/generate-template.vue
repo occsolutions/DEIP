@@ -17,11 +17,14 @@ import fileDownload from '../../../utils/file-download'
 import evaluationsService from '../../../services/evaluations'
 
 export default Vue.extend({
+  props: {
+    evaluated: Array
+  },
   methods: {
     downloadTemplate () {
       this.$store.dispatch('loading/show')
       return evaluationsService
-        .generateTemplate()
+        .generateTemplate(this.evaluated ? this.evaluated.map(ev => ev.id) : undefined)
         .then((res) => {
           this.$store.dispatch('loading/hide')
           const blob = new Blob([res.template])
