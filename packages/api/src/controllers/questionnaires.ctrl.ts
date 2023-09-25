@@ -4,7 +4,10 @@ import slugify from 'slugify';
 
 import { default as QuestionnairesService } from '../services/questionnaires.srvc';
 import { default as QuestionsIndexService } from '../services/question-index.srvc';
+
 import IRequest from './contracts/request';
+import { BadRequestException } from '../error';
+import { Question } from 'src/models/question';
 
 class QuestionnairesController {
 
@@ -56,7 +59,23 @@ class QuestionnairesController {
   }
 
   async edit (req: Request, res: Response) {
-    res.send(await QuestionnairesService.update(req.params.slug, req.body.questionnaire));
+    const parts = (req.body.questionnaire.key || '').split('_');
+    if ([2, 3].indexOf(parts.length) === -1) {
+      throw new BadRequestException('key-is-invalid');
+    }
+
+    const questionnaire = await QuestionnairesService.findOneBySlug(req.params.slug);
+    if (parts.length === 2) {
+      questionnaire.evaluations.leader[req.body.questionnaire.key].label[req.body.questionnaire.lang] = req.body.questionnaire.label
+    } else {
+      const setLang = (dimention, attr: string, question: string, lang: string, value: string) => {
+        dimention.attrs[attr].questions[question].label[lang] = value;
+        return dimention;
+      }
+      questionnaire.evaluations[parts[0]] = setLang(questionnaire.evaluations[parts[0]], `${parts[0]}_${parts[1]}`, req.body.questionnaire.key, req.body.questionnaire.lang, req.body.questionnaire.label)
+    }
+
+    res.send(await QuestionnairesService.update(req.params.slug, questionnaire));
   }
 
   async toggle (req: Request, res: Response) {
@@ -105,6 +124,47 @@ class QuestionnairesController {
     }
   }
 
+  async questionsTypes(req: Request, res: Response) {
+    const questions = await QuestionnairesService.getQuestionsType();
+    res.send({items: questions});
+  }
+
+  async updateOptions(req: Request, res: Response) {
+    const parts = (req.body.questionnaire.key || '').split('_');
+    if ([2, 3].indexOf(parts.length) === -1) {
+      throw new BadRequestException('key-is-invalid');
+    }
+
+    const questionnaire = await QuestionnairesService.findOneBySlug(req.params.slug);
+    let question: Question = undefined;
+    if (parts.length === 2) {
+      question = questionnaire.evaluations.leader[req.body.questionnaire.key]
+    } else {
+      const getQuestion = (dimention, attr: string, question: string) => {
+        return dimention.attrs[attr].questions[question];
+      }
+      question = getQuestion(questionnaire.evaluations[parts[0]], `${parts[0]}_${parts[1]}`, req.body.questionnaire.key)
+    }
+
+    if (!question) {
+      throw new BadRequestException('question-is-invalid');
+    }
+
+    const questionType = await QuestionnairesService.getQuestionType(question.type);
+    if (questionType.editable.length) {
+      if (questionType.editable.indexOf('options') !== -1) {
+        question.options = req.body.questionnaire.options
+      }
+      if (questionType.editable.indexOf('min') !== -1) {
+        question.min = req.body.questionnaire.min
+      }
+      if (questionType.editable.indexOf('limit') !== -1) {
+        question.limit = req.body.questionnaire.limit
+      }
+    }
+
+    res.send(await QuestionnairesService.update(req.params.slug, questionnaire));
+  }
 }
 
 export default new QuestionnairesController();
