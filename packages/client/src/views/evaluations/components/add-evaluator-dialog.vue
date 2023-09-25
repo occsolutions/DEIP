@@ -68,7 +68,11 @@ import Vue from 'vue'
 export default Vue.extend({
   props: {
     employees: Array,
-    evaluation: Object
+    evaluation: Object,
+    keyEvaluated: {
+      type: String,
+      default: 'evaluated'
+    }
   },
   data () {
     return {
@@ -96,8 +100,8 @@ export default Vue.extend({
       this.$emit('pushEvaluator', this.evaluated)
     },
     filterEmployees () {
-      return this.evaluation.evaluated.length ? this.employees.filter(employee => {
-        return !this.evaluation.evaluated.find(evaluated => {
+      return this.evaluation[this.keyEvaluated].length ? this.employees.filter(employee => {
+        return !this.evaluation[this.keyEvaluated].find(evaluated => {
           return evaluated.id === employee.id
         })
       }).map(this.employeeMapper) : this.employees.map(this.employeeMapper)
