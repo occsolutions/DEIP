@@ -45,6 +45,7 @@ export default {
     modal_confirm_create_title: 'Confirme la creación de la valoración',
     modal_workshop_cost: 'Costo de la valoración',
     total_receptors: 'Total de participantes: {n}',
+    total_receptors_leaders: 'Total de participantes líderes: {n}',
     msg_created_evaluation: 'Valoración creada satisfactoriamente'
   },
   stepOverview: {
@@ -100,14 +101,15 @@ export default {
     desc: 'En esta sección, podrás elegir los participantes de la medición, puedes escoger entre todos los colaboradores activos en la empresa, por corte demográfico o individual. Recuerda que todos los participantes de la medición, deben estar previamente cargados.',
     want_massive: '¿Desea realizar la asignación de la valoración via carga masiva?',
     add_evaluated: 'Agregar participante',
+    add_evaluated_leader: 'Agregar líder',
     select_file_to_upload: 'Selecciones archivo a subir',
     evaluatedExists: 'Hay participantes en el archivo que ya se encuentran en el listado',
     incorrect_file: 'Por favor cargue un archivo valido',
     input_upload_file: 'Subir archivo',
     modal_del_title: 'Confirmar Borrado',
     modal_del_question: '¿Desea borrar este participante?',
+    modal_del_question_leader: '¿Desea borrar este participante como líder con personas a cargo?',
     input_trash: 'Borrar',
-    min_evaluated: 'Se necesitan al menos dos (2) miembros para ser considerado un equipo',
     evaluatedTable: {
       team_members: 'Participantes',
       actions: 'Acciones',
@@ -162,7 +164,11 @@ export default {
       age_low: 'Menos de {n} años',
       age_range: 'De {n} a {p} años',
       age_upper: 'Más de {n} años'
-    }
+    },
+    leader_title: 'Participantes líderes con personas a cargo',
+    leader_desc: 'Entre los participantes previamente elegidos, indica quienes son líderes con personas a cargo, estos líderes tendrán una sección especial en la medición. Este paso no es obligatorio.',
+    leader_want_massive: '¿Desea realizar la seleción de líderes via carga masiva?',
+    leader_add_evaluated: 'Selécionar más líderes'
   },
   stepRevition: {
     poll_name: 'Nombre de la valoración',
