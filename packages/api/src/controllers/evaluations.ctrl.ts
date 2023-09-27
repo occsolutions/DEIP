@@ -7,12 +7,8 @@ import * as xlsx from 'xlsx';
 
 import { default as EvaluationsService } from '../services/evaluations.srvc';
 import { default as EvaluatedService } from '../services/evaluated.srvc';
-import { default as EvaluationAnswersService } from '../services/evaluation-answers.srvc';
 import { default as ProductServiceService } from '../services/product-service.srvc';
 import { default as QuestionnairesService } from '../services/questionnaires.srvc';
-import { default as OpenQuestionService } from '../services/open-question.srvc';
-import { default as QuestionsIndexService } from '../services/question-index.srvc';
-import { default as AnswersReferenceService } from '../services/answers-reference.srvc';
 
 import { default as OperationThreadsService } from '../services/operation-threads.srvc';
 
@@ -28,15 +24,13 @@ const promisify = require('util.promisify');
 class EvaluationsController {
 
   async list(req: IRequest, res: Response) {
-    let evaluations = undefined;
     const selectFields = 'displayName name questionnaire.name  status deliveredAt validUntil slug _id';
     const filter = req.query.filter ? { status: req.query.filter } : {};
     if (req.user.role === 'admin') {
-      evaluations = await EvaluationsService.listAll(filter, selectFields);
+      res.send({ items: await EvaluationsService.listAll(filter, selectFields) });
     } else {
-      evaluations = await EvaluationsService.listByEnterprise(req.user.enterprise.id, filter, selectFields);
+      res.send({ items: await EvaluationsService.listByEnterprise(req.user.enterprise.id, filter, selectFields) });
     }
-    res.send({ items: evaluations });
   }
 
   async saveTempAnswers(req: Request, resp: Response) {
@@ -55,14 +49,14 @@ class EvaluationsController {
   async finishPollByToken(req: Request, resp: Response) {
     try {
       // Find Evaluated
-      const evaluated = await EvaluatedService.getOneByToken(req.body.tokenId);
+      const evaluated: any = await EvaluatedService.getOneByToken(req.body.tokenId);
       // Find Evaluation
-      const evaluation = await EvaluationsService.findById(evaluated.evaluationRef as any);
+      const evaluation: any = await EvaluationsService.findById(evaluated.evaluationRef as any);
       if (evaluation.status === 'completed') {
         throw new BadRequestException('evaluation-has-ended');
       }
       // Finish Poll
-      const closedPoll = await EvaluatedService.setPollCompleted(req.body.tokenId);
+      const closedPoll: any = await EvaluatedService.setPollCompleted(req.body.tokenId);
 
       // Check if there are still uncompleted participants
       const isInProgress = await EvaluatedService.getAtLeastOneActiveParticipant(evaluation._id);
@@ -132,7 +126,7 @@ class EvaluationsController {
     const name = input.name;
     const slug = slugify(name, { lower: true }) + `-${new Date().getTime()}`;
     try {
-      const reminders = [];
+      const reminders: any[] = [];
       for (const reminder of input.reminders) {
         if (!reminder.value) {
           continue;
@@ -148,18 +142,8 @@ class EvaluationsController {
       }
 
       const questionnaire = await QuestionnairesService.findOneBySlug(input.questionnaire);
-      let answersReferences: any = [];
-      const questionsIndices: any = [];
       if (!questionnaire) {
         throw new BadRequestException('por-fail/questionnaire-not-found');
-      } else {
-        // Fetch Questionnaire Indices & Answers Options (Eventually, may be filtered by questions relations)
-        answersReferences = await AnswersReferenceService.list();
-
-        const groups = ['generalHealth', 'burnoutOrganizational'];
-        for (const group of groups) {
-          questionsIndices.push(await QuestionsIndexService.listByIndexGroup(group));
-        }
       }
 
       const spend = await SpendRequest(req, 'MEDICIÓN DEIP', input.populationCount);
@@ -205,9 +189,6 @@ class EvaluationsController {
         operations: spend,
         questionnaire,
         additionalQuestions: input.additionalQuestions,
-        openQuestions: await OpenQuestionService.findAll(),
-        answersReference: answersReferences,
-        questionsIndex: questionsIndices.flat(),
         deliveredAt: new Date(`${input.deliveredAt.value} ${input.deliveredAt.hour}`),
         validUntil: new Date(`${input.validUntil.value} ${input.validUntil.hour}`),
         timeZone: input.timeZone,
@@ -227,7 +208,7 @@ class EvaluationsController {
         populationCompletedCount: 0,
         additionalSegmentation: input.additionalSegmentation
       };
-      const evaluation = await EvaluationsService.create(evaluationData);
+      const evaluation: any = await EvaluationsService.create(evaluationData);
 
       await OperationThreadsService.save({
         operation: 'CreateEvaluationPopulation',
@@ -244,7 +225,7 @@ class EvaluationsController {
         }
       });
 
-      const productService = await ProductServiceService.findByName('MEDICIÓN DEIP');
+      const productService: any = await ProductServiceService.findByName('MEDICIÓN DEIP');
       await RunHttpRequest.suitePost(req, 'activities/create-activity', {
         service: {
           enterpriseId: req.user.enterprise.id,
@@ -264,7 +245,7 @@ class EvaluationsController {
 
   async update (req: IRequest, res: Response) {
     const input = req.body.evaluation;
-    const oldEvaluation = await EvaluationsService.findOneBySlug(req.params.slug, '_id slug reminders status enterpriseId operations populationCount populationSelectionType populationSelectionDetails');
+    const oldEvaluation: any = await EvaluationsService.findOneBySlug(req.params.slug, '_id slug reminders status enterpriseId operations populationCount populationSelectionType populationSelectionDetails');
     if (!oldEvaluation) {
       throw new BadRequestException('por-fail/not-found');
     }
@@ -353,7 +334,7 @@ class EvaluationsController {
     // Reminders
     if (input.reminders) {
       for (const reminder of input.reminders) {
-        const rem = {
+        const rem: any = {
           dateTime: undefined,
           status: '',
           customEmail: {
@@ -421,7 +402,7 @@ class EvaluationsController {
   }
 
   async getCountEvaluatedsByTeam(req: IRequest, res: Response) {
-    const evaluation = await EvaluationsService.findOneBySlug(req.params.slug, 'enterpriseId populationCount');
+    const evaluation: any = await EvaluationsService.findOneBySlug(req.params.slug, 'enterpriseId populationCount');
     if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
       throw new BadRequestException('evaluation-not-found');
     }
@@ -429,7 +410,7 @@ class EvaluationsController {
   }
 
   async getOneToEdit(req: IRequest, res: Response) {
-    const evaluation = await EvaluationsService.findOneBySlug(req.params.slug);
+    const evaluation: any = await EvaluationsService.findOneBySlug(req.params.slug);
     if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
       throw new BadRequestException('evaluation-not-found');
     }
@@ -438,7 +419,7 @@ class EvaluationsController {
   }
 
   async getOneToShow(req: IRequest, res: Response) {
-    const evaluation = await EvaluationsService.findOneBySlug(req.params.slug, 'name displayName slug status timeZone deliveredAt validUntil reminders enterpriseId populationCount populationCompletedCount');
+    const evaluation: any = await EvaluationsService.findOneBySlug(req.params.slug, 'name displayName slug status timeZone deliveredAt validUntil reminders enterpriseId populationCount populationCompletedCount');
     if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
       throw new BadRequestException('evaluation-not-found');
     }
@@ -459,7 +440,7 @@ class EvaluationsController {
           msg: 'Evaluation not found'
         });
       } else {
-        const evaluation = await EvaluationsService.findById(evaluated.evaluationRef as any);
+        const evaluation: any = await EvaluationsService.findById(evaluated.evaluationRef as any);
         if (!evaluation) {
           resp.send({
             executed: false,
@@ -483,7 +464,7 @@ class EvaluationsController {
 
   async findById(req: IRequest, resp: Response) {
     try {
-      const evaluation = await EvaluationsService.findById(req.params.id);
+      const evaluation: any = await EvaluationsService.findById(req.params.id);
       if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
         throw new BadRequestException('evaluation-not-found');
       }
@@ -504,7 +485,7 @@ class EvaluationsController {
 
   async generateOrganizationalReport(req: IRequest, resp: Response) {
     try {
-      const evaluation = await EvaluationsService.findById(req.params.id, 'name displayName questionnaire status enterpriseId enterprise deliveredAt validUntil');
+      const evaluation: any = await EvaluationsService.findById(req.params.id, 'name displayName questionnaire status enterpriseId enterprise deliveredAt validUntil');
       if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
         throw new BadRequestException('evaluation-not-found');
       }
@@ -512,7 +493,7 @@ class EvaluationsController {
         throw new BadRequestException('evaluation-not-completed');
       }
 
-      const answeredCount = await EvaluationAnswersService.countByEvaluationId(evaluation._id);
+      const answeredCount = await EvaluatedService.countByEvaluationRef(evaluation._id);
       if (!answeredCount) {
         throw new BadRequestException('evaluation-no-answers');
       }
@@ -522,7 +503,7 @@ class EvaluationsController {
         throw new BadRequestException('suite-fail/evaluation/spend-fail');
       }
 
-      const productService = await ProductServiceService.findByName('REPORTE DEIP ORGANIZACIONAL');
+      const productService: any = await ProductServiceService.findByName('REPORTE DEIP ORGANIZACIONAL');
       await RunHttpRequest.suitePost(req, 'activities/create-activity', {
         service: {
           enterpriseId: req.user.enterprise.id,
@@ -562,7 +543,7 @@ class EvaluationsController {
 
   async generateDemographicReport(req: IRequest, resp: Response) {
     try {
-      const evaluation = await EvaluationsService.findById(req.params.id, 'name displayName questionnaire status enterpriseId enterprise deliveredAt validUntil populationCompletedCount');
+      const evaluation: any = await EvaluationsService.findById(req.params.id, 'name displayName questionnaire status enterpriseId enterprise deliveredAt validUntil populationCompletedCount');
       if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
         throw new BadRequestException('evaluation-not-found');
       }
@@ -570,18 +551,18 @@ class EvaluationsController {
         throw new BadRequestException('evaluation-not-completed');
       }
 
-      const filters = {
+      const filters: any = {
         $or: []
       };
       for (const segment of req.body.criteria) {
         if (segment.type === 'demographic') {
-          const demoFilters = {};
+          const demoFilters: any = {};
           demoFilters[`demographicItems.${segment.field}`] = { $ne: null };
           filters.$or.push(demoFilters);
         }
 
         if (segment.type === 'segmentation') {
-          const segFilters = {
+          const segFilters: any = {
             $and: []
           };
           const tmpObj1 = {};
@@ -595,10 +576,11 @@ class EvaluationsController {
         }
       }
 
-      const filteredAnswersCount = await EvaluationAnswersService.countByEvaluationIdAndFilterItems(
-        evaluation._id,
-        filters
-      );
+      const filteredAnswersCount = 0;
+      // const filteredAnswersCount = await EvaluationAnswersService.countByEvaluationIdAndFilterItems(
+      //   evaluation._id,
+      //   filters
+      // );
       if (!filteredAnswersCount) {
         throw new BadRequestException('evaluation-no-answers');
       }
@@ -608,7 +590,7 @@ class EvaluationsController {
         throw new BadRequestException('suite-fail/evaluation/spend-fail');
       }
 
-      const productService = await ProductServiceService.findByName('REPORTE DEIP POR POBLACION');
+      const productService: any = await ProductServiceService.findByName('REPORTE DEIP POR POBLACION');
       await RunHttpRequest.suitePost(req, 'activities/create-activity', {
         service: {
           enterpriseId: req.user.enterprise.id,
@@ -617,9 +599,9 @@ class EvaluationsController {
         productService: productService.code
       });
 
-      const usr = {
+      const usr: any = {
         ...req.user,
-        token: req.header('Authorization').replace('Bearer ', ''),
+        token: req.header('Authorization')!.replace('Bearer ', ''),
       };
 
       await OperationThreadsService.save({
@@ -656,7 +638,7 @@ class EvaluationsController {
 
   async currentThreads(req: IRequest, resp: Response) {
     try {
-      const evaluation = await EvaluationsService.findById(req.params.id, '_id enterpriseId');
+      const evaluation: any = await EvaluationsService.findById(req.params.id, '_id enterpriseId');
       if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
         throw new BadRequestException('evaluation-not-found');
       }
@@ -671,7 +653,7 @@ class EvaluationsController {
 
   async openThreadReport(req: IRequest, resp: Response) {
     try {
-      const evaluation = await EvaluationsService.findById(req.body.id, 'status enterpriseId');
+      const evaluation: any = await EvaluationsService.findById(req.body.id, 'status enterpriseId');
       if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
         throw new BadRequestException('evaluation-not-found');
       } else if (evaluation.status !== 'completed') {
@@ -693,8 +675,8 @@ class EvaluationsController {
   }
 
   async getAdditionalQuestionAnswers(req: Request, res: Response) {
-    const answers = await EvaluationAnswersService.findByQuestion(req.params.pollId, req.body.question);
-    res.send({ answers });
+    // const answers = await EvaluatedService.findByQuestion(req.params.pollId, req.body.question);
+    res.send();
   }
 
   async checkBalance(req: IRequest, resp: Response) {
@@ -705,15 +687,15 @@ class EvaluationsController {
     };
 
     try {
-      const balance = await RunHttpRequest.suiteGet(req, 'token-account-detail/balance');
+      const balance: any = await RunHttpRequest.suiteGet(req, 'token-account-detail/balance');
       if (!balance.success) {
-        throw new BadRequestException(`suite-fail/${balance.error.msg}`);
+        throw new BadRequestException(`suite-fail/${balance.error!.msg}`);
       }
       const productServiceName = dictionary[req.params.key];
-      const productService = await ProductServiceService.findByName(productServiceName);
-      const productServiceSuite = await RunHttpRequest.suiteGet(req, `product-services/c/${productService.code}`);
+      const productService: any = await ProductServiceService.findByName(productServiceName);
+      const productServiceSuite: any = await RunHttpRequest.suiteGet(req, `product-services/c/${productService.code}`);
       if (!productServiceSuite.success) {
-        throw new BadRequestException(`suite-fail/${productServiceSuite.error.msg}`);
+        throw new BadRequestException(`suite-fail/${productServiceSuite.error!.msg}`);
       }
 
       resp.send({
@@ -737,7 +719,7 @@ class EvaluationsController {
       throw new BadRequestException('suite-fail/generateTemplate/employee-list');
     }
 
-    const examples = [];
+    const examples: any = [];
     for (const enterpriseEmployee of employeesRequest.res.items) {
       if (req.body.filters && req.body.filters.length) {
         if (req.body.filters.indexOf(enterpriseEmployee.id) === -1) {
@@ -779,8 +761,8 @@ class EvaluationsController {
     });
 
     const employeesUploaded = parsed.data;
-    const evaluated = [];
-    const errors = {
+    const evaluated: any = [];
+    const errors: any = {
       evaluatedNotFound: [], // evaluado si no está recorrer hasta el siguiente evaluado y dar advertencia de que ese evaluado no existe (listo)
       evaluatedDuplicated: [], // Evaluador: ignorar y recorrer hasta el siguiente evaluador, solo se toma una vez y dar advertencia (listo)
     };
@@ -794,7 +776,7 @@ class EvaluationsController {
           errors.evaluatedNotFound.push(employeeUploaded.email);
           continue;
         } else { // Se buscan los datos del nuevo evaluado
-          const alreadyEmployee = evaluated.find((emp) => { // Se verifica que el evaluado no exista anteriormente como otro evaluado
+          const alreadyEmployee = evaluated.find((emp: any) => { // Se verifica que el evaluado no exista anteriormente como otro evaluado
             return emp.id === employee.id;
           });
           if (alreadyEmployee) { // Si el evaluado existe como otro evaluado se salta el proceso de llenado y se activa la bandera para continuar al siguiente evaluado
@@ -811,7 +793,7 @@ class EvaluationsController {
 
   async sendReminders (req: IRequest, res: Response) {
     try {
-      const evaluation = await EvaluationsService.findOneBySlug(req.body.slug);
+      const evaluation: any = await EvaluationsService.findOneBySlug(req.body.slug);
 
       const population = await EvaluatedService.getByEvaluationRefAndStatus(
         evaluation._id,
@@ -819,7 +801,7 @@ class EvaluationsController {
         'token employee.email employee.employeeEnterprise.firstName employee.employeeEnterprise.lastName'
       );
 
-      const endPopulation = [];
+      const endPopulation: any = [];
       population.forEach((emp) => {
         endPopulation.push({
           token: emp.token,
@@ -828,13 +810,13 @@ class EvaluationsController {
         });
       });
 
-      const suiteRes = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', {
+      const suiteRes: any = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', {
         population: endPopulation,
         customEmailRelease: evaluation.customEmailReminder,
         file: evaluation.customEmailReminder.attachment ? evaluation.customEmailReminder.attachment : ''
       });
       if (suiteRes.error) {
-        throw new Error(`Suite Request Failed with status: ${suiteRes.error.status} by ${suiteRes.error.msg}`);
+        throw new Error(`Suite Request Failed with status: ${suiteRes.error!.status} by ${suiteRes.error!.msg}`);
       }
 
       res.send();
@@ -862,7 +844,7 @@ class EvaluationsController {
 
   async close (req: IRequest, res: Response) {
     try {
-      const evaluation = await EvaluationsService.closeEvaluation(req.params.slug);
+      const evaluation: any = await EvaluationsService.closeEvaluation(req.params.slug);
       res.send(evaluation);
     } catch (error) {
       res.status(400);
@@ -872,7 +854,7 @@ class EvaluationsController {
 
   async countSegmentedAnswers (req: IRequest, res: Response) {
     try {
-      const countRes = {};
+      const countRes: any = {};
       const type = req.body.type;
       const data = req.body.data;
       const filters = {};
@@ -886,10 +868,11 @@ class EvaluationsController {
           filters['segmentation.detailId'] = { $ne: -1 };
         }
 
-        countRes[segment.code] = await EvaluationAnswersService.countByEvaluationIdAndFilterItems(
-          req.params.evaluationId,
-          filters
-        );
+        countRes[segment.code] = 0;
+        // countRes[segment.code] = await EvaluationAnswersService.countByEvaluationIdAndFilterItems(
+        //   req.params.evaluationId,
+        //   filters
+        // );
       }
 
       res.send(countRes);

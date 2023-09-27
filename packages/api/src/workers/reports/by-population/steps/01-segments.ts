@@ -7,7 +7,7 @@ export default async (
   criteria: any,
 ) => {
 
-  const resp = {
+  const resp: any = {
     success: false,
     segments: {},
     segmentedInitAnswers: {},

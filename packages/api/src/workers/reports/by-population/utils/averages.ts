@@ -1,15 +1,13 @@
 
 import { IAnswersDimension, IScore } from '../contracts/answers-dimension';
-import { IIndicesAnswers } from '../contracts/indices-answers';
 
 class AveragesUtils {
 
   /**
-   * @description Calculate dimensions & indices averages
+   * @description Calculate dimensions
    */
   public calcAverages (
     answersDimension: IAnswersDimension,
-    indicesAnswers: IIndicesAnswers,
     total: number,
     totalFiltered: number
   ) {
@@ -35,22 +33,8 @@ class AveragesUtils {
       }
     }
 
-    // INDICES
-    for (const indexKey of Object.keys(indicesAnswers)) {
-      indicesAnswers[indexKey].general = this.getAverage(indicesAnswers[indexKey].general, total);
-      indicesAnswers[indexKey].filtered = this.getAverage(indicesAnswers[indexKey].filtered, totalFiltered);
-
-      // Answers
-      const indexAnswers = indicesAnswers[indexKey].answers;
-      for (const aKey of Object.keys(indexAnswers)) {
-        indicesAnswers[indexKey].answers[aKey].general = this.getAverage(indicesAnswers[indexKey].answers[aKey].general, total);
-        indicesAnswers[indexKey].answers[aKey].filtered = this.getAverage(indicesAnswers[indexKey].answers[aKey].filtered, totalFiltered);
-      }
-    }
-
     return {
-      answersDimension,
-      indicesAnswers
+      answersDimension
     };
   }
 

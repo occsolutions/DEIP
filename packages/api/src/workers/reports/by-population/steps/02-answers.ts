@@ -1,8 +1,7 @@
 
-import { default as EvaluationAnswersService } from '../../../../services/evaluation-answers.srvc';
+import { default as EvaluatedService } from '../../../../services/evaluated.srvc';
 
 import { IAnswersDimension } from '../contracts/answers-dimension';
-import { IIndicesAnswers } from '../contracts/indices-answers';
 
 import AnswersUtils from '../utils/answers';
 import SegmentsUtils from '../utils/segments';
@@ -11,30 +10,29 @@ export default async (
   evaluationId: string,
   alreadyProcessedAnswersCount: number,
   answersDimension: IAnswersDimension,
-  indicesAnswers: IIndicesAnswers,
   criteria: any,
   segmentedAnswers: any
 ) => {
   const chunkSize = 100;
-  const fields = 'demographicItems segmentation evaluations indices';
-  let filteredIds = [];
+  const fields = 'demographicItems segmentation evaluations';
+  let filteredIds: any = [];
 
-  const answersBatch = await EvaluationAnswersService.findBatchByEvaluationId(evaluationId, alreadyProcessedAnswersCount, chunkSize, fields);
+  const answersBatch: any = await EvaluatedService.findByBatchByEvaluationId(evaluationId, alreadyProcessedAnswersCount, chunkSize, fields);
   const answersBatchIds = answersBatch.map(x => x._id);
 
-  const filters = {
+  const filters: any = {
     $or: []
   };
 
   for (const segment of criteria) {
     if (segment.type === 'demographic') {
-      const demoFilters = {};
+      const demoFilters: any = {};
       demoFilters[`demographicItems.${segment.field}`] = { $ne: null };
       filters.$or.push(demoFilters);
     }
 
     if (segment.type === 'segmentation') {
-      const segFilters = {
+      const segFilters: any = {
         $and: []
       };
       const tmpObj1 = {};
@@ -47,8 +45,9 @@ export default async (
       filters.$or.push(segFilters);
     }
   }
-  const filteredAnswersBatch = await EvaluationAnswersService.findBatchByIdsAndFilterItems(answersBatchIds, filters, '_id');
-  filteredIds = filteredAnswersBatch.map(x => x._id.toString());
+  // const filteredAnswersBatch = await EvaluatedService.findByBatchByEvaluationIdByItems(answersBatchIds, filters, '_id');
+  // filteredIds = filteredAnswersBatch.map(x => x._id.toString());
+  filteredIds = []
 
   // Run Answers Dimension
   for (let i = 0; i < answersBatch.length; i++) {
@@ -56,14 +55,11 @@ export default async (
 
     // Process ALL answers
     const temp = AnswersUtils.runAnswersDimension(
-      answersBatch[i].evaluations,
-      answersBatch[i].indices,
+      answersBatch[i].temp,
       answersDimension,
-      indicesAnswers,
       isFiltered
     );
     answersDimension = temp.evaluations;
-    indicesAnswers = temp.indices;
 
     // Process Segmented answers
     if (isFiltered) {
@@ -80,7 +76,6 @@ export default async (
   return {
     processedAnswers: answersBatch.length,
     answersDimension,
-    indicesAnswers,
     segmentedAnswers
   };
 };

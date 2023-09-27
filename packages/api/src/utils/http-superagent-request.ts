@@ -18,7 +18,7 @@ class HttpRequest {
     const options: IHttpRequest =  typeof request === 'string' ? {
       product : request,
     } : request;
-    const host = await HostService.findByProductName(options.product);
+    const host: any = await HostService.findByProductName(options.product);
     let token;
     if (req) {
       token = req.user && req.user['token']

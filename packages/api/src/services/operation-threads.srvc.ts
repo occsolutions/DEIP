@@ -13,7 +13,7 @@ class OperationThreadsService {
    * @param id
    * @returns {Promise<OperationThreads>}
    */
-  async findOneById(id: string, select?: undefined|any): Promise<OperationThreads> {
+  async findOneById(id: string, select?: undefined|any): Promise<OperationThreads|null> {
     return OperationThreadsRepository.findOne({
       '_id': new ObjectID(id)
     }, select || undefined);
@@ -36,7 +36,7 @@ class OperationThreadsService {
    * @param name
    * @returns {Promise<OperationThreads>}
    */
-  async findOneDownloadReportById(id: string, select?: undefined|any): Promise<OperationThreads> {
+  async findOneDownloadReportById(id: string, select?: undefined|any): Promise<OperationThreads|null> {
     return OperationThreadsRepository.findOne({
       operation: 'DownloadReport',
       '_id': new ObjectID(id)
@@ -48,7 +48,7 @@ class OperationThreadsService {
    * @param name
    * @returns {Promise<OperationThreads>}
    */
-  async findByOperationAndStatus(operation: string, status: string): Promise<OperationThreads|OperationThreadsType> {
+  async findByOperationAndStatus(operation: string, status: string): Promise<OperationThreads|OperationThreadsType|null> {
     return OperationThreadsRepository.findOne({ operation, status });
   }
 
@@ -57,7 +57,7 @@ class OperationThreadsService {
    * @param name
    * @returns {Promise<OperationThreads>}
    */
-  async findByOperationStatusAndDataType(operation: string, status: string, type: string): Promise<OperationThreads|OperationThreadsType> {
+  async findByOperationStatusAndDataType(operation: string, status: string, type: string): Promise<OperationThreads|OperationThreadsType|null> {
     return OperationThreadsRepository.findOne({ operation, status, 'data.type': type });
   }
 
@@ -75,7 +75,7 @@ class OperationThreadsService {
    * @param {OperationThreads} OperationThreads
    * @returns {Promise<OperationThreads>}
    */
-  async save(OperationThreads: OperationThreads): Promise<OperationThreads|OperationThreadsType> {
+  async save(OperationThreads: OperationThreads): Promise<OperationThreads|OperationThreadsType|null> {
     return (await new OperationThreadsRepository(OperationThreads).save());
   }
 
@@ -84,7 +84,7 @@ class OperationThreadsService {
    * @param name
    * @returns {Promise<OperationThreads>}
    */
-  async findOneAndUpdateStatus(id: string, status: string): Promise<OperationThreads|OperationThreadsType> {
+  async findOneAndUpdateStatus(id: string, status: string): Promise<any> {
     return await OperationThreadsRepository.updateOne(
       {_id: new ObjectID(id)},
       { status }
@@ -97,7 +97,7 @@ class OperationThreadsService {
    * @param name
    * @returns {Promise<OperationThreads>}
    */
-  async findOneAndUpdateData(id: string, data: {[key: string]: any}): Promise<OperationThreads|OperationThreadsType> {
+  async findOneAndUpdateData(id: string, data: {[key: string]: any}): Promise<any> {
     return await OperationThreadsRepository.updateOne(
       {_id: new ObjectID(id)},
       { data }
@@ -111,7 +111,7 @@ class OperationThreadsService {
    * @param data
    * @returns {Promise<OperationThreads>}
    */
-  async findOneAndUpdateStatusData(id: string, status: string, data: {[key: string]: any}): Promise<OperationThreads|OperationThreadsType> {
+  async findOneAndUpdateStatusData(id: string, status: string, data: {[key: string]: any}): Promise<any> {
     return await OperationThreadsRepository.updateOne(
       {_id: new ObjectID(id)},
       { status, data }
@@ -124,11 +124,10 @@ class OperationThreadsService {
    * @param data
    * @returns {Promise<OperationThreads>}
    */
-  async findOneAndSaveFail(id: string, data: {[key: string]: any}): Promise<OperationThreads|OperationThreadsType> {
+  async findOneAndSaveFail(id: string, data: {[key: string]: any}): Promise<any> {
     return await OperationThreadsRepository.updateOne(
       {_id: new ObjectID(id)},
       { status: 'failed', dataFail: data }
-      // { new: true}
     );
   }
 }

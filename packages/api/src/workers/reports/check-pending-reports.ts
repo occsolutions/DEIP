@@ -29,19 +29,6 @@ class ReportChecker {
         const initOrganizational = await InitOrganizational();
         threadData.answersForScatter = initOrganizational.answersForScatter;
         threadData.answersDimension = initOrganizational.answersDimension;
-        threadData.indicesAnswers = initOrganizational.indicesAnswers;
-
-        // OpenAnswers will be saved into another thread to reduce the current thread's size
-        const openAnswersThread = await OperationThreadsService.save({
-          operation: 'DownloadReport-OpenAnswers',
-          status: 'pending',
-          createdAt: new Date(),
-          data: {
-            _thread: pendingOperationThread._id,
-            _evaluation: threadData._evaluation,
-            openAnswers: initOrganizational.openAnswers
-          }
-        });
 
         threadData.tempData = {
           alreadyProcessedAnswers: 0,
@@ -50,13 +37,10 @@ class ReportChecker {
             answeredCount: 0
           }
         };
-
-        threadData.openAnswersThreadId = openAnswersThread._id;
         break;
       case 'by_demographic':
         const initByPopulation = await InitByPopulation();
         threadData.answersDimension = initByPopulation.answersDimension;
-        threadData.indicesAnswers = initByPopulation.indicesAnswers;
         threadData.segments = initByPopulation.segments;
         threadData.segmentedAnswers = initByPopulation.segmentedAnswers;
         threadData.tempData = { alreadyProcessedAnswers: 0 };

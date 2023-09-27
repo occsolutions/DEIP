@@ -1,7 +1,6 @@
 
 import { Request, Response } from 'express';
 
-
 import { default as ProductServiceService } from '../services/product-service.srvc';
 import { default as EvaluationsService } from '../services/evaluations.srvc';
 import { default as EvaluatedService } from '../services/evaluated.srvc';
@@ -54,19 +53,6 @@ const calculateProgress = (evaluatedTemp, questions) => {
         }
         break;
 
-      case 'indices':
-        // Questions Count
-        totalQuestions += questions[key].length;
-        // Answers Count
-        if (evaluatedTemp[key]) {
-          evaluatedTemp[key].forEach(a => {
-            if (a.answer) {
-              answeredCount++;
-            }
-          });
-        }
-        break;
-
       case 'additional':
         // Questions Count
         totalQuestions += questions[key].length;
@@ -76,21 +62,6 @@ const calculateProgress = (evaluatedTemp, questions) => {
             if (a.answer[0]) {
               answeredCount++;
             }
-          });
-        }
-        break;
-
-      case 'open':
-        // Questions Count
-        totalQuestions += (questions[key].length * 3);
-        // Answers Count
-        if (evaluatedTemp[key]) {
-          evaluatedTemp[key].forEach(a => {
-            a.answer.forEach(oq => {
-              if (oq) {
-                answeredCount++;
-              }
-            });
           });
         }
         break;
@@ -119,15 +90,13 @@ class DashboardController {
     const productService = await ProductServiceService.findByName('MEDICIÓN DEIP');
 
     for (const evaluated of evaluationsEmployee) {
-      const evaluation = await EvaluationsService.findInProgressById(evaluated.evaluationRef, 'name displayName status additionalSegmentation questionnaire.evaluations questionsIndex additionalQuestions openQuestions');
+      const evaluation = await EvaluationsService.findInProgressById(evaluated.evaluationRef, 'name displayName status additionalSegmentation questionnaire.evaluations additionalQuestions');
       if (!evaluation) continue;
 
       const evaluationQuestions = {
         segmentation: evaluation.additionalSegmentation,
         evaluations: evaluation.questionnaire.evaluations,
-        indices: evaluation.questionsIndex,
-        additional: evaluation.additionalQuestions,
-        open: evaluation.openQuestions
+        additional: evaluation.additionalQuestions
       };
 
       if (!evaluationQuestions.segmentation) {

@@ -18,7 +18,7 @@ class RunHttpRequest {
       httpResponse = error;
     }
 
-    const response = { success: true, request, error: undefined };
+    const response = { success: true, request, error: {} };
     if (!(httpResponse && httpResponse.status ) || httpResponse.status !== 200) {
       response.success = false;
       response.error = {

@@ -1,11 +1,9 @@
 
 import { Dimention } from './dimention';
-import { AnswerOpenQuestion } from './answer-open-question';
+import { AnswerAdditionalQuestion } from './answer-additional-question';
 
 export type EvaluatedAnswers = {
   segmentation: Array<{ segmentationId: Number, detailId: Number }>;
   evaluations: Dimention<Number>;
-  indices: Array<{ idx: Number, answer: Number }>;
-  additional: Array<AnswerOpenQuestion>;
-  open: Array<AnswerOpenQuestion>;
+  additional: Array<AnswerAdditionalQuestion>;
 };

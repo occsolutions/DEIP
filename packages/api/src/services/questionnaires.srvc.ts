@@ -38,23 +38,20 @@ class QuestionnaireService {
     return (await new QuestionnaireRepository(questionnaire).save()).toObject({ virtuals: true });
   }
 
-  async deleteOne(slug: string): Promise<QuestionnairesType> {
+  async deleteOne(slug: string): Promise<Questionnaire|null> {
     return await QuestionnaireRepository.findOneAndUpdate({ slug: slug }, { active: false, deletedAt: new Date() }, { new: true });
-    // return await QuestionnaireRepository.deleteOne({ name: name });
   }
 
-  async findOneBySlug(slug: string): Promise<Questionnaire> {
-    const questionnaire: QuestionnairesType = await QuestionnaireRepository.findOne({ slug });
-    return questionnaire;
+  async findOneBySlug(slug: string): Promise<Questionnaire|null> {
+    return await QuestionnaireRepository.findOne({ slug });
   }
 
-  async update(slug: string, questionnaire: Questionnaire): Promise<Questionnaire> {
-    const response: Questionnaire = await QuestionnaireRepository.findOneAndUpdate({ slug: slug }, { evaluations: questionnaire.evaluations }, { new: true});
-    return response;
+  async update(slug: string, questionnaire: Questionnaire): Promise<Questionnaire|null> {
+    return await QuestionnaireRepository.findOneAndUpdate({ slug: slug }, { evaluations: questionnaire.evaluations }, { new: true});
   }
 
   async updateQuestionnaireInfo(slug: string, questionnaire: Questionnaire): Promise<Questionnaire> {
-    const assignation = {
+    const assignation: any = {
       type: '',
       for: undefined
     };
@@ -63,7 +60,7 @@ class QuestionnaireService {
       assignation.type = questionnaire.assignationType;
       assignation.for = questionnaire.assignationFor;
     }
-    const response: Questionnaire = await QuestionnaireRepository.findOneAndUpdate({slug: slug}, {
+    const response: any = await QuestionnaireRepository.findOneAndUpdate({slug: slug}, {
       name: questionnaire.name,
       assignationType: assignation.type,
       assignationFor: assignation.for
@@ -71,19 +68,16 @@ class QuestionnaireService {
     return response;
   }
 
-  async toggle(slug: string, active: boolean): Promise<Questionnaire> {
-    const questionnaire: Questionnaire = await QuestionnaireRepository.findOneAndUpdate({ slug: slug }, { active: active }, { new: true });
-    return questionnaire;
+  async toggle(slug: string, active: boolean): Promise<Questionnaire|null> {
+    return await QuestionnaireRepository.findOneAndUpdate({ slug: slug }, { active: active }, { new: true });
   }
 
   async getQuestionsType(): Promise<QuestionsType[]> {
-    const questionsType: QuestionsTypeType[] = await QuestionTypeRepository.find();
-    return questionsType;
+    return await QuestionTypeRepository.find();
   }
 
-  async getQuestionType(type: string): Promise<QuestionsType> {
-    const questionType: QuestionsTypeType = await QuestionTypeRepository.findOne({ type });
-    return questionType;
+  async getQuestionType(type: string): Promise<QuestionsType|null> {
+    return await QuestionTypeRepository.findOne({ type });
   }
 }
 

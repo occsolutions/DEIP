@@ -50,14 +50,12 @@ class ReportMethods {
             threadData._evaluation,
             threadData.tempData.alreadyProcessedAnswers,
             threadData.answersDimension,
-            threadData.indicesAnswers,
             threadData.criteria,
             threadData.segmentedAnswers
           );
 
           threadData.tempData.alreadyProcessedAnswers += tempStepTwo.processedAnswers;
           threadData.answersDimension = tempStepTwo.answersDimension;
-          threadData.indicesAnswers = tempStepTwo.indicesAnswers;
           threadData.segmentedAnswers = tempStepTwo.segmentedAnswers;
 
           if (threadData.answeredCount <= threadData.tempData.alreadyProcessedAnswers) {
@@ -68,14 +66,12 @@ class ReportMethods {
         case 3: // Averages
           const tempStepThree = await StepThree(
             threadData.answersDimension,
-            threadData.indicesAnswers,
             threadData.answeredCount,
             threadData.filteredAnswersCount,
             threadData.segmentedAnswers
           );
 
           threadData.answersDimension = tempStepThree.generalAverages.answersDimension;
-          threadData.indicesAnswers = tempStepThree.generalAverages.indicesAnswers;
           threadData.segmentedAnswers = tempStepThree.segmentedAnswers;
 
           threadData.progress = 100;

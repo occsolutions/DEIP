@@ -15,12 +15,6 @@ const EvaluationsSchema = new mongoose.Schema({
   operations: Array,
   questionnaire: Object,
   additionalQuestions: [],
-  openQuestions: [{
-    name: String,
-    question: Object
-  }],
-  answersReference: Object,
-  questionsIndex: Object,
   deliveredAt: { index: true, type: Date },
   validUntil: { index: true, type: Date },
   timeZone: String,

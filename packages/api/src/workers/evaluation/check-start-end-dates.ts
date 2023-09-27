@@ -1,7 +1,7 @@
 
 import { default as OperationThreadsService } from '../../services/operation-threads.srvc';
 import { default as EvaluationService } from '../../services/evaluations.srvc';
-import { default as EvaluationAnswersService } from '../../services/evaluation-answers.srvc';
+import { default as EvaluatedService } from '../../services/evaluated.srvc';
 
 class EvaluationMethods {
 
@@ -13,7 +13,7 @@ class EvaluationMethods {
     const localDate = new Date();
 
     // Pending Evaluations
-    const pendingEvaluationsIds = [];
+    const pendingEvaluationsIds: any = [];
     for (const pendingEvaluation of pendingEvaluations) {
       const diffTimeZone = Number(pendingEvaluation.timeZone.substring(4, 7));
       const timeAdapted = new Date(localDate.getTime() + (3600000 * diffTimeZone));
@@ -33,7 +33,7 @@ class EvaluationMethods {
     }
 
     // Evaluations in Progress
-    const expiredEvaluationsIds = [];
+    const expiredEvaluationsIds: any = [];
     for (const progressEvaluation of progressEvaluations) {
       const diffTimeZone = Number(progressEvaluation.timeZone.substring(4, 7));
       const timeAdapted = new Date(localDate.getTime() + (3600000 * diffTimeZone));
@@ -63,7 +63,7 @@ class EvaluationMethods {
 
       // Update participation count (answered polls)
       for (const expiredEvaluationId of expiredEvaluationsIds) {
-        const totalAnswered = await EvaluationAnswersService.countByEvaluationId(expiredEvaluationId);
+        const totalAnswered = await EvaluatedService.countByEvaluationRef(expiredEvaluationId);
         await EvaluationService.updateAnsweredCount(expiredEvaluationId, totalAnswered);
       }
     }

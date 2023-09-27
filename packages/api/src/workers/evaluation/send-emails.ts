@@ -20,7 +20,7 @@ class SendEvaluationsEmails {
     }
     await OperationThreadsService.findOneAndUpdateStatus(pendingOperationThreads._id, 'in_progress');
     try {
-      const evaluation = await EvaluationsService.findById(
+      const evaluation: any = await EvaluationsService.findById(
         pendingOperationThreads.data._evaluation,
         pendingOperationThreads.data.type === 'reminder' ? 'customEmailReminder' : 'customEmailRelease'
       );
@@ -46,7 +46,7 @@ class SendEvaluationsEmails {
           customEmailRelease: customEmail,
           file: customEmail.attachment ? customEmail.attachment : ''
         };
-        const res = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', data);
+        const res: any = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', data);
         if (res.error) {
           throw new Error(`Suite Request Failed with status: ${res.error.status} by ${res.error.msg}`);
         }
@@ -70,7 +70,7 @@ class SendEvaluationsEmails {
   }
 
   private async getAndFilterpopulation(population: Evaluated[]) {
-    const endPopulation = [];
+    const endPopulation: any = [];
     population.forEach((employee) => {
       if (employee.employee.email && (employee.status === 'pending' || employee.status === 'in_progress')) {
         endPopulation.push({

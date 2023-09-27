@@ -84,8 +84,7 @@ class SegmentsUtils {
     for (const segment of segments) {
       resp[segment.id] = {
         count: 0,
-        answersDimension: await AnswersUtils.iniAnswersDimension(),
-        indicesAnswers: await AnswersUtils.iniIndicesAnswers()
+        answersDimension: await AnswersUtils.iniAnswersDimension()
       };
     }
 
@@ -127,14 +126,11 @@ class SegmentsUtils {
       if (belongs) {
         const temp = AnswersUtils.runAnswersDimension(
           participation.evaluations,
-          participation.indices,
           segmentedAnswers[segmentId].answersDimension,
-          segmentedAnswers[segmentId].indicesAnswers,
           true
         );
         segmentedAnswers[segmentId].count++;
         segmentedAnswers[segmentId].answersDimension = temp.evaluations;
-        segmentedAnswers[segmentId].indicesAnswers = temp.indices;
         break;
       }
     }

@@ -5,7 +5,6 @@ import CreatePopulationWorker from './evaluation/create-population';
 import EditPopulationWorker from './evaluation/edit-population';
 import EvaluationWorker from './evaluation/check-start-end-dates';
 import EvaluationEmailsWorker from './evaluation/send-emails';
-import TempAnswersWorker from './evaluation/temp-answers';
 import ReportCheck from './reports/check-pending-reports';
 import ProcessReportOrganizational from './reports/organizational';
 import ProcessReportByPopulation from './reports/by-population';
@@ -105,15 +104,5 @@ export default () => {
       console.log('Send Evaluation Email error:', error);
     });
   }, ms('4m'));
-
-  setInterval(() => {
-    TempAnswersWorker.processAnswers().then((res) => {
-      // tslint:disable-next-line: no-console
-      console.log('Saved TempAnswers:', res);
-    }).catch((error) => {
-      // tslint:disable-next-line: no-console
-      console.log('Save TempAnswers error:', error);
-    });
-  }, ms('1m'));
   */
 };

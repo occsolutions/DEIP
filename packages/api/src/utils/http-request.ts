@@ -13,7 +13,7 @@ class HttpRequest {
   public async sendRequest(request: IHttpRequest, req: Request, res: Response) {
     const host = await HostService.findByProductName(request.product);
     const http = require('http');
-    let dataString: string;
+    let dataString: string = '';
     let contentType = 'application/x-www-form-urlencoded';
     if (request.method === 'POST' && request.data) {
       dataString = JSON.stringify(request.data);
@@ -33,8 +33,8 @@ class HttpRequest {
         }
       };
 
-      const callBackToPromise = (options, data = undefined) => {
-        return new Promise((resolve, reject) => {
+      const callBackToPromise = (options, data?) => {
+        return new Promise<void>((resolve, reject) => {
           const reqH = http.request(options, (res) => {
             res.setEncoding('utf8');
             res.on('data', (chunk) => resolve(chunk));

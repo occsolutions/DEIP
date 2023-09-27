@@ -1,6 +1,6 @@
 
 export default class Formatter {
-  constructor(private errors = []) {}
+  constructor(private errors: any = []) {}
 
   public addError(error, field, validation, args) {
     if (error instanceof Error) {

@@ -6,8 +6,8 @@ import ProductServiceService from '../services/product-service.srvc';
 import RunHttpRequest from './run-http-request';
 
 export default async (req: Request, product: string, qty: number, operations?: Array<number>) => {
-  const productService = await ProductServiceService.findByName(product);
-  const spend = await RunHttpRequest.suitePost(req, 'token-account-detail/spend', {
+  const productService: any = await ProductServiceService.findByName(product);
+  const spend: any = await RunHttpRequest.suitePost(req, 'token-account-detail/spend', {
     serviceCode: productService.code,
     qty,
     ...(operations ? { operations } : {})

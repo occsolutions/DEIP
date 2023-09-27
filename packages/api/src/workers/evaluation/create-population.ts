@@ -67,7 +67,7 @@ class CreatePopulation {
       const alreadyCreatedPopulationCount = alreadyCreatedPopulationIds.length;
 
       // Get Employees from Suite
-      const employees = await RunHttpRequest.suitePost(undefined, suitePath, {
+      const employees: any = await RunHttpRequest.suitePost(undefined, suitePath, {
         enterpriseId: threadData.enterpriseId,
         selectionType: threadData.selectionType,
         limit: Math.ceil(threadData.totalReceivers / threadData.maxLaps),
@@ -85,7 +85,7 @@ class CreatePopulation {
 
       let increases = alreadyCreatedPopulationCount;
       let decreases = threadData.totalReceivers - alreadyCreatedPopulationCount;
-      const population = [];
+      const population: any = [];
       for (const employee of employees.res) {
         // Skip if employee already exists in population
         if (alreadyCreatedPopulationIds.includes(employee.id)) {

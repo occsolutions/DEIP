@@ -130,8 +130,8 @@ export default class AsureStore {
     });
   }
 
-  private uploadFile(folder: string, localPath: string, name?: string) {
-    name = name || (localPath.split('/')).pop();
+  private uploadFile(folder: string, localPath: string, nm?: string) {
+    const name: any = nm || (localPath.split('/')).pop();
     return new Promise((resolve, reject) => {
       this.storage.createFileFromLocalFile(this.share, folder, name, localPath, (error, result, response) => {
         if (!error) {

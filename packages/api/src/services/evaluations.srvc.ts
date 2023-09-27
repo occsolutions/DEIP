@@ -27,63 +27,69 @@ class EvaluationsService {
     return (await new EvaluationRepository(evaluation).save()).toObject({ virtuals: true });
   }
 
-  async findOneBySlug(slug: string, select?: string): Promise<Evaluation> {
+  async findOneBySlug(slug: string, select?: string): Promise<Evaluation|null> {
     return EvaluationRepository.findOne({ slug }, select || undefined);
   }
 
-  async findById(id: string, select?: undefined|any): Promise<Evaluation> {
+  async findById(id: string, select?: undefined|any): Promise<Evaluation|null> {
     return EvaluationRepository.findOne({_id: new ObjectID(id)}, select || undefined);
   }
 
-  async findInProgressById(id: string, select?: undefined|any): Promise<Evaluation> {
+  async findInProgressById(id: string, select?: undefined|any): Promise<Evaluation|null> {
     return EvaluationRepository.findOne({
       _id: new ObjectID(id),
       status: 'in_progress'
     }, select || undefined);
   }
 
-  async updateBySlug(slug: string, evaluation: Evaluation): Promise<Evaluation> {
-    return EvaluationRepository.updateOne({ slug: slug }, {...evaluation});
+  async updateBySlug(slug: string, evaluation: Evaluation): Promise<Evaluation|null> {
+    return EvaluationRepository.findOneAndUpdate({ slug: slug }, {...evaluation}, { new: true });
   }
 
-  async updateCustomEmailReleaseBySlug(slug: string, evaluation: Evaluation): Promise<Evaluation> {
-    return EvaluationRepository.updateOne({ slug: slug }, { customEmailRelease: evaluation.customEmailRelease });
+  async updateCustomEmailReleaseBySlug(slug: string, evaluation: Evaluation): Promise<Evaluation|null> {
+    return EvaluationRepository.findOneAndUpdate(
+      { slug: slug },
+      { customEmailRelease: evaluation.customEmailRelease },
+      { new: true }
+    );
   }
 
-  async updateCustomEmailReminderBySlug(slug: string, evaluation: Evaluation): Promise<Evaluation> {
-    return EvaluationRepository.updateOne({ slug: slug }, {
-      customEmailReminder: evaluation.customEmailReminder,
-      reminders: evaluation.reminders
-    });
+  async updateCustomEmailReminderBySlug(slug: string, evaluation: Evaluation): Promise<Evaluation|null> {
+    return EvaluationRepository.findOneAndUpdate(
+      { slug: slug },
+      { customEmailReminder: evaluation.customEmailReminder, reminders: evaluation.reminders },
+      { new: true }
+    );
   }
 
   async filterByStatus(status: string) {
     return EvaluationRepository.find({ status });
   }
 
-  async updateReminders(id: string, reminders: any): Promise<Evaluation> {
+  async updateReminders(id: string, reminders: any): Promise<Evaluation|null> {
     return EvaluationRepository.findByIdAndUpdate(new ObjectID(id), {
       reminders: reminders
     });
   }
 
-  async updateStatus(status: string, data: any): Promise<Evaluation[]> {
+  async updateStatus(status: string, data: any): Promise<any> {
     return EvaluationRepository.updateMany(
       { _id: { $in: data } },
-      { status: status });
+      { status: status }
+    );
   }
 
-  async updateEvaluatedCount(id: string, count: number): Promise<Evaluation> {
+  async updateEvaluatedCount(id: string, count: number): Promise<Evaluation|null> {
     return EvaluationRepository.findByIdAndUpdate(
       new ObjectID(id),
       { populationCount: count });
   }
 
-  async closeEvaluation(slug: string): Promise<Evaluation> {
+  async closeEvaluation(slug: string): Promise<Evaluation|null> {
     return EvaluationRepository.findOneAndUpdate({ slug }, { status: 'completed' });
   }
 
-  async closeEvaluationById(id: any): Promise<Evaluation> {
+  async closeEvaluationById(id: any): Promise<Evaluation|null> {
     return EvaluationRepository.findOneAndUpdate({ _id: new ObjectID(id) }, { status: 'completed' });
   }
 
@@ -103,7 +109,7 @@ class EvaluationsService {
    * @description Find a previous evaluation
    * @returns {Promise<void>}
    */
-  async findOnePrevious(id: string, enterpriseId: number, questionnaire: any, deliveredAt: any, select?: undefined|any): Promise<Evaluation> {
+  async findOnePrevious(id: string, enterpriseId: number, questionnaire: any, deliveredAt: any, select?: undefined|any): Promise<Evaluation|null> {
     return EvaluationRepository.findOne({
       _id: { $ne: new ObjectID(id) },
       enterpriseId: enterpriseId,
@@ -119,7 +125,7 @@ class EvaluationsService {
    * @description Update an evaluation's answered polls count
    * @returns {Promise<void>}
    */
-  async updateAnsweredCount(id: string, populationCompletedCount: number): Promise<Evaluation> {
+  async updateAnsweredCount(id: string, populationCompletedCount: number): Promise<Evaluation|null> {
     return EvaluationRepository.findByIdAndUpdate(new ObjectID(id), {
       populationCompletedCount
     });

@@ -1,9 +1,7 @@
 
 import { IAnswersDimension } from '../contracts/answers-dimension';
-import { IIndicesAnswers } from '../contracts/indices-answers';
 
 const dimensionNames = ['physical', 'mental', 'emotional', 'professional'];
-const indexNames = ['generalHealth', 'burnoutIndividual', 'burnoutOrganizational'];
 
 class AnswersUtils {
 
@@ -44,39 +42,9 @@ class AnswersUtils {
     };
   }
 
-  // Indices Answers Initializer
-  public iniIndicesAnswers (): IIndicesAnswers {
-    const getInitScore = () => ({ score: 0 });
-    const getInitIndexAnswer = () => ({
-      idx: 0,
-      general: getInitScore(),
-      filtered: getInitScore()
-    });
-    const getInitIndex = () => ({
-      general: getInitScore(),
-      filtered: getInitScore(),
-      answers: {
-        answer_1: getInitIndexAnswer(),
-        answer_2: getInitIndexAnswer(),
-        answer_3: getInitIndexAnswer(),
-        answer_4: getInitIndexAnswer(),
-        answer_5: getInitIndexAnswer(),
-        answer_6: getInitIndexAnswer()
-      }
-    });
-
-    return {
-      generalHealth: getInitIndex(),
-      burnoutIndividual: getInitIndex(),
-      burnoutOrganizational: getInitIndex()
-    };
-  }
-
   public runAnswersDimension (
     answers: Array<any>,
-    indices: Array<any>,
     answersDimension: IAnswersDimension,
-    indicesAnswers: IIndicesAnswers,
     isFiltered: boolean
   ) {
     // EVALUATIONS
@@ -111,28 +79,8 @@ class AnswersUtils {
       }
     }
 
-    // INDICES
-    for (const index of indexNames) {
-      const found = indices.find(x => x.name === index);
-      indicesAnswers[index].general.score += found.score;
-      if (isFiltered) {
-        indicesAnswers[index].filtered.score += found.score;
-      }
-
-      // Answers
-      for (let a = 0; a < 6; a++) {
-        const answr = found.answers[a];
-        indicesAnswers[index].answers[`answer_${a + 1}`].idx = answr.idx;
-        indicesAnswers[index].answers[`answer_${a + 1}`].general.score += answr.score;
-        if (isFiltered) {
-          indicesAnswers[index].answers[`answer_${a + 1}`].filtered.score += answr.score;
-        }
-      }
-    }
-
     return {
-      evaluations: answersDimension,
-      indices: indicesAnswers
+      evaluations: answersDimension
     };
   }
 }

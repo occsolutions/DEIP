@@ -1,10 +1,8 @@
 
-import { ObjectID } from 'mongodb';
-
 import { EvaluatedAnswers } from './evaluated-answers';
 
 export interface Evaluated {
-  evaluationRef?: ObjectID;
+  evaluationRef?: string;
   baseToken?: string;
   token?: string;
   status?: string;

@@ -30,20 +30,11 @@ const EvaluatedSchema = new mongoose.Schema({
         score: Number
       }]
     }],
-    indices: [{
-      idx: Number,
-      answer: Number
-    }],
     additional: [{
       question: String,
       answer: []
-    }],
-    open: [{
-      question: String,
-      answer: []
-    }],
-  },
-  alreadySentEmail: String
+    }]
+  }
 }, { timestamps: true, collection: 'evaluated' });
 
 const EvaluatedRepository = mongoose.model<EvaluatedType>('Evaluated', EvaluatedSchema);

@@ -1,14 +1,11 @@
 
 import { IDimensionScatter } from '../contracts/scatter-dimension';
 import { IAnswersDimension, IScore } from '../contracts/answers-dimension';
-import { IIndicesAnswers } from '../contracts/indices-answers';
-import { IOpenAnswers } from '../contracts/open-answers';
 
 export default async (
   hasPrevious: boolean,
   answersForScatter: IDimensionScatter,
   answersDimension: IAnswersDimension,
-  indicesAnswers: IIndicesAnswers,
   totalAnswers,
   totalPreviousAnswers
 ) => {
@@ -49,33 +46,12 @@ export default async (
     }
   }
 
-  // INDICES
-  for (const indexKey of Object.keys(indicesAnswers)) {
-    indicesAnswers[indexKey].general = getAverage(indicesAnswers[indexKey].general);
-
-    // Answers
-    const indexAnswers = indicesAnswers[indexKey].answers;
-    for (const aKey of Object.keys(indexAnswers)) {
-      indicesAnswers[indexKey].answers[aKey].general = getAverage(indicesAnswers[indexKey].answers[aKey].general);
-      if (indicesAnswers[indexKey].answers[aKey].idx !== null) {
-        higherLower.push({
-          type: 'indices',
-          index: indexKey,
-          answer: aKey,
-          idx: indicesAnswers[indexKey].answers[aKey].idx,
-          score: indicesAnswers[indexKey].answers[aKey].general.score
-        });
-      }
-    }
-  }
-
   const highest = higherLower.sort((a, b) => b.score - a.score).slice(0, 6);
   const lowest = higherLower.sort((a, b) => a.score - b.score).slice(0, 6);
 
   return {
     answersForScatter,
     answersDimension,
-    indicesAnswers,
     highest,
     lowest
   };

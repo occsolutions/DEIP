@@ -1,11 +1,9 @@
 
 import { IAnswersDimension } from '../contracts/answers-dimension';
-import { IIndicesAnswers } from '../contracts/indices-answers';
 import AveragesUtils from '../utils/averages';
 
 export default async (
   answersDimension: IAnswersDimension,
-  indicesAnswers: IIndicesAnswers,
   totalAnswers,
   totalFilteredAnswers,
   segmentedAnswers
@@ -14,7 +12,6 @@ export default async (
   // General Averages
   const generalAverages = await AveragesUtils.calcAverages(
     answersDimension,
-    indicesAnswers,
     totalAnswers,
     totalFilteredAnswers
   );
@@ -24,14 +21,12 @@ export default async (
     const cnt = segmentedAnswers[segmentId].count;
     const segmentAverages = await AveragesUtils.calcAverages(
       segmentedAnswers[segmentId].answersDimension,
-      segmentedAnswers[segmentId].indicesAnswers,
       cnt,
       cnt
     );
     segmentedAnswers[segmentId] = {
       count: cnt,
-      answersDimension: segmentAverages.answersDimension,
-      indicesAnswers: segmentAverages.indicesAnswers
+      answersDimension: segmentAverages.answersDimension
     };
   }
 

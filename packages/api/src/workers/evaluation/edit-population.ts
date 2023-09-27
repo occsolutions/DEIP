@@ -74,7 +74,7 @@ class EditPopulation {
         const alreadyIncludedPopulationCount = alreadyIncludedPopulationIds.length;
 
         // Get Employees from Suite
-        const employees = await RunHttpRequest.suitePost(undefined, suitePath, {
+        const employees: any = await RunHttpRequest.suitePost(undefined, suitePath, {
           enterpriseId: threadData.enterpriseId,
           selectionType: threadData.selectionType,
           limit: Math.ceil(threadData.included.length / threadData.maxLaps),
@@ -92,7 +92,7 @@ class EditPopulation {
 
         let increases = alreadyIncludedPopulationCount;
         let decreases = threadData.included.length - alreadyIncludedPopulationCount;
-        const population = [];
+        const population: any = [];
         for (const employee of employees.res) {
           // Skip if employee already exists in population
           if (alreadyExistingPopulationIds.includes(employee.id)) {

@@ -45,17 +45,6 @@ export default () => {
     QuestionnairesController.getOne
   );
 
-  // Questions Indices
-  QuestionnairesRouter.get(
-    '/indices-groups',
-    QuestionnairesController.getIndicesGroups
-  );
-
-  QuestionnairesRouter.put(
-    '/edit-index-question',
-    QuestionnairesController.editIndexQuestion
-  );
-
   QuestionnairesRouter.get(
     '/questions-types',
     QuestionnairesController.questionsTypes

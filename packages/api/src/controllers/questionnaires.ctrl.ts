@@ -3,11 +3,10 @@ import { Request, Response } from 'express';
 import slugify from 'slugify';
 
 import { default as QuestionnairesService } from '../services/questionnaires.srvc';
-import { default as QuestionsIndexService } from '../services/question-index.srvc';
 
 import IRequest from './contracts/request';
 import { BadRequestException } from '../error';
-import { Question } from 'src/models/question';
+import { Question } from '../models/question';
 
 class QuestionnairesController {
 
@@ -35,7 +34,7 @@ class QuestionnairesController {
       lower: true
     });
 
-    const baseQuestionnaire = await QuestionnairesService.findOneBySlug(req.body.questionnaire.baseQuestionnaire);
+    const baseQuestionnaire: any = await QuestionnairesService.findOneBySlug(req.body.questionnaire.baseQuestionnaire);
     const data = {
       name,
       slug,
@@ -64,7 +63,7 @@ class QuestionnairesController {
       throw new BadRequestException('key-is-invalid');
     }
 
-    const questionnaire = await QuestionnairesService.findOneBySlug(req.params.slug);
+    const questionnaire: any = await QuestionnairesService.findOneBySlug(req.params.slug);
     if (parts.length === 2) {
       questionnaire.evaluations.leader[req.body.questionnaire.key].label[req.body.questionnaire.lang] = req.body.questionnaire.label
     } else {
@@ -101,29 +100,6 @@ class QuestionnairesController {
     res.send(await QuestionnairesService.updateQuestionnaireInfo(req.params.slug, req.body.questionnaire));
   }
 
-  async getIndicesGroups(req: Request, res: Response) {
-    const grouped: any = {};
-    const groups = ['generalHealth', 'burnoutOrganizational'];
-    const indexFields = 'idx answers reference question';
-    for (const group of groups) {
-      const indices = await QuestionsIndexService.listByIndexGroup(group, indexFields);
-      grouped[group] = indices;
-    }
-    res.send(grouped);
-  }
-
-  async editIndexQuestion(req: Request, res: Response) {
-    try {
-      res.send(await QuestionsIndexService.update(req.body.data));
-    } catch (error) {
-      console.log(error);
-      res.send({
-        msg: 'Not found',
-        status: 400
-      });
-    }
-  }
-
   async questionsTypes(req: Request, res: Response) {
     const questions = await QuestionnairesService.getQuestionsType();
     res.send({items: questions});
@@ -135,8 +111,8 @@ class QuestionnairesController {
       throw new BadRequestException('key-is-invalid');
     }
 
-    const questionnaire = await QuestionnairesService.findOneBySlug(req.params.slug);
-    let question: Question = undefined;
+    const questionnaire: any = await QuestionnairesService.findOneBySlug(req.params.slug);
+    let question: Question;
     if (parts.length === 2) {
       question = questionnaire.evaluations.leader[req.body.questionnaire.key]
     } else {
@@ -150,7 +126,7 @@ class QuestionnairesController {
       throw new BadRequestException('question-is-invalid');
     }
 
-    const questionType = await QuestionnairesService.getQuestionType(question.type);
+    const questionType: any = await QuestionnairesService.getQuestionType(question.type);
     if (questionType.editable.length) {
       if (questionType.editable.indexOf('options') !== -1) {
         question.options = req.body.questionnaire.options

@@ -33,7 +33,7 @@ class EvaluatedService {
     });
   }
 
-  async findOneCompletedByEvaluationRefAndId(evaluationRef: any, id: any): Promise<EvaluatedType> {
+  async findOneCompletedByEvaluationRefAndId(evaluationRef: any, id: any): Promise<EvaluatedType|null> {
     return EvaluatedRepository.findOne({
       _id: new ObjectID(id),
       evaluationRef: new ObjectID(evaluationRef),
@@ -48,7 +48,7 @@ class EvaluatedService {
     }, select);
   }
 
-  async getAtLeastOneActiveParticipant(evaluationRef: any): Promise<EvaluatedType> {
+  async getAtLeastOneActiveParticipant(evaluationRef: any): Promise<EvaluatedType|null> {
     return EvaluatedRepository.findOne({
       evaluationRef: new ObjectID(evaluationRef),
       status: {$in: ['pending', 'in_progress']}
@@ -111,7 +111,7 @@ class EvaluatedService {
     return { total: count.total, items };
   }
 
-  async getOneByToken(token: string, select?: string|undefined): Promise<EvaluatedType> {
+  async getOneByToken(token: string, select?: string|undefined): Promise<EvaluatedType|null> {
     return EvaluatedRepository.findOne({ token }, select);
   }
 
@@ -131,7 +131,7 @@ class EvaluatedService {
     }, select || undefined);
   }
 
-  async getEvaluationBaseToken(evaluationRef: any): Promise<EvaluatedType> {
+  async getEvaluationBaseToken(evaluationRef: any): Promise<EvaluatedType|null> {
     return EvaluatedRepository.findOne({
       evaluationRef: new ObjectID(evaluationRef),
       'status': { $nin: ['excluded']}
@@ -154,7 +154,7 @@ class EvaluatedService {
     );
   }
 
-  async setPolicyAccepted(tokenId: string, url: string): Promise<EvaluatedType> {
+  async setPolicyAccepted(tokenId: string, url: string): Promise<EvaluatedType|null> {
     const data = {
       accepted: true,
       timestamp: Date.now(),
@@ -167,7 +167,7 @@ class EvaluatedService {
     );
   }
 
-  async updateTempAnswers(tokenId: string, temp: any): Promise<EvaluatedType> {
+  async updateTempAnswers(tokenId: string, temp: any): Promise<EvaluatedType|null> {
     return EvaluatedRepository.findOneAndUpdate(
       {'token': tokenId},
       { '$set': { 'temp': temp, 'status': 'in_progress' }},
@@ -175,7 +175,7 @@ class EvaluatedService {
     );
   }
 
-  async setPollCompleted(tokenId: string): Promise<EvaluatedType> {
+  async setPollCompleted(tokenId: string): Promise<EvaluatedType|null> {
     return EvaluatedRepository.findOneAndUpdate(
       {'token': tokenId},
       { '$set': { 'status': 'completed' }},
@@ -183,7 +183,7 @@ class EvaluatedService {
     );
   }
 
-  async setResultsRecipient(tokenId: string, email: string): Promise<EvaluatedType> {
+  async setResultsRecipient(tokenId: string, email: string): Promise<EvaluatedType|null> {
     return EvaluatedRepository.findOneAndUpdate(
       {'token': tokenId},
       { '$set': { 'alreadySentEmail': email }},

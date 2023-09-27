@@ -18,8 +18,7 @@ class ProductServiceController {
   }
   async getOne(req: Request, resp: Response) {
     try {
-      const productService = await ProductServiceService.findByName(req.params.name);
-      resp.status(200).send(productService);
+      resp.status(200).send(await ProductServiceService.findByName(req.params.name));
     } catch (error) {
       resp.send({
         msg: 'Not found',
@@ -29,7 +28,7 @@ class ProductServiceController {
   }
   async getDemograficReportPrice(req: Request, res: Response) {
 
-    const productService = await ProductServiceService.findByName('REPORTE ORGANIZACIONAL OCC DML 360°');
+    const productService: any = await ProductServiceService.findByName('REPORTE ORGANIZACIONAL OCC DML 360°');
     const idProductService = productService.productServiceId;
     let resProductService: any;
     try {

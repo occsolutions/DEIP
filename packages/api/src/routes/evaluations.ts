@@ -51,7 +51,7 @@ export default (middlewares, services) => {
     '/upload-invitation-file/:id',
     middlewares.uploads.single('pollInvitationFile'),
     async(req: IRequest, res: Response) => {
-      const evaluation = await EvaluationsService.findById(req.params.id);
+      const evaluation: any = await EvaluationsService.findById(req.params.id);
       const file = await services.storage.sendVideo(req.file.path, req.file.filename);
       evaluation.customEmailRelease.attachment = file.result.name;
       const resp = await EvaluationsService.updateCustomEmailReleaseBySlug(evaluation.slug, evaluation);
@@ -63,7 +63,7 @@ export default (middlewares, services) => {
     '/upload-reminder-file/:id',
     middlewares.uploads.single('reminderMailFile'),
     async(req: IRequest, res: Response) => {
-      const evaluation = await EvaluationsService.findById(req.params.id);
+      const evaluation: any = await EvaluationsService.findById(req.params.id);
       const file = await services.storage.sendVideo(req.file.path, req.file.filename);
       evaluation.customEmailReminder.attachment = file.result.name;
       for (const reminder of evaluation.reminders) {

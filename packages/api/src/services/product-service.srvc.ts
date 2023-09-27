@@ -12,7 +12,7 @@ class ProductServiceService {
    * @param name
    * @returns {Promise<ProductService>}
    */
-  async findByName(name): Promise<ProductService | ProductServiceType> {
+  async findByName(name): Promise<ProductService | ProductServiceType | null> {
     return ProductServiceRepository.findOne({ 'name': { $regex: '.*' + name + '.*' } });
   }
 
@@ -21,7 +21,7 @@ class ProductServiceService {
    * @param {ProductService} productService
    * @returns {Promise<ProductService>}
    */
-  async save(productService: ProductService): Promise<ProductService | ProductServiceType> {
+  async save(productService: ProductService): Promise<ProductService | ProductServiceType | null> {
     return (await new ProductServiceRepository(productService).save());
   }
 
@@ -30,7 +30,7 @@ class ProductServiceService {
    * @returns {Promise<ProductService>}
    * @param id
    */
-  async findOneAndUpdate(id: string): Promise<ProductService | ProductServiceType> {
+  async findOneAndUpdate(id: string): Promise<ProductService | ProductServiceType | null> {
     const productService = ProductServiceRepository.findOneAndUpdate({ _id: id }, { active: true }, { new: true });
     return productService;
   }
@@ -45,9 +45,9 @@ class ProductServiceService {
 
   /**
    * @description Deletes a single product service from storage
-   * @returns {Promise<void>}
+   * @returns {Promise<any>}
    */
-  async deleteOne(id: string): Promise<void> {
+  async deleteOne(id: string): Promise<any> {
     return ProductServiceRepository.deleteOne({ _id: id });
   }
 }

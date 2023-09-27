@@ -1,12 +1,8 @@
 
 import { IDimensionScatter } from '../contracts/scatter-dimension';
 import { IAnswersDimension } from '../contracts/answers-dimension';
-import { IIndicesAnswers } from '../contracts/indices-answers';
-import { IOpenAnswers } from '../contracts/open-answers';
 
 const dimensionNames = ['physical', 'mental', 'emotional', 'professional'];
-const indexNames = ['generalHealth', 'burnoutIndividual', 'burnoutOrganizational'];
-const openQuestionNames = ['openQuestion1', 'openQuestion2'];
 
 class AnswersUtils {
 
@@ -76,52 +72,10 @@ class AnswersUtils {
     };
   }
 
-  // Indices Answers Initializer
-  public iniIndicesAnswers (): IIndicesAnswers {
-    const getInitScore = () => ({ score: 0, previous: 0 });
-    const getInitIndexAnswer = () => ({
-      idx: 0,
-      general: getInitScore()
-    });
-    const getInitIndex = () => ({
-      general: getInitScore(),
-      answers: {
-        answer_1: getInitIndexAnswer(),
-        answer_2: getInitIndexAnswer(),
-        answer_3: getInitIndexAnswer(),
-        answer_4: getInitIndexAnswer(),
-        answer_5: getInitIndexAnswer(),
-        answer_6: getInitIndexAnswer()
-      }
-    });
-
-    return {
-      generalHealth: getInitIndex(),
-      burnoutIndividual: getInitIndex(),
-      burnoutOrganizational: getInitIndex()
-    };
-  }
-
-  // Open Questions' Answers Initializer
-  public iniOpenAnswers (): IOpenAnswers {
-    const getInitOpen = () => ({
-      answers: []
-    });
-
-    return {
-      openQuestion1: getInitOpen(),
-      openQuestion2: getInitOpen()
-    };
-  }
-
   public runAnswersDimension (
     answers: Array<any>,
-    indices: Array<any>,
-    opens: Array<any>,
     answersForScatter: IDimensionScatter,
     answersDimension: IAnswersDimension,
-    indicesAnswers: IIndicesAnswers,
-    openAnswers: IOpenAnswers,
     previous: boolean
   ) {
     const dynamicKey = previous ? 'previous' : 'score';
@@ -152,33 +106,9 @@ class AnswersUtils {
       }
     }
 
-    // INDICES
-    for (const index of indexNames) {
-      const found = indices.find(x => x.name === index);
-      indicesAnswers[index].general[dynamicKey] += found.score;
-
-      // Answers
-      for (let a = 0; a < 6; a++) {
-        const answr = found.answers[a];
-        indicesAnswers[index].answers[`answer_${a + 1}`].idx = answr.idx;
-        indicesAnswers[index].answers[`answer_${a + 1}`].general[dynamicKey] += answr.score;
-      }
-    }
-
-    // OPENS
-    if (!previous) {
-      let cnt = 0;
-      for (const opn of openQuestionNames) {
-        openAnswers[opn].answers.push(...opens[cnt].answer);
-        cnt++;
-      }
-    }
-
     return {
       scatter: answersForScatter,
-      evaluations: answersDimension,
-      indices: indicesAnswers,
-      open: openAnswers
+      evaluations: answersDimension
     };
   }
 }

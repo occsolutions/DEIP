@@ -11,7 +11,7 @@ class HostService {
    * @returns {Promise<Host>}
    * @param productName
    */
-  async findByProductName(productName: string): Promise<Host> {
+  async findByProductName(productName: string): Promise<Host|null> {
     return HostRepository.findOne({productName: new RegExp('^' + productName + '$', 'i')});
   }
 
@@ -29,7 +29,7 @@ class HostService {
    * @param id
    * @returns {Promise<Host>}
    */
-  async findOneAndUpdate(id: number): Promise<Host> {
+  async findOneAndUpdate(id: number): Promise<Host|null> {
     const host = HostRepository.findOneAndUpdate({_id: id}, {active: true}, {new: true});
     return host;
   }
@@ -44,9 +44,9 @@ class HostService {
 
   /**
    * @description Deletes a single host from storage
-   * @returns {Promise<void>}
+   * @returns {Promise<any>}
    */
-  async deleteOne(productName: string): Promise<void> {
+  async deleteOne(productName: string): Promise<any> {
     return HostRepository.deleteOne({productName: productName});
   }
 }
