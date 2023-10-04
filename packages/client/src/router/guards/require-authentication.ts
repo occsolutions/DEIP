@@ -16,6 +16,10 @@ export default (to: any, from: any, next: any) => {
     return
   }
 
+  if (to.path === '/') {
+    next('/dashboard')
+  }
+
   store.dispatch('session/isValid')
     .then((res) => {
       if (res) {

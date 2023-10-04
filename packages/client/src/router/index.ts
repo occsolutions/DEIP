@@ -12,12 +12,6 @@ import CreateQuestionnaires from '../views/questionnaires/create.vue'
 import EditQuestionnaires from '../views/questionnaires/edit.vue'
 import EditQuestionnaireInfo from '../views/questionnaires/edit-questionnaire.vue'
 
-// Indices
-import ListIndices from '../views/indices/list.vue'
-
-// Open Questions
-import ListOpenQuestions from '../views/open-questions/list.vue'
-
 // Evaluations
 import CreateEvaluation from '../views/evaluations/create.vue'
 import EditEvaluation from '../views/evaluations/edit.vue'
@@ -29,7 +23,6 @@ import Evaluation from '../views/evaluations/evaluation.vue'
 
 // Reports
 import Reports from '../views/evaluations/reports.vue'
-import IndividualResults from '../views/reports/individual/results.vue'
 
 // Operations summary
 import OperationSummary from '../views/operations/summary.vue'
@@ -103,16 +96,6 @@ const routes = [
         beforeEnter: RequireAdmin
       },
       {
-        path: '/indices',
-        component: ListIndices,
-        beforeEnter: RequireAdmin
-      },
-      {
-        path: '/open-questions',
-        component: ListOpenQuestions,
-        beforeEnter: RequireAdmin
-      },
-      {
         path: '/evaluations',
         component: ListEvaluations,
         beforeEnter: RequireAuthentication
@@ -151,11 +134,6 @@ const routes = [
       {
         path: 'individual/:tokenId',
         component: Evaluation
-      },
-      {
-        name: 'individualResults',
-        path: 'individual-results/:tokenId',
-        component: IndividualResults
       }
     ]
   },
