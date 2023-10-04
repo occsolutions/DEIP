@@ -442,12 +442,7 @@ export default {
       highest_scores: 'Atributos con puntaje más Alto',
       lowest_scores: 'Atributos con puntaje más Bajo',
       highest_scatter: 'Atributos con dispersión más Alta',
-      lowest_scatter: 'Atributos con dispersión más Baja',
-      burnout_index: 'Índice de riesgo de Burnout',
-      burnout_index_individual: 'Índice de riesgo de Burnout Individual',
-      burnout_index_organizational: 'Índice de riesgo de Burnout Organizacional',
-      health_index: 'Índice de Salud',
-      word_clouds: 'Preguntas Abiertas'
+      lowest_scatter: 'Atributos con dispersión más Baja'
     },
     current: 'Actual',
     dimension: 'Dimensión',
