@@ -3,16 +3,14 @@
     <v-col cols="12">
       <v-tooltip bottom color="blue" >
         <template v-slot:activator="{ on }" >
-          <v-text-field
-            light outlined
+          <v-text-field light outlined hide-details
             name="question"
             v-model="label"
+            v-on="on"
+            color="blue"
+            append-icon="mdi-content-save-edit-outline"
             @keypress.enter="sendForm()"
             @blur="sendForm()"
-            v-on="on"
-            outline
-            append-icon="mdi-content-save-edit-outline"
-            color="blue"
           ></v-text-field>
         </template>
         <span>
@@ -20,7 +18,7 @@
         </span>
       </v-tooltip>
     </v-col>
-    <v-col cols="12">
+    <v-col cols="12" class="pt-0">
       <v-alert dense outlined text type="info">
         <v-row align="center">
           <v-col class="grow">

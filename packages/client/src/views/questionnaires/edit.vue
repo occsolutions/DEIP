@@ -6,18 +6,17 @@
           <h4 class="display-1">{{ $t('Views.Questionnaires.edit.title') }}</h4>
         </v-col>
       </v-row>
-      <v-card>
-        <v-tabs
+      <v-card class="py-5 px-4">
+        <v-tabs light grow
           v-model="tab"
           background-color="transparent"
-          light grow
         >
           <v-tab>{{ $t('Views.Questionnaires.edit.dimentions') }}</v-tab>
           <v-tab>{{ $t('Views.Questionnaires.edit.leader') }}</v-tab>
         </v-tabs>
         <v-tabs-items v-model="tab">
           <v-tab-item>
-            <v-card-text>
+            <v-card-text class="px-1">
               <v-expansion-panels>
                 <v-expansion-panel
                   v-for="(dimention, ix) in evaluations" :key="ix">
@@ -53,7 +52,7 @@
               </v-expansion-panels>
             </v-card-text>
           </v-tab-item>
-          <v-tab-item>
+          <v-tab-item class="pt-3">
             <!-- Questions with Reference -->
             <x-input-question
               v-for="(question, q) in leader" :key="q"
@@ -65,8 +64,8 @@
             />
           </v-tab-item>
         </v-tabs-items>
-        <v-row class="m-t-4">
-          <v-col align="end">
+        <v-row>
+          <v-col class="pl-4">
             <v-btn to="/questionnaires" text>
               {{ $t('Views.Questionnaires.edit.btn_back') }}
             </v-btn>
