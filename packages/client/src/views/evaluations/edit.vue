@@ -78,11 +78,25 @@
               key="5-content"
               step="5"
             >
+              <x-step-leaders-with-subordinates
+                :evaluation="evaluation"
+                :identify-types="identifyTypes"
+                step="5"
+                nextAction="Views.Evaluations.create.stepper_btn_next"
+                prevAction="Views.Evaluations.create.stepper_btn_back"
+                @changeStep="verifyStepChanged"
+                :employees="employees"
+              />
+            </v-stepper-content>
+            <v-stepper-content
+              key="6-content"
+              step="6"
+            >
               <x-step-additional-segmentation
                 :is-edit="true"
                 :evaluation="evaluation"
                 :user="user"
-                step="5"
+                step="6"
                 :current-step="step"
                 nextAction="Views.Evaluations.edit.stepper_btn_next"
                 prevAction="Views.Evaluations.edit.stepper_btn_back"
@@ -90,13 +104,13 @@
               ></x-step-additional-segmentation>
             </v-stepper-content>
             <v-stepper-content
-              key="6-content"
-              step="6"
+              key="7-content"
+              step="7"
             >
               <x-step-revition
                 :evaluation="evaluation"
                 :price="productService"
-                step="6"
+                step="7"
                 :key="step"
                 nextAction="Views.Evaluations.edit.stepper_btn_update"
                 prevAction="Views.Evaluations.edit.stepper_btn_back"
@@ -138,12 +152,13 @@ import employeesService from '../../services/employees'
 import timeZoneService from '../../services/time-zones'
 import identifyTypesService from '../../services/identify-types'
 
-import XStepOverview from './steps/overview.vue'
-import XStepDate from './steps/date.vue'
-import XStepQuestion from './steps/question.vue'
-import XStepEvaluatedSelection from './steps/evaluated-selection.vue'
-import XStepAdditionalSegmentation from './steps/additional-segmentation.vue'
-import XStepRevition from './steps/revition.vue'
+import XStepOverview from './steps/01-overview.vue'
+import XStepDate from './steps/02-date.vue'
+import XStepQuestion from './steps/03-question.vue'
+import XStepEvaluatedSelection from './steps/04-evaluated-selection.vue'
+import XStepLeadersWithSubordinates from './steps/05-leaders-with-subordinates.vue'
+import XStepAdditionalSegmentation from './steps/06-additional-segmentation.vue'
+import XStepRevition from './steps/07-revition.vue'
 
 export default Vue.extend({
   components: {
@@ -151,6 +166,7 @@ export default Vue.extend({
     XStepDate,
     XStepQuestion,
     XStepEvaluatedSelection,
+    XStepLeadersWithSubordinates,
     XStepAdditionalSegmentation,
     XStepRevition
   },

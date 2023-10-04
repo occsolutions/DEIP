@@ -1,25 +1,19 @@
 <template>
-  <v-dialog v-model="show" width="50em" persistent>
+  <v-dialog v-model="show" width="44em" persistent>
     <v-card>
       <v-card-title
-        class="headline white--text primary lighten-2"
-        style="padding: 1em"
+        class="headline white--text primary lighten-2 pb-4"
         primary-title
       >
         {{ $t('Views.Evaluations.stepEvaluatedSelection.addEvaluatorDialog.add_evaluated') }}
       </v-card-title>
 
-      <v-card-text>
+      <v-card-text class="pt-12">
         <v-row>
           <v-col cols="12">
             <ValidationObserver v-slot="{ handleSubmit }">
               <v-form @submit.prevent="handleSubmit(pushEvaluator)">
                 <v-row>
-                  <v-col cols="12" align="center">
-                    <h2>
-                      {{ $t('Views.Evaluations.stepEvaluatedSelection.addEvaluatorDialog.evaluated') }}
-                    </h2>
-                  </v-col>
                   <v-col cols="12">
                     <x-inputs-autocomplete
                       :items="filterEmployees()"

@@ -1,13 +1,13 @@
 <template>
   <v-container fluid>
     <v-row align="center" justify="start" fill-height>
-      <v-col xs="12" class="ml-2">
-        <h4 class="display-1 mb-3">{{ $t('Views.Evaluations.create.title') }}</h4>
+      <v-col xs="12">
+        <h4 class="display-1">{{ $t('Views.Evaluations.create.title') }}</h4>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="12">
-        <v-card class="mt-4">
+        <v-card>
           <x-stepper
             :step="step"
             :headers="stepperHeaders"
@@ -64,23 +64,34 @@
               />
             </v-stepper-content>
             <v-stepper-content key="5-content" step="5">
+              <x-step-leaders-with-subordinates
+                :evaluation="evaluation"
+                :identify-types="identifyTypes"
+                step="5"
+                nextAction="Views.Evaluations.create.stepper_btn_next"
+                prevAction="Views.Evaluations.create.stepper_btn_back"
+                @changeStep="verifyStepChanged"
+                :employees="employees"
+              />
+            </v-stepper-content>
+            <v-stepper-content key="6-content" step="6">
               <x-step-additional-segmentation
                 :evaluation="evaluation"
                 :user="user"
-                step="5"
+                step="6"
                 :current-step="step"
                 nextAction="Views.Evaluations.create.stepper_btn_next"
                 prevAction="Views.Evaluations.create.stepper_btn_back"
                 @changeStep="verifyStepChanged"
               ></x-step-additional-segmentation>
             </v-stepper-content>
-            <v-stepper-content key="6-content" step="6">
+            <v-stepper-content key="7-content" step="7">
               <x-step-revition
-                v-if="step === 6"
+                v-if="step === 7"
                 :evaluation="evaluation"
                 :identify-types="identifyTypes"
                 :price="evaluation.price"
-                step="6"
+                step="7"
                 :key="step"
                 nextAction="Views.Evaluations.create.stepper_btn_confirm_create"
                 prevAction="Views.Evaluations.create.stepper_btn_back"
@@ -119,12 +130,13 @@ import employeesService from '../../services/employees'
 import timeZoneService from '../../services/time-zones'
 import identifyTypesService from '../../services/identify-types'
 
-import XStepOverview from './steps/overview.vue'
-import XStepDate from './steps/date.vue'
-import XStepQuestion from './steps/question.vue'
-import XStepEvaluatedSelection from './steps/evaluated-selection.vue'
-import XStepAdditionalSegmentation from './steps/additional-segmentation.vue'
-import XStepRevition from './steps/revition.vue'
+import XStepOverview from './steps/01-overview.vue'
+import XStepDate from './steps/02-date.vue'
+import XStepQuestion from './steps/03-question.vue'
+import XStepEvaluatedSelection from './steps/04-evaluated-selection.vue'
+import XStepLeadersWithSubordinates from './steps/05-leaders-with-subordinates.vue'
+import XStepAdditionalSegmentation from './steps/06-additional-segmentation.vue'
+import XStepRevition from './steps/07-revition.vue'
 
 export default Vue.extend({
   components: {
@@ -132,6 +144,7 @@ export default Vue.extend({
     XStepDate,
     XStepQuestion,
     XStepEvaluatedSelection,
+    XStepLeadersWithSubordinates,
     XStepAdditionalSegmentation,
     XStepRevition
   },
@@ -244,7 +257,7 @@ export default Vue.extend({
   },
   watch: {
     step (val) {
-      if (val === 6 && this.evaluation.additionalQuestions.length > 1) {
+      if (val === 7 && this.evaluation.additionalQuestions.length > 1) {
         if (this.evaluation.additionalQuestions[this.evaluation.additionalQuestions.length - 1].question === '') {
           this.evaluation.additionalQuestions.pop()
         }
@@ -268,7 +281,7 @@ export default Vue.extend({
     verifyStepChanged (data, step) {
       switch (step) {
         case 0: return this.$router.push('/evaluations')
-        case 7: return this.toConfirm()
+        case 8: return this.toConfirm()
         default: return (this.step = step)
       }
     },

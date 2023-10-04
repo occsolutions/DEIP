@@ -1,14 +1,5 @@
 <template>
   <div>
-    <v-row>
-      <v-col cols="12" class="headline">
-        <v-divider class="my-1"></v-divider>
-        {{ $t('Views.Evaluations.stepEvaluatedSelection.leader_title') }}
-      </v-col>
-    </v-row>
-    <v-card-subtitle class="pa-1 body-2 text-justify">
-      {{ $t('Views.Evaluations.stepEvaluatedSelection.leader_desc') }}
-    </v-card-subtitle>
     <v-row align="center" justify="center">
       <v-col align="center" justify="center" cols="12" class="pt-0 px-6">
         <v-switch
