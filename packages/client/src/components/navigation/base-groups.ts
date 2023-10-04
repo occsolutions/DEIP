@@ -15,12 +15,6 @@ const baseGroups: Array<IMenuGroup | IMenuLeaf> = [
     permission: 'questionnaires.listAll'
   },
   {
-    title: 'open_questions',
-    path: '/open-questions',
-    icon: 'mdi-comment-question-outline',
-    permission: 'openQuestions.listAll'
-  },
-  {
     title: 'evaluations',
     path: '/evaluations',
     icon: 'fa-chart-bar',
