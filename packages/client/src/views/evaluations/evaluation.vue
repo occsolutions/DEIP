@@ -100,36 +100,6 @@
               </v-row>
             </div>
 
-            <!-- Index Questions -->
-            <div v-else-if="computedQuestionnairePages === 5"
-              :key="`${currentPage}-${i}`"
-            >
-              <v-divider v-if="i > 0" class="mt-4 grey lighten-3"></v-divider>
-              <h5 class="mt-6 text-left headline">
-                {{ questionsCount + i }}.-
-                {{ item.question[lang] }}
-              </h5>
-              <v-row>
-                <v-col cols="12" class="pt-0">
-                  <ValidationProvider rules="required">
-                    <v-radio-group dense hide-details
-                      v-model="evaluated.temp.indices[i].answer"
-                      class="mt-2 mx-11 justify-left"
-                      style="max-width: fit-content;"
-                    >
-                      <v-radio v-for="option in Object.keys(getAnswerRef(item.answers)).sort((a, b) => b - a)"
-                        :key="`aref-${option}`"
-                        :value="parseInt(option)"
-                        :label="getAnswerRef(item.answers)[option][lang]"
-                        color="primary"
-                        @change="saveAnswers()"
-                      ></v-radio>
-                    </v-radio-group>
-                  </ValidationProvider>
-                </v-col>
-              </v-row>
-            </div>
-
             <!-- Additional Questions -->
             <div v-else-if="hasAdditionalQuestions && computedQuestionnairePages === 6"
               :key="`${currentPage}-${i}`"
@@ -154,36 +124,6 @@
                         @change="saveAnswers()"
                       ></v-radio>
                     </v-radio-group>
-                  </ValidationProvider>
-                </v-col>
-              </v-row>
-            </div>
-
-            <!-- Open Questions -->
-            <div v-else-if="currentPage === pages.length - 1"
-              :key="`${currentPage}-${i}`"
-            >
-              <h5
-                class="text-left headline"
-                :class="i > 0 ? 'mt-12' : 'mt-6'"
-              >
-                {{ item.question[lang] }}
-              </h5>
-              <v-row class="px-1">
-                <v-col cols="12" md="4"
-                  v-for="oq in [0,1,2]" :key="`w${oq}`"
-                  class="text-left"
-                >
-                  <ValidationProvider rules="required" v-slot="{valid}">
-                    <v-text-field
-                      v-model="evaluated.temp.open[i].answer[oq]"
-                      counter
-                      :maxlength="18"
-                      :placeholder="`${$t('Views.Evaluations.evaluation.answer')} ${oq + 1}`"
-                      @keyup="!valid ? setProgress() : ''"
-                      @keyup.enter="valid ? saveAnswers() : ''"
-                      @blur="valid ? saveAnswers() : setProgress()"
-                    ></v-text-field>
                   </ValidationProvider>
                 </v-col>
               </v-row>

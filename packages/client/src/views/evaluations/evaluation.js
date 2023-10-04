@@ -128,15 +128,6 @@ export default Vue.extend({
               qPage++
             })
             break
-          case 'indices':
-            this.pageAnswerCnt[qPage] = 0
-            this.evaluated.temp[key].forEach(a => {
-              if (a.answer) {
-                answered++
-                this.pageAnswerCnt[qPage]++
-              }
-            })
-            break
           case 'additional':
             this.pageAnswerCnt[qPage + 1] = 0
             if (this.hasAdditionalQuestions) {
@@ -147,17 +138,6 @@ export default Vue.extend({
                 }
               })
             }
-            break
-          case 'open':
-            this.pageAnswerCnt[qPage + 2] = 0
-            this.evaluated.temp[key].forEach(a => {
-              a.answer.forEach(oq => {
-                if (oq) {
-                  answered++
-                  this.pageAnswerCnt[qPage + 2]++
-                }
-              })
-            })
             break
         }
       }
@@ -293,16 +273,6 @@ export default Vue.extend({
         this.pages.push(dimensionQuestions)
       }
 
-      // Index Questions
-      this.pages.push(this.evaluation.questionsIndex)
-      this.totalQuestionsCount += this.evaluation.questionsIndex.length
-      if (notAnsweredQuestions) {
-        // Initial answers structure
-        for (const index of this.evaluation.questionsIndex) {
-          this.evaluated.temp.indices.push({ idx: index.idx, answer: null })
-        }
-      }
-
       // Additional Questions
       this.hasAdditionalQuestions = this.evaluation.additionalQuestions &&
         this.evaluation.additionalQuestions.length > 0 &&
@@ -315,16 +285,6 @@ export default Vue.extend({
           for (const additionalQ of this.evaluation.additionalQuestions) {
             this.evaluated.temp.additional.push({ question: additionalQ.question, answer: [null] })
           }
-        }
-      }
-
-      // Open Questions
-      this.pages.push(this.evaluation.openQuestions)
-      this.totalQuestionsCount += (this.evaluation.openQuestions.length * 3)
-      // Initial answers structure
-      if (notAnsweredQuestions) {
-        for (const openQ of this.evaluation.openQuestions) {
-          this.evaluated.temp.open.push({ question: openQ.name, answer: [null, null, null] })
         }
       }
 
