@@ -33,13 +33,6 @@
       id="dynamicEnterpriseLogo"
       class="d-none"
     />
-    <canvas id="burnoutIndex" width="448" height="451" class="d-none"></canvas>
-    <img v-show="false"
-      :src="wCloudPreload"
-      id="preloadWordCloud"
-      width="800"
-      height="440"
-    />
   </div>
 </template>
 
@@ -62,13 +55,9 @@ import dimResults from './mixins/08-dimension-results'
 import dimDetails from './mixins/09-dimension-details'
 import scoresRank from './mixins/10-highest-lowest-scores'
 import scatterRank from './mixins/11-highest-lowest-scatter'
-import burnoutIndex from './mixins/12-burnout-index'
-import healthIndex from './mixins/13-health-index'
-import wordClouds from './mixins/14-word-clouds'
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 const echarts = require('echarts')
-require('echarts-wordcloud')
 
 export default {
   name: 'thread-organizational-report-exec',
@@ -84,10 +73,7 @@ export default {
     dimResults,
     dimDetails,
     scoresRank,
-    scatterRank,
-    burnoutIndex,
-    healthIndex,
-    wordClouds
+    scatterRank
   ],
   props: {
     pollId: String,
@@ -99,8 +85,7 @@ export default {
       downloadPdf: true,
       renderPart: {
         donutPie: false,
-        chartPie: false,
-        wordClouds: false
+        chartPie: false
       },
       heatMap: [
         '#f85d19',
@@ -129,22 +114,13 @@ export default {
       completedPolls: 0,
       expectedPolls: 0,
       responseRatePie: null,
-      dimensionsResultsPie: null,
-      wCloudPreload: null,
-      wClouds: {},
-      wordColors: [
-        'rgba(81, 199, 175, 1)',
-        'rgba(125, 131, 141, 1)',
-        'rgba(236, 96, 77, 1)',
-        'rgba(25, 153, 218, 1)'
-      ]
+      dimensionsResultsPie: null
     }
   },
   mounted () {
     if (this.evaluationData.enterprise.logo) {
       this.enterpriseLogoSrc = `data:image/png;base64,${this.evaluationData.enterprise.logo}`
     }
-    this.preloadWordCloudFont()
   },
   watch: {
     renderPart: {
@@ -469,83 +445,7 @@ export default {
       chartPieLocal.on('finished', () => {
         this.dimensionsResultsPie = chartPieLocal.getDataURL()
         this.renderPart.chartPie = true
-        this.generateWordClouds()
       })
-    },
-    preloadWordCloudFont () {
-      const canvas = document.createElement('canvas')
-      canvas.width = 800
-      canvas.height = 440
-      const preload = echarts.init(canvas)
-
-      preload.setOption({
-        textStyle: {
-          fontFamily: 'Bowlby One'
-        },
-        series: [{
-          type: 'wordCloud',
-          shape: 'circle',
-          gridSize: 9,
-          sizeRange: [14, 60],
-          rotationRange: [-90, 90],
-          rotationStep: 90,
-          left: 'center',
-          top: 'center',
-          drawOutOfBound: true,
-          textStyle: {
-            color: '#FF6600'
-          },
-          data: [
-            { name: 'test2', value: 2 },
-            { name: 'test1', value: 1 }
-          ]
-        }]
-      })
-
-      preload.on('finished', () => {
-        this.wCloudPreload = preload.getDataURL()
-      })
-    },
-    generateWordClouds () {
-      let cnt = 1
-      for (const key of Object.keys(this.wordsCloud)) {
-        const canvas = document.createElement('canvas')
-        canvas.width = 1200// 800
-        canvas.height = 660// 440
-        const chartWordsLocal = echarts.init(canvas)
-
-        chartWordsLocal.setOption({
-          textStyle: {
-            fontFamily: 'Bowlby One'
-          },
-          series: [{
-            type: 'wordCloud',
-            shape: 'circle',
-            gridSize: 9,
-            sizeRange: [14, 60],
-            rotationRange: [-90, 90],
-            rotationStep: 90,
-            left: 'center',
-            top: 'center',
-            // width: '80%',
-            // height: '70%',
-            drawOutOfBound: true,
-            textStyle: {
-              // fontWeight: 'bold',
-              color: () => this.wordColors[Math.floor(Math.random() * this.wordColors.length)]
-            },
-            data: this.wordsCloud[key]
-          }]
-        })
-
-        chartWordsLocal.on('finished', () => {
-          this.wClouds[key] = chartWordsLocal.getDataURL()
-          if (cnt === this.evaluationData.openQuestions.length) {
-            this.renderPart.wordClouds = true
-          }
-          cnt++
-        })
-      }
     },
     toDataURL (url, callback) {
       const xhr = new XMLHttpRequest()

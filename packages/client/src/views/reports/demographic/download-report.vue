@@ -44,9 +44,6 @@ import methodology from '../organizational/mixins/05-methodology'
 import gralScores from './mixins/07-gral-scores'
 import dimResults from './mixins/08-dimension-results'
 import dimDetails from './mixins/09-dimension-details'
-import burnoutIndexInd from './mixins/12a-burnout-index-ind'
-import burnoutIndexOrg from './mixins/12b-burnout-index-org'
-import healthIndex from './mixins/13-health-index'
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
@@ -61,10 +58,7 @@ export default {
     methodology,
     gralScores,
     dimResults,
-    dimDetails,
-    burnoutIndexInd,
-    burnoutIndexOrg,
-    healthIndex
+    dimDetails
   ],
   props: {
     pollId: String,

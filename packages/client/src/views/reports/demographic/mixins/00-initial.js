@@ -36,7 +36,6 @@ export default {
           this.expectedPolls = this.evaluationData.populationCount
           this.completedPolls = res.data.answeredCount
           this.answersDimension = res.data.answersDimension
-          this.indicesAnswers = res.data.indicesAnswers
           this.criteria = res.data.criteria[0]
           this.segments = res.data.segments
           this.segmentedAnswers = res.data.segmentedAnswers

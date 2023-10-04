@@ -29,13 +29,6 @@ export default {
         if (hc.type === 'evaluations') {
           firstColumnText = this.$t(`Views.Questionnaires.edit.d_${hc.dimension}`)
           marginTop = 38
-        } else {
-          firstColumnText = this.$t(`Views.Indices.list.i_${hc.index}`)
-          if (hc.index === 'generalHealth') {
-            marginTop = 38
-          } else {
-            marginTop = 29
-          }
         }
 
         let reference = ''
@@ -43,14 +36,6 @@ export default {
           const vName = this.answersDimension[hc.dimension].variables[hc.variable].name
           const qName = this.answersDimension[hc.dimension].variables[hc.variable].questions[hc.question].name
           reference = this.evaluationData.questionnaire.evaluations[hc.dimension][vName][qName].reference[this.user.lang]
-        }
-        if (hc.type === 'indices') {
-          if (hc.idx === null) {
-            reference = this.healthIndexQ1
-          } else {
-            const foundIndex = this.evaluationData.questionsIndex.find(x => x.idx === hc.idx)
-            reference = foundIndex.reference[this.user.lang] || ''
-          }
         }
 
         const data = [

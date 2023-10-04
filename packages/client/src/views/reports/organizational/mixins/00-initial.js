@@ -29,12 +29,10 @@ export default {
           this.expectedPolls = this.evaluationData.populationCount
           this.completedPolls = res.data.answeredCount
           this.answersDimension = res.data.answersDimension
-          this.indicesAnswers = res.data.indicesAnswers
           this.highestScores = res.data.highestScores
           this.lowestScores = res.data.lowestScores
           this.highestScatter = res.data.highestScatter
           this.lowestScatter = res.data.lowestScatter
-          this.wordsCloud = res.data.wordsCloud
           this.hasPrevious = res.data.hasPrevious
           this.calculateGeneralScores(this.hasPrevious)
           this.generateResponseRatePie()
@@ -144,13 +142,7 @@ export default {
           // 10 Highest/Lowest Scores
           this.$generateScoreRank(),
           // 11 Highest/Lowest Scatter
-          this.$generateScatterRank(),
-          // 12 Burnout Index
-          await this.$generateBurnoutIndex(),
-          // 13 Health Index
-          this.$generateHealthIndex(),
-          // 14 WordClouds
-          this.$generateWordClouds()
+          this.$generateScatterRank()
         ]
       }
     }
