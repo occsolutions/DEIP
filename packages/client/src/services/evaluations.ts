@@ -54,9 +54,6 @@ export default {
   finishPoll: (tokenId: string) => {
     return service.put('finish-poll', { tokenId: tokenId })
   },
-  sendIndividualResultsEmail: (tokenId: string, data: any) => {
-    return service.post(`send-individual-results/${tokenId}`, { data })
-  },
   generateReportOrganizational: (id: number) => {
     return service.post(`generate-organizational-report/${id}`)
   },
