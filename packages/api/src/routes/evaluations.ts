@@ -29,11 +29,6 @@ export default (middlewares, services) => {
     EvaluationsController.finishPollByToken
   );
 
-  EvaluationsRouter.post(
-    '/send-individual-results/:tokenId',
-    EvaluationsController.sendIndividualResults
-  );
-
   // Protected routes
   EvaluationsRouter.use(middlewares.jwt);
 

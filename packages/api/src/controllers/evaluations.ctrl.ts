@@ -93,34 +93,6 @@ class EvaluationsController {
     }
   }
 
-  async sendIndividualResults(req: Request, resp: Response) {
-    try {
-      // Queue email in SUITE
-      const suiteRes = await RunHttpRequest.suitePost(undefined,
-        'emails/send-deip-individual-results',
-        req.body.data
-      );
-      if (!suiteRes.success) {
-        throw new BadRequestException('Suite communication failed');
-      }
-
-      // Save recipient
-      await EvaluatedService.setResultsRecipient(req.params.tokenId, req.body.data.email);
-
-      resp.send();
-    } catch (error) {
-      if (error._code && error._httpCode) {
-        resp.status(error._httpCode).send({ code: error._code });
-      } else {
-        resp.send({
-          msg: 'Not found',
-          er: error,
-          status: 404
-        });
-      }
-    }
-  }
-
   async create(req: IRequest, res: Response) {
     const input = req.body.evaluation;
     const name = input.name;
@@ -326,6 +298,7 @@ class EvaluationsController {
       evaluation.timeZone = input.timeZone;
       evaluation.deliveredAt = new Date(`${input.deliveredAt.value} ${input.deliveredAt.hour}`);
       evaluation.customEmailRelease = input.customEmailRelease;
+      evaluation.populationLeaders = input.leaders;
       evaluation.additionalSegmentation = input.additionalSegmentation;
     }
 
@@ -356,14 +329,13 @@ class EvaluationsController {
       }
     }
 
-    // Check for population changes (Allowed only for individual selection type)
-    if (oldEvaluation.populationSelectionType === 'individual') {
-      const oldEvaluatedIds = oldEvaluation.populationSelectionDetails.evaluatedIds;
-      const newEvaluatedIds = input.evaluated;
-      const included = newEvaluatedIds.filter(inc => !oldEvaluatedIds.includes(inc));
-      const excluded = oldEvaluatedIds.filter(exc => !newEvaluatedIds.includes(exc));
-      if (included.length || excluded.length) {
-        const newPopulationCount = oldEvaluation.populationCount + included.length - excluded.length;
+    // Check for population changes (Only additions allowed)
+    if (oldEvaluation.populationCount < input.evaluated.length) {
+      const oldEvaluatedIds = await EvaluatedService.getByEvaluationRef(oldEvaluation._id, 'indEmpEntId');
+      const newEvaluatedIds = input.evaluated.filter(inc => !oldEvaluatedIds.map(x => x.indEmpEntId).includes(inc));
+
+      if (newEvaluatedIds.length) {
+        const newPopulationCount = oldEvaluation.populationCount + newEvaluatedIds.length;
         const addedPopulationCount = newPopulationCount - oldEvaluation.populationCount;
         if (addedPopulationCount > 0) {
           const spend = await SpendRequest(req, 'MEDICIÓN DEIP', addedPopulationCount);
@@ -376,7 +348,6 @@ class EvaluationsController {
 
         evaluation.status = oldEvaluation.status === 'pending' ? 'editing' : oldEvaluation.status;
         evaluation.populationCount = newPopulationCount;
-        evaluation.populationSelectionDetails.evaluatedIds = newEvaluatedIds;
 
         // Create population editing thread
         await OperationThreadsService.save({
@@ -388,8 +359,7 @@ class EvaluationsController {
             evaluationStatus: oldEvaluation.status,
             enterpriseId: req.user.enterprise.id,
             selectionType: oldEvaluation.populationSelectionType,
-            included,
-            excluded,
+            included: newEvaluatedIds,
             lang: req.user.lang
           }
         });
