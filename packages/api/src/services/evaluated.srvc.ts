@@ -56,7 +56,7 @@ class EvaluatedService {
   }
 
   async countByEvaluationRef(evaluationRef: any): Promise<number> {
-    return EvaluatedRepository.countDocuments({ evaluationRef: new ObjectID(evaluationRef), status: { $ne : 'excluded'}  }, (err, result) => result);
+    return EvaluatedRepository.countDocuments({ evaluationRef: new ObjectID(evaluationRef), status: { $ne : 'excluded'}  });
   }
 
   async getByEvaluationRef(evaluationRef: any, select?: string|undefined): Promise<EvaluatedType[]> {
@@ -179,14 +179,6 @@ class EvaluatedService {
     return EvaluatedRepository.findOneAndUpdate(
       {'token': tokenId},
       { '$set': { 'status': 'completed' }},
-      { new: true}
-    );
-  }
-
-  async setResultsRecipient(tokenId: string, email: string): Promise<EvaluatedType|null> {
-    return EvaluatedRepository.findOneAndUpdate(
-      {'token': tokenId},
-      { '$set': { 'alreadySentEmail': email }},
       { new: true}
     );
   }
