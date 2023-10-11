@@ -1,20 +1,19 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12">
-        <v-row justify="space-between" class="px-8">
-          <h4 class="display-1 left">{{ evaluation.name }}</h4>
-          <v-chip
-            v-if="evaluation.displayName"
-            color="primary"
-            class="mb-3 white--text right"
-          >
-            {{ evaluation.displayName }}
-          </v-chip>
-        </v-row>
+    <v-row align="center" justify="start" fill-height>
+      <v-col xs="12">
+        <h4 class="display-1 left">{{ evaluation.name }}</h4>
+        <v-chip
+          v-if="evaluation.displayName"
+          color="primary"
+          class="mb-3 white--text right"
+        >
+          {{ evaluation.displayName }}
+        </v-chip>
       </v-col>
     </v-row>
-    <v-card class="mb-12">
+
+    <v-card class="my-4">
       <v-toolbar color="primary" flat class="white--text">
         <v-btn icon to="/evaluations" color="primary" large>
           <v-icon color="white">fa-chevron-left</v-icon>
@@ -223,7 +222,7 @@
     >
       <template v-slot:question>{{ typeModal !== 'close' ? $t('Views.Evaluations.show.send_reminders_q') : $t('Views.Evaluations.show.close_evaluation_q') }}</template>
     </x-confirmation-modal>
-    <v-dialog v-model="showModalChip">
+    <v-dialog v-model="showModalChip" width="500">
       <v-card>
         <v-toolbar light flat class="text-center">
           <v-toolbar-title>{{ $t('Views.Evaluations.show.modal_title') }}</v-toolbar-title>
