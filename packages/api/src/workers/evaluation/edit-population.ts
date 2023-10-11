@@ -61,6 +61,9 @@ class EditPopulation {
       delete threadData.lap;
       delete threadData.progress;
 
+      // Get the Evaluation
+      const evaluation: any = await EvaluationService.findById(threadData._evaluation, 'populationLeaders');
+
       // Population to be INCLUDED
       let finishedIncluding = false;
       if (threadData.included.length) {
@@ -76,11 +79,12 @@ class EditPopulation {
         // Get Employees from Suite
         const employees: any = await RunHttpRequest.suitePost(undefined, suitePath, {
           enterpriseId: threadData.enterpriseId,
-          selectionType: threadData.selectionType,
+          selectionType: 'individual',
           limit: Math.ceil(threadData.included.length / threadData.maxLaps),
           offset: alreadyIncludedPopulationCount,
           filters: { evaluatedIds: threadData.included }
         });
+
         if (!employees.success) {
           return await this.saveFailed(pendingOperationThread._id, 'Suite communication', {
             path: suitePath,
@@ -130,13 +134,12 @@ class EditPopulation {
                   identifyDocument: employee.identifyDocument,
                   firstName: employee.firstName,
                   lastName: employee.lastName,
-                  phoneNumber: employee.phoneNumber,
-                  active: employee.active,
                   birthdate: employee.birthdate,
                   admission: employee.admission,
                   deletedAt: employee.deletedAt
                 }
-              }
+              },
+              isLeaderWithSubordinates: evaluation.populationLeaders.includes(employee.id)
             });
           }
         }
@@ -166,40 +169,8 @@ class EditPopulation {
         finishedIncluding = true;
       }
 
-      // Population to be EXCLUDED
-      let finishedExcluding = false;
-      if (threadData.excluded.length && finishedIncluding) {
-        const populationToExclude = await EvaluatedService.findBatchByEvaluationRefAndEmployeeEnterpriseIds(
-          threadData._evaluation,
-          threadData.excluded,
-          '_id'
-        );
-        const populationIdsToExclude = populationToExclude.map(x => x._id);
-        let excludedCount = 0;
-        if (threadData.evaluationStatus === 'pending') {
-          // Delete from collection
-          const deletedPopulation = await EvaluatedService.deleteBatch(
-            threadData._evaluation,
-            populationIdsToExclude
-          );
-          excludedCount = deletedPopulation['deletedCount'];
-        } else {
-          // Update status to 'excluded'
-          const excludedPopulation = await EvaluatedService.excludeBatch(
-            threadData._evaluation,
-            populationIdsToExclude
-          );
-          excludedCount = excludedPopulation.modifiedCount;
-        }
-        if (threadData.excluded.length === excludedCount) {
-          finishedExcluding = true;
-        }
-      } else {
-        finishedExcluding = true;
-      }
-
       // When ALL population has been updated
-      if (finishedIncluding && finishedExcluding) {
+      if (finishedIncluding) {
         try {
           const newEvaluatedCnt = await EvaluatedService.countByEvaluationRef(threadData._evaluation);
           await EvaluationService.updateEvaluatedCount(threadData._evaluation, newEvaluatedCnt);
