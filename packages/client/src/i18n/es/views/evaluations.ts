@@ -99,7 +99,7 @@ export default {
   },
   stepEvaluatedSelection: {
     title: 'Participantes',
-    desc: 'En esta sección, podrás elegir los participantes de la medición, puedes escoger entre todos los colaboradores activos en la empresa, por corte demográfico o individual. Recuerda que todos los participantes de la medición, deben estar previamente cargados.',
+    desc: 'En esta sección, podrás elegir los participantes de la medición, puedes escoger entre todos los colaboradores activos en la empresa o por corte demográfico. Recuerda que todos los participantes de la medición, deben estar previamente cargados.',
     want_massive: '¿Desea realizar la asignación de la valoración via carga masiva?',
     add_evaluated: 'Agregar participante',
     add_evaluated_leader: 'Agregar líder',
@@ -111,6 +111,8 @@ export default {
     modal_del_question: '¿Desea borrar este participante?',
     modal_del_question_leader: '¿Desea borrar este participante como líder con personas a cargo?',
     input_trash: 'Borrar',
+    population_diff_singular: 'Con la última actualizacion de Colaboradores, se agregará (1) nuevo participante al momento de confirmar la edición de la medición.',
+    population_diff_plural: 'Con la última actualizacion de Colaboradores, se agregarán ({n}) nuevos participantes al momento de confirmar la edición de la medición.',
     evaluatedTable: {
       team_members: 'Participantes',
       actions: 'Acciones',
@@ -139,8 +141,7 @@ export default {
     want_to_send: '¿A quién desea enviar esta encuesta?',
     selectionType: {
       everybody: 'A toda mi organización',
-      demographic_cuts: 'A cortes demográficos',
-      individual: 'Individual'
+      demographic_cuts: 'A cortes demográficos'
     },
     please_wait: 'Por favor espere mientras se cargan todos los demográficos',
     demographic_cuts: {
@@ -200,7 +201,7 @@ export default {
     '<p>Información clave sobre esta encuesta:</p>' +
     '<ul>' +
     '<li>La valoración tarda menos de 15 minutos en completarse.</li>' +
-    '<li>La información entregada será manejada de manera confidencial y será utilizada con fines estadísticos. Nadie en la organización tendrá acceso a su informe individual.</li>' +
+    '<li>La información entregada será manejada de manera confidencial y será utilizada con fines estadísticos.</li>' +
     '<li>Por favor contestar con total objetividad.</li>' +
     '<li>Para una mejor experiencia, utiliza <b>Google Chrome</b>. Recuerda que debes estar conectado(a) a Internet.</li>' +
     '<li>Si tienes alguna duda o evidencia algún problema con la encuesta por favor no dude en contactarnos en el correo: <a href="mailto:info@occsolutions.org">info@occsolutions.org</a>.</li>' +
@@ -212,7 +213,7 @@ export default {
     '<p>Información clave sobre esta encuesta:</p>' +
     '<ul>' +
     '<li>La valoración tarda menos de 15 minutos en completarse.</li>' +
-    '<li>La información entregada será manejada de manera confidencial y será utilizada con fines estadísticos. Nadie en la organización tendrá acceso a su informe individual.</li>' +
+    '<li>La información entregada será manejada de manera confidencial y será utilizada con fines estadísticos.</li>' +
     '<li>Por favor contestar con total objetividad.</li>' +
     '<li>Para una mejor experiencia, utiliza <b>Google Chrome</b>. Recuerda que debes estar conectado(a) a Internet.</li>' +
     '<li>Si tienes alguna duda o evidencia algún problema con la encuesta por favor no dude en contactarnos en el correo: <a href="mailto:info@occsolutions.org">info@occsolutions.org</a>.</li>' +
@@ -299,7 +300,7 @@ export default {
     evaluate: 'Participante',
     information_1: 'Bienvenido(a) a la encuesta DEIP',
     information_2: 'DEIP, es una medición de XX preguntas que explora las 4 dimensiones de las personas de alta energía positiva: Física, Mental, Emocional y Profesional.',
-    information_3: 'El primer paso en este camino de mejoramiento personal, es el de generar auto-consciencia de tus fortalezas y áreas de oportunidad, por ello te invitamos a contestar de manera totalmente honesta cada una de las preguntas. Los resultados individuales son totalmente confidenciales y de uso personal.',
+    information_3: 'El primer paso en este camino de mejoramiento personal, es el de generar auto-consciencia de tus fortalezas y áreas de oportunidad, por ello te invitamos a contestar de manera totalmente honesta cada una de las preguntas.',
     score_label1: 'Nunca',
     score_label2: 'Casi nunca',
     score_label3: 'Ocasionalmente',
@@ -325,7 +326,7 @@ export default {
     answer: 'Respuesta',
     wellcomeDialog: {
       wellcome_instructions: 'DEIP, es una medición de XX preguntas que explora las 4 dimensiones de las personas de alta energía positiva: Física, Mental, Emocional y Profesional.' +
-      '<br/><br/>El primer paso en este camino de mejoramiento personal, es el de generar auto-consciencia de tus fortalezas y áreas de oportunidad, por ello te invitamos a contestar de manera totalmente honesta cada una de las preguntas. Los resultados individuales son totalmente confidenciales y de uso personal.' +
+      '<br/><br/>El primer paso en este camino de mejoramiento personal, es el de generar auto-consciencia de tus fortalezas y áreas de oportunidad, por ello te invitamos a contestar de manera totalmente honesta cada una de las preguntas.' +
       '<br/><br/>El plazo máximo para completar la encuesta es: {deadline}',
       must_accept_policy_to_continue: 'Para continuar con la encuesta es indispensable que por favor aceptes las política de tratamiento de datos:',
       i_accept_the: 'Acepto la',

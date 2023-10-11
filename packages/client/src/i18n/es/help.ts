@@ -140,7 +140,7 @@ export default {
       },
       selection: {
         title: '¿A quién desea enviar esta encuesta?',
-        text: `Permite seleccionar a los participantes de la encuesta en base a tres criterios distintos: toda la organización, filtrados por cortes demográficos o individual. ${required}`
+        text: `Permite seleccionar a los participantes de la encuesta en base a dos criterios distintos: toda la organización o filtrados por cortes demográficos. ${required}`
       }
     }
   },
