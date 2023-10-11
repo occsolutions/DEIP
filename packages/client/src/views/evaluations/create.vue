@@ -55,7 +55,6 @@
               <x-step-evaluated-selection
                 v-show="step == 4"
                 :evaluation="evaluation"
-                :identify-types="identifyTypes"
                 step="4"
                 nextAction="Views.Evaluations.create.stepper_btn_next"
                 prevAction="Views.Evaluations.create.stepper_btn_back"
