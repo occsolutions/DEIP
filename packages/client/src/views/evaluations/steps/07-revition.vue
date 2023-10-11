@@ -67,7 +67,7 @@
                 :title="`${computedPrice} ${$t('Views.Evaluations.stepRevition.token_unit')}`"
                 :sub-title="computedPrice <= 0 ?
                   $t('Views.Evaluations.stepRevition.paid_measuring') :
-                  $t('Views.Evaluations.stepRevition.workshop_cost', { members: (evaluation.populationCount - countOldEvaluated)})"
+                  $t('Views.Evaluations.stepRevition.workshop_cost', { members: finalPopulationCount - countOldEvaluated})"
               ></x-list-item-revition>
             </v-col>
           </v-row>
@@ -390,6 +390,7 @@ export default {
     XPollPreviewEmail
   },
   props: {
+    isEdit: Boolean,
     evaluation: Object,
     identifyTypes: Object,
     step: String,
@@ -462,7 +463,7 @@ export default {
       return cnt > 0
     },
     computedPrice () {
-      const evaluatedDiff = this.evaluation.populationCount - this.countOldEvaluated
+      const evaluatedDiff = this.finalPopulationCount - this.countOldEvaluated
       return evaluatedDiff <= 0 ? 0 : (evaluatedDiff * this.price)
     },
     pollReminderEditor () {
@@ -470,6 +471,13 @@ export default {
     },
     pollInvitationEditor () {
       return this.$refs.pollInvitationBody.quill
+    },
+    finalPopulationCount () {
+      if (!this.isEdit) {
+        return this.evaluation.populationCount
+      } else {
+        return this.evaluation.evaluated.length
+      }
     },
     ...mapState({
       user: (state) => state.session.user

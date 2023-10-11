@@ -66,7 +66,6 @@
               <x-step-evaluated-selection
                 :is-edit="true"
                 :evaluation="evaluation"
-                :identify-types="identifyTypes"
                 step="4"
                 nextAction="Views.Evaluations.edit.stepper_btn_next"
                 prevAction="Views.Evaluations.edit.stepper_btn_back"
@@ -78,7 +77,8 @@
               key="5-content"
               step="5"
             >
-              <x-step-leaders-with-subordinates
+              <x-step-leaders-with-subordinates v-if="step === 5"
+                :is-edit="true"
                 :evaluation="evaluation"
                 :identify-types="identifyTypes"
                 step="5"
@@ -108,6 +108,7 @@
               step="7"
             >
               <x-step-revition
+                :is-edit="true"
                 :evaluation="evaluation"
                 :price="productService"
                 step="7"
@@ -273,7 +274,7 @@ export default Vue.extend({
       if (val === 4 && this.evaluation.selectionType === '') {
         this.evaluation.selectionType = this.selType
       }
-      if (val === 6 && this.evaluation.additionalQuestions.length > 1) {
+      if (val === 7 && this.evaluation.additionalQuestions.length > 1) {
         if (this.evaluation.additionalQuestions[this.evaluation.additionalQuestions.length - 1].question === '') {
           this.evaluation.additionalQuestions.pop()
         }
@@ -297,19 +298,29 @@ export default Vue.extend({
               lastName: employee.lastName,
               identifyDocument: employee.identifyDocument,
               identifyTypeId: employee.identifyTypeId,
-              employee: { id: employee.employee.id }
+              employee
             }
           })
-          this.mapEvaluated()
+          this.evaluation.evaluated = this.employees
+          this.mapLeaders()
         })
         .finally(() => {
           this.$store.dispatch('loading/hide')
         })
     },
-    mapEvaluated () {
-      this.evaluation.evaluated = this.employees.filter(emp => {
-        return this.evaluation.selectionDetails.evaluatedIds.includes(emp.id)
-      })
+    mapLeaders () {
+      if (this.selType === 'everybody') {
+        this.evaluation.toLeaders = this.employees
+      } else {
+        const demographicEmployees = []
+        Object.keys(this.evaluation.selectionDetails).forEach(demographicKey => {
+          const demographicId = this.evaluation.selectionDetails[demographicKey]
+          demographicEmployees.push(...this.employees.filter(emp => emp.employee[demographicKey] === demographicId))
+        })
+        this.evaluation.toLeaders = demographicEmployees
+      }
+
+      this.evaluation.leaders = this.employees.filter(emp => this.evaluation.populationLeaders?.includes(emp.id))
     },
     getTimeZones (items) {
       this.timeZones = items.map((item) => ({
@@ -349,7 +360,7 @@ export default Vue.extend({
     verifyStepChanged (data, step) {
       switch (step) {
         case 0: return this.$router.push('/evaluations')
-        case 7: return this.toConfirm()
+        case 8: return this.toConfirm()
         default: this.step = step
       }
     },
@@ -369,9 +380,9 @@ export default Vue.extend({
       if (this.selType !== 'everybody') {
         this.evaluation.selectionDetails = res.populationSelectionDetails
       }
-      if (this.selType === 'individual') {
-        this.getEmployees()
-      }
+
+      this.getEmployees()// To load leaders with subordinates table
+
       this.evaluation.populationCount = res.populationCount
       this.evaluation.questionnaire = res.questionnaire.slug
       this.evaluation.additionalQuestions = res.additionalQuestions
@@ -398,6 +409,9 @@ export default Vue.extend({
       }
       if (res.additionalSegmentation) {
         this.evaluation.additionalSegmentation = res.additionalSegmentation
+      }
+      if (res.populationLeaders.length) {
+        this.evaluation.populationLeaders = res.populationLeaders
       }
     },
     getFormattedReminders (reminders) {
@@ -426,11 +440,14 @@ export default Vue.extend({
       const pollInvitationFile = this.evaluation.pollInvitation.file
       const reminderMailFile = this.evaluation.reminderMail.file
       const data = JSON.parse(JSON.stringify(this.evaluation))
+      data.leaders = data.leaders.map(emp => emp.id)
       // data.pollInvitation.file = this.evaluation.pollInvitation.file.name
       // data.reminderMail.file = this.evaluation.reminderMail.file.name
+      delete data.toLeaders
 
       data.evaluated = data.evaluated.map(emp => emp.id)
-      return evaluationsService.edit(this.$route.params.slug, data)
+
+      evaluationsService.edit(this.$route.params.slug, data)
         .then((res) => {
           if (!res._id) {
             if (res.status === 401 && this.evaluation.evaluated.length > this.countOldEvaluated) {

@@ -27,7 +27,6 @@
     <v-row>
       <v-col cols="12" sm="6">
         <v-btn block large
-          :disabled="loadingDemographics"
           @click="changeStep(true)"
         >
           {{ $t(prevAction) }}
@@ -37,7 +36,7 @@
         <v-btn block large
           color="primary"
           :key="editHasCeroEvaluated"
-          :disabled="!evaluation.populationCount || loadingDemographics || editHasCeroEvaluated"
+          :disabled="editHasCeroEvaluated"
           @click="changeStep(false)"
         >
           {{ $t(nextAction) }}
@@ -63,25 +62,11 @@ export default Vue.extend({
     identifyTypes: Object,
     step: String,
     nextAction: String,
-    prevAction: String,
-    employees: Array
+    prevAction: String
   },
   data () {
     return {
-      editHasCeroEvaluated: false,
-      loadingDemographics: false,
-      demographicDataLoaded: false,
-      demographicLists: {
-        departments: [],
-        academicDegrees: [],
-        jobTypes: [],
-        charges: [],
-        genders: [],
-        countries: [],
-        getSelectAge: [],
-        additionalDemographics1: [],
-        additionalDemographics2: []
-      }
+      editHasCeroEvaluated: false
     }
   },
   created () {
@@ -91,9 +76,7 @@ export default Vue.extend({
     //
   },
   computed: {
-    ...mapState({
-      user: state => state.session.user
-    })
+    //
   },
   methods: {
     changeStep (isBack = false) {

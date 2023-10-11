@@ -333,8 +333,19 @@
       </v-col>
 
       <!-- Total -->
-      <v-col cols="12" class="pt-0 pb-6 px-8 headline text-right">
+      <v-col cols="12" class="pt-0 pb-4 px-8 headline text-right">
         {{ $t('Views.Evaluations.create.total_receptors', {n: `${totalFilteredEmployees}`}) }}
+      </v-col>
+
+      <!-- Population change warning -->
+      <v-col cols="12"
+        v-if="isEdit"
+        class="pt-0 pb-1 px-1 caption text-right error--text"
+      >
+        {{ 1 === 1
+            ? $t('Views.Evaluations.stepEvaluatedSelection.population_diff_singular')
+            : $t('Views.Evaluations.stepEvaluatedSelection.population_diff_plural', {n: `${populationDiff}`})
+        }}
       </v-col>
     </v-row>
   </div>
@@ -540,7 +551,7 @@ export default Vue.extend({
       while (++k < listItems.length) {
         if (listItems[k].name === 'genders' && this.evaluation.selectionDetails[listItems[k].item]) {
           this.evaluation.genderId = this.evaluation.selectionDetails.genderId
-          this.demographicRefs.genders = this.evaluation.genderId
+          this.demographicRefs.genderId = this.evaluation.genderId
         } else if (this.evaluation.selectionDetails[listItems[k].item] &&
             this.evaluation.selectionDetails[listItems[k].item].length
         ) {
@@ -548,7 +559,15 @@ export default Vue.extend({
           this.demographicRefs[listItems[k].name] = this.evaluation[listItems[k].item]
         }
       }
-      this.totalFilteredEmployees = this.evaluation.populationCount
+      if (this.evaluation.status === 'pending') {
+        employeesServices.getByCriteria(this.demographicRefs)
+          .then((res) => {
+            this.evaluation.evaluated = res.items
+            this.totalFilteredEmployees = res.items.length
+          })
+      } else {
+        this.totalFilteredEmployees = this.evaluation.populationCount
+      }
     },
     loadDemographicData () {
       this.loadingDemographics = true

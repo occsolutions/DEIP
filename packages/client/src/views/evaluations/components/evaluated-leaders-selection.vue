@@ -11,6 +11,7 @@
     <v-row v-if="!isMassive">
       <v-col cols="12">
         <x-evaluated-table
+          :key="evaluation.leaders.length"
           :evaluated="evaluation.leaders"
           :identify-types="identifyTypes"
           @delete="openModal"

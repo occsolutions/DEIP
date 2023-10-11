@@ -31,8 +31,19 @@
     <!------------- EVERYBODY ------------->
     <!------------------------------------->
     <v-row v-if="evaluation.selectionType === 'everybody'">
-      <v-col cols="12" class="pt-2 pb-6 px-8 headline text-right">
-        {{ $t('Views.Evaluations.create.total_receptors', {n: `${evaluation.populationCount}`}) }}
+      <v-col cols="12" class="pt-2 pb-4 px-8 headline text-right">
+        {{ $t('Views.Evaluations.create.total_receptors', {n: `${populationCnt}`}) }}
+      </v-col>
+
+      <!-- Population change warning -->
+      <v-col cols="12"
+        v-if="isEdit && populationDiff > 0"
+        class="pt-0 pb-1 px-4 caption text-right error--text"
+      >
+        {{ populationDiff === 1
+            ? $t('Views.Evaluations.stepEvaluatedSelection.population_diff_singular')
+            : $t('Views.Evaluations.stepEvaluatedSelection.population_diff_plural', {n: `${populationDiff}`})
+        }}
       </v-col>
     </v-row>
 
@@ -49,22 +60,9 @@
     />
 
     <!------------------------------------->
-    <!------------- LEADERS --------------->
-    <!------------------------------------->
-    <!--
-    <x-evaluated-leaders-selection v-if="evaluation.populationCount"
-      :is-edit="isEdit"
-      :employees="evaluation.toLeaders"
-      :evaluation="evaluation"
-      :identify-types="identifyTypes"
-      @editingZeroEvaluated="($event) => editHasCeroEvaluated = $event"
-    />
-    -->
-
-    <!------------------------------------->
     <!---------- Actions Buttons ---------->
     <!------------------------------------->
-    <v-row>
+    <v-row class="mt-0">
       <v-col cols="12" sm="6">
         <v-btn block large
           :disabled="loadingDemographics"
@@ -76,8 +74,7 @@
       <v-col cols="12" sm="6">
         <v-btn block large
           color="primary"
-          :key="editHasCeroEvaluated"
-          :disabled="!evaluation.populationCount || loadingDemographics || editHasCeroEvaluated"
+          :disabled="!evaluation.populationCount || loadingDemographics"
           @click="changeStep(false)"
         >
           {{ $t(nextAction) }}
@@ -100,7 +97,6 @@ export default Vue.extend({
   props: {
     isEdit: Boolean,
     evaluation: Object,
-    identifyTypes: Object,
     step: String,
     nextAction: String,
     prevAction: String,
@@ -108,7 +104,6 @@ export default Vue.extend({
   },
   data () {
     return {
-      editHasCeroEvaluated: false,
       loadingDemographics: false,
       demographicDataLoaded: false,
       demographicLists: {
@@ -158,20 +153,28 @@ export default Vue.extend({
         }
       },
       immediate: true
-    },
-    'evaluation.evaluated': {
-      handler (val) {
-        if (this.evaluation.selectionType === 'individual') {
-          this.evaluation.populationCount = val.length
-          this.evaluation.totalPrice = this.evaluation.populationCount * this.evaluation.price
-        }
-      }
     }
   },
   computed: {
     ...mapState({
       user: state => state.session.user
     }),
+    populationCnt () {
+      if (!this.isEdit) {
+        return this.evaluation.populationCount
+      } else {
+        if (this.evaluation.status === 'pending') {
+          return this.employees.length > this.evaluation.populationCount
+            ? this.employees.length
+            : this.evaluation.populationCount
+        } else {
+          return this.evaluation.populationCount
+        }
+      }
+    },
+    populationDiff () {
+      return this.employees.length - this.evaluation.populationCount
+    },
     getSelectType () {
       return [
         {
