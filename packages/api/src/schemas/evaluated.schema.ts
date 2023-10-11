@@ -34,7 +34,8 @@ const EvaluatedSchema = new mongoose.Schema({
       question: String,
       answer: []
     }]
-  }
+  },
+  isLeaderWithSubordinates: Boolean
 }, { timestamps: true, collection: 'evaluated' });
 
 const EvaluatedRepository = mongoose.model<EvaluatedType>('Evaluated', EvaluatedSchema);
