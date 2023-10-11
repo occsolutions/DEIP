@@ -8,14 +8,16 @@ import TokenUtils from '../../utils/token-utils';
 
 class CreatePopulation {
 
+  /**
+   * Check if there is a new evaluation pending to create its population, and generate a thread.
+   */
   public async checkCreatePopulation () {
     const pendingOperationThread = await OperationThreadsService.findByOperationAndStatus(
       'CreateEvaluationPopulation',
       'pending'
     );
-    if (!pendingOperationThread) {
-      return;
-    }
+    if (!pendingOperationThread) return;
+
     const threadData = pendingOperationThread.data;
 
     // Population's base token
@@ -43,14 +45,15 @@ class CreatePopulation {
     return pendingOperationThread._id;
   }
 
+  /**
+   * Run the process to create population for new evaluations.
+   */
   public async runCreatePopulation () {
     const pendingOperationThread = await OperationThreadsService.findByOperationAndStatus(
       'CreateEvaluationPopulation',
       'in_progress'
     );
-    if (!pendingOperationThread) {
-      return;
-    }
+    if (!pendingOperationThread) return;
 
     await OperationThreadsService.findOneAndUpdateStatus(pendingOperationThread._id, 'running');
 
@@ -60,6 +63,9 @@ class CreatePopulation {
       const thisLap = threadData.lap + 1;
       delete threadData.lap;
       delete threadData.progress;
+
+      // Get the Evaluation
+      const evaluation: any = await EvaluationService.findById(threadData._evaluation, 'populationLeaders');
 
       // Already created Population
       const alreadyCreatedPopulation = await EvaluatedService.getByEvaluationRef(threadData._evaluation, 'indEmpEntId');
@@ -107,6 +113,7 @@ class CreatePopulation {
               userId: employee.employee.userId,
               email: employee.employee.email,
               employeeEnterprise: {
+                id: employee.id,
                 employeeId: employee.employeeId,
                 countryId: employee.countryId,
                 headquarterId: employee.headquarterId,
@@ -119,17 +126,15 @@ class CreatePopulation {
                 identifyTypeId: employee.identifyTypeId,
                 additionalDemographic1Id: employee.additionalDemographic1Id,
                 additionalDemographic2Id: employee.additionalDemographic2Id,
-                id: employee.id,
                 identifyDocument: employee.identifyDocument,
                 firstName: employee.firstName,
                 lastName: employee.lastName,
-                phoneNumber: employee.phoneNumber,
-                active: employee.active,
                 birthdate: employee.birthdate,
                 admission: employee.admission,
                 deletedAt: employee.deletedAt
               }
-            }
+            },
+            isLeaderWithSubordinates: evaluation.populationLeaders.includes(employee.id)
           });
         }
       }
