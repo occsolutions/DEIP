@@ -196,30 +196,30 @@ export default {
     team: 'Equipo',
     team_members: 'Participantes',
     deleteFile: 'Eliminar archivo',
-    subject_msg: 'Bienvenido a la medición de Energía Personal',
-    custom_msg: '<p>Bienvenido(a) al proceso de valoración de Energía Personal, la cual te permitirá obtener información valiosa acerca de tus niveles de energía en cuatro dimensiones: física, mental, emocional y profesional.</p>' +
+    subject_msg: 'Inicia tu Encuesta Índice de Evolución DEIP (Enfoque Diferencial e Interseccional)',
+    custom_msg: '<p>Te damos la bienvenida al Índice de Evolución DEIP (Enfoque Diferencial e Interseccional), una encuesta que nos permitirá identificar el nivel de consciencia, conocimiento y madurez de tu organización sobre su estrategia de Diversidad, Equidad, Inclusión y Pertenencia. Adicionalmente, ayudará a inspirar y monitorear la evolución que ha tenido en este tema.</p>' +
     '<p>Información clave sobre esta encuesta:</p>' +
     '<ul>' +
-    '<li>La valoración tarda menos de 15 minutos en completarse.</li>' +
-    '<li>La información entregada será manejada de manera confidencial y será utilizada con fines estadísticos.</li>' +
-    '<li>Por favor contestar con total objetividad.</li>' +
-    '<li>Para una mejor experiencia, utiliza <b>Google Chrome</b>. Recuerda que debes estar conectado(a) a Internet.</li>' +
-    '<li>Si tienes alguna duda o evidencia algún problema con la encuesta por favor no dude en contactarnos en el correo: <a href="mailto:info@occsolutions.org">info@occsolutions.org</a>.</li>' +
-    '<li>Recuerda que <b>este link es personal</b> y no se debe compartir.</li>' +
+    '<li>Tiempo estimado de respuesta: 30 minutos.</li>' +
+    '<li>La información recopilada es anónima por lo cual es 100% confidencial.</li>' +
+    '<li>Agradecemos que puedas contestar con total sinceridad y objetividad.</li>' +
+    '<li>Recuerda que debes estar conectado(a) a Internet. Para una mejor experiencia, utiliza <b>Google Chrome</b>.</li>' +
+    '<li>Si tienes alguna duda o evidencias algún problema con la encuesta por favor no dudes en contactarnos al correo: <a href="mailto:info@occsolutions.org">info@occsolutions.org</a>.</li>' +
+    '<li>Recuerda que <b>el link de esta encuesta es personal y no debe ser compartido</b>.</li>' +
     '</ul><br>' +
-    '<p>De antemano te agradecemos por tu tiempo y valiosos aportes en este proceso.</p>',
-    subject_reminder: 'Recordatorio medición Energía Personal',
-    custom_reminder: '<p>Te recordamos culminar el proceso de valoración de Energía Personal, la cual te permitirá obtener información valiosa acerca de tus niveles de energía en cuatro dimensiones: física, mental, emocional y profesional.</p>' +
+    '<p>Agradecemos tu participación, valoramos tu tiempo y aportes en este proceso.</p>',
+    subject_reminder: 'Recordatorio de tu Encuesta Índice de Evolución DEIP (Enfoque Diferencial e Interseccional)',
+    custom_reminder: '<p>Te recordamos culminar la encuesta Índice de Evolución DEIP (Enfoque Diferencial e Interseccional), que nos permitirá identificar el nivel de consciencia, conocimiento y madurez de tu organización sobre su estrategia de Diversidad, Equidad, Inclusión y Pertenencia. Adicionalmente, ayudará a inspirar y monitorear la evolución que ha tenido en este tema.</p>' +
     '<p>Información clave sobre esta encuesta:</p>' +
     '<ul>' +
-    '<li>La valoración tarda menos de 15 minutos en completarse.</li>' +
-    '<li>La información entregada será manejada de manera confidencial y será utilizada con fines estadísticos.</li>' +
-    '<li>Por favor contestar con total objetividad.</li>' +
-    '<li>Para una mejor experiencia, utiliza <b>Google Chrome</b>. Recuerda que debes estar conectado(a) a Internet.</li>' +
-    '<li>Si tienes alguna duda o evidencia algún problema con la encuesta por favor no dude en contactarnos en el correo: <a href="mailto:info@occsolutions.org">info@occsolutions.org</a>.</li>' +
-    '<li>Recuerda que <b>este link es personal</b> y no se debe compartir.</li>' +
+    '<li>Tiempo estimado de respuesta: 30 minutos.</li>' +
+    '<li>La información recopilada es anónima por lo cual es 100% confidencial.</li>' +
+    '<li>Agradecemos que puedas contestar con total sinceridad y objetividad.</li>' +
+    '<li>Recuerda que debes estar conectado(a) a Internet. Para una mejor experiencia, utiliza <b>Google Chrome</b>.</li>' +
+    '<li>Si tienes alguna duda o evidencias algún problema con la encuesta por favor no dudes en contactarnos al correo: <a href="mailto:info@occsolutions.org">info@occsolutions.org</a>.</li>' +
+    '<li>Recuerda que <b>el link de esta encuesta es personal y no debe ser compartido</b>.</li>' +
     '</ul><br>' +
-    '<p>De antemano te agradecemos por tu tiempo y valiosos aportes en este proceso.</p>',
+    '<p>Agradecemos tu participación, valoramos tu tiempo y aportes en este proceso.</p>',
     previewEmail: {
       subject: 'Asunto',
       hello: 'Hola',
