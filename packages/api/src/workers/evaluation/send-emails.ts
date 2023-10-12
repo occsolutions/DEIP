@@ -8,6 +8,13 @@ import RunHttpRequest from '../../utils/run-http-request';
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+interface MailInterface {
+  res: any;
+  success: boolean;
+  request: any;
+  error: any;
+};
+
 class SendEvaluationsEmails {
 
   public async sendEmails() {
@@ -46,9 +53,9 @@ class SendEvaluationsEmails {
           customEmailRelease: customEmail,
           file: customEmail.attachment ? customEmail.attachment : ''
         };
-        const res: any = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', data);
-        if (res.error) {
-          throw new Error(`Suite Request Failed with status: ${res.error.status} by ${res.error.msg}`);
+        const mailRes: MailInterface = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', data);
+        if (mailRes.error) {
+          throw new Error(`Suite Request Failed with status: ${mailRes.error.status} by ${mailRes.error.msg}`);
         }
 
         if (population.length < interval) {
