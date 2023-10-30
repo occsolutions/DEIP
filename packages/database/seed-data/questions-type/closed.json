@@ -17,21 +17,21 @@
         "es": "Sí",
         "en": "Yes"
       },
-      "value": "1"
+      "value": 1
     },
     {
       "label": {
         "es": "No",
         "en": "No"
       },
-      "value": "2"
+      "value": 0
     },
     {
       "label": {
-        "es": "No responde",
-        "en": "Does not respond"
+        "es": "No sabe / Prefiere no responder",
+        "en": "Does not know / Prefer not to answer"
       },
-      "value": "0"
+      "value": 0
     }
   ]
 }

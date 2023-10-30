@@ -17,35 +17,35 @@
         "es": "Totalmente en desacuerdo",
         "en": "Totally disagree"
       },
-      "value": "1"
+      "value": 0
     },
     {
       "label": {
         "es": "En desacuerdo",
         "en": "In disagreement"
       },
-      "value": "2"
+      "value": 0.25
     },
     {
       "label": {
         "es": "Ni de acuerdo ni en desacuerdo",
         "en": "Neither agree nor disagree"
       },
-      "value": "3"
+      "value": 0.5
     },
     {
       "label": {
         "es": "De acuerdo",
         "en": "Agree"
       },
-      "value": "4"
+      "value": 0.75
     },
     {
       "label": {
-        "es": "totalmente de acuerdo",
-        "en": "totally agree"
+        "es": "Totalmente de acuerdo",
+        "en": "Totally agree"
       },
-      "value": "5"
+      "value": 1
     }
   ]
 }
