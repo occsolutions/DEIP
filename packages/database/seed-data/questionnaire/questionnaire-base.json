@@ -11,8 +11,8 @@
   "evaluations": {
     "d1": {
       "label": {
-        "es": "Estrategia y Compromiso",
-        "en": "Strategy and Commitment"
+        "es": "Estrategia/Compromiso",
+        "en": "Strategy/Commitment"
       },
       "attrs": {
         "d1_attr1": {
@@ -23,25 +23,63 @@
           "questions": {
             "d1_attr1_q1": {
               "label":{
-                "es": "¿Conoce el propósito superior  (la razón por la cual existe y el legado que desea dejar más allá de lo económico)  de su organización?",
-                "en": "Do you know the higher purpose (the reason why you exist and the legacy you want to leave beyond the economic) of your organization?"
+                "es": "¿Conoce el propósito superior de su organización?",
+                "en": "Do you know the higher purpose of your organization?"
               },
               "type": "closed"
             },
             "d1_attr1_q2": {
+              "parent": "d1_attr1_q1",
               "label":{
-                "es": "Si su organización tiene un propósito superior por escrito ¿cuáles de los siguientes aspectos considera que incluye?",
-                "en": "If your organization has a higher purpose in writing, which of the following aspects do you consider it includes?"
+                "es": "Si su organización tiene un propósito superior ¿cuáles de los siguientes aspectos incluye?",
+                "en": "If your organization has a higher purpose, which of the following aspects does it include?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                  {
+                     "label" : {
+                         "es" : "Impacto social",
+                         "en" : "Social impact"
+                     },
+                     "value" : "0.01"
+                  },
+                  {
+                     "label" : {
+                         "es" : "Impacto ambiental",
+                         "en" : "Environmental impact"
+                     },
+                     "value" : "0.02"
+                  },
+                  {
+                     "label" : {
+                         "es" : "Bienestar colectivo",
+                         "en" : "Collective well-being"
+                     },
+                     "value" : "0.03"
+                  },
+                  {
+                     "label" : {
+                         "es" : "Relación entre ética y valores corporativos",
+                         "en" : "Relationship between ethics and corporate values"
+                     },
+                     "value" : "0.04"
+                  },
+                  {
+                     "label" : {
+                         "es" : "Otro",
+                         "en" : "Other"
+                     },
+                     "value" : "0.05"
+                  }
+               ]
             },
             "d1_attr1_q3": {
+              "parent": "d1_attr1_q1",
               "label":{
-                "es": "¿Considera que el propósito de la organización está alineado  con su propósito personal?",
-                "en": "Do you think the organization's purpose is aligned with your personal purpose?"
+                "es": "El propósito de su organización es consistente con su propósito personal",
+                "en": "Your organization's purpose is consistent with your personal purpose"
               },
               "type": "likert"
             }
@@ -49,47 +87,172 @@
         },
         "d1_attr2": {
           "label": {
-            "es": "Conexión con sostenibilidad",
-            "en": "Connection with sustainability"
+            "es": "Conexión Sostenibilidad",
+            "en": "Sustainability Connection"
           },
           "questions": {
             "d1_attr2_q1": {
               "label":{
-                "es": "¿Con cuáles de las siguientes opciones, considera que su organización está comprometida en relación con la sostenibilidad/triple impacto(cuidar las necesidades de la generación actual y las generaciones futuras)?",
-                "en": "Which of the following options do you consider your organization to be committed to in relation to sustainability/triple impact (caring for the needs of the current generation and future generations)?"
+                "es": "En su organización están comprometidos en generar un impacto social y ambiental, para sus grupos de interés",
+                "en": "In their organization they are committed to generating a social and environmental impact for their interest groups"
               },
-              "type": "options",
-              "limit": null,
-              "min": 1,
-              "options": []
+              "type": "likert"
             },
             "d1_attr2_q2": {
               "label":{
-                "es": "¿Qué tipo de impacto social (resultado o consecuencia de una acción sobre la sociedad/comunidad) considera que ha generado su organización?",
-                "en": "What type of social impact (result or consequence of an action on society/community) do you consider your organization has generated?"
+                "es": "¿Qué tipo de impacto social considera que se ha generado su organización en los últimos meses?",
+                "en": "What type of social impact do you think your organization has generated in recent months?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Necesidades básicas (salud y alimentación)",
+                    "en": "Basic needs (health and food)"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Igualdad de género",
+                    "en": "Gender equality"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Educación de calidad",
+                    "en": "Quality education"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Trabajo decente y crecimiento económico",
+                    "en": "Decent work and economic growth"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Protección del medio ambiente",
+                    "en": "Environmental Protection"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Paz y justicia",
+                    "en": "Peace and justice"
+                  },
+                  "value": "0.06"
+                },
+                {
+                  "label": {
+                    "es": "No sabe/Prefiere no responder",
+                    "en": "Don't know/Prefer not to answer"
+                  },
+                  "value": "0.07"
+                }
+              ]
             }
           }
         },
         "d1_attr3": {
           "label": {
-            "es": "Caso de Negocio (aristas de la diversidad)",
-            "en": "Business Case (edges of diversity)"
+            "es": "Caso de Negocio (Aristas de la Diversidad)",
+            "en": "Business Case (Edges of Diversity)"
           },
           "questions": {
             "d1_attr3_q1": {
               "label":{
-                "es": "¿En cuáles aristas de la diversidad (todas las posibles diferencias entre los seres humanos: género, diversidad sexual, etnia, origen, nivel socioeconómico, disCapacidad, entre otras), se enfocan las acciones de su organización?",
-                "en": "On which aspects of diversity (all possible differences between human beings: gender, sexual diversity, ethnicity, origin, socioeconomic level, disability, among others), do your organization's actions focus?"
+                "es": "¿En cuáles aristas de la inclusión y la diversidad se enfocan las acciones en su organización?",
+                "en": "On which aspects of inclusion and diversity do actions in your organization focus?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Género",
+                    "en": "Gender"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Diversidad/Orientación sexual",
+                    "en": "Diversity/sexual orientation"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Cultura/Origen/Etnia",
+                    "en": "Culture/Origin/Ethnicity"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Nivel socioeconómico",
+                    "en": "Socioeconomic level"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "DisCapacidad",
+                    "en": "Disability"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Conflicto armado/Segundas oportunidades",
+                    "en": "Armed conflict/Second chances"
+                  },
+                  "value": "0.06"
+                },
+                {
+                  "label": {
+                    "es": "Migraciones",
+                    "en": "Migrations"
+                  },
+                  "value": "0.07"
+                },
+                {
+                  "label": {
+                    "es": "Generaciones",
+                    "en": "Generations"
+                  },
+                  "value": "0.08"
+                },
+                {
+                  "label": {
+                    "es": "Estilos de pensamiento/Perspectivas",
+                    "en": "Thinking Styles/Perspectives"
+                  },
+                  "value": "0.09"
+                },
+                {
+                  "label": {
+                    "es": "Otra",
+                    "en": "Other"
+                  },
+                  "value": "0.10"
+                },
+                {
+                  "label": {
+                    "es": "Ninguna de las anteriores",
+                    "en": "None of the above"
+                  },
+                  "value": "0.11"
+                }
+              ]
             }
           }
         },
@@ -101,8 +264,8 @@
           "questions": {
             "d1_attr4_q1": {
               "label":{
-                "es": "¿Su organización está comprometida formalmente y respeta los Derechos Humanos?",
-                "en": "Is your organization formally committed to and respects Human Rights?"
+                "es": "¿Su organización está formalmente comprometida con el respeto a los Derechos Humanos?",
+                "en": "Is your organization formally committed to respecting Human Rights?"
               },
               "type": "closed"
             }
@@ -116,18 +279,63 @@
           "questions": {
             "d1_attr5_q1": {
               "label":{
-                "es": "¿El balance vida laboral - personal (equilibrio/armonía en la cotidianidad) está basada en?",
-                "en": "Is the work-life balance (balance/harmony in everyday life) based on?"
+                "es": "¿En su organización fomentan un balance adecuado de vida laboral y personal? ",
+                "en": "Does your organization promote an adequate work-life balance?"
+              },
+              "type": "closed"
+            },
+            "d1_attr5_q2": {
+              "parent": "d1_attr5_q1",
+              "label":{
+                "es": "El balance vida laboral - personal está basado en",
+                "en": "The work-life balance is based on"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Políticas de conciliación (flexibilidad laboral: horario, trabajo remoto)",
+                    "en": "Work-life balance policies (work flexibility: schedule, remote work)"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Formación y desarrollo (Capacitaciones para el crecimiento laboral y personal)",
+                    "en": "Training and development (Training for job and personal growth)"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Fortalecimiento del vínculo familiar (acceso a programas y actividades, licencias parentales)",
+                    "en": "Strengthening the family bond (access to programs and activities, parental leave)"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Permisos (personas de cuidado, tratamientos médicos, entre otros)",
+                    "en": "Permits (care persons, medical treatments, among others)"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Otro",
+                    "en": "Other"
+                  },
+                  "value": "0.05"
+                }
+              ]
             },
-            "d1_attr5_q2": {
+            "d1_attr5_q3": {
+              "parent": "d1_attr5_q1",
               "label":{
-                "es": "¿Considera que las condiciones de flexibilidad laboral que le brinda su organización fomentan un  equilibrio real entre lo laboral y lo personal?",
-                "en": "Do you consider that the flexible working conditions offered by your organization encourage a real balance between work and personal life?"
+                "es": "Las condiciones de flexibilidad que le brindan en su organización, fomentan un equilibrio real entre lo laboral y lo personal",
+                "en": "The flexible conditions offered to you in your organization encourage a real balance between work and personal life"
               },
               "type": "likert"
             }
@@ -141,18 +349,68 @@
           "questions": {
             "d1_attr6_q1": {
               "label":{
-                "es": "¿Cuáles de las siguientes iniciativas en Diversidad, Equidad e Inclusión, que ha implementado su organización, le hacen sentirse orgulloso(a) de trabajar en ella?",
-                "en": "Which of the following Diversity, Equity and Inclusion initiatives that your organization has implemented make you proud to work there?"
+                "es": "¿Cuáles de las siguientes iniciativas en Diversidad, Equidad e Inclusión, que han implementado en su organización, le hacen sentirse orgulloso(a) de trabajar en ella?",
+                "en": "Which of the following Diversity, Equity and Inclusion initiatives that you have implemented in your organization make you proud to work there?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Programas de capacitación y sensibilización",
+                    "en": "Training and awareness programs"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Contratación de talento diverso",
+                    "en": "Hiring diverse talent"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Participación en rankings e iniciativas incluyentes",
+                    "en": "Participation in rankings and inclusive initiatives"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Desarrollo profesional equitativo",
+                    "en": "Equitable professional development"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Otro",
+                    "en": "Other"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Ninguna de las anteriores",
+                    "en": "None of the above"
+                  },
+                  "value": "0.06"
+                },
+                {
+                  "label": {
+                    "es": "No sabe/Prefiere no responder",
+                    "en": "Don't know/Prefer not to answer"
+                  },
+                  "value": "0.07"
+                }
+              ]
             },
             "d1_attr6_q2": {
               "label":{
-                "es": "¿Ha escuchado si su organización es referente como una organización incluyente en su industria o país?",
-                "en": "Have you heard if your organization is a benchmark as an inclusive organization in your industry or country?"
+                "es": "¿Ha escuchado si su organización es referente como una organización incluyente en su industria o en el país?",
+                "en": "Have you heard if your organization is a benchmark as an inclusive organization in your industry or in the country?"
               },
               "type": "closed"
             }
@@ -162,8 +420,8 @@
     },
     "d2": {
       "label": {
-        "es": "Gobernanza / Liderazgo CSI* (Concepto de InspirandoT SAS BIC)",
-        "en": "Governance / Leadership CSI* (InspirandoT SAS BIC Concept)"
+        "es": "Gobernanza / Liderazgo CSI (Consciente, Sostenible e Incluyente)*",
+        "en": "Governance / Leadership CSI (Conscious, Sustainable and Inclusive)*"
       },
       "attrs": {
         "d2_attr1": {
@@ -174,7 +432,7 @@
           "questions": {
             "d2_attr1_q1": {
               "label":{
-                "es": "¿Existe un rol o cargo específico  responsable de la estrategia de Diversidad, Equidad e Inclusión, en su organización?",
+                "es": "¿Existe un rol o cargo específico responsable de la estrategia de Diversidad, Equidad e Inclusión, en su organización?",
                 "en": "Is there a specific role or position responsible for the Diversity, Equity and Inclusion strategy in your organization?"
               },
               "type": "closed"
@@ -183,19 +441,90 @@
         },
         "d2_attr2": {
           "label": {
-            "es": "Sponsorship",
-            "en": "Sponsorship"
+            "es": "Champions",
+            "en": "Champions"
           },
           "questions": {
-            "d2_attr2_q2": {
+            "d2_attr2_q1": {
               "label":{
-                "es": "¿A qué áreas de su organización pertenecen los sponsors (líderes del equipo directivo para la estrategia de Diversidad, Equidad e Inclusión) de la estrategia de Diversidad, Equidad e Inclusión?",
-                "en": "To which areas of your organization do the sponsors (leaders of the management team for the Diversity, Equity and Inclusion strategy) of the Diversity, Equity and Inclusion strategy belong?"
+                "es": "¿A qué áreas de su organización pertenecen los champions de la estrategia de Diversidad, Equidad e Inclusión?",
+                "en": "To which areas of your organization do the champions of the Diversity, Equity and Inclusion strategy belong?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Gestión Humana/People & Culture",
+                    "en": "Human Management/People & Culture"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Sostenibilidad",
+                    "en": "Sustainability"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Financiera",
+                    "en": "Financial"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Legal/Jurídica",
+                    "en": "Legal/Juridical"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Comunicaciones",
+                    "en": "Communications"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Marketing",
+                    "en": "Marketing"
+                  },
+                  "value": "0.06"
+                },
+                {
+                  "label": {
+                    "es": "Comercial",
+                    "en": "Commercial"
+                  },
+                  "value": "0.07"
+                },
+                {
+                  "label": {
+                    "es": "Tecnología",
+                    "en": "Technology"
+                  },
+                  "value": "0.08"
+                },
+                {
+                  "label": {
+                    "es": "Otro",
+                    "en": "Other"
+                  },
+                  "value": "0.09"
+                },
+                {
+                  "label": {
+                    "es": "No reconozco champions",
+                    "en": "I don't recognize champions"
+                  },
+                  "value": "0.10"
+                }
+              ]
             }
           }
         },
@@ -207,72 +536,140 @@
           "questions": {
             "d2_attr3_q1": {
               "label":{
-                "es": "¿Conoce si en su organización se ejecuta un plan de acción en Diversidad, Equidad e Inclusión?",
-                "en": "Do you know if your organization implements an action plan on Diversity, Equity and Inclusion?"
-              },
-              "type": "closed"
-            },
-            "d2_attr3_q2": {
-              "label":{
                 "es": "¿Existe un comité conformado por los colaboradores(as) que se encargue de liderar y ejecutar el plan de acción Diversidad, Equidad e Inclusión?",
                 "en": "Is there a committee made up of employees that is responsible for leading and executing the Diversity, Equity and Inclusion action plan?"
               },
               "type": "closed"
             },
-            "d2_attr3_q3": {
+            "d2_attr3_q2": {
+              "parent": "d2_attr3_q1",
               "label":{
-                "es": "¿Le gustaría ser parte del comité de Diversidad, Equidad e Inclusión?",
-                "en": "Would you like to be part of the Diversity, Equity and Inclusion committee?"
+                "es": "¿Le gustaría ser parte del Comité de Diversidad, Equidad e Inclusión de su organización?",
+                "en": "Would you like to be part of your organization's Diversity, Equity and Inclusion Committee?"
               },
               "type": "closed"
             },
-            "d2_attr3_q4": {
+            "d2_attr3_q3": {
+              "parent": "d2_attr3_q1",
               "label":{
-                "es": "¿Qué acciones recomendaría a este comité para un mayor impacto de su gestión en la organización?",
-                "en": "What actions would you recommend to this committee for a greater impact of its management on the organization?"
+                "es": "¿Qué tipo de acciones recomendaría al Comité para un mayor impacto de su gestión en la organización?",
+                "en": "What type of actions would you recommend to the Committee for a greater impact of its management on the organization?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Capacitaciones en liderazgo inclusivo",
+                    "en": "Inclusive leadership training"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Seguimiento en procesos disciplinarios",
+                    "en": "Monitoring in disciplinary processes"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Mayor apoyo a grupos de afinidad",
+                    "en": "Greater support for affinity groups"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Monitoreo y reporte de progreso",
+                    "en": "Monitoring and reporting progress"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Otro",
+                    "en": "Other"
+                  },
+                  "value": "0.05"
+                }
+              ]
             }
           }
         },
         "d2_attr4": {
           "label": {
-            "es": "Voluntariado  Corporativo/Impacto Comunidad",
+            "es": "Voluntariado Corporativo/Impacto Comunidad",
             "en": "Corporate Volunteering/Community Impact"
           },
           "questions": {
             "d2_attr4_q1": {
               "label":{
-                "es": "¿Su organización cuenta con un programa formal de voluntariado corporativo (participación directa de los(as) colaboradores(as))?",
-                "en": "Does your organization have a formal corporate volunteering program (direct participation of collaborators)?"
+                "es": "¿En su organización cuentan con un programa de voluntariado corporativo (participación directa de los(as) colaboradores(as))?",
+                "en": "Does your organization have a corporate volunteering program (direct participation of collaborators)?"
               },
               "type": "closed"
             },
             "d2_attr4_q2": {
+              "parent": "d2_attr4_q1",
               "label":{
-                "es": "Si su respuesta fue afirmativa ¿Qué tipo de iniciativas de impacto social promueve el voluntariado corporativo de su organización?",
-                "en": "If your answer was affirmative, what type of social impact initiatives does your organization's corporate volunteering promote?"
+                "es": "Si su respuesta fue afirmativa ¿Qué tipo de iniciativas de impacto social promueve el voluntariado corporativo en su organización?",
+                "en": "If your answer was affirmative, what type of social impact initiatives does corporate volunteering promote in your organization?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Educación y tutoría",
+                    "en": "Education and mentoring"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Participación en proyectos de desarrollo comunitario",
+                    "en": "Participation in community development projects"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Reforestación y arborización",
+                    "en": "Reforestation and tree planting"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Reciclaje y limpieza",
+                    "en": "Recycling and cleaning"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Otro",
+                    "en": "Other"
+                  },
+                  "value": "0.05"
+                }
+              ]
             }
           }
         },
         "d2_attr5": {
           "label": {
             "es": "Líderes y Responsabilidad de Triple Impacto/DEIP",
-            "en": "Triple Impact/DRIP Leaders and Accountability"
+            "en": "Triple Impacto/DEIP Leaders and Accountability"
           },
           "questions": {
             "d2_attr5_q1": {
               "label":{
-                "es": "¿Considera que los líderes de la organización están realmente comprometidos e involucrados con la estrategia de sostenibilidad?",
-                "en": "Do you consider that the organization's leaders are really committed and involved with the sustainability strategy?"
+                "es": "Los(as) líderes de la organización muestran un compromiso e involucramiento real con la estrategia de sostenibilidad",
+                "en": "The organization's leaders show a real commitment and involvement with the sustainability strategy"
               },
               "type": "likert"
             }
@@ -280,24 +677,81 @@
         },
         "d2_attr6": {
           "label": {
-            "es": "Perfil y Atributos de Liderazgo  CSI",
+            "es": "Perfil y Atributos de Liderazgo CSI",
             "en": "CSI Leadership Profile and Attributes"
           },
           "questions": {
             "d2_attr6_q1": {
               "label":{
-                "es": "¿Escoja los 3 atributos que considera que son parte del perfil del líder de su organización?",
-                "en": "Choose the 3 attributes that you consider to be part of the leader profile of your organization?"
+                "es": "Los(as) líderes de la organización asumen la responsabilidad de los planes de carrera/desarrollo del talento diverso",
+                "en": "The leaders of the organization assume responsibility for the career plans/development of diverse talent"
+              },
+              "type": "likert"
+            },
+            "d2_attr6_q2": {
+              "label":{
+                "es": "Escoja máximo 3 atributos que son parte del perfil del líder de su organización",
+                "en": "Choose the 3 attributes that you consider to be part of the leader profile of your organization"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Cuida el impacto de sus acciones y comportamientos",
+                    "en": "Takes care of the impact of your actions and behaviors"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Genera confianza",
+                    "en": "Build trust"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Escucha a todos con atención",
+                    "en": "Listens to everyone carefully"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Genera igualdad de oportunidades",
+                    "en": "Generates equal opportunities"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Identifica los talentos y dones de su equipo",
+                    "en": "Identifies the talents and gifts of your team"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Ninguna de las anteriores",
+                    "en": "None of the above"
+                  },
+                  "value": "0.06"
+                },
+                {
+                  "label": {
+                    "es": "No sabe/Prefiere no responder",
+                    "en": "Don't know/Prefer not to answer"
+                  },
+                  "value": "0.07"
+                }
+              ]
             },
-            "d2_attr6_q2": {
+            "d2_attr6_q3": {
               "label":{
-                "es": "¿Considera que los líderes de la organización son ejemplo de inclusión y equidad?",
-                "en": "Do you consider that the organization's leaders are an example of inclusion and equity?"
+                "es": "Los(as) líderes de la organización son incluyentes y equitativos en sus comportamientos cotidianos",
+                "en": "The organization's leaders are inclusive and equitable in their daily behaviors"
               },
               "type": "likert"
             }
@@ -311,13 +765,61 @@
           "questions": {
             "d2_attr7_q1": {
               "label":{
-                "es": "¿Escoja 3 acciones afirmativas (acciones/comportamientos en pro de la inclusión y la equidad), que considera que define el perfil del líder de su organización?",
-                "en": "Choose 3 affirmative actions (actions/behaviors in favor of inclusion and equity), that you consider define the profile of the leader of your organization?"
+                "es": "Escoja las acciones afirmativas que considera que definen el perfil del líder en su organización",
+                "en": "Choose the affirmative actions that you consider define the profile of the leader in your organization"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [{
+                  "label": {
+                    "es": "Los(as) líderes generan espacios de confianza",
+                    "en": "Leaders generate spaces of trust"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Los(as) líderes generan oportunidades para cada persona en la organización",
+                    "en": "Leaders create opportunities for each person in the organization"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Los(as) líderes interactúan equitativamente con colaboradores(as)",
+                    "en": "Leaders interact equitably with collaborators"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Las posiciones de liderazgo están familiarizadas con la estrategia e iniciativas de Diversidad, Equidad e Inclusión de la organización",
+                    "en": "Leadership positions are familiar with the organization's Diversity, Equity and Inclusion strategy and initiatives"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Los(as) líderes escuchan las voces (opiniones y puntos de vista) de los(as) colaboradores(as)",
+                    "en": "Leaders listen to the voices (opinions and points of view) of collaborators"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Ninguna de las anteriores",
+                    "en": "None of the above"
+                  },
+                  "value": "0.06"
+                },
+                {
+                  "label": {
+                    "es": "No sabe/Prefiere no responder",
+                    "en": "Don't know/Prefer not to answer"
+                  },
+                  "value": "0.07"
+                }]
             }
           }
         }
@@ -325,8 +827,8 @@
     },
     "d3": {
       "label": {
-        "es": "Cultura CSI*  (Concepto de InspirandoT SAS BIC)",
-        "en": "CSI Culture* (InspirandoT SAS BIC Concept)"
+        "es": "Cultura CSI (Consciente, Sostenible e Incluyente)*",
+        "en": "CSI Culture (Conscious, Sustainable and Inclusive)*"
       },
       "attrs": {
         "d3_attr1": {
@@ -337,69 +839,173 @@
           "questions": {
             "d3_attr1_q1": {
               "label":{
-                "es": "Conozco y me identifico con los valores y principios corporativos de la organización",
-                "en": "I know and identify with the corporate values and principles of the organization"
-              },
-              "type": "likert"
-            },
-            "d3_attr1_q2": {
-              "label":{
-                "es": "Escoja los 3 atributos que considera que son parte de la cultura de su organización",
-                "en": "Choose the 3 attributes that you consider to be part of your organization's culture"
+                "es": "Escoja los atributos que considera que hacen parte de la cultura de su organización",
+                "en": "Choose the attributes that you consider to be part of your organization's culture"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Respeta y valora la diversidad",
+                    "en": "Respect and value diversity"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Transforma sesgos inconscientes",
+                    "en": "Transform unconscious biases"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Crea condiciones de igualdad y equidad",
+                    "en": "Create conditions of equality and equity"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Reconoce y remueve las barreras que impiden la inclusión",
+                    "en": "Recognize and remove barriers that prevent inclusion"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Amplifica todas las voces de la organización",
+                    "en": "Amplify all voices in the organization"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Otro",
+                    "en": "Other"
+                  },
+                  "value": "0.06"
+                }
+              ]
             }
           }
         },
         "d3_attr2": {
           "label": {
             "es": "Nivel de Conocimiento DEIP",
-            "en": "DRIP Knowledge Level"
+            "en": "DEIP's Knowledge Level"
           },
           "questions": {
             "d3_attr2_q1": {
               "label":{
-                "es": "¿En el último año, su organización ha realizado programas de sensibilización sobre diversidad e inclusión?",
-                "en": "In the last year, has your organization carried out awareness programs on diversity and inclusion?"
+                "es": "¿En el último año, en su organización se han realizado programas de sensibilización sobre diversidad e inclusión?",
+                "en": "In the last year, have your organization carried out awareness programs on diversity and inclusion?"
               },
               "type": "closed"
             },
             "d3_attr2_q2": {
               "label":{
-                "es": "En las capacitaciones realizadas por la organización ¿cuáles de los siguientes temas se han abordado?",
-                "en": "In the training carried out by the organization, which of the following topics have been addressed?"
-              },
-              "type": "options",
-              "limit": null,
-              "min": 1,
-              "options": []
-            },
-            "d3_attr2_q3": {
-              "label":{
-                "es": "¿Ha recibido capacitaciones en sesgos inconscientes (creencias automáticas y etiquetas con referencia a una persona)?",
-                "en": "Have you received training on unconscious bias (automatic beliefs and labels regarding a person)?"
+                "es": "¿Ha recibido capacitación en cómo manejar los sesgos inconscientes?",
+                "en": "Have you received training on how to manage unconscious bias?"
               },
               "type": "closed"
             },
-            "d3_attr2_q4": {
+            "d3_attr2_q3": {
               "label":{
-                "es": "Si su respuesta fue afirmativa ¿En cuáles de estas aristas de la diversidad su organización ha realizado un especial énfasis?",
-                "en": "If your answer was affirmative, which of these aspects of diversity has your organization placed special emphasis on?"
+                "es": "En las capacitaciones realizadas en su organización ¿En cuáles de estas aristas de la diversidad se ha realizado un especial énfasis?",
+                "en": "In the training carried out in your organization, which of these aspects of diversity have special emphasis been placed on?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Género",
+                    "en": "Gender"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Diversidad/Orientación sexual",
+                    "en": "Diversity/sexual orientation"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Cultura/Origen/Etnia",
+                    "en": "Culture/Origin/Ethnicity"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Nivel socioeconómico",
+                    "en": "Socioeconomic level"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "DisCapacidad",
+                    "en": "Disability"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Conflicto armado/Segundas oportunidades",
+                    "en": "Armed conflict/Second chances"
+                  },
+                  "value": "0.06"
+                },
+                {
+                  "label": {
+                    "es": "Migraciones",
+                    "en": "Migrations"
+                  },
+                  "value": "0.07"
+                },
+                {
+                  "label": {
+                    "es": "Generaciones",
+                    "en": "Generations"
+                  },
+                  "value": "0.08"
+                },
+                {
+                  "label": {
+                    "es": "Estilos de pensamiento/Perspectivas",
+                    "en": "Thinking Styles/Perspectives"
+                  },
+                  "value": "0.09"
+                },
+                {
+                  "label": {
+                    "es": "Otra",
+                    "en": "Other"
+                  },
+                  "value": "0.10"
+                },
+                {
+                  "label": {
+                    "es": "Ninguna de las anteriores",
+                    "en": "None of the above"
+                  },
+                  "value": "0.11"
+                }
+              ]
             }
           }
         },
         "d3_attr3": {
           "label": {
-            "es": "Estrategia de Comunicación DEIP (Interna/Externa)",
-            "en": "DEIP Communication Strategy (Internal/External)"
+            "es": "Estrategia de Comunicación DEIP (Externa/Interna)",
+            "en": "DEIP Communication Strategy (External/Internal)"
           },
           "questions": {
             "d3_attr3_q1": {
@@ -410,19 +1016,55 @@
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "A través de los(as) líderes de la organización",
+                    "en": "Through the leaders of the organization"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Comunicación interna (correo, yammer,intranet)",
+                    "en": "Internal communication (mail, yammer, intranet)"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Eventos corporativos/Capacitaciones",
+                    "en": "Corporate events/Training"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "No se ha comunicado la estrategia",
+                    "en": "The strategy has not been communicated"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "No sabe/Prefiere no responder",
+                    "en": "Don't know/Prefer not to answer"
+                  },
+                  "value": "0.05"
+                }
+              ]
             },
             "d3_attr3_q2": {
               "label":{
-                "es": "¿Considera que la comunicación interna de su organización maneja un lenguaje de igualdad y no discriminación?",
-                "en": "Do you consider that your organization's internal communication uses language of equality and non-discrimination?"
+                "es": "La comunicación interna de su organización (e - mailing, carteleras, pantallas, reuniones, entre otras) utiliza un lenguaje que promueve la igualdad y no discriminación",
+                "en": "Your organization's internal communication (e-mailing, billboards, screens, meetings, among others) uses language that promotes equality and non-discrimination"
               },
               "type": "likert"
             },
             "d3_attr3_q3": {
               "label":{
-                "es": "¿Considera que la comunicación externa y la publicidad de su organización maneja un lenguaje de igualdad y no discriminación?",
-                "en": "Do you consider that your organization's external communication and advertising uses language of equality and non-discrimination?"
+                "es": "La comunicación externa y la publicidad (redes sociales, página web, comerciales, puntos de venta, entre otras) de su organización utilizan un lenguaje que promueve la igualdad y no discriminación",
+                "en": "Your organization's external communication and advertising (social networks, website, commercials, points of sale, among others) use language that promotes equality and non-discrimination"
               },
               "type": "likert"
             }
@@ -431,27 +1073,27 @@
         "d3_attr4": {
           "label": {
             "es": "Comportamientos Deseados DEIP",
-            "en": "DRIP Desired Behaviors"
+            "en": "DEIP Desired Behaviors"
           },
           "questions": {
             "d3_attr4_q1": {
               "label":{
-                "es": "¿Considera que en su equipo de trabajo se respira un ambiente incluyente (espacio donde todas las personas son valoradas y respetadas)?",
-                "en": "Do you consider that your work team has an inclusive environment (a space where all people are valued and respected)?"
+                "es": "En su equipo de trabajo se respira un ambiente incluyente",
+                "en": "There is an inclusive atmosphere in your work team"
               },
               "type": "likert"
             },
             "d3_attr4_q2": {
               "label":{
-                "es": "¿En su organización existen normas de conducta claras para vivir un ambiente libre de discriminación?",
-                "en": "In your organization, are there clear standards of conduct to live an environment free of discrimination?"
+                "es": "¿Ha experimentado situaciones en las que se ha sentido discriminado(a) o excluido(a) por su diversidad?",
+                "en": "Have you experienced situations in which you have felt discriminated against or excluded because of your diversity?"
               },
               "type": "closed"
             },
             "d3_attr4_q3": {
               "label":{
-                "es": "¿Ha experimentado situaciones en las que se ha sentido discriminado(a) o excluido(a) por su diversidad?",
-                "en": "Have you experienced situations in which you have felt discriminated against or excluded because of your diversity?"
+                "es": "¿Ha presenciado situaciones de discriminación hacia sus compañeros(as) en su equipo u organización?",
+                "en": "Have you witnessed situations of discrimination towards your colleagues in your team or organization?"
               },
               "type": "closed"
             }
@@ -474,37 +1116,76 @@
         },
         "d3_attr6": {
           "label": {
-            "es": "Grupos de Afinidad",
-            "en": "Affinity Groups"
-          },
-          "questions": {
-            "d3_attr6_q1": {
-              "label":{
-                "es": "¿La organización cuenta con alguno de los siguientes grupos de afinidad (comparten características, experiencias de vida y movilizan cultura incluyente)?",
-                "en": "Does the organization have any of the following affinity groups (do they share characteristics, life experiences and mobilize inclusive culture)?"
-              },
-              "type": "options",
-              "limit": null,
-              "min": 1,
-              "options": []
-            }
-          }
-        },
-        "d3_attr7": {
-          "label": {
             "es": "Acciones Afirmativas",
             "en": "Affirmative Actions"
           },
           "questions": {
-            "d3_attr7_q1": {
+            "d3_attr6_q1": {
               "label":{
-                "es": "¿Elija 3 acciones afirmativas que considera que definen la cultura de su organización?",
-                "en": "Choose 3 affirmative actions that you consider define the culture of your organization?"
+                "es": "Elija las acciones afirmativas que considera definen la cultura en su organización",
+                "en": "Choose the affirmative actions that you believe define the culture in your organization"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Se propician espacios libres de violencia y acoso",
+                    "en": "Spaces free of violence and harassment are provided"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Visibilización del talento diverso en la organización",
+                    "en": "Visibility of diverse talent in the organization"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Promoción de un clima laboral libre de sesgos",
+                    "en": "Promotion of a work environment free of bias"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Equidad de la voz de todos los colaboradores(as)",
+                    "en": "Equality of voice for all collaborators"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Lenguaje inclusivo y libre de estereotipos",
+                    "en": "Inclusive language free of stereotypes"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Sistemas de recompensa de comportamientos incluyentes",
+                    "en": "Inclusive behavior reward systems"
+                  },
+                  "value": "0.06"
+                },
+                {
+                  "label": {
+                    "es": "Ninguna de las anteriores",
+                    "en": "None of the above"
+                  },
+                  "value": "0.07"
+                },
+                {
+                  "label": {
+                    "es": "No sabe/Prefiere no responder",
+                    "en": "Don't know/Prefer not to answer"
+                  },
+                  "value": "0.08"
+                }
+              ]
             }
           }
         }
@@ -524,15 +1205,15 @@
           "questions": {
             "d4_attr1_q1": {
               "label":{
-                "es": "¿Su organización busca atraer talentos independientemente de su sexo, étnia, orientación sexual, origen, situación de discapacidad, entre otras diversidades?",
-                "en": "Does your organization seek to attract talent regardless of their sex, ethnicity, sexual orientation, origin, disability status, among other diversities?"
+                "es": "Su organización atrae el mejor talento sin importar el género, orientación sexual, etnia, origen, situación de discapacidad, entre otras diversidades",
+                "en": "Your organization attracts the best talent regardless of gender, sexual orientation, ethnicity, origin, disability status, among other diversities"
               },
               "type": "likert"
             },
             "d4_attr1_q2": {
               "label":{
-                "es": "¿En su organización se invita de manera explícita a comunidades o poblaciones vulnerables (poblaciones que enfrentan a desafíos sociales y/o discriminación) a las convocatorias de empleo?",
-                "en": "Does your organization explicitly invite vulnerable communities or populations (populations that face social challenges and/or discrimination) to job applications?"
+                "es": "¿En su organización se invita de manera explícita a comunidades o poblaciones vulnerables a las convocatorias de empleo?",
+                "en": "Does your organization explicitly invite vulnerable communities or populations to employment calls?"
               },
               "type": "closed"
             }
@@ -546,8 +1227,8 @@
           "questions": {
             "d4_attr2_q1": {
               "label":{
-                "es": "¿Considera que todas las personas, independientemente de su diversidad, pueden acceder a las mismas oportunidades en su proceso de entrevista y selección?",
-                "en": "Do you consider that all people, regardless of their diversity, can access the same opportunities in their interview and selection process?"
+                "es": "Durante el proceso de entrevista, selección y contratación, se brindan las mismas oportunidades a todas las personas, sin importar su diversidad",
+                "en": "During the interview, selection and hiring process, the same opportunities are provided to all people, regardless of their diversity"
               },
               "type": "likert"
             }
@@ -561,13 +1242,49 @@
           "questions": {
             "d4_attr3_q1": {
               "label":{
-                "es": "¿Cuáles considera que son las 3 estrategias más efectivas para asegurar que los procesos de inducción sean inclusivos con el talento diverso?",
-                "en": "What do you consider to be the 3 most effective strategies to ensure that induction processes are inclusive of diverse talent?"
+                "es": "Elija máximo 3 estrategias, que considere son las más efectivas para asegurar que los procesos de inducción sean inclusivos con todo tipo de talento",
+                "en": "Choose a maximum of 3 strategies, which you consider to be the most effective to ensure that induction processes are inclusive of all types of talent"
               },
               "type": "options",
-              "limit": null,
+              "limit": 3,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Adaptación de puestos y equipos de trabajo",
+                    "en": "Adaptation of positions and work equipment"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Retroalimentación y acompañamiento continuo",
+                    "en": "Continuous feedback and support"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Capacitaciones permanentes en diversidad e inclusión",
+                    "en": "Permanent training in diversity and inclusion"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Declaraciones y políticas en inclusión",
+                    "en": "Declarations and policies on inclusion"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Redes de apoyo para el personal nuevo",
+                    "en": "Support networks for new staff"
+                  },
+                  "value": "0.05"
+                }
+              ]
             }
           }
         },
@@ -579,10 +1296,17 @@
           "questions": {
             "d4_attr4_q1": {
               "label":{
-                "es": "¿Puede desarrollar su carrera en la organización, siendo una persona auténtica y en un ambiente seguro?",
-                "en": "Can you develop your career in the organization, being an authentic person and in a safe environment?"
+                "es": "En la organización brindan posibilidades de desarrollo de carrera a todas las personas de manera equitativa",
+                "en": "In the organization they provide career development opportunities to all people equally"
               },
-              "type": "closed"
+              "type": "likert"
+            },
+            "d4_attr4_q2": {
+              "label":{
+                "es": "En la organización propician un ambiente seguro para avanzar en su carrera siendo auténtico(a)",
+                "en": "In the organization they provide a safe environment to advance in your career while being authentic"
+              },
+              "type": "likert"
             }
           }
         },
@@ -594,28 +1318,64 @@
           "questions": {
             "d4_attr5_q1": {
               "label":{
-                "es": "¿Considera que los procesos de promoción/ascenso basado en el mérito, son equitativos para todas las personas, independiente de su diversidad?",
-                "en": "Do you consider that promotion/promotion processes based on merit are equitable for all people, regardless of their diversity?"
+                "es": "Los procesos de promoción/ascenso en su organización, están basados en el mérito y competencias de cada persona, sin importar la diversidad",
+                "en": "The promotion/promotion processes in your organization are based on the merit and competencies of each person, regardless of diversity"
               },
-              "type": "closed"
+              "type": "likert"
             }
           }
         },
         "d4_attr6": {
           "label": {
-            "es": "Momentos de la Verdad (Fidelización-Engagement)",
-            "en": "Moments of Truth (Loyalty-Engagement)"
+            "es": "Momentos de la Verdad (Fidelización - Engagement)",
+            "en": "Moments of Truth (Loyalty - Engagement)"
           },
           "questions": {
             "d4_attr6_q1": {
               "label":{
-                "es": "¿Cuáles de las siguietes afirmaciones lo hacen sentir incluído(a) y valorado(a) en su organización?",
-                "en": "Which of the following statements make you feel uncomfortable and valued in your organization?"
+                "es": "¿Cuáles de las siguientes afirmaciones lo hacen sentir incluído(a) y valorado(a) en su organización?",
+                "en": "Which of the following statements make you feel included and valued in your organization?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Me siento escuchado(a)",
+                    "en": "I feel heard"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Mis opiniones son tenidas en cuenta y valoradas",
+                    "en": "My opinions are taken into account and valued"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Mi talento y competencias son reconocidos",
+                    "en": "My talent and skills are recognized"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Soy quien quiero ser dentro de la organización",
+                    "en": "I am who I want to be within the organization"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Siento que puedo desarrollarme y crecer con mi propio estilo",
+                    "en": "I feel like I can develop and grow with my own style"
+                  },
+                  "value": "0.05"
+                }
+              ]
             }
           }
         },
@@ -627,20 +1387,84 @@
           "questions": {
             "d4_attr7_q1": {
               "label":{
-                "es": "¿En su organización se toman medidas para asegurar que todas las personas se sientan incluidas, además de brindarles las mismas oportunidades?",
-                "en": "Does your organization take steps to ensure that all people feel included, as well as providing them with the same opportunities?"
+                "es": "En su organización aseguran que todas las personas se sientan incluidas y valoradas por lo que son y por sus competencias",
+                "en": "In their organization they ensure that all people feel included and valued for who they are and their skills"
               },
               "type": "likert"
             },
             "d4_attr7_q2": {
               "label":{
-                "es": "Elija 3 acciones habilitadoras que apoyan el desarrollo del talento diverso, en cualquier momento de la carrera del colaborador(a)",
-                "en": "Choose 3 enabling actions that support the development of diverse talent, at any point in the employee's career."
+                "es": "Elija las acciones habilitadoras que apoyan el desarrollo del talento diverso en su organización",
+                "en": "Choose the enabling actions that support the development of diverse talent in your organization"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Acciones orientadas al aprendizaje y transformación de prejuicios",
+                    "en": "Actions aimed at learning and transforming prejudices"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Apoyo con insumos y herramientas que faciliten el autorreconocimiento de la diversidad individual",
+                    "en": "Support with inputs and tools that facilitate self-recognition of individual diversity"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Adecuación de espacios y señalización para apoyar las necesidades de ciertas poblaciones (ajustes en infraestructura, baños universales, salas de lactancia, entre otros)",
+                    "en": "Adaptation of spaces and signage to support the needs of certain populations (infrastructure adjustments, universal bathrooms, lactation rooms, among others)"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Establecimiento de metas y/o cuotas de incorporación/promoción de talento diverso",
+                    "en": "Establishment of goals and/or quotas for the incorporation/promotion of diverse talent"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Diseño de planes de carrera diversos y flexibles",
+                    "en": "Design of diverse and flexible career plans"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Dotaciones flexibles e inclusivas (uniformes de diferentes tallas, unisex/sin género, entre otros)",
+                    "en": "Flexible and inclusive provisions (uniforms of different sizes, unisex/genderless, among others)"
+                  },
+                  "value": "0.06"
+                },
+                {
+                  "label": {
+                    "es": "Otro",
+                    "en": "Other"
+                  },
+                  "value": "0.07"
+                },
+                {
+                  "label": {
+                    "es": "Ninguna de las anteriores",
+                    "en": "None of the above"
+                  },
+                  "value": "0.08"
+                },
+                {
+                  "label": {
+                    "es": "No sabe/Prefiere no responder",
+                    "en": "Don't know/Prefer not to answer"
+                  },
+                  "value": "0.09"
+                }
+              ]
             }
           }
         }
@@ -648,8 +1472,8 @@
     },
     "d5": {
       "label": {
-        "es": "Ecosisistema DI* (Concepto de InspirandoT SAS BIC)",
-        "en": "DI Ecosystem* (InspirandoT SAS BIC Concept)"
+        "es" : "Ecosistema DI (Diferencial e Interseccional)*",
+        "en" : "DI Ecosystem (Differential and Intersectional)*"
       },
       "attrs": {
         "d5_attr1": {
@@ -660,8 +1484,8 @@
           "questions": {
             "d5_attr1_q1": {
               "label":{
-                "es": "¿Su organización cuenta con productos y servicios inclusivos?",
-                "en": "Does your organization have inclusive products and services?"
+                "es": "¿En su organización se han desarrollado productos y servicios inclusivos para sus clientes?",
+                "en": "Has your organization developed inclusive products and services for your customers?"
               },
               "type": "closed"
             }
@@ -675,23 +1499,137 @@
           "questions": {
             "d5_attr2_q1": {
               "label":{
-                "es": "¿Recuerda si en su organización se han socializado los siguientes lineamientos/declaraciones/compromisos?",
-                "en": "Do you remember if the following guidelines/declarations/commitments have been socialized in your organization?"
+                "es": "¿Cuáles de los siguientes lineamientos/declaraciones/compromisos se han socializado en su organización?",
+                "en": "Which of the following guidelines/declarations/commitments have been socialized in your organization?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Código de Conducta",
+                    "en": "Code of Conduct"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Política de Derechos Humanos",
+                    "en": "Human Rights Policy"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Política de Diversidad, Equidad e Inclusión",
+                    "en": "Diversity, Equity and Inclusion Policy"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Otra",
+                    "en": "Other"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "No sabe/Prefiere no responder",
+                    "en": "Don't know/Prefer not to answer"
+                  },
+                  "value": "0.05"
+                }
+              ]
             },
             "d5_attr2_q2": {
               "label":{
-                "es": "Si la organización cuenta con una Política de Diversidad, Equidad e Inclusión, la misma, manifiesta su compromiso con:",
+                "es": "Si en la organización cuentan con una Política de Diversidad, Equidad e Inclusión, la misma, manifiesta su compromiso con:",
                 "en": "If the organization has a Diversity, Equity and Inclusion Policy, it expresses its commitment to:"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Género",
+                    "en": "Gender"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Diversidad/Orientación sexual",
+                    "en": "Diversity/sexual orientation"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Cultura/Origen/Etnia",
+                    "en": "Culture/Origin/Ethnicity"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Nivel socioeconómico",
+                    "en": "Socioeconomic level"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "DisCapacidad",
+                    "en": "Disability"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Conflicto armado/Segundas oportunidades",
+                    "en": "Armed conflict/Second chances"
+                  },
+                  "value": "0.06"
+                },
+                {
+                  "label": {
+                    "es": "Migraciones",
+                    "en": "Migrations"
+                  },
+                  "value": "0.07"
+                },
+                {
+                  "label": {
+                    "es": "Generaciones",
+                    "en": "Generations"
+                  },
+                  "value": "0.08"
+                },
+                {
+                  "label": {
+                    "es": "Estilos de pensamiento/Perspectivas",
+                    "en": "Thinking Styles/Perspectives"
+                  },
+                  "value": "0.09"
+                },
+                {
+                  "label": {
+                    "es": "Otra",
+                    "en": "Other"
+                  },
+                  "value": "0.10"
+                },
+                {
+                  "label": {
+                    "es": "No se cuenta con una Política en Diversidad, Equidad e Inclusión",
+                    "en": "There is no Policy on Diversity, Equity and Inclusion"
+                  },
+                  "value": "0.11"
+                }
+              ]
             }
           }
         },
@@ -703,30 +1641,103 @@
           "questions": {
             "d5_attr3_q1": {
               "label":{
-                "es": "Su organización cuenta con los siguientes protocolos:",
-                "en": "Your organization has the following protocols:"
+                "es": "Con cuáles de los siguientes protocolos cuenta su organización:",
+                "en": "Which of the following protocols does your organization have:"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Acoso Sexual Laboral",
+                    "en": "Workplace Sexual Harassment"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Violencias Basadas en Género",
+                    "en": "Gender-Based Violence"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "No discriminación",
+                    "en": "Nondiscrimination"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Otro",
+                    "en": "Other"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "No sabe/Prefiere no responder",
+                    "en": "Don't know/Prefer not to answer"
+                  },
+                  "value": "0.05"
+                }
+              ]
             },
             "d5_attr3_q2": {
               "label":{
-                "es": "¿Conoce si en su organización existen canales de denuncia anónima para identificar situaciones de acoso sexual laboral o violencias?",
-                "en": "Do you know if there are anonymous reporting channels in your organization to identify situations of workplace sexual harassment or violence?"
+                "es": "¿Conoce si en su organización existen canales de denuncia anónima para reportar situaciones de acoso sexual laboral o violencias de: género, diversidad sexual, etnia, origen, nivel socioeconómico, disCapacidad, entre otras?",
+                "en": "Do you know if there are anonymous reporting channels in your organization to report situations of workplace sexual harassment or violence of: gender, sexual diversity, ethnicity, origin, socioeconomic level, disability, among others?"
               },
               "type": "closed"
             },
             "d5_attr3_q3": {
+              "parent": "d5_attr3_q2",
               "label":{
-                "es": "Si su respuesta es afirmativa ¿Cuáles de los canales de denuncia anónima para identificar situaciones de acoso sexual laboral conoce?",
-                "en": "If your answer is affirmative, which of the anonymous reporting channels to identify situations of workplace sexual harassment are you familiar with?"
+                "es": "Si su respuesta es afirmativa ¿Qué canales de denuncia conoce?",
+                "en": "If your answer is affirmative, what reporting channels do you know?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Línea telefónica de denuncia anónima",
+                    "en": "Anonymous reporting telephone line"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Portal en línea seguro",
+                    "en": "Secure online portal"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Buzón físico seguro",
+                    "en": "Secure physical mailbox"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Correo electrónico anónimo",
+                    "en": "anonymous email"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Otra",
+                    "en": "Other"
+                  },
+                  "value": "0.05"
+                }
+              ]
             }
           }
         },
@@ -738,15 +1749,15 @@
           "questions": {
             "d5_attr4_q1": {
               "label":{
-                "es": "¿Sabe si su organización cuenta con un sello/certificación que la avale como incluyente?",
-                "en": "Do you know if your organization has a seal/certification that endorses it as inclusive?"
+                "es": "¿Sabe si en su organización cuentan con un sello/certificación que la avale como organización incluyente?",
+                "en": "Do you know if your organization has a seal/certification that endorses it as an inclusive organization?"
               },
               "type": "closed"
             },
             "d5_attr4_q2": {
               "label":{
-                "es": "Su organización es reconocida en su industria como referente por ser diversa, incluyente y equitativa?",
-                "en": "Is your organization recognized in your industry as a benchmark for being diverse, inclusive and equitable?"
+                "es": "Su organización es reconocida en su industria como referente por ser diversa, incluyente y equitativa",
+                "en": "Your organization is recognized in its industry as a benchmark for being diverse, inclusive and equitable"
               },
               "type": "likert"
             }
@@ -760,13 +1771,144 @@
           "questions": {
             "d5_attr5_q1": {
               "label":{
-                "es": "¿Elija 3 de las siguientes acciones afirmativas que considere definen el trabajo que la organización ha realizado con sus grupos de interés (individuos y organizaciones que tienen relación con la misión y el propósito de su organización)?",
-                "en": "Choose 3 of the following affirmative actions that you believe define the work the organization has done with its stakeholders (individuals and organizations that have a relationship with the mission and purpose of your organization)?"
+                "es": "¿En su organización cuentan con alguno de los siguientes grupos de afinidad?",
+                "en": "Do you have any of the following affinity groups in your organization?"
               },
               "type": "options",
               "limit": null,
               "min": 1,
-              "options": []
+              "options": [
+                {
+                  "label": {
+                    "es": "Género",
+                    "en": "Gender"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Diversidad/Orientación sexual",
+                    "en": "Diversity/sexual orientation"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Cultura/Origen/Etnia",
+                    "en": "Culture/Origin/Ethnicity"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Nivel socioeconómico",
+                    "en": "Socioeconomic level"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "DisCapacidad",
+                    "en": "Disability"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "Conflicto armado/Segundas oportunidades",
+                    "en": "Armed conflict/Second chances"
+                  },
+                  "value": "0.06"
+                },
+                {
+                  "label": {
+                    "es": "Migraciones",
+                    "en": "Migrations"
+                  },
+                  "value": "0.07"
+                },
+                {
+                  "label": {
+                    "es": "Generaciones",
+                    "en": "Generations"
+                  },
+                  "value": "0.08"
+                },
+                {
+                  "label": {
+                    "es": "Estilos de pensamiento/Perspectivas",
+                    "en": "Thinking Styles/Perspectives"
+                  },
+                  "value": "0.09"
+                },
+                {
+                  "label": {
+                    "es": "Otra",
+                    "en": "Other"
+                  },
+                  "value": "0.10"
+                },
+                {
+                  "label": {
+                    "es": "No se cuentan con grupos de afinidad",
+                    "en": "There are no affinity groups"
+                  },
+                  "value": "0.11"
+                }
+              ]
+            },
+            "d5_attr5_q2": {
+              "label":{
+                "es": "Elija las acciones afirmativas en Diversidad, Equidad e Inclusión, que definen el trabajo en su organización con sus grupos de interés",
+                "en": "Choose affirmative actions in Diversity, Equity and Inclusion, which define the work in your organization with its stakeholders"
+              },
+              "type": "options",
+              "limit": null,
+              "min": 1,
+              "options": [
+                {
+                  "label": {
+                    "es": "Escucha activa y diálogo abierto (atención a necesidades, resolución de conflictos)",
+                    "en": "Active listening and open dialogue (attention to needs, conflict resolution)"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Acciones de responsabilidad social corporativa (programas y proyectos que beneficien las comunidades y el medio ambiente)",
+                    "en": "Corporate social responsibility actions (programs and projects that benefit communities and the environment)"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Evaluación del impacto social y ambiental (evaluación periódica y toma de medidas)",
+                    "en": "Assessment of social and environmental impact (periodic evaluation and taking of measures)"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Otra",
+                    "en": "Other"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Ninguna de las anteriores",
+                    "en": "None of the above"
+                  },
+                  "value": "0.05"
+                },
+                {
+                  "label": {
+                    "es": "No sabe/Prefiere no responder",
+                    "en": "Don't know/Prefer not to answer"
+                  },
+                  "value": "0.06"
+                }
+              ]
             }
           }
         }
@@ -775,91 +1917,283 @@
     "leader": {
       "leader_q1": {
         "label":{
-          "es": "La razón por la cuál su organización está interesada en la Diversidad, Equidad e Inclusión es por qué:",
-          "en": "The reason your organization is interested in Diversity, Equity and Inclusion is because:"
+          "es": "La razón por la cuál en su organización gestionan la Diversidad, Equidad e Inclusión es por qué:",
+          "en": "The reason why you manage Diversity, Equity and Inclusion in your organization is because:"
         },
         "type": "options",
         "limit": null,
         "min": 1,
-        "options": []
+        "options": [
+          {
+                  "label": {
+                    "es": "Cumplimiento con una política global/regional/local",
+                    "en": "Compliance with a global/regional/local policy"
+                  },
+                  "value": "0.01"
+                },
+                {
+                  "label": {
+                    "es": "Cumplimiento legal y ético",
+                    "en": "Legal and ethical compliance"
+                  },
+                  "value": "0.02"
+                },
+                {
+                  "label": {
+                    "es": "Atracción y retención del talento/marca empleadora",
+                    "en": "Talent attraction and retention/employer brand"
+                  },
+                  "value": "0.03"
+                },
+                {
+                  "label": {
+                    "es": "Mejora en reputación corporativa",
+                    "en": "Improvement in corporate reputation"
+                  },
+                  "value": "0.04"
+                },
+                {
+                  "label": {
+                    "es": "Otra",
+                    "en": "Other"
+                  },
+                  "value": "0.05"
+                }
+        ]
       },
       "leader_q2": {
         "label":{
-          "es": "En la organización existe una verdadera cultura incluyente",
-          "en": "There is a true inclusive culture in the organization"
+          "es": "En su organización se fomenta una cultura de inclusión para todos(as)",
+          "en": "A culture of inclusion for all is fostered in your organization"
         },
         "type": "likert"
       },
       "leader_q3": {
         "label":{
-          "es": "¿Su organización atrae, desarrolla y fideliza personas, independientemente de su diversidad?",
+          "es": "¿En su organización se atrae, desarrolla y fideliza personas, independientemente de su diversidad?",
           "en": "Does your organization attract, develop and retain people, regardless of their diversity?"
         },
         "type": "closed"
       },
       "leader_q4": {
         "label":{
-          "es": "En sus palabras, ¿cómo se vive la inclusión en su organización?",
-          "en": "In your words, how do you experience inclusion in your organization?"
+          "es": "Las 3 palabras que describen mejor la inclusión en su organización son:",
+          "en": "The 3 words that best describe inclusion in your organization are:"
         },
-        "type": "open",
-        "limit": null
+        "type": "options",
+        "limit": 3,
+        "min": 1,
+        "options": [
+          {
+            "label": {
+              "es": "Respeto",
+              "en": "I respect"
+            },
+            "value": "0.01"
+          },
+          {
+            "label": {
+              "es": "Confianza",
+              "en": "Trust"
+            },
+            "value": "0.02"
+          },
+          {
+            "label": {
+              "es": "Participación",
+              "en": "Stake"
+            },
+            "value": "0.03"
+          },
+          {
+            "label": {
+              "es": "Empatía",
+              "en": "Empathy"
+            },
+            "value": "0.04"
+          },
+          {
+            "label": {
+              "es": "Tolerancia",
+              "en": "Tolerance"
+            },
+            "value": "0.05"
+          },
+          {
+            "label": {
+              "es": "Comunicación asertiva",
+              "en": "Assertive communication"
+            },
+            "value": "0.06"
+          },
+          {
+            "label": {
+              "es": "Apertura",
+              "en": "Opening"
+            },
+            "value": "0.07"
+          },
+          {
+            "label": {
+              "es": "Otra",
+              "en": "Other"
+            },
+            "value": "0.08"
+          },
+          {
+            "label": {
+              "es": "Ninguna de las anteriores",
+              "en": "None of the above"
+            },
+            "value": "0.09"
+          }
+        ]
       },
       "leader_q5": {
         "label":{
-          "es": "¿Qué tipo de indicadores tiene su organización para medir el progreso de la inclusión y las diversidades?",
-          "en": "What type of indicators does your organization have to measure the progress of inclusion and diversities?"
+          "es": "¿Qué tipo de indicadores tienen en su organización para medir el progreso de la inclusión de las diversidades?",
+          "en": "What type of indicators do you have in your organization to measure the progress of the inclusion of diversities?"
         },
         "type": "options",
         "limit": null,
         "min": 1,
-        "options": []
+        "options": [
+          {
+            "label": {
+              "es": "Demografía de la fuerza laboral (composición demográfica del personal)",
+              "en": "Workforce demographics (demographic composition of staff)"
+            },
+            "value": "0.01"
+          },
+          {
+            "label": {
+              "es": "Atracción, selección y contratación de talento diverso",
+              "en": "Attraction, selection and hiring of diverse talent"
+            },
+            "value": "0.02"
+          },
+          {
+            "label": {
+              "es": "Planes de promoción y desarrollo de talento diverso",
+              "en": "Promotion and development plans for diverse talent"
+            },
+            "value": "0.03"
+          },
+          {
+            "label": {
+              "es": "Otro",
+              "en": "Other"
+            },
+            "value": "0.04"
+          },
+          {
+            "label": {
+              "es": "No existen indicadores aún",
+              "en": "There are no indicators yet"
+            },
+            "value": "0.05"
+          },
+          {
+            "label": {
+              "es": "No sabe/Prefiere no responder",
+              "en": "Don't know/Prefer not to answer"
+            },
+            "value": "0.06"
+          }
+        ]
       },
       "leader_q6": {
         "label":{
-          "es": "¿Elija 3 opciones que considere que la organización implementa para fomentar un ambiente inclusivo?",
-          "en": "Choose 3 options that you think the organization implements to foster an inclusive environment?"
+          "es": "¿Qué medidas ha implementado usted, para asegurarse de que todas las personas tengan igualdad de oportunidades en su equipo?",
+          "en": "What measures have you implemented to ensure that everyone on your team has equal opportunities?"
         },
         "type": "options",
         "limit": null,
         "min": 1,
-        "options": []
+        "options": [
+          {
+            "label": {
+              "es": "Promover el entendimiento y compromiso por la inclusión en el equipo",
+              "en": "Promote understanding and commitment to inclusion in the team"
+            },
+            "value": "0.01"
+          },
+          {
+            "label": {
+              "es": "Apoyar programas de flexibilidad y balance vida-trabajo",
+              "en": "Support flexibility and work-life balance programs"
+            },
+            "value": "0.02"
+          },
+          {
+            "label": {
+              "es": "Propiciar programas de mentoring (guía y apoyo personalizado para el desarrollo de carrera)",
+              "en": "Promote mentoring programs (personalized guidance and support for career development)"
+            },
+            "value": "0.03"
+          },
+          {
+            "label": {
+              "es": "Generar espacios seguros para el desarrollo de talento diverso",
+              "en": "Generate safe spaces for the development of diverse talent"
+            },
+            "value": "0.04"
+          },
+          {
+            "label": {
+              "es": "Identificar habilidades diversas para promociones verticales - horizontales",
+              "en": "Identify diverse skills for vertical - horizontal promotions"
+            },
+            "value": "0.05"
+          },
+          {
+            "label": {
+              "es": "Otra",
+              "en": "Other"
+            },
+            "value": "0.06"
+          },
+          {
+            "label": {
+              "es": "Ninguna de las anteriores",
+              "en": "None of the above"
+            },
+            "value": "0.07"
+          }
+        ]
       },
       "leader_q7": {
         "label":{
-          "es": "¿Qué medidas ha implementado para asegurarse de que todas las personas tengan igualdad de oportunidades para su desarrollo profesional?",
-          "en": "What measures have you implemented to ensure that all people have equal opportunities for their professional development?"
-        },
-        "type": "options",
-        "limit": null,
-        "min": 1,
-        "options": []
-      },
-      "leader_q8": {
-        "label":{
-          "es": "Las voces de los colaboradores pertenecientes a comunidades o poblaciones vulnerables, son escuchados y tienen un impacto real en la toma de decisiones",
+          "es": "Las voces de los(as) colaboradores(as) pertenecientes a comunidades o poblaciones vulnerables, son escuchadas y tienen un impacto real en la toma de decisiones",
           "en": "The voices of collaborators belonging to vulnerable communities or populations are heard and have a real impact on decision-making"
         },
         "type": "likert"
       },
-      "leader_q9": {
+      "leader_q8": {
         "label":{
-          "es": "¿Como líder, se siente en capacidad para apoyar el desarrollo del talento diverso que tiene a su cargo?",
-          "en": "As a leader, do you feel capable of supporting the development of the diverse talent under your supervision?"
+          "es": "¿Como líder, se siente con las herramientas necesarias para apoyar el desarrollo del talento diverso de su equipo?",
+          "en": "As a leader, do you feel you have the necessary tools to support the development of your team's diverse talent?"
         },
         "type": "closed"
       },
-      "leader_q10": {
+      "leader_q9": {
         "label":{
-          "es": "En la organización  se dan los espacios para que exista diversidad en cargos de liderazgo",
-          "en": "In the organization there are spaces for diversity in leadership positions"
+          "es": "En su organización se dan los espacios para que exista diversidad en cargos de liderazgo",
+          "en": "In your organization there are spaces for diversity in leadership positions"
         },
         "type": "likert"
       },
+      "leader_q10": {
+        "label":{
+          "es": "¿La organización cuenta con prácticas o políticas que apoyen las compras de proveedores, pertenecientes a comunidades o poblaciones vulnerables?",
+          "en": "Does the organization have practices or policies that support purchases from suppliers belonging to vulnerable communities or populations?"
+        },
+        "type": "closed"
+      },
       "leader_q11": {
         "label":{
-          "es": "¿La organización cuenta con prácticas o políticas que apoyen  las compras de proveedores, pertenecientes a comunidades o poblaciones vulnerables?",
-          "en": "Does the organization have practices or policies that support purchases from suppliers belonging to vulnerable communities or populations?"
+          "es": "¿En su organización cuentan con prácticas que promuevan el apoyo a las comunidades o poblaciones vulnerables?",
+          "en": "Do you have practices in your organization that promote support for vulnerable communities or populations?"
         },
         "type": "closed"
       },
@@ -871,7 +2205,71 @@
         "type": "options",
         "limit": null,
         "min": 1,
-        "options": []
+        "options": [
+          {
+            "label": {
+              "es": "Pacto Global/Mundial - ONU",
+              "en": "Global/World Pact - UN"
+            },
+            "value": "0.01"
+          },
+          {
+            "label": {
+              "es": "Principios Para el Empoderamiento de las Mujeres (WEPs) - ONU Mujeres",
+              "en": "Women's Empowerment Principles (WEPs) - UN Women"
+            },
+            "value": "0.02"
+          },
+          {
+            "label": {
+              "es": "Ranking PAR - Aequales",
+              "en": "PAR Ranking - Aequales"
+            },
+            "value": "0.03"
+          },
+          {
+            "label": {
+              "es": "Equipares - Gobierno Nacional - Ministerio de Trabajo - PNUD",
+              "en": "Equipares - National Government - Ministry of Labor - UNDP"
+            },
+            "value": "0.04"
+          },
+          {
+            "label": {
+              "es": "Modelo Empresas Familiarmente Responsables (EFR) - Fundación MásFamilia",
+              "en": "Family Responsible Business Model (EFR) - MásFamilia Foundation"
+            },
+            "value": "0.05"
+          },
+          {
+            "label": {
+              "es": "Friendly Biz - Cámara de la Diversidad",
+              "en": "Friendly Biz - Chamber of Diversity"
+            },
+            "value": "0.06"
+          },
+          {
+            "label": {
+              "es": "Otro",
+              "en": "Other"
+            },
+            "value": "0.07"
+          },
+          {
+            "label": {
+              "es": "Ninguna de las anteriores",
+              "en": "None of the above"
+            },
+            "value": "0.08"
+          },
+          {
+            "label": {
+              "es": "No Sabe/Prefiero no responder",
+              "en": "Don't know/prefer not to answer"
+            },
+            "value": "0.09"
+          }
+        ]
       }
     }
   }
