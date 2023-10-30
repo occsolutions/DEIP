@@ -11,7 +11,7 @@ RUN apk --no-cache add \
     g++
 
 # install vue cli
-RUN npm install -g @vue/cli --unsafe-perm 
+RUN npm install -g @vue/cli --unsafe-perm
 
 # copy both 'package.json' and 'package-lock.json' (if available)
 COPY package*.json ./
@@ -25,7 +25,7 @@ COPY . .
 RUN npx browserslist
 
 # build app for production with minification
-RUN yarn run build:qa --unsafe-perm 
+RUN yarn run build:qa --unsafe-perm
 
 # etapa de producción
 FROM nginx:1.15.11-alpine as production-stage
