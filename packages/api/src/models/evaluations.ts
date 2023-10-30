@@ -37,7 +37,8 @@ export interface Evaluations {
         label: Translations,
         questions: {
           d1_attr5_q1: Question,
-          d1_attr5_q2: Question
+          d1_attr5_q2: Question,
+          d1_attr5_q3: Question
         }
       },
       d1_attr6: {
@@ -69,8 +70,7 @@ export interface Evaluations {
         questions: {
           d2_attr3_q1: Question,
           d2_attr3_q2: Question,
-          d2_attr3_q3: Question,
-          d2_attr3_q4: Question
+          d2_attr3_q3: Question
         },
       },
       d2_attr4: {
@@ -90,7 +90,8 @@ export interface Evaluations {
         label: Translations,
         questions: {
           d2_attr6_q1: Question,
-          d2_attr6_q2: Question
+          d2_attr6_q2: Question,
+          d2_attr6_q3: Question
         }
       },
       d2_attr7: {
@@ -107,8 +108,7 @@ export interface Evaluations {
       d3_attr1: {
         label: Translations,
         questions: {
-          d3_attr1_q1: Question,
-          d3_attr1_q2: Question
+          d3_attr1_q1: Question
         }
       },
       d3_attr2: {
@@ -116,8 +116,7 @@ export interface Evaluations {
         questions: {
           d3_attr2_q1: Question,
           d3_attr2_q2: Question,
-          d3_attr2_q3: Question,
-          d3_attr2_q4: Question
+          d3_attr2_q3: Question
         }
       }
       d3_attr3: {
@@ -147,12 +146,6 @@ export interface Evaluations {
         questions: {
           d3_attr6_q1: Question
         }
-      },
-      d3_attr7: {
-        label: Translations,
-        questions: {
-          d3_attr7_q1: Question
-        }
       }
     }
   },
@@ -181,7 +174,8 @@ export interface Evaluations {
       d4_attr4: {
         label: Translations,
         questions: {
-          d4_attr4_q1: Question
+          d4_attr4_q1: Question,
+          d4_attr4_q2: Question
         }
       },
       d4_attr5: {
@@ -239,7 +233,8 @@ export interface Evaluations {
       d5_attr5: {
         label: Translations,
         questions: {
-          d5_attr5_q1: Question
+          d5_attr5_q1: Question,
+          d5_attr5_q2: Question
         }
       }
     }
