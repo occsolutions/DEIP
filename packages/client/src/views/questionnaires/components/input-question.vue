@@ -25,9 +25,8 @@
             <strong>{{ type.title[lang] }}</strong> {{ type.descriptions[lang] }}
           </v-col>
           <v-col class="shrink" v-if="type.type !== 'open'">
-            <v-dialog
+            <v-dialog scrollable persistent
               v-model="dialog"
-              persistent
               max-width="600px"
             >
               <template v-slot:activator="{ on, attrs }">
@@ -95,28 +94,18 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-text-field
-                          v-if="isMinEditable"
+                          v-model.number="min"
                           :label="$t('Views.Questionnaires.edit.input_min')"
-                          v-model="min"
-                        ></v-text-field>
-                        <v-text-field
-                          v-else
-                          :label="$t('Views.Questionnaires.edit.input_min')"
-                          v-model="min"
-                          readonly disabled
+                          :readonly="!isMinEditable"
+                          :disabled="!isMinEditable"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-text-field
-                          v-if="isLimitEditable"
+                          v-model.number="limit"
                           :label="$t('Views.Questionnaires.edit.input_limit')"
-                          v-model="limit"
-                        ></v-text-field>
-                        <v-text-field
-                          v-else
-                          :label="$t('Views.Questionnaires.edit.input_limit')"
-                          v-model="limit"
-                          readonly disabled
+                          :readonly="!isLimitEditable"
+                          :disabled="!isLimitEditable"
                         ></v-text-field>
                       </v-col>
                     </v-row>
