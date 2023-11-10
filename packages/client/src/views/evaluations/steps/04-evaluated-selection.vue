@@ -163,7 +163,7 @@ export default Vue.extend({
       if (!this.isEdit) {
         return this.evaluation.populationCount
       } else {
-        if (this.evaluation.status === 'pending') {
+        if (['pending', 'in_progress'].includes(this.evaluation.status)) {
           return this.employees.length > this.evaluation.populationCount
             ? this.employees.length
             : this.evaluation.populationCount
