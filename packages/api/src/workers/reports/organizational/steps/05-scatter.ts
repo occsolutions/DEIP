@@ -70,7 +70,7 @@ export default async (
 
         higherLower.push({
           dimension: dimKey,
-          variable: varKey,
+          attribute: varKey,
           question: qKey,
           scatter
         });

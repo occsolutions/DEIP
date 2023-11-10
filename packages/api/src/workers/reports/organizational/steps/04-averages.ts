@@ -37,7 +37,7 @@ export default async (
         higherLower.push({
           type: 'evaluations',
           dimension: dimKey,
-          variable: varKey,
+          attribute: varKey,
           question: qKey,
           score: answersDimension[dimKey].variables[varKey].questions[qKey].general.score
         });
