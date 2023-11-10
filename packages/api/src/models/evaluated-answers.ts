@@ -1,9 +1,8 @@
 
-import { Dimention } from './dimention';
 import { AnswerAdditionalQuestion } from './answer-additional-question';
 
 export type EvaluatedAnswers = {
   segmentation: Array<{ segmentationId: Number, detailId: Number }>;
-  evaluations: Dimention<Number>;
+  evaluations: Array<{ attribute: Array<{ key: String, qType: String, score: Array<Number> }> }>;
   additional: Array<AnswerAdditionalQuestion>;
 };

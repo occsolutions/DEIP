@@ -20,22 +20,27 @@ const EvaluatedSchema = new mongoose.Schema({
   employee: Object,
   temp: {
     segmentation: [{
+      _id: false,
       segmentationId: Number,
       detailId: Number
     }],
     evaluations: [{
+      _id: false,
       name: String,
       score: Number,
-      variable: [{
-        score: Number
+      attribute: [{
+        _id: false,
+        key: String,
+        qType: String,
+        score: [Number]
       }]
     }],
     additional: [{
+      _id: false,
       question: String,
       answer: []
     }]
-  },
-  isLeaderWithSubordinates: Boolean
+  }
 }, { timestamps: true, collection: 'evaluated' });
 
 const EvaluatedRepository = mongoose.model<EvaluatedType>('Evaluated', EvaluatedSchema);
