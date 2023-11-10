@@ -64,9 +64,6 @@ class CreatePopulation {
       delete threadData.lap;
       delete threadData.progress;
 
-      // Get the Evaluation
-      const evaluation: any = await EvaluationService.findById(threadData._evaluation, 'populationLeaders');
-
       // Already created Population
       const alreadyCreatedPopulation = await EvaluatedService.getByEvaluationRef(threadData._evaluation, 'indEmpEntId');
       const alreadyCreatedPopulationIds = alreadyCreatedPopulation.map(x => x.indEmpEntId);
@@ -133,8 +130,7 @@ class CreatePopulation {
                 admission: employee.admission,
                 deletedAt: employee.deletedAt
               }
-            },
-            isLeaderWithSubordinates: evaluation.populationLeaders.includes(employee.id)
+            }
           });
         }
       }
