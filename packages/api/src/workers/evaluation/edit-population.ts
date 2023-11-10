@@ -61,9 +61,6 @@ class EditPopulation {
       delete threadData.lap;
       delete threadData.progress;
 
-      // Get the Evaluation
-      const evaluation: any = await EvaluationService.findById(threadData._evaluation, 'populationLeaders');
-
       // Population to be INCLUDED
       let finishedIncluding = false;
       if (threadData.included.length) {
@@ -138,8 +135,7 @@ class EditPopulation {
                   admission: employee.admission,
                   deletedAt: employee.deletedAt
                 }
-              },
-              isLeaderWithSubordinates: evaluation.populationLeaders.includes(employee.id)
+              }
             });
           }
         }
@@ -176,6 +172,20 @@ class EditPopulation {
           await EvaluationService.updateEvaluatedCount(threadData._evaluation, newEvaluatedCnt);
           await EvaluationService.updateStatus(threadData.evaluationStatus, threadData._evaluation);
           await OperationThreadsService.findOneAndUpdateStatus(pendingOperationThread._id, 'completed');
+
+          if (threadData.evaluationStatus === 'in_progress' && threadData.included.length) {
+            // Create thread to send email to included participants
+            await OperationThreadsService.save({
+              operation: 'SendIncludedPopulationEmail',
+              status: 'pending',
+              createdAt: new Date(),
+              data: {
+                _evaluation: threadData._evaluation,
+                type: 'launch',
+                included: threadData.included
+              }
+            });
+          }
         } catch (error) {
           return await this.saveFailed(pendingOperationThread._id, 'Mongo EvaluationService Edit', {
             error: error.stack ? error.stack : error.toString()

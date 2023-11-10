@@ -54,7 +54,60 @@ class SendEvaluationsEmails {
           file: customEmail.attachment ? customEmail.attachment : ''
         };
         const mailRes: MailInterface = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', data);
-        if (mailRes.error) {
+        if (mailRes.error?.status && mailRes.error?.msg) {
+          throw new Error(`Suite Request Failed with status: ${mailRes.error.status} by ${mailRes.error.msg}`);
+        }
+
+        if (population.length < interval) {
+          break;
+        } else {
+          round++;
+        }
+
+        await sleep(10000);
+      }
+      await OperationThreadsService.findOneAndUpdateStatus(pendingOperationThreads._id, 'completed');
+    } catch (error) {
+      return await this.saveFailed(pendingOperationThreads._id, 'SendEvaluationEmail', {
+        error: error.stack ? error.stack : error.toString()
+      });
+    }
+
+    return pendingOperationThreads._id;
+  }
+
+  public async sendIncludedEmails() {
+    const pendingOperationThreads = await OperationThreadsService.findByOperationAndStatus(
+      'SendIncludedPopulationEmail',
+      'pending'
+    );
+    if (!pendingOperationThreads) {
+      return;
+    }
+    await OperationThreadsService.findOneAndUpdateStatus(pendingOperationThreads._id, 'in_progress');
+    try {
+      const evaluation: any = await EvaluationsService.findById(
+        pendingOperationThreads.data._evaluation,
+        'customEmailRelease'
+      );
+
+      const interval = 250;
+      let population: Evaluated[];
+      let round = 0;
+      const select = 'employee.email status token employee.employeeEnterprise.firstName employee.employeeEnterprise.lastName';
+      while (true) {
+        population = await EvaluatedService.findBatchByEvaluationRefAndEmployeeEnterpriseIds(
+          pendingOperationThreads.data._evaluation, pendingOperationThreads.data.included, round, interval, select
+        );
+        const customEmail = evaluation.customEmailRelease;
+        const endPopulation = await this.getAndFilterpopulation(population);
+        const data = {
+          population: endPopulation,
+          customEmailRelease: customEmail,
+          file: customEmail.attachment ? customEmail.attachment : ''
+        };
+        const mailRes: MailInterface = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', data);
+        if (mailRes.error?.status && mailRes.error?.msg) {
           throw new Error(`Suite Request Failed with status: ${mailRes.error.status} by ${mailRes.error.msg}`);
         }
 
