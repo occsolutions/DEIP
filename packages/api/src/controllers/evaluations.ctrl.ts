@@ -58,26 +58,15 @@ class EvaluationsController {
       // Finish Poll
       const closedPoll: any = await EvaluatedService.setPollCompleted(req.body.tokenId);
 
+      // Update Evaluation's populationCompletedCount
+      const completedCount: number = await EvaluatedService.countCompletedByEvaluationRef(evaluation._id);
+      await EvaluationsService.updateAnsweredCount(evaluation._id, completedCount);
+
       // Check if there are still uncompleted participants
       const isInProgress = await EvaluatedService.getAtLeastOneActiveParticipant(evaluation._id);
       if (!isInProgress) {
         await EvaluationsService.closeEvaluationById(evaluation._id);
       }
-
-      // Save anonymous Answers in temporary collection to be managed by worker
-      await OperationThreadsService.save({
-        operation: 'TempAnswers',
-        status: 'pending',
-        createdAt: new Date(),
-        data: {
-          enterpriseId: evaluation.enterpriseId,
-          evaluationRef: evaluation._id,
-          populationRef: closedPoll._id,
-          questionnaire: evaluation.questionnaire.evaluations,
-          employee: closedPoll.employee,
-          tempAnswers: closedPoll.temp
-        }
-      });
 
       resp.send(closedPoll.temp);
     } catch (error) {
@@ -298,10 +287,10 @@ class EvaluationsController {
       evaluation.timeZone = input.timeZone;
       evaluation.deliveredAt = new Date(`${input.deliveredAt.value} ${input.deliveredAt.hour}`);
       evaluation.customEmailRelease = input.customEmailRelease;
-      evaluation.populationLeaders = input.leaders;
       evaluation.additionalSegmentation = input.additionalSegmentation;
     }
 
+    evaluation.populationLeaders = input.leaders;
     evaluation.validUntil = new Date(`${input.validUntil.value} ${input.validUntil.hour}`);
 
     // Reminders
@@ -417,10 +406,13 @@ class EvaluationsController {
             msg: 'Evaluation not found'
           });
         } else {
+          const questionsTypes: any = await QuestionnairesService.getQuestionsType();
           resp.send({
             executed: true,
-            data: evaluation,
-            evaluated: evaluated
+            evaluated,
+            evaluation,
+            questionsTypes,
+            isLeader: evaluation.populationLeaders.includes(evaluated.indEmpEntId)
           });
         }
       }
