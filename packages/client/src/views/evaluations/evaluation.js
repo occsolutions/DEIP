@@ -3,6 +3,8 @@ import Vue from 'vue'
 
 import evaluationsService from '../../services/evaluations'
 
+import XPollQuestion from './components/poll-question.vue'
+
 import XWellcomeDialog from './components/wellcome-dialog.vue'
 import XMiddleDialog from './components/middle-dialog.vue'
 import XEndDialog from './components/end-dialog.vue'
@@ -11,6 +13,7 @@ import DevFillForm from '../../utils/dev-fill-form.js'
 
 export default Vue.extend({
   components: {
+    XPollQuestion,
     XWellcomeDialog,
     XMiddleDialog,
     XEndDialog
@@ -24,16 +27,16 @@ export default Vue.extend({
       totalQuestionsCount: 0,
       hasSegmentation: false,
       hasAdditionalQuestions: false,
+      evaluated: {},
       evaluation: {
         timeZone: '',
         enterprise: {}
       },
-      evaluated: {},
-      answersRefs: {},
+      questionsTypes: [],
+      isLeader: false,
       lang: '',
       completed: false,
       progress: 0,
-      legendColors: ['#BB3E3E', '#B8663D', '#C2B147', '#B6C144', '#44C156', '#1B5E20'],
       // Modals
       outIntervalDialog: false,
       dialogIcon: '',
@@ -42,8 +45,7 @@ export default Vue.extend({
       middleDialog: false,
       displayedMiddleDialog: false,
       showConfirmation: false,
-      endDialog: false,
-      alreadySentEmail: ''
+      endDialog: false
     }
   },
   watch: {
@@ -78,6 +80,13 @@ export default Vue.extend({
       let pg = this.currentPage
       if (!this.hasSegmentation) pg += 1
       return pg
+    },
+    qPages () {
+      const arr = [1, 2, 3, 4, 5]
+      if (this.isLeader) {
+        arr.push(6)
+      }
+      return arr
     }
   },
   created () {
@@ -119,8 +128,8 @@ export default Vue.extend({
           case 'evaluations':
             this.evaluated.temp[key].forEach(a => {
               this.pageAnswerCnt[qPage] = 0
-              a.variable.forEach(v => {
-                if (v.score) {
+              a.attribute.forEach(v => {
+                if (v.score.length) {
                   answered++
                   this.pageAnswerCnt[qPage]++
                 }
@@ -158,8 +167,10 @@ export default Vue.extend({
         .then((res) => {
           if (res.executed) {
             this.evaluated = res.evaluated
-            this.alreadySentEmail = this.evaluated.alreadySentEmail || ''
-            if (res.data.status === 'completed') {
+            this.evaluation = res.evaluation
+            this.questionsTypes = res.questionsTypes
+            this.isLeader = res.isLeader
+            if (this.evaluation.status === 'completed') {
               this.completed = true
               this.$store.dispatch('loading/hide')
               if (this.evaluated.status === 'completed') {
@@ -168,14 +179,13 @@ export default Vue.extend({
                 this.showDialog('/img/expiracion.png', this.$t('Views.Evaluations.evaluation.expiration_date'))
               }
             } else {
-              this.evaluation = res.data
-              const releasedAtParsed = Date.parse(res.data.deliveredAt.split('Z')[0]) / 1000
-              const deadLineAtParsed = Date.parse(res.data.validUntil.split('Z')[0]) / 1000
+              const releasedAtParsed = Date.parse(this.evaluation.deliveredAt.split('Z')[0]) / 1000
+              const deadLineAtParsed = Date.parse(this.evaluation.validUntil.split('Z')[0]) / 1000
               if (releasedAtParsed > parseInt(Date.now() / 1000)) {
                 this.showDialog('/img/reloj.png', this.$t('Views.Evaluations.evaluation.before_date'))
               } else if (deadLineAtParsed < parseInt(Date.now() / 1000)) {
                 this.showDialog('/img/expiracion.png', this.$t('Views.Evaluations.evaluation.expiration_date'))
-              } else if (res.data.status === 'pending') {
+              } else if (this.evaluation.status === 'pending') {
                 this.showDialog('/img/reloj.png', this.$t('Views.Evaluations.evaluation.not_available'))
               } else {
                 if (this.evaluated.status === 'completed') {
@@ -194,15 +204,14 @@ export default Vue.extend({
             this.$store.dispatch('loading/hide')
             this.showDialog('/img/alerta.png', this.$t('Views.Evaluations.evaluation.invalid_token'))
           }
-        }).catch((err) => {
+        })
+        .catch((err) => {
+          console.log(err)
           this.$store.dispatch('alert/error', this.$t(`errors.${err.code}`))
           this.$store.dispatch('loading/hide')
         })
     },
     assemblePoll () {
-      // Answers Types
-      this.answersRefs = this.evaluation.answersReference
-
       // Additional Segmentation
       if (this.evaluation.additionalSegmentation &&
         Object.keys(this.evaluation.additionalSegmentation).length !== 0
@@ -251,26 +260,66 @@ export default Vue.extend({
       const notAnsweredQuestions = !this.evaluated.temp.evaluations.length
       let dimCnt = 0
       for (const dimKey of Object.keys(qQuestions)) {
+        const dimension = qQuestions[dimKey]
         // Initial answers structure
         if (notAnsweredQuestions) {
-          this.evaluated.temp.evaluations.push({ variable: [] })
+          if (dimKey === 'leader') {
+            if (this.isLeader) {
+              this.evaluated.temp.evaluations.push({ attribute: [] })
+            }
+          } else {
+            this.evaluated.temp.evaluations.push({ attribute: [] })
+          }
         }
         const dimensionQuestions = []
-        for (const varKey of Object.keys(qQuestions[dimKey])) {
-          for (const qKey of Object.keys(qQuestions[dimKey][varKey])) {
-            // Initial answers structure
-            if (notAnsweredQuestions) {
-              this.evaluated.temp.evaluations[dimCnt].variable.push({ score: null })
+        if (dimension.attrs) {
+          for (const attrKey of Object.keys(dimension.attrs)) {
+            const attribute = dimension.attrs[attrKey]
+            for (const qKey of Object.keys(attribute.questions)) {
+              const question = attribute.questions[qKey]
+              // Initial answers structure
+              if (notAnsweredQuestions) {
+                this.evaluated.temp.evaluations[dimCnt].attribute.push({
+                  key: qKey,
+                  qType: question.type,
+                  score: []
+                })
+              }
+              // Questions structure
+              if (!question.parent) {
+                question.qCount = this.questionsCount
+                this.questionsCount++
+              }
+              dimensionQuestions.push(question)
+              this.totalQuestionsCount++
             }
-            // Questions structure
-            qQuestions[dimKey][varKey][qKey].qCount = this.questionsCount
-            dimensionQuestions.push(qQuestions[dimKey][varKey][qKey])
-            this.questionsCount++
-            this.totalQuestionsCount++
+          }
+          this.pages.push(dimensionQuestions)
+        } else {
+          // Leaders questions
+          if (this.isLeader) {
+            for (const qKey of Object.keys(dimension)) {
+              const question = dimension[qKey]
+              // Initial answers structure
+              if (notAnsweredQuestions) {
+                this.evaluated.temp.evaluations[dimCnt].attribute.push({
+                  key: qKey,
+                  qType: question.type,
+                  score: []
+                })
+              }
+              // Questions structure
+              if (!question.parent) {
+                question.qCount = this.questionsCount
+                this.questionsCount++
+              }
+              dimensionQuestions.push(question)
+              this.totalQuestionsCount++
+            }
+            this.pages.push(dimensionQuestions)
           }
         }
         dimCnt++
-        this.pages.push(dimensionQuestions)
       }
 
       // Additional Questions
@@ -293,15 +342,20 @@ export default Vue.extend({
         this.setProgress(true)
       }
     },
-    getAnswerRef (idx) {
-      const aRefs = this.answersRefs.find(aRef => aRef.idx === idx)
-      const cleanRef = {}
-      for (const key of Object.keys(aRefs)) {
-        if (!isNaN(parseInt(key))) {
-          cleanRef[key] = aRefs[key]
+    parentAnsweredTrue (parentId, answer) {
+      const parts = parentId.split('_')
+      const dimIdx = parts[0].match(/(\d+)/)[1] - 1
+      const foundParent = this.evaluated.temp.evaluations[dimIdx].attribute.find(q => q.key === parentId)
+      if (foundParent && foundParent.score[0] === 1) {
+        if (answer.score.length && answer.score[0] === -1) {
+          answer.score = []
         }
+        return true
       }
-      return cleanRef
+      if (!answer.score.length || answer.score[0] !== -1) {
+        answer.score = [-1]
+      }
+      return false
     },
     saveAnswers () {
       this.$store.dispatch('loading/show')

@@ -1,7 +1,7 @@
 
 <template>
-  <v-container fluid class="py-0 px-2">
-    <v-card v-if="!completed">
+  <v-container fluid class="pa-0">
+    <v-card v-if="!completed" class="mt-6 mb-0 mx-3">
       <!-- Header -->
       <v-row justify="center">
         <v-col cols="12" sm="12" md="8" class="pt-6">
@@ -15,7 +15,7 @@
             />
           </section>
         </v-col>
-        <v-col cols="12" class="pb-0 text-center">
+        <v-col cols="12" class="pb-2 text-center">
           <v-card flat>
             <h1 class="display-1">{{ evaluation.displayName || evaluation.name }}</h1>
             <!--
@@ -40,7 +40,9 @@
       <v-card-text>
         <ValidationObserver ref="poll_validation">
           <template v-for="(item, i) in pages[currentPage]">
-            <!-- Additional Segmentation -->
+            <!--------------------------------------------->
+            <!---------- Additional Segmentation ---------->
+            <!--------------------------------------------->
             <div v-if="hasSegmentation && currentPage === 0"
               :key="`${currentPage}-${i}`"
             >
@@ -53,7 +55,7 @@
                   <ValidationProvider rules="required">
                     <v-radio-group dense hide-details
                       v-model="evaluated.temp.segmentation[i].detailId"
-                      class="mt-2 mx-4 justify-left"
+                      class="mt-4 mx-4 justify-left"
                       style="max-width: fit-content;"
                     >
                       <v-radio v-for="option in item.details"
@@ -69,39 +71,72 @@
               </v-row>
             </div>
 
-            <!-- Questionnaire Questions -->
-            <div v-else-if="[1,2,3,4].includes(computedQuestionnairePages)"
+            <!--------------------------------------------->
+            <!---------- Questionnaire Questions ---------->
+            <!--------------------------------------------->
+            <div v-else-if="qPages.includes(computedQuestionnairePages)"
               :key="`${currentPage}-${i}`"
             >
-              <v-divider v-if="i > 0" class="mt-4 grey lighten-3"></v-divider>
-              <h5 class="mt-6 text-left headline">
-                {{ item.qCount }}.-
-                {{ item.question[lang] }}
-              </h5>
-              <v-row>
-                <v-col cols="12" class="pt-0">
-                  <ValidationProvider rules="required">
-                    <v-radio-group dense hide-details
-                      v-model="evaluated.temp.evaluations[computedQuestionnairePages - 1].variable[i].score"
-                      class="mt-2 justify-left"
-                      :class="computedQuestionnairePages > 1 ? 'mx-11' : 'mx-7'"
-                      style="max-width: fit-content;"
-                    >
-                      <v-radio v-for="option in Object.keys(getAnswerRef(item.answers)).sort((a, b) => b - a)"
-                        :key="`aref-${option}`"
-                        :value="parseInt(option)"
-                        :label="getAnswerRef(item.answers)[option][lang]"
-                        color="primary"
-                        @change="saveAnswers()"
-                      ></v-radio>
-                    </v-radio-group>
-                  </ValidationProvider>
-                </v-col>
-              </v-row>
+              <div
+                v-if="!item.parent || parentAnsweredTrue(item.parent, evaluated.temp.evaluations[computedQuestionnairePages - 1].attribute[i])"
+                :class="item.parent ? 'pl-9' : 'pl-1'"
+              >
+                <v-divider v-if="i > 0" class="mt-5 grey lighten-3"></v-divider>
+                <!-- Question -->
+                <x-poll-question
+                  :question="item"
+                  :lang="lang"
+                />
+                <v-row>
+                  <!-- Answer options -->
+                  <v-col cols="12" class="pt-0">
+                    <ValidationProvider rules="required">
+                      <!-- Type Closed / Likert -->
+                      <div v-if="['closed', 'likert'].includes(item.type)">
+                        <v-radio-group dense hide-details
+                          v-model="evaluated.temp.evaluations[computedQuestionnairePages - 1].attribute[i].score"
+                          class="mt-4 justify-left"
+                          :class="computedQuestionnairePages > 1 ? 'mx-11' : 'mx-7'"
+                          style="max-width: fit-content;"
+                          @change="saveAnswers()"
+                        >
+                          <v-radio
+                            v-for="(option, j) in questionsTypes.find(qT => qT.type === item.type).options"
+                            :key="`aref-${i}-${j}`"
+                            :value="[parseFloat(option.value)]"
+                            :label="option.label[lang]"
+                            color="primary"
+                          ></v-radio>
+                        </v-radio-group>
+                      </div>
+                      <!-- Type Options -->
+                      <div v-else class="mt-4">
+                        <v-checkbox multiple hide-details
+                          v-for="option in item.options"
+                          v-model="evaluated.temp.evaluations[computedQuestionnairePages - 1].attribute[i].score"
+                          :key="`bref-${i}-${option.value}`"
+                          :value="parseFloat(option.value)"
+                          :label="option.label[lang]"
+                          class="mt-2 justify-left"
+                          :class="computedQuestionnairePages > 1 ? 'mx-11' : 'mx-7'"
+                          style="max-width: fit-content;"
+                          :disabled="item.limit
+                            ? evaluated.temp.evaluations[computedQuestionnairePages - 1].attribute[i].score.length >= item.limit && evaluated.temp.evaluations[computedQuestionnairePages - 1].attribute[i].score.indexOf(parseFloat(option.value)) === -1
+                            : false
+                          "
+                          @change="saveAnswers()"
+                        />
+                      </div>
+                    </ValidationProvider>
+                  </v-col>
+                </v-row>
+              </div>
             </div>
 
-            <!-- Additional Questions -->
-            <div v-else-if="hasAdditionalQuestions && computedQuestionnairePages === 6"
+            <!-------------------------------------------->
+            <!----------- Additional Questions ----------->
+            <!-------------------------------------------->
+            <div v-else-if="hasAdditionalQuestions && computedQuestionnairePages === isLeader ? 7 : 6"
               :key="`${currentPage}-${i}`"
             >
               <v-divider v-if="i > 0" class="mt-4 grey lighten-3"></v-divider>
@@ -113,7 +148,7 @@
                   <ValidationProvider rules="required">
                     <v-radio-group dense hide-details
                       v-model="evaluated.temp.additional[i].answer[0]"
-                      class="mt-2 mx-4 justify-left"
+                      class="mt-4 mx-4 justify-left"
                       style="max-width: fit-content;"
                     >
                       <v-radio v-for="option in item.options"
@@ -136,8 +171,8 @@
     <!-------------------------------------------->
     <!-------------- Action Buttons -------------->
     <!-------------------------------------------->
-    <v-row wrap row justify="center">
-      <v-col cols="12" class="mb-12 mb-sm-0 pt-9 pb-12 pb-sm-6 text-center">
+    <v-row no-gutters justify="center">
+      <v-col cols="12" class="py-7 text-center grey lighten-3">
         <v-btn large
           v-if="currentPage > 0"
           color="secondary lighten-3"
@@ -206,9 +241,7 @@
     </x-confirmation-modal>
     <x-end-dialog
       :lang="$i18n.locale"
-      :evaluated-employee="evaluated && evaluated.employee ? evaluated.employee : {}"
       :show-dialog="endDialog"
-      :sent-email="alreadySentEmail"
     ></x-end-dialog>
 
     <x-loading></x-loading>
