@@ -5,14 +5,14 @@ import CreatePopulationWorker from './evaluation/create-population';
 import EditPopulationWorker from './evaluation/edit-population';
 import EvaluationWorker from './evaluation/check-start-end-dates';
 import EvaluationEmailsWorker from './evaluation/send-emails';
-import ReportCheck from './reports/check-pending-reports';
-import ProcessReportOrganizational from './reports/organizational';
-import ProcessReportByPopulation from './reports/by-population';
+// import ReportCheck from './reports/check-pending-reports';
+// import ProcessReportOrganizational from './reports/organizational';
+// import ProcessReportByPopulation from './reports/by-population';
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export default () => {
-  // setInterval(() => { console.log('Updated at 2023-06-23 11:00'); }, ms('5m'));
+  setInterval(() => { console.log('Updated at 2023-11-10 14:00'); }, ms('5m'));
   const quarter = '15m';
   const minutes = '5m';
   const seconds = '30s';
@@ -44,6 +44,7 @@ export default () => {
       console.log('Processing Segmented Report error:', error);
     });
   }, ms(seconds));
+  */
 
   setInterval(async () => {
     CreatePopulationWorker.checkCreatePopulation().then((res) => {
@@ -103,6 +104,12 @@ export default () => {
       // tslint:disable-next-line: no-console
       console.log('Send Evaluation Email error:', error);
     });
+    EvaluationEmailsWorker.sendIncludedEmails().then((res) => {
+      // tslint:disable-next-line: no-console
+      console.log('Send Included Email:', res);
+    }).catch((error) => {
+      // tslint:disable-next-line: no-console
+      console.log('Send Included Email error:', error);
+    });
   }, ms('4m'));
-  */
 };
