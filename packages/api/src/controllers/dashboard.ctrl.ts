@@ -7,7 +7,7 @@ import { default as EvaluatedService } from '../services/evaluated.srvc';
 
 import IRequest from './contracts/request';
 
-const calculateProgress = (evaluatedTemp, questions) => {
+const calculateProgress = (evaluatedTemp, questions, isLeader) => {
   let totalQuestions = 0;
   let answeredCount = 0;
   for (const key of Object.keys(questions)) {
@@ -35,17 +35,27 @@ const calculateProgress = (evaluatedTemp, questions) => {
       case 'evaluations':
         // Questions Count
         for (const dimKey of Object.keys(questions[key])) {
-          for (const varKey of Object.keys(questions[key][dimKey])) {
-            for (const qKey of Object.keys(questions[key][dimKey][varKey])) {
-              totalQuestions++;
+          const dimension = questions[key][dimKey]
+          if (dimension.attrs) {
+            for (const attrKey of Object.keys(dimension.attrs)) {
+              const attribute = dimension.attrs[attrKey]
+              for (const qKey of Object.keys(attribute.questions)) {
+                totalQuestions++;
+              }
+            }
+          } else {
+            if (isLeader) {
+              for (const qKey of Object.keys(dimension)) {
+                totalQuestions++;
+              }
             }
           }
         }
         // Answers Count
         if (evaluatedTemp[key]) {
           evaluatedTemp[key].forEach(a => {
-            a.variable.forEach(v => {
-              if (v.score) {
+            a.attribute.forEach(q => {
+              if (q.score.length) {
                 answeredCount++;
               }
             });
@@ -81,7 +91,7 @@ class DashboardController {
       score: any,
     }[] = [];
     let evaluationsEmployee;
-    const populationFields = 'status token evaluationRef temp';
+    const populationFields = 'status token indEmpEntId evaluationRef temp';
     if (req.body.employeeId) {
       evaluationsEmployee = await EvaluatedService.findManyByEmployeeId(req.body.employeeId, populationFields);
     } else {
@@ -90,7 +100,7 @@ class DashboardController {
     const productService = await ProductServiceService.findByName('MEDICIÓN DEIP');
 
     for (const evaluated of evaluationsEmployee) {
-      const evaluation = await EvaluationsService.findInProgressById(evaluated.evaluationRef, 'name displayName status additionalSegmentation questionnaire.evaluations additionalQuestions');
+      const evaluation = await EvaluationsService.findInProgressById(evaluated.evaluationRef, 'name displayName status additionalSegmentation questionnaire.evaluations additionalQuestions populationLeaders');
       if (!evaluation) continue;
 
       const evaluationQuestions = {
@@ -103,6 +113,8 @@ class DashboardController {
         delete evaluationQuestions.segmentation;
       }
 
+      const isLeader = evaluation.populationLeaders.includes(evaluated.indEmpEntId);
+
       response.push({
         productService,
         token: evaluated.token,
@@ -111,7 +123,7 @@ class DashboardController {
           name: evaluation.name,
           displayName: evaluation.displayName
         },
-        score: evaluated.temp ? calculateProgress(evaluated.temp, evaluationQuestions) : 0
+        score: evaluated.temp ? calculateProgress(evaluated.temp, evaluationQuestions, isLeader) : 0
       });
     }
     res.send(response);
