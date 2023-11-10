@@ -1,12 +1,16 @@
 
-function getIdx (max, min) {
-  return Math.floor(Math.random() * (max - min) + min)
+function setScore (source, qty) {
+  const result = []
+  for (let i = 0; i < qty; i++) {
+    const newScore = source[Math.floor(Math.random() * source.length)]
+    if (!result.includes(newScore)) {
+      result.push(newScore)
+    }
+  }
+  return result
 }
 
-export default (vueInstance, options) => {
-  options = options || {}
-  const min = options.min && typeof options.min === 'number' ? options.min : 1
-  const max = options.max && typeof options.max === 'number' ? options.max : 5
+export default (vueInstance) => {
   const tmpAnswers = vueInstance.evaluated.temp
   const additionalQs = vueInstance.evaluation.additionalQuestions
 
@@ -19,8 +23,18 @@ export default (vueInstance, options) => {
 
   // Questionnaire
   tmpAnswers.evaluations.forEach(d => {
-    d.variable.forEach(v => {
-      v.score = getIdx(max, min)
+    d.attribute.forEach(v => {
+      switch (v.qType) {
+        case 'closed':
+          v.score = setScore([0, 0.01, 1], 1)
+          break
+        case 'likert':
+          v.score = setScore([0, 0.25, 0.5, 0.75, 1], 1)
+          break
+        case 'options':
+          v.score = setScore([0.01, 0.02, 0.03, 0.04], Math.floor(Math.random() * (4 - 1) + 1))
+          break
+      }
     })
   })
 
