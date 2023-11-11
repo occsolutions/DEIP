@@ -299,8 +299,8 @@ export default {
   evaluation: {
     evaluate: 'Participante',
     information_1: 'Bienvenido(a) a la encuesta DEIP',
-    information_2: 'DEIP, es una medición de XX preguntas que explora las 4 dimensiones de las personas de alta energía positiva: Física, Mental, Emocional y Profesional.',
-    information_3: 'El primer paso en este camino de mejoramiento personal, es el de generar auto-consciencia de tus fortalezas y áreas de oportunidad, por ello te invitamos a contestar de manera totalmente honesta cada una de las preguntas.',
+    information_2: 'El Índice de Evolución DEIP (Enfoque diferencial e interseccional), es una medición que permite identificar el nivel de consciencia, conocimiento y madurez de la organización y su estrategia de Diversidad, Equidad, Inclusión y Pertenencia; a través de 5 dimensiones: Estrategia/Compromiso, Gobernanza/Liderazgo CSI, Cultura CSI, Ciclo de Talento Incluyente, Ecosistema DI y una dimensión adicional para Líderes con Personas a Cargo.',
+    information_3: 'Le invitamos a contestar de manera totalmente honesta cada una de las siguientes preguntas.',
     score_label1: 'Nunca',
     score_label2: 'Casi nunca',
     score_label3: 'Ocasionalmente',
@@ -325,10 +325,10 @@ export default {
     input_next: 'Siguiente',
     answer: 'Respuesta',
     wellcomeDialog: {
-      wellcome_instructions: 'DEIP, es una medición de XX preguntas que explora las 4 dimensiones de las personas de alta energía positiva: Física, Mental, Emocional y Profesional.' +
-      '<br/><br/>El primer paso en este camino de mejoramiento personal, es el de generar auto-consciencia de tus fortalezas y áreas de oportunidad, por ello te invitamos a contestar de manera totalmente honesta cada una de las preguntas.' +
+      wellcome_instructions: 'El Índice de Evolución DEIP (Enfoque diferencial e interseccional), es una medición que permite identificar el nivel de consciencia,<br />conocimiento y madurez de la organización y su estrategia de Diversidad, Equidad, Inclusión y Pertenencia; a través de 5 dimensiones:<br />Estrategia/Compromiso, Gobernanza/Liderazgo CSI, Cultura CSI, Ciclo de Talento Incluyente, Ecosistema DI y una dimensión adicional para Líderes con Personas a Cargo.' +
+      '<br/><br/>Le invitamos a contestar de manera totalmente honesta cada una de las siguientes preguntas.' +
       '<br/><br/>El plazo máximo para completar la encuesta es: {deadline}',
-      must_accept_policy_to_continue: 'Para continuar con la encuesta es indispensable que por favor aceptes las política de tratamiento de datos:',
+      must_accept_policy_to_continue: 'Para continuar con la encuesta es indispensable que por favor acepte nuestra política de tratamiento de datos:',
       i_accept_the: 'Acepto la',
       policy: 'Política de Tratamiento de Datos',
       input_start_poll: 'Comenzar valoración'
