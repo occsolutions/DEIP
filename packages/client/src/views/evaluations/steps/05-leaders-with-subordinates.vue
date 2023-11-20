@@ -48,7 +48,7 @@
 
 <script>
 import Vue from 'vue'
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 
 import XEvaluatedLeadersSelection from '../components/evaluated-leaders-selection.vue'
 
