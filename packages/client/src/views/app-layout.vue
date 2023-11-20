@@ -14,7 +14,7 @@
     >
       <v-app-bar-nav-icon @click.stop="toggleNavigation" text></v-app-bar-nav-icon>
 
-      <img src="/img/20200301_occ_solution_logo_w.png" style="height: 90%;" class="pl-0" alt="OCC - Solutions logo"/>
+      <img src="/img/20231120_occ_deip_logo_w.png" style="height: 100%" class="ml-n1 pl-0" alt="OCC - Solutions logo"/>
 
       <v-spacer></v-spacer>
       <!--
