@@ -12,7 +12,7 @@ import EvaluationEmailsWorker from './evaluation/send-emails';
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export default () => {
-  setInterval(() => { console.log('Updated at 2023-11-10 14:00'); }, ms('5m'));
+  setInterval(() => { console.log('Updated at 2023-11-21 18:00'); }, ms('5m'));
   const quarter = '15m';
   const minutes = '5m';
   const seconds = '30s';
