@@ -1,0 +1,9 @@
+
+{
+  "productName": "ENERGY COMPASS",
+  "clientUrl": "https://energy-compass.occ-solutions.com",
+  "clientPort": 443,
+  "serverUrl": "https://occenergycompassserver.azurewebsites.net",
+  "serverPort": 443,
+  "reference": 7
+}

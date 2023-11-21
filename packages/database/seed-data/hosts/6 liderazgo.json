@@ -1,9 +1,9 @@
 
 {
   "productName": "LIDERAZGO360",
-  "clientUrl": "https://liderazgo360.occ-solutions.com/",
+  "clientUrl": "https://liderazgo360.occ-solutions.com",
   "clientPort": 443,
-  "serverUrl": "https://liderazgo360server.azurewebsites.net/",
+  "serverUrl": "https://liderazgo360server.azurewebsites.net",
   "serverPort": 443,
   "reference": 6
 }
