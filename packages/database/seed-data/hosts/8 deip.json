@@ -1,0 +1,9 @@
+
+{
+  "productName": "DEIP",
+  "clientUrl": "https://deip.occ-solutions.com",
+  "clientPort": 443,
+  "serverUrl": "https://occdeipserver.azurewebsites.net",
+  "serverPort": 443,
+  "reference": 8
+}
