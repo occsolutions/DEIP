@@ -22,7 +22,6 @@
   "dependencies": {
     "@types/cors": "^2.8.12",
     "@types/passport-jwt": "^3.0.1",
-    "@types/string-similarity": "^4.0.0",
     "@types/superagent": "^4.1.15",
     "applicationinsights": "^1.7.6",
     "async": "^3.2.4",
@@ -52,7 +51,6 @@
     "passport-jwt": "^4.0.0",
     "request": "^2.88.0",
     "slugify": "^1.6.5",
-    "string-similarity": "^4.0.4",
     "superagent": "^5.2.2",
     "xlsx": "^0.18.5"
   },
