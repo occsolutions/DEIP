@@ -13,7 +13,7 @@ interface MailInterface {
   success: boolean;
   request: any;
   error: any;
-};
+}
 
 class SendEvaluationsEmails {
 

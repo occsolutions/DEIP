@@ -1,5 +1,5 @@
 
-import {ConnectOptions} from 'mongoose';
+import { ConnectOptions } from 'mongoose';
 
 if (Boolean(process.env.APP_DEIP_APPLICATION_INSIGHTS_ACTIVE)) {
   const appInsights = require('applicationinsights');

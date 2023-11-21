@@ -35,10 +35,10 @@ const calculateProgress = (evaluatedTemp, questions, isLeader) => {
       case 'evaluations':
         // Questions Count
         for (const dimKey of Object.keys(questions[key])) {
-          const dimension = questions[key][dimKey]
+          const dimension = questions[key][dimKey];
           if (dimension.attrs) {
             for (const attrKey of Object.keys(dimension.attrs)) {
-              const attribute = dimension.attrs[attrKey]
+              const attribute = dimension.attrs[attrKey];
               for (const qKey of Object.keys(attribute.questions)) {
                 totalQuestions++;
               }
