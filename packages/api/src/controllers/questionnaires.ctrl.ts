@@ -44,7 +44,7 @@ class QuestionnairesController {
       assignationType: req.body.questionnaire.assignationType,
       assignationFor: req.body.questionnaire.assignationFor,
       baseQuestionnaire: baseQuestionnaire.slug,
-      evaluations: baseQuestionnaire.evaluations,
+      evaluations: baseQuestionnaire.evaluations
     };
     res.send(await QuestionnairesService.save(data));
   }
@@ -65,13 +65,13 @@ class QuestionnairesController {
 
     const questionnaire: any = await QuestionnairesService.findOneBySlug(req.params.slug);
     if (parts.length === 2) {
-      questionnaire.evaluations.leader[req.body.questionnaire.key].label[req.body.questionnaire.lang] = req.body.questionnaire.label
+      questionnaire.evaluations.leader[req.body.questionnaire.key].label[req.body.questionnaire.lang] = req.body.questionnaire.label;
     } else {
       const setLang = (dimention, attr: string, question: string, lang: string, value: string) => {
         dimention.attrs[attr].questions[question].label[lang] = value;
         return dimention;
-      }
-      questionnaire.evaluations[parts[0]] = setLang(questionnaire.evaluations[parts[0]], `${parts[0]}_${parts[1]}`, req.body.questionnaire.key, req.body.questionnaire.lang, req.body.questionnaire.label)
+      };
+      questionnaire.evaluations[parts[0]] = setLang(questionnaire.evaluations[parts[0]], `${parts[0]}_${parts[1]}`, req.body.questionnaire.key, req.body.questionnaire.lang, req.body.questionnaire.label);
     }
 
     res.send(await QuestionnairesService.update(req.params.slug, questionnaire));
@@ -114,12 +114,12 @@ class QuestionnairesController {
     const questionnaire: any = await QuestionnairesService.findOneBySlug(req.params.slug);
     let question: Question;
     if (parts.length === 2) {
-      question = questionnaire.evaluations.leader[req.body.questionnaire.key]
+      question = questionnaire.evaluations.leader[req.body.questionnaire.key];
     } else {
       const getQuestion = (dimention, attr: string, question: string) => {
         return dimention.attrs[attr].questions[question];
-      }
-      question = getQuestion(questionnaire.evaluations[parts[0]], `${parts[0]}_${parts[1]}`, req.body.questionnaire.key)
+      };
+      question = getQuestion(questionnaire.evaluations[parts[0]], `${parts[0]}_${parts[1]}`, req.body.questionnaire.key);
     }
 
     if (!question) {
@@ -129,13 +129,13 @@ class QuestionnairesController {
     const questionType: any = await QuestionnairesService.getQuestionType(question.type);
     if (questionType.editable.length) {
       if (questionType.editable.indexOf('options') !== -1) {
-        question.options = req.body.questionnaire.options
+        question.options = req.body.questionnaire.options;
       }
       if (questionType.editable.indexOf('min') !== -1) {
-        question.min = req.body.questionnaire.min
+        question.min = req.body.questionnaire.min;
       }
       if (questionType.editable.indexOf('limit') !== -1) {
-        question.limit = req.body.questionnaire.limit
+        question.limit = req.body.questionnaire.limit;
       }
     }
 

@@ -47,7 +47,7 @@ export default async (
   }
   // const filteredAnswersBatch = await EvaluatedService.findByBatchByEvaluationIdByItems(answersBatchIds, filters, '_id');
   // filteredIds = filteredAnswersBatch.map(x => x._id.toString());
-  filteredIds = []
+  filteredIds = [];
 
   // Run Answers Dimension
   for (let i = 0; i < answersBatch.length; i++) {
