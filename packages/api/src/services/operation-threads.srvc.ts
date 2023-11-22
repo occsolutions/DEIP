@@ -62,6 +62,23 @@ class OperationThreadsService {
   }
 
   /**
+   * @description Fetches single operation thread by operation type, status, data type & poll ID
+   * @param operation   Thread operation name
+   * @param status      Thread status
+   * @param pollId      Evaluation ID
+   * @param dataType    Type of data in Thread
+   * @returns {Promise<OperationThreads>}
+   */
+  async findByConditions(operation: string, status: string, pollId: string, dataType: string): Promise<OperationThreads|OperationThreadsType|null> {
+    return OperationThreadsRepository.findOne({
+      operation,
+      status,
+      'data._evaluation': new ObjectID(pollId),
+      'data.type': dataType
+    });
+  }
+
+  /**
    * @description Fetches multiple operation threads by operation type and status
    * @param name
    * @returns {Promise<OperationThreads>}
