@@ -7,12 +7,10 @@ class EvaluationMethods {
 
   public async checkStartEndDates() {
     const resp = { launched: 0, closed: 0, reminders: 0 };
-    const pendingEvaluations = await EvaluationService.filterByStatus('pending');
-    const progressEvaluations = await EvaluationService.filterByStatus('in_progress');
-
     const localDate = new Date();
 
     // Pending Evaluations
+    const pendingEvaluations = await EvaluationService.filterByStatus('pending');
     const pendingEvaluationsIds: any = [];
     for (const pendingEvaluation of pendingEvaluations) {
       const diffTimeZone = Number(pendingEvaluation.timeZone.substring(4, 7));
@@ -33,6 +31,7 @@ class EvaluationMethods {
     }
 
     // Evaluations in Progress
+    const progressEvaluations = await EvaluationService.filterByStatus('in_progress');
     const expiredEvaluationsIds: any = [];
     for (const progressEvaluation of progressEvaluations) {
       const diffTimeZone = Number(progressEvaluation.timeZone.substring(4, 7));
@@ -72,6 +71,8 @@ class EvaluationMethods {
   }
 
   private async queueEvaluationEmail (evaluationId: any, type: 'launch'|'reminder') {
+    const exists = await OperationThreadsService.findByConditions('SendEvaluationEmail', 'pending', evaluationId, type);
+    if (exists) return;
     return OperationThreadsService.save({
       operation: 'SendEvaluationEmail',
       status: 'pending',
