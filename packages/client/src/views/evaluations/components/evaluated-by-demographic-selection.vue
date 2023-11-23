@@ -339,10 +339,10 @@
 
       <!-- Population change warning -->
       <v-col cols="12"
-        v-if="isEdit"
+        v-if="isEdit && populationDiff > 0"
         class="pt-0 pb-1 px-1 caption text-right error--text"
       >
-        {{ 1 === 1
+        {{ populationDiff === 1
             ? $t('Views.Evaluations.stepEvaluatedSelection.population_diff_singular')
             : $t('Views.Evaluations.stepEvaluatedSelection.population_diff_plural', {n: `${populationDiff}`})
         }}
@@ -417,6 +417,9 @@ export default Vue.extend({
     }
   },
   computed: {
+    populationDiff () {
+      return this.totalFilteredEmployees - this.evaluation.populationCount
+    },
     getSelectAntiquity () {
       return [
         {
@@ -556,10 +559,10 @@ export default Vue.extend({
             this.evaluation.selectionDetails[listItems[k].item].length
         ) {
           this.evaluation[listItems[k].item] = this.evaluation.selectionDetails[listItems[k].item]
-          this.demographicRefs[listItems[k].name] = this.evaluation[listItems[k].item]
+          this.demographicRefs[listItems[k].item] = this.evaluation[listItems[k].item]
         }
       }
-      if (this.evaluation.status === 'pending') {
+      if (['pending', 'in_progress'].includes(this.evaluation.status)) {
         employeesServices.getByCriteria(this.demographicRefs)
           .then((res) => {
             this.evaluation.evaluated = res.items

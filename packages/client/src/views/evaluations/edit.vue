@@ -314,10 +314,24 @@ export default Vue.extend({
       if (this.selType === 'everybody') {
         this.evaluation.toLeaders = this.employees.filter(x => !this.activePolls.includes(x.id))
       } else {
-        const demographicEmployees = []
+        let demographicEmployees = []
         Object.keys(this.evaluation.selectionDetails).forEach(demographicKey => {
           const demographicId = this.evaluation.selectionDetails[demographicKey]
-          demographicEmployees.push(...this.employees.filter(emp => emp.employee[demographicKey] === demographicId))
+
+          const filtered = typeof demographicId === 'number'
+            ? this.employees.filter(emp => emp.employee[demographicKey] === demographicId)
+            : this.employees.filter(emp => {
+              if (demographicKey.endsWith('Ids')) {
+                demographicKey = demographicKey.slice(0, -1)
+              }
+              return demographicId.includes(emp.employee[demographicKey])
+            })
+
+          if (!demographicEmployees.length) {
+            demographicEmployees = filtered
+          } else {
+            demographicEmployees = filtered.filter(x => demographicEmployees.includes(x))
+          }
         })
         this.evaluation.toLeaders = demographicEmployees.filter(x => !this.activePolls.includes(x.id))
       }
