@@ -21,6 +21,13 @@ import SpendRequest from '../utils/spend-request';
 
 const promisify = require('util.promisify');
 
+interface SuiteResInterface {
+  res: any;
+  success: boolean;
+  request: any;
+  error: any;
+}
+
 class EvaluationsController {
 
   async list(req: IRequest, res: Response) {
@@ -761,12 +768,12 @@ class EvaluationsController {
         });
       });
 
-      const suiteRes: any = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', {
+      const suiteRes: SuiteResInterface = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', {
         population: endPopulation,
         customEmailRelease: evaluation.customEmailReminder,
         file: evaluation.customEmailReminder.attachment ? evaluation.customEmailReminder.attachment : ''
       });
-      if (suiteRes.error) {
+      if (suiteRes.error?.status && suiteRes.error?.msg) {
         throw new Error(`Suite Request Failed with status: ${suiteRes.error!.status} by ${suiteRes.error!.msg}`);
       }
 
