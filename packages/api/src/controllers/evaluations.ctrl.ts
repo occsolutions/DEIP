@@ -633,14 +633,13 @@ class EvaluationsController {
   }
 
   async getAdditionalQuestionAnswers(req: Request, res: Response) {
-    // const answers = await EvaluatedService.findByQuestion(req.params.pollId, req.body.question);
-    res.send();
+    const answers = await EvaluatedService.findAdditionalByQuestion(req.params.pollId, req.body.question);
+    res.send({ answers });
   }
 
   async checkBalance(req: IRequest, resp: Response) {
     const dictionary = {
       'individual': 'MEDICIÓN DEIP',
-      'organizational': 'REPORTE DEIP ORGANIZACIONAL',
       'by_population': 'REPORTE DEIP POR POBLACION'
     };
 
