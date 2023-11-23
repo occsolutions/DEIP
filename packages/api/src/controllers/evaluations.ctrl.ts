@@ -464,20 +464,6 @@ class EvaluationsController {
         throw new BadRequestException('evaluation-no-answers');
       }
 
-      const spend = await SpendRequest(req, 'REPORTE DEIP ORGANIZACIONAL', 1);
-      if (typeof spend === 'string') {
-        throw new BadRequestException('suite-fail/evaluation/spend-fail');
-      }
-
-      const productService: any = await ProductServiceService.findByName('REPORTE DEIP ORGANIZACIONAL');
-      await RunHttpRequest.suitePost(req, 'activities/create-activity', {
-        service: {
-          enterpriseId: req.user.enterprise.id,
-          _id: evaluation._id
-        },
-        productService: productService.code
-      });
-
       await OperationThreadsService.save({
         operation: 'DownloadReport',
         status: 'pending',
@@ -485,7 +471,6 @@ class EvaluationsController {
         data: {
           _evaluation: evaluation._id,
           evaluationSlug: evaluation.slug,
-          operations: spend,
           enterpriseId: evaluation.enterpriseId,
           questionnaire: evaluation.questionnaire.slug,
           answeredCount,
