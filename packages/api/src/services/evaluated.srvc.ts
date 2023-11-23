@@ -165,6 +165,31 @@ class EvaluatedService {
     );
   }
 
+  async findAdditionalByQuestion(evaluationId: any, value: string): Promise<any> {
+    return EvaluatedRepository.aggregate([
+      {
+        $match: {
+          $and: [
+            { evaluationRef: new ObjectID(evaluationId) },
+            { 'temp.additional.question': value }
+          ]
+        }
+      },
+      { $unwind: '$temp' },
+      { $unwind: '$temp.additional' },
+      {
+        $match: {
+          'temp.additional.question': value
+        }
+      },
+      {
+        $replaceRoot: {
+          newRoot: '$temp.additional'
+        }
+      }
+    ]);
+  }
+
   async setPolicyAccepted(tokenId: string, url: string): Promise<EvaluatedType|null> {
     const data = {
       accepted: true,
