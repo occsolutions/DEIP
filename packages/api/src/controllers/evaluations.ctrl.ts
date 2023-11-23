@@ -373,8 +373,12 @@ class EvaluationsController {
     if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
       throw new BadRequestException('evaluation-not-found');
     }
-    // evaluation.evaluated = await EvaluatedService.getByEvaluationRef(evaluation._id, 'employee');
-    res.send(evaluation);
+    const activePolls = await EvaluatedService.getByEvaluationRefAndStatus(evaluation._id, ['in_progress', 'completed'], 'indEmpEntId');
+
+    res.send({
+      evaluation,
+      activePolls: activePolls.map(x => x.indEmpEntId)
+    });
   }
 
   async getOneToShow(req: IRequest, res: Response) {
