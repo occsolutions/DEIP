@@ -21,6 +21,13 @@ import SpendRequest from '../utils/spend-request';
 
 const promisify = require('util.promisify');
 
+interface SuiteResInterface {
+  res: any;
+  success: boolean;
+  request: any;
+  error: any;
+}
+
 class EvaluationsController {
 
   async list(req: IRequest, res: Response) {
@@ -373,8 +380,12 @@ class EvaluationsController {
     if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
       throw new BadRequestException('evaluation-not-found');
     }
-    // evaluation.evaluated = await EvaluatedService.getByEvaluationRef(evaluation._id, 'employee');
-    res.send(evaluation);
+    const activePolls = await EvaluatedService.getByEvaluationRefAndStatus(evaluation._id, ['in_progress', 'completed'], 'indEmpEntId');
+
+    res.send({
+      evaluation,
+      activePolls: activePolls.map(x => x.indEmpEntId)
+    });
   }
 
   async getOneToShow(req: IRequest, res: Response) {
@@ -460,20 +471,6 @@ class EvaluationsController {
         throw new BadRequestException('evaluation-no-answers');
       }
 
-      const spend = await SpendRequest(req, 'REPORTE DEIP ORGANIZACIONAL', 1);
-      if (typeof spend === 'string') {
-        throw new BadRequestException('suite-fail/evaluation/spend-fail');
-      }
-
-      const productService: any = await ProductServiceService.findByName('REPORTE DEIP ORGANIZACIONAL');
-      await RunHttpRequest.suitePost(req, 'activities/create-activity', {
-        service: {
-          enterpriseId: req.user.enterprise.id,
-          _id: evaluation._id
-        },
-        productService: productService.code
-      });
-
       await OperationThreadsService.save({
         operation: 'DownloadReport',
         status: 'pending',
@@ -481,7 +478,6 @@ class EvaluationsController {
         data: {
           _evaluation: evaluation._id,
           evaluationSlug: evaluation.slug,
-          operations: spend,
           enterpriseId: evaluation.enterpriseId,
           questionnaire: evaluation.questionnaire.slug,
           answeredCount,
@@ -637,14 +633,13 @@ class EvaluationsController {
   }
 
   async getAdditionalQuestionAnswers(req: Request, res: Response) {
-    // const answers = await EvaluatedService.findByQuestion(req.params.pollId, req.body.question);
-    res.send();
+    const answers = await EvaluatedService.findAdditionalByQuestion(req.params.pollId, req.body.question);
+    res.send({ answers });
   }
 
   async checkBalance(req: IRequest, resp: Response) {
     const dictionary = {
       'individual': 'MEDICIÓN DEIP',
-      'organizational': 'REPORTE DEIP ORGANIZACIONAL',
       'by_population': 'REPORTE DEIP POR POBLACION'
     };
 
@@ -772,12 +767,12 @@ class EvaluationsController {
         });
       });
 
-      const suiteRes: any = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', {
+      const suiteRes: SuiteResInterface = await RunHttpRequest.suitePost(undefined, 'emails/create-deip-emails', {
         population: endPopulation,
         customEmailRelease: evaluation.customEmailReminder,
         file: evaluation.customEmailReminder.attachment ? evaluation.customEmailReminder.attachment : ''
       });
-      if (suiteRes.error) {
+      if (suiteRes.error?.status && suiteRes.error?.msg) {
         throw new Error(`Suite Request Failed with status: ${suiteRes.error!.status} by ${suiteRes.error!.msg}`);
       }
 

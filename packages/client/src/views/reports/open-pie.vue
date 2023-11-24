@@ -140,7 +140,7 @@ export default {
 
               for (const opt of options) {
                 this.answers[this.selectedQuestion][opt] = res.answers.filter(a => {
-                  return a.additionalQuestions[0].answer[0] === opt
+                  return a.answer[0] === opt
                 }).length
               }
               this.generatePie(this.selectedQuestion)

@@ -181,6 +181,7 @@ export default Vue.extend({
         'Views.Evaluations.edit.stepper_additional_segmentation',
         'Views.Evaluations.edit.stepper_revition'
       ],
+      activePolls: [],
       evaluation: {
         name: '',
         displayName: '',
@@ -260,7 +261,8 @@ export default Vue.extend({
         this.balance = res.balance.balance
         this.productService = res.balance.productService
         this.price = res.balance.productService
-        this.assembleEvaluation(res.evaluation)
+        this.activePolls = res.evaluation.activePolls
+        this.assembleEvaluation(res.evaluation.evaluation)
       })
       .catch(err => {
         this.$store.dispatch('alert/error', this.$t(`errors.${err.code}`))
@@ -310,14 +312,28 @@ export default Vue.extend({
     },
     mapLeaders () {
       if (this.selType === 'everybody') {
-        this.evaluation.toLeaders = this.employees
+        this.evaluation.toLeaders = this.employees.filter(x => !this.activePolls.includes(x.id))
       } else {
-        const demographicEmployees = []
+        let demographicEmployees = []
         Object.keys(this.evaluation.selectionDetails).forEach(demographicKey => {
           const demographicId = this.evaluation.selectionDetails[demographicKey]
-          demographicEmployees.push(...this.employees.filter(emp => emp.employee[demographicKey] === demographicId))
+
+          const filtered = typeof demographicId === 'number'
+            ? this.employees.filter(emp => emp.employee[demographicKey] === demographicId)
+            : this.employees.filter(emp => {
+              if (demographicKey.endsWith('Ids')) {
+                demographicKey = demographicKey.slice(0, -1)
+              }
+              return demographicId.includes(emp.employee[demographicKey])
+            })
+
+          if (!demographicEmployees.length) {
+            demographicEmployees = filtered
+          } else {
+            demographicEmployees = filtered.filter(x => demographicEmployees.includes(x))
+          }
         })
-        this.evaluation.toLeaders = demographicEmployees
+        this.evaluation.toLeaders = demographicEmployees.filter(x => !this.activePolls.includes(x.id))
       }
 
       this.evaluation.leaders = this.employees.filter(emp => this.evaluation.populationLeaders?.includes(emp.id))

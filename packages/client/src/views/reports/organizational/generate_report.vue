@@ -12,18 +12,6 @@
         {{ $t('Views.Evaluations.report.generate_report') }}
       </v-btn>
 
-      <x-confirm-spend-dialog
-        :confirmText="$t('Views.Evaluations.report.confirm_report_title')"
-        :costText="$t('Views.Evaluations.report.report_cost')"
-        :showModalConfirm="showModalConfirm"
-        :balance="balance"
-        :price="price"
-        :noBalanceResponse="noBalanceResponse"
-        :disableButtonModal="balance > price"
-        @result="verifySpend"
-        @update="checkBalance">
-      </x-confirm-spend-dialog>
-
       <!-- Dialog already Generated Report -->
       <x-dialog-already-generated-report
         :show.sync="alreadyGeneratedModal"
@@ -52,9 +40,7 @@ export default Vue.extend({
   data () {
     return {
       loadingBtn: false,
-      showModalConfirm: false,
       disableButtonModal: true,
-      noBalanceResponse: false,
       alreadyGeneratedModal: false,
       balance: 0,
       price: 0
@@ -70,7 +56,7 @@ export default Vue.extend({
       if (this.alreadyGenerated) {
         this.alreadyGeneratedModal = true
       } else {
-        this.checkBalance()
+        this.runGenerateReport()
       }
     },
     runGenerateReport () {
@@ -81,43 +67,15 @@ export default Vue.extend({
             'alert/success',
             this.$t('Views.Evaluations.report.organizational.operation_init')
           )
-          this.showModalConfirm = false
           this.$emit('reportGenerated')
         })
         .catch((err) => {
-          if (err.code === 'suite-fail/evaluation/spend-fail') {
-            this.noBalanceResponse = true
-            this.disableButtonModal = true
-            this.$store.dispatch('alert/error', this.$t('errors.no_balance'))
-          } else {
-            this.$store.dispatch('alert/error', this.$t(`errors.${err.code}`))
-          }
+          this.$store.dispatch('alert/error', this.$t(`errors.${err.code}`))
         })
         .finally(() => {
           this.loadingBtn = false
           this.$store.dispatch('loading/hide')
         })
-    },
-    checkBalance () {
-      this.$store.dispatch('loading/show')
-      this.loadingBtn = true
-      return evaluationsService.checkBalance('organizational')
-        .then((res) => {
-          this.balance = res.balance
-          this.price = res.productService
-          this.showModalConfirm = true
-        })
-        .finally(() => {
-          this.$store.dispatch('loading/hide')
-        })
-    },
-    verifySpend ($event) {
-      if ($event === 1) {
-        this.runGenerateReport()
-      } else {
-        this.loadingBtn = false
-      }
-      this.showModalConfirm = false
     }
   }
 })

@@ -24,7 +24,7 @@
           </h2>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-menu offset-y transition="slide-y-transition">
+        <v-menu offset-y left transition="slide-y-transition">
           <template v-slot:activator="{ on }">
             <v-btn
               color="primary"
@@ -36,15 +36,16 @@
             </v-btn>
           </template>
           <v-list>
-            <v-list-item v-if="evaluation.status === 'completed'"
+            <v-list-item
+              v-if="evaluation.status === 'completed'"
               @click="$router.push(`/evaluations/reports/${evaluation._id}`)"
             >
               <v-icon class="mr-2" small>fa-file-pdf</v-icon>
               <v-list-item-title>{{ $t('Views.Evaluations.show.download_reports') }}</v-list-item-title>
             </v-list-item>
             <v-list-item
-              @click="$router.push(`/evaluations/${evaluation.slug}/edit`)"
               v-if="evaluation.status !== 'completed'"
+              @click="$router.push(`/evaluations/${evaluation.slug}/edit`)"
             >
               <v-icon class="mr-2" small>fa-pen</v-icon>
               <v-list-item-title>{{ $t('Views.Evaluations.show.edit') }}</v-list-item-title>
@@ -57,15 +58,15 @@
               <v-list-item-title>{{ $t('Views.Evaluations.show.tracking') }}</v-list-item-title>
             </v-list-item>
             <v-list-item
-              @click="openConfirmationModal('reminders')"
               v-if="evaluation.status === 'in_progress'"
+              @click="openConfirmationModal('reminders')"
             >
               <v-icon class="mr-2" small>fa-share</v-icon>
               <v-list-item-title>{{ $t('Views.Evaluations.show.sending_reminders') }}</v-list-item-title>
             </v-list-item>
             <v-list-item
-              @click="openConfirmationModal('close')"
               v-if="evaluation.status === 'in_progress'"
+              @click="openConfirmationModal('close')"
             >
               <v-icon class="mr-2" small>fa-times-circle</v-icon>
               <v-list-item-title>{{ $t('Views.Evaluations.show.close_evaluation') }}</v-list-item-title>

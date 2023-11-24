@@ -105,7 +105,7 @@
             </v-row>
             <!-- Report Requests -->
             <v-row>
-              <v-col cols="12" class="my-0 pt-4 py-0">
+              <v-col cols="12" class="mt-0 mb-3 pt-4 py-0">
                 <x-report-threads
                   :key="demographicItemsFetched"
                   :threads="reportThreads"
@@ -120,7 +120,7 @@
           <v-card-actions>
             <v-row row wrap>
               <v-btn large
-                class="ml-5 my-3"
+                class="ma-3"
                 to="/evaluations"
               >
                 {{ $t('Views.Evaluations.report.input_back') }}
