@@ -37,13 +37,6 @@ import pdfFonts from 'pdfmake/build/vfs_fonts.js'
 
 import initial from './mixins/00-initial'
 import cover from './mixins/01-cover'
-import index from './mixins/02-index'
-// import intro from '../organizational/mixins/03-intro'
-import model from '../organizational/mixins/04-model'
-import methodology from '../organizational/mixins/05-methodology'
-import gralScores from './mixins/07-gral-scores'
-import dimResults from './mixins/08-dimension-results'
-import dimDetails from './mixins/09-dimension-details'
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
@@ -51,14 +44,7 @@ export default {
   name: 'download-demographic-report',
   mixins: [
     initial,
-    cover,
-    index,
-    // intro,
-    model,
-    methodology,
-    gralScores,
-    dimResults,
-    dimDetails
+    cover
   ],
   props: {
     pollId: String,

@@ -1,150 +1,315 @@
 
-import evaluationService from '../../../../services/evaluations'
-
-import CoverBase64 from '../../base64Files/cover'
-import HeaderBase64 from '../../base64Files/header'
-import WaterMarkBase64 from '../../base64Files/watermark'
+import pdfUtils from '../../utils/pdf'
+const echarts = require('echarts')
 
 export default {
-  methods: {
-    calculateGeneralScores (hasPrevious) {
-      let currentScores = 0
-      let previousScores = 0
-      let cnt = 0
-      for (const key of Object.keys(this.answersDimension)) {
-        currentScores += this.answersDimension[key].general.score
-        if (hasPrevious) {
-          previousScores += this.answersDimension[key].general.previous
+  data () {
+    return {
+      variablesTables: [
+        {
+          titles: {
+            0: this.$t('engagementReport.my_inspiration.attributes.0'),
+            1: this.$t('engagementReport.culture_alignment'),
+            2: this.$t('engagementReport.purpose'),
+            3: this.$t('engagementReport.future_vision')
+          },
+          min: 0,
+          max: 3
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.my_inspiration.attributes.1'),
+            4: this.$t('engagementReport.autonomy'),
+            5: this.$t('engagementReport.strengths_and_talents'),
+            6: this.$t('engagementReport.my_contribution')
+          },
+          min: 3,
+          max: 6
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.my_inspiration.attributes.2'),
+            7: this.$t('engagementReport.motivation'),
+            8: this.$t('engagementReport.they_value_me'),
+            9: this.$t('engagementReport.performance')
+          },
+          min: 6,
+          max: 9
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.my_job.attributes.0'),
+            10: this.$t('engagementReport.recognized_organization'),
+            11: this.$t('engagementReport.organization_performance'),
+            12: this.$t('engagementReport.pride_of_belonging_organization')
+          },
+          min: 9,
+          max: 12
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.my_job.attributes.1'),
+            13: this.$t('engagementReport.recognized_area'),
+            14: this.$t('engagementReport.area_performance'),
+            15: this.$t('engagementReport.pride_of_being_part_area')
+          },
+          min: 12,
+          max: 15
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.my_job.attributes.2'),
+            16: this.$t('engagementReport.materials_and_equipment'),
+            17: this.$t('engagementReport.offices_and_dress_code'),
+            18: this.$t('engagementReport.balance_personal_professional')
+          },
+          min: 15,
+          max: 18
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.positive_work_enviroment.attributes.0'),
+            19: this.$t('engagementReport.being_myself'),
+            20: this.$t('engagementReport.freedom_of_expression'),
+            21: this.$t('engagementReport.interpersonal_relationships')
+          },
+          min: 18,
+          max: 21
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.positive_work_enviroment.attributes.1'),
+            22: this.$t('engagementReport.care_for_people'),
+            23: this.$t('engagementReport.inclusive_workplace'),
+            24: this.$t('engagementReport.respectful_treatment')
+          },
+          min: 21,
+          max: 24
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.positive_work_enviroment.attributes.2'),
+            25: this.$t('engagementReport.equal_opportunities'),
+            26: this.$t('engagementReport.salary_and_benefits'),
+            27: this.$t('engagementReport.recognition_culture')
+          },
+          min: 24,
+          max: 27
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.my_team.attributes.0'),
+            28: this.$t('engagementReport.trust_quality_relationships'),
+            29: this.$t('engagementReport.responsibility_meeting_goals'),
+            30: this.$t('engagementReport.workload_balance')
+          },
+          min: 27,
+          max: 30
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.my_team.attributes.1'),
+            31: this.$t('engagementReport.team_network'),
+            32: this.$t('engagementReport.communication_team'),
+            33: this.$t('engagementReport.diversity')
+          },
+          min: 30,
+          max: 33
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.my_team.attributes.2'),
+            34: this.$t('engagementReport.agility_processes'),
+            35: this.$t('engagementReport.innovation'),
+            36: this.$t('engagementReport.access_transparency_information')
+          },
+          min: 33,
+          max: 36
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.my_development_and_learning.attributes.0'),
+            37: this.$t('engagementReport.autonomous_learning'),
+            38: this.$t('engagementReport.development_potential'),
+            39: this.$t('engagementReport.expectations_role')
+          },
+          min: 36,
+          max: 39
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.my_development_and_learning.attributes.1'),
+            40: this.$t('engagementReport.career_plan'),
+            41: this.$t('engagementReport.future_organization'),
+            42: this.$t('engagementReport.horizontal_mobility')
+          },
+          min: 39,
+          max: 42
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.my_development_and_learning.attributes.2'),
+            43: this.$t('engagementReport.learning_tracking'),
+            44: this.$t('demographicReport.learning_culture'),
+            45: this.$t('engagementReport.genuine_interest')
+          },
+          min: 42,
+          max: 45
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.the_leaders.attributes.0'),
+            46: this.$t('engagementReport.admiration'),
+            47: this.$t('engagementReport.transparency_honesty'),
+            48: this.$t('engagementReport.motivation')
+          },
+          min: 45,
+          max: 48
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.the_leaders.attributes.1'),
+            49: this.$t('engagementReport.clear_transparent_objectives'),
+            50: this.$t('engagementReport.coaching_feedback'),
+            51: this.$t('engagementReport.leader_access')
+          },
+          min: 48,
+          max: 51
+        },
+        {
+          titles: {
+            0: this.$t('engagementReport.the_leaders.attributes.2'),
+            52: this.$t('engagementReport.systematic_thinking'),
+            53: this.$t('engagementReport.strategic_planning'),
+            54: this.$t('engagementReport.social_intelligence_collaboration')
+          },
+          min: 51,
+          max: 54
         }
-        cnt++
+      ]
+    }
+  },
+  watch: {
+    rtype (val) {
+      if (val === 'byitems') {
+        this.variablesTables[13].titles['0'] = this.$t('engagementReport.opportunities_of_growth')
       }
-      this.gralScore = currentScores / cnt
-      if (hasPrevious) {
-        this.gralPrevScore = previousScores / cnt
+    }
+  },
+  methods: {
+    $getCalcData (data) {
+      this.nameReport = data.nameReport
+      this.dimensions = data.dimensions
+      this.attributes = data.attributes
+      this.variables = data.variables
+      this.current = data.current
+      this.previous = data.previous
+      this.currentPoll = data.currentPoll
+      this.previousPoll = data.previousPoll
+      this.itemsCover = data.itemsCover
+      this.itemsSelecteText = data.itemsSelecteText
+      this.rtype = data.reportType.toLowerCase()
+      this.hasPrevious = data.hasPrevious
+      this.totalParticipantsPercent = data.totalParticipantsPercent
+      this.totalObtained = data.totalObtained
+      this.totalReceivers = data.totalReceivers
+      this.dispersionCounter = data.dispersionCounter
+      this.rateCounter = data.rateCounter
+      this.rankingCounter = data.rankingCounter
+      this.dispersionLowAttrFooterContent = data.dispersionLowAttrFooterContent
+      this.dispersionHighAttrFooterContent = data.dispersionHighAttrFooterContent
+      this.dispersionLowVarFooterContent = data.dispersionLowVarFooterContent
+      this.dispersionHighVarFooterContent = data.dispersionHighVarFooterContent
+      this.executeResultRutine = true
+      this.variables.forEach(variable => {
+        const vTable = this.variablesTables.find(vTable => vTable.min < variable.id && vTable.max >= variable.id)
+        if (vTable) {
+          vTable.titles[variable.id] = (variable.translate || {}).label
+        }
+      })
+      this.pollReferences = data.pollReferences
+      this.wordsChart = data.wordsChart
+      this.totalFiltered = data.totalFiltered
+      this.enterpriseLogoBase64 = data.logoBase64 ? `data:image/pngbase64,${data.logoBase64}` : this.enterpriseLogoBase64
+    },
+    generateTableBarsChart (name, result, prevResult, dimensionId) {
+      const canvas = document.createElement('canvas')
+      canvas.width = 500
+      canvas.height = 90
+
+      const tableBarsChart = echarts.init(canvas)
+      tableBarsChart.setOption(
+        pdfUtils.generateTableBars(
+          this.$round(result),
+          this.$round(prevResult),
+          dimensionId
+        )
+      )
+
+      tableBarsChart.on('finished', () => {
+        this.bars[name] = tableBarsChart.getDataURL()
+        this.$set(this.renderPart, name, true)
+      })
+    },
+    $generateVariablesTableGroupBars () {
+      let i = 1
+      for (const tab of this.variablesTables) {
+        const chunk = Object
+          .entries(this.current.variablesResults)
+          .slice(tab.min, tab.max)
+          .map((arr) => arr[0])
+
+        let actualTotal = 0
+        let previousTotal = 0
+        let currentTotal = 0
+
+        let j = 1
+        let dimensionId
+        for (const vari of chunk) {
+          const actTotal = this.current.variablesResults[vari]
+          const prevTotal = this.hasPrevious ? this.previous.variablesResults[vari] : 0
+          const curTotal = this.rtype === 'byitems' ? this.current.wholesVariablesResults[vari] : 0
+          dimensionId = this.variables.find(v => v.id === Number(vari)).dimensionId
+
+          this.generateTableBarsChart(`curAttr${i}${j}`, actTotal, this.rtype === 'byitems' ? curTotal : prevTotal, dimensionId)
+
+          actualTotal += Number.parseInt(actTotal)
+          previousTotal += Number.parseInt(prevTotal)
+          currentTotal += Number.parseInt(curTotal)
+
+          j++
+        }
+
+        actualTotal = actualTotal / 3
+        previousTotal = previousTotal ? previousTotal / 3 : 0
+        currentTotal = currentTotal / 3
+
+        this.generateTableBarsChart(`totAttr${i}`, actualTotal, this.rtype === 'byitems' ? currentTotal : previousTotal, dimensionId)
+
+        i++
       }
     },
-    async $getInitialData () {
-      await evaluationService.getOneReportByThreadId(this.thread._id, this.pollId)
-        .then((res) => {
-          this.expectedPolls = this.evaluationData.populationCount
-          this.completedPolls = res.data.answeredCount
-          this.answersDimension = res.data.answersDimension
-          this.highestScores = res.data.highestScores
-          this.lowestScores = res.data.lowestScores
-          this.highestScatter = res.data.highestScatter
-          this.lowestScatter = res.data.lowestScatter
-          this.hasPrevious = res.data.hasPrevious
-          this.calculateGeneralScores(this.hasPrevious)
-          this.generateResponseRatePie()
-        })
-        .catch((err) => {
-          console.log(err)
-          this.$store.dispatch('alert/error', this.$t(`errors.${err.code}`))
-        })
+    // CÁLCULO DE TOTALES
+    $calcTotal (group, exact) {
+      const vals = Object.values(group)
+      const total = vals.reduce((acc, crt) => acc + crt, 0) / vals.length
+      return exact ? total : this.$round(total)
     },
-    async $getConfiguration () {
-      return {
-        pageSize: 'A4',
-        pageOrientation: 'landscape',
-        pageMargins: [40, 100, 50, 27],
-        info: {
-          title: this.$t('Views.Evaluations.report.organizational.title'),
-          author: 'OCC Solutions',
-          subject: this.$t('Views.Evaluations.report.organizational.subject')
-        },
-        defaultStyle: {
-          fontSize: 11,
-          font: 'Roboto',
-          lineHeight: 1.2,
-          margin: [0, 25, 0, 0]
-        },
-        header: (currentPage) => {
-          const resultObj = {
-            image: HeaderBase64,
-            width: 400,
-            height: 100,
-            margin: [52, -12, 0, 0]
-          }
-          if (currentPage === 1) return [{}]
-          return [resultObj]
-        },
-        footer: (currentPage) => {
-          if (currentPage === 1) return
-          return [
-            {
-              margin: [28, 0, 17, -4],
-              columns: [
-                {
-                  width: '2%',
-                  text: currentPage.toString(),
-                  alignment: 'left',
-                  fontSize: 10,
-                  color: '#999999'
-                },
-                {
-                  text: 'DEIP',
-                  alignment: 'right',
-                  fontSize: 9,
-                  color: '#999999'
-                },
-                {
-                  width: '10%',
-                  text: this.user.enterprise.name,
-                  alignment: 'right',
-                  fontSize: 10,
-                  color: '#555555',
-                  bold: true
-                },
-                {
-                  width: '12%',
-                  text: this.getDateString(),
-                  alignment: 'right',
-                  fontSize: 10,
-                  color: '#777777'
-                }
-              ]
-            }
-          ]
-        },
-        background: (currentPage) => {
-          if (currentPage === 1) {
-            return {
-              // Cover Background
-              image: CoverBase64
-            }
-          } else {
-            return {
-              // OCC Solutions logo watermark
-              image: WaterMarkBase64,
-              absolutePosition: { x: -77, y: 244 }
-            }
-          }
-        },
-        content: [
-          // 01 Cover
-          this.$generateCover(),
-          // 02 Table of Contents
-          this.$generateTableOfContents(),
-          // 03 Introduction
-          this.$generateIntroduction(),
-          // 04 Model Description
-          this.$generateModelDescription(),
-          // 05 Methodology
-          this.$generateMethodology(),
-          // 06 Response Rate
-          this.$generateResponseRate(),
-          // 07 General Scores
-          this.$generateGeneralScores(),
-          // 08 Dimensions/Variables
-          this.$generateDimensionsResults(),
-          // 09 Detailed Dimensions
-          this.$generateDimensionDetail(),
-          // 10 Highest/Lowest Scores
-          this.$generateScoreRank(),
-          // 11 Highest/Lowest Scatter
-          this.$generateScatterRank()
-        ]
-      }
+    // SORTER
+    $sortKeys (obj, asc, dont) {
+      if (dont) return Object.keys(obj)
+      return Object.keys(obj).filter(key => key !== 'null').sort((a, b) => {
+        if (asc) return obj[a] - obj[b]
+        return obj[b] - obj[a]
+      })
+    },
+    // REDONDEADOR
+    $round (num) {
+      // let result = (Math.round(num * 10) / 10).toFixed(2)
+      let result = parseFloat(num).toFixed(2)
+      if (result === '0.00') result = '0'
+      if (result === '100.00') result = '100'
+      return result
     }
   }
 }

@@ -1,13 +1,33 @@
 
-import pdfUtils from '../../utils/pdf'
+import footerBase64 from '../../base64files/index-footer'
 
 export default {
   methods: {
     $generateTableOfContents () {
       return [
-        // Page Title
-        pdfUtils.generateHeaderTitle(this.$t('Views.Evaluations.report.toc.index'), false),
-        // Table of Contents
+        {
+          table: {
+            widths: [479],
+            body: [
+              [
+                {
+                  text: this.$t('engagementReport.index'),
+                  font: 'League Spartan',
+                  bold: true,
+                  fontSize: 40,
+                  margin: [50, 6, 0, 0]
+                }
+              ]
+            ]
+          },
+          layout: {
+            defaultBorder: ''
+          },
+          alignment: 'left',
+          pageBreak: 'before',
+          margin: [-40, 0, 0, 0]
+        },
+        // TABLE OF CONTENTS
         {
           toc: {
             id: 'mainToc',
@@ -16,12 +36,14 @@ export default {
             }
           },
           color: '#222222',
-          fontSize: 13,
-          bold: true,
-          margin: [50, 17, 40, 0],
+          fontSize: 12.5,
+          margin: [15, -1, 10, 0],
           maxHeight: 0,
-          lineHeight: 1,
-          characterSpacing: 0.4
+          lineHeight: 0.8
+        },
+        {
+          image: footerBase64,
+          absolutePosition: { x: -1, y: 658 }
         }
       ]
     }
