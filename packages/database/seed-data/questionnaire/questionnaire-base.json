@@ -694,7 +694,7 @@
                 "en": "Choose the 3 attributes that you consider to be part of the leader profile of your organization"
               },
               "type": "options",
-              "limit": null,
+              "limit": 3,
               "min": 1,
               "options": [
                 {
