@@ -46,15 +46,28 @@ import pdfFonts from 'pdfmake/build/vfs_fonts.js'
 import initial from './mixins/00-initial'
 import cover from './mixins/01-cover'
 import index from './mixins/02-index'
-import intro from './mixins/03-intro'
-import model from './mixins/04-model'
-import methodology from './mixins/05-methodology'
-import responseRate from './mixins/06-response-rate'
-import gralScores from './mixins/07-gral-scores'
-import dimResults from './mixins/08-dimension-results'
-import dimDetails from './mixins/09-dimension-details'
-import scoresRank from './mixins/10-highest-lowest-scores'
-import scatterRank from './mixins/11-highest-lowest-scatter'
+import whatIs from './mixins/03-what-is'
+import recommendations from './mixins/04-recommendations'
+import howWorks from './mixins/05-how-works'
+import indicators from './mixins/06-indicators'
+import methodology from './mixins/07-methodology'
+import responseRate from './mixins/08a-response-rate'
+import responseRateDetails from './mixins/08b-response-rate-details'
+import gralResults from './mixins/09a-gral-results'
+import gralDimResults from './mixins/09b-gral-dim-results'
+import renderChartPie from './mixins/09c-chart-pie'
+import gralAttrResults from './mixins/09d-gral-attr-results'
+import specificAttrResults from './mixins/10a-specific-attr-results'
+import specificAttrResultsPop from './mixins/10b-specific-attr-results'
+import dimensionRanking from './mixins/11a-ranking-dim'
+import attributeRanking from './mixins/11b-ranking-attr'
+import variableRanking from './mixins/11c-ranking-var'
+import dimensionScatter from './mixins/12a-scatter-dim'
+import attributeScatter from './mixins/12b-scatter-attr'
+import variableScatter from './mixins/12c-scatter-var'
+import dimensionTrend from './mixins/13a-trend-dim'
+import attributeTrend from './mixins/13b-trend-attr'
+import variableTrend from './mixins/13c-trend-var'
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 const echarts = require('echarts')
@@ -65,15 +78,28 @@ export default {
     initial,
     cover,
     index,
-    intro,
-    model,
+    whatIs,
+    recommendations,
+    howWorks,
+    indicators,
     methodology,
     responseRate,
-    gralScores,
-    dimResults,
-    dimDetails,
-    scoresRank,
-    scatterRank
+    responseRateDetails,
+    gralResults,
+    gralDimResults,
+    renderChartPie,
+    gralAttrResults,
+    specificAttrResults,
+    specificAttrResultsPop,
+    dimensionRanking,
+    attributeRanking,
+    variableRanking,
+    dimensionScatter,
+    attributeScatter,
+    variableScatter,
+    dimensionTrend,
+    attributeTrend,
+    variableTrend
   ],
   props: {
     pollId: String,

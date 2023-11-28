@@ -1,155 +1,43 @@
 
-import evaluationService from '../../../../services/evaluations'
-
-import CoverBase64 from '../../base64Files/cover'
-import HeaderBase64 from '../../base64Files/header'
-import WaterMarkBase64 from '../../base64Files/watermark'
-
 export default {
   methods: {
-    generateReportName () {
-      if (this.criteria.type === 'demographic' && this.demographicCuts[this.criteria.code]) {
-        this.segmentLabel = this.demographicCuts[this.criteria.code].label
-      }
-      if (this.criteria.type === 'segmentation') {
-        const addSeg = this.evaluationData.additionalSegmentation
-        this.segmentLabel = addSeg[this.criteria.code].trans[this.user.lang].label
-      }
+    // OBTENCIÓN DE DATOS INICIALES
+    $getSummaryCalcData (data) {
+      this.pollName = data.pollName
+      this.totalItems = data.demographicItems
+      this.totalReceivers = data.totalReceivers
+      this.totalObtained = data.totalObtained
+      this.totalParticipantsPercent = data.totalParticipantsPercent
 
-      this.reportName = `${this.evaluationData.name} - ${this.segmentLabel}`
+      this.dimensionsByDemographicsCuts = data.dimensionsByDemographicsCuts
+      this.resultsByDemographicsCuts = data.resultsByDemographicsCuts
+      this.currentDimensionsResults = data.currentDimensionsResults
+
+      this.lang = data.lang
+      this.nameReport = `${this.$t('demographicReport.demographic_population_title')} - ${this.pollName}`
+      this.enterpriseLogoBase64 = data.logoBase64 ? `data:image/pngbase64,${data.logoBase64}` : this.enterpriseLogoBase64
     },
-    calculateGeneralScores () {
-      for (const segmentKey of Object.keys(this.segmentedAnswers)) {
-        const segmentAnswersDimension = this.segmentedAnswers[segmentKey].answersDimension
-        let currentScores = 0
-        let cnt = 0
-        for (const key of Object.keys(segmentAnswersDimension)) {
-          currentScores += segmentAnswersDimension[key].filtered
-          cnt++
-        }
-        this.gralScore[segmentKey] = currentScores / cnt
-      }
+    // CÁLCULO DE TOTALES
+    $calcTotal (group, exact) {
+      const vals = Object.values(group)
+      const total = vals.reduce((acc, crt) => acc + crt, 0) / vals.length
+      return exact ? total : this.$round(total)
     },
-    async $getInitialData () {
-      await evaluationService.getOneReportByThreadId(this.thread._id, this.pollId)
-        .then((res) => {
-          this.expectedPolls = this.evaluationData.populationCount
-          this.completedPolls = res.data.answeredCount
-          this.answersDimension = res.data.answersDimension
-          this.criteria = res.data.criteria[0]
-          this.segments = res.data.segments
-          this.segmentedAnswers = res.data.segmentedAnswers
-          this.generateReportName()
-          this.calculateGeneralScores()
-        })
-        .catch((err) => {
-          console.log(err)
-          this.$store.dispatch('alert/error', this.$t(`errors.${err.code}`))
-        })
+    // SORTER
+    $sortKeys (obj, asc, dont) {
+      if (dont) return Object.keys(obj)
+      return Object.keys(obj).filter(key => key !== 'null').sort((a, b) => {
+        if (asc) return obj[a] - obj[b]
+        return obj[b] - obj[a]
+      })
     },
-    async $getConfiguration () {
-      return {
-        pageSize: 'A4',
-        pageOrientation: 'landscape',
-        pageMargins: [40, 100, 50, 27],
-        info: {
-          title: this.$t('Views.Evaluations.report.demographic.title'),
-          author: 'OCC Solutions',
-          subject: this.$t('Views.Evaluations.report.demographic.subject')
-        },
-        defaultStyle: {
-          fontSize: 11,
-          font: 'Roboto',
-          lineHeight: 1.2,
-          margin: [0, 25, 0, 0]
-        },
-        header: (currentPage) => {
-          const resultObj = {
-            image: HeaderBase64,
-            width: 644,
-            height: 100,
-            margin: [52, -12, 0, 0]
-          }
-          if (currentPage === 1) return [{}]
-          return [resultObj]
-        },
-        footer: (currentPage) => {
-          if (currentPage === 1) return
-          return [
-            {
-              margin: [28, 0, 17, -4],
-              columns: [
-                {
-                  width: '2%',
-                  text: currentPage.toString(),
-                  alignment: 'left',
-                  fontSize: 10,
-                  color: '#999999'
-                },
-                {
-                  text: 'DEIP',
-                  alignment: 'right',
-                  fontSize: 9,
-                  color: '#999999'
-                },
-                {
-                  width: '10%',
-                  text: this.user.enterprise.name,
-                  alignment: 'right',
-                  fontSize: 10,
-                  color: '#555555',
-                  bold: true
-                },
-                {
-                  width: '12%',
-                  text: this.getDateString(),
-                  alignment: 'right',
-                  fontSize: 10,
-                  color: '#777777'
-                }
-              ]
-            }
-          ]
-        },
-        background: (currentPage) => {
-          if (currentPage === 1) {
-            return {
-              // Cover Background
-              image: CoverBase64
-            }
-          } else {
-            return {
-              // OCC Solutions logo watermark
-              image: WaterMarkBase64,
-              absolutePosition: { x: -77, y: 244 }
-            }
-          }
-        },
-        content: [
-          // 01 Cover
-          this.$generateCover(),
-          // 02 Table of Contents
-          this.$generateTableOfContents(),
-          // 03 Introduction
-          // this.$generateIntroduction(),
-          // 04 Model Description
-          this.$generateModelDescription(),
-          // 05 Methodology
-          this.$generateMethodology(),
-          // 07 General Scores
-          this.$generateGeneralScores(),
-          // 08 Dimension Results
-          this.$generateDimensionResults(),
-          // 09 Detailed Dimensions
-          this.$generateDimensionDetail(),
-          // 12a Burnout Index
-          this.$generateBurnoutIndexInd(),
-          // 12b Burnout Index
-          this.$generateBurnoutIndexOrg(),
-          // 13 Health Index
-          this.$generateHealthIndex()
-        ]
-      }
+    // REDONDEADOR
+    $round (num) {
+      // let result = (Math.round(num * 10) / 10).toFixed(2)
+      let result = parseFloat(num).toFixed(2)
+      if (result === '0.00') result = '0'
+      if (result === '100.00') result = '100'
+      return result
     }
   }
 }

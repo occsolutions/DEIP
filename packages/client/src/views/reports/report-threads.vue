@@ -19,7 +19,7 @@
             v-if="thread.data.progress !== 100"
             class="caption d-inline-block mt-1 mr-2 grey--text text--darken-1 font-weight-bold"
           >
-            {{ thread.data.progress }}%
+            {{ thread.data.progress || 0 }}%
           </span>
           <v-icon color="primary" v-if="thread.status === 'pending'">
             mdi-progress-clock
