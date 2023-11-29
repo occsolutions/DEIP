@@ -42,6 +42,9 @@ export default {
   getOneById: (id: string) => {
     return service.get(`find-by-id/${id}`)
   },
+  getParticipantsByPoll: (pollId: string) => {
+    return service.get(`get-participants-by-poll/${pollId}`)
+  },
   getCountEvaluated: (slug: string) => {
     return service.get(`get-count-evaluated/${slug}`)
   },

@@ -144,6 +144,10 @@ export default {
       demographic_cuts: 'A cortes demográficos'
     },
     please_wait: 'Por favor espere mientras se cargan todos los demográficos',
+    select_country_first: 'Debe seleccionar al menos un (1) país.',
+    population: 'Población',
+    people: 'personas',
+    others: 'otros',
     demographic_cuts: {
       departments: 'Áreas / Departamentos',
       charges: 'Cargos',
@@ -377,7 +381,8 @@ export default {
     general_desc: 'Este reporte muestra los resultados de la apreciación de todos los participantes de la medición.',
     no_members: 'No hubo participación de los miembros',
     demographic_title: 'Reporte por corte demográfico',
-    demographic_desc: 'Seleccione uno de los cortes demograficos o segmentación adicional para generar un reporte detallado con las variables que lo componen:',
+    demographic_desc: 'En este reporte podrás escoger y filtrar los puntajes de los diferentes cortes demográficos que hayas configurado al momento de crear la medición.',
+    demographic_desc2: 'Este reporte cuenta con los puntajes de la población filtrada por los cortes demográficos que selecciones a continuación:',
     generate_report: 'Generar reporte',
     generated_reports: 'Reportes Generados',
     generated_reports_desc: 'En esta sección encontrarás todos los reportes que has generado.<br>Dependiendo del número de participantes cada reporte puede tardar hasta 30 minutos en generarse. Puedes actualizar el progreso recargando la página.<br>Se recomienda generar un máximo de 5 reportes a la vez, para mejorar el rendimiento de la plataforma.',
