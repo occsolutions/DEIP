@@ -31,14 +31,14 @@
       </v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-row v-if="thread.data.type === 'by_demographic'">
-          <v-col class="text-center pt-0">
-            <v-chip large
-              class="ma-0 px-6 grey--text text--darken-3"
+          <v-col class="text-center">
+            <v-chip
+              class="my-0 mx-1 px-6 grey--text text--darken-3"
               v-for="(demographic, $i) in getDemographicChip(thread.data.criteria)"
               :key="$i"
             >
               <span class="font-weight-bold body-2">
-                {{ demographic.toUpperCase() }}
+                {{ demographic ? demographic.toUpperCase() : '' }}
               </span>
             </v-chip>
           </v-col>
@@ -126,15 +126,27 @@ export default {
       return this.$t(`reports.demographicCuts.${tag}`)
     },
     getDemographicChip (criteria) {
+      const demographicKeys = {
+        academicDegrees: 'academicDegree',
+        additionalDemographics1: 'optionalDemo2',
+        additionalDemographics2: 'optionalDemo1',
+        age: 'age',
+        antiquity: 'antiquity',
+        charges: 'charge',
+        countries: 'country',
+        departments: 'departments',
+        genders: 'gender',
+        headquarters: 'headquarter',
+        jobTypes: 'jobTypes'
+      }
+
       const labels = []
-      for (const filter of criteria) {
-        if (filter.type === 'demographic' && this.demographics[filter.code]) {
-          labels.push(this.demographics[filter.code].label)
-        }
-        if (filter.type === 'segmentation') {
-          labels.push(
-            this.evaluation.additionalSegmentation[filter.code].trans[this.user.lang].label
-          )
+      for (const key of Object.keys(criteria)) {
+        // const filter = criteria[key]
+        if (Object.keys(demographicKeys).includes(key)) {
+          labels.push(this.demographics[demographicKeys[key]]?.label)
+        } else {
+          // Segmentation
         }
       }
       return labels

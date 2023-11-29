@@ -58,11 +58,7 @@
 
             <p>{{ $t('Views.Evaluations.report.demographic_desc') }}</p>
             <x-generate-demographic-report
-              :key="demographicItemsFetched"
-              :demographics-fetched="demographicItemsFetched"
               :poll-id="$route.params.id"
-              :demographic-items="demographicItems"
-              :additional-segmentation="evaluation.additionalSegmentation"
               :disable-button="disableNoAnswers"
               :lang="user.lang"
               @reportGenerated="demographicReportGenerated"
@@ -184,8 +180,8 @@ export default {
       disableNoAnswers: false,
       evaluation: {},
       loadingDemographics: false,
-      demographicItemsFetched: false,
       demographicItems: {},
+      demographicItemsFetched: false,
       cutsSelected: {},
       showModal: false,
       reportThreads: [],
@@ -194,11 +190,6 @@ export default {
     }
   },
   watch: {
-    reportType (val) {
-      if (val === 'by_demographic' && !this.demographicItemsFetched) {
-        this.getDemographicItems()
-      }
-    },
     reportThreads: {
       handler (val) {
         if (val.length) {
@@ -289,8 +280,6 @@ export default {
           if (res.items) {
             res.items.forEach(item => {
               this.demographicItems[item.code] = {
-                id: item.id,
-                optional: item.optional,
                 label: item.translate.label
               }
             })
@@ -301,7 +290,7 @@ export default {
           console.log(err)
           this.$store.dispatch('alert/error', this.$t(err.code))
         })
-        .then(() => {
+        .finally(() => {
           this.loadingDemographics = false
         })
     },

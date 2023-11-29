@@ -2,38 +2,18 @@
 <template>
   <v-row>
     <!------------------------------------------------------------------------>
-    <!--------------------- Segmentation Selection Table --------------------->
+    <!------------------------ Demographics Selectors ------------------------>
     <!------------------------------------------------------------------------>
-    <v-col cols="12" v-if="tableItems.length" class="pt-0 px-4">
-      <p class="mb-0 body-2 text-right font-weight-bold">
-        {{ $t('Views.Evaluations.report.demographic.selected') }}:
-        {{ selectedFiltersCount }}
-      </p>
-      <v-simple-table dense class="filters-table">
-        <template v-slot:default>
-          <tbody>
-            <tr v-for="(item, i) in tableItems" :key="`s-${i}-${item.id}`">
-              <th v-if="item.type === 'header'" class="pt-2 pr-0 pl-3 grey--text text--darken-2">
-                {{ item.label }}
-              </th>
-              <td v-else class="pr-0 pl-3">
-                <v-checkbox dense hide-details
-                  v-model="item.selected"
-                  :ripple="false"
-                  :label="item.label"
-                  :disabled="(optionalAnswerCount[item.code] && optionalAnswerCount[item.code] === 0) || (selectedFiltersCount > 0 && !item.selected)"
-                  color="primary"
-                  class="mt-1 mb-2 small-label"
-                  style="max-width: fit-content;"
-                ></v-checkbox>
-              </td>
-            </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
-      <p class="mb-0 ml-1 caption primary--text font-weight-bold">
-        {{ $t('Views.Evaluations.report.demographic.table_legend') }}
-      </p>
+    <v-col cols="12" class="pt-0 px-4">
+      <x-filter-demographic-items
+        :cuts-selected="cutsSelected"
+        :poll-id="$route.params.id"
+        @receivers-modified="handleReceiversModified($event)"
+        @demographics-filtered="setDemographicsFiltered($event)"
+        @answers-fetched="handleReportButton($event)"
+        @demographics-selects="demographicsSelects = $event"
+        @loading="loadingFilters = $event"
+      ></x-filter-demographic-items>
     </v-col>
 
     <!------------------------------------------------------------------------>
@@ -42,7 +22,7 @@
     <v-col cols="12" class="py-5 text-center">
       <v-btn large
         :loading="loadingBtn"
-        :disabled="disableButton || !selectedFiltersCount"
+        :disabled="disableButton || disableGenerateButton"
         color="primary"
         @click="openDialog()"
       >
@@ -61,6 +41,23 @@
         @result="verifySpend"
         @update="checkBalance">
       </x-confirm-spend-dialog>
+
+      <v-dialog v-model="showModal" width="400px">
+        <v-card>
+          <v-card-text class="pt-9 pb-6 text-center">
+            <h6>{{ $t('Views.Evaluations.report.no_answers_modal_msg') }}</h6>
+          </v-card-text>
+          <v-card-actions class="pa-2">
+            <v-btn large block
+              color="#3898d9"
+              class="white--text"
+              @click="showModal = !showModal"
+            >
+              {{ $t('Views.Evaluations.report.input_accept') }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-col>
   </v-row>
 </template>
@@ -100,134 +97,40 @@
 import Vue from 'vue'
 
 import evaluationsService from '../../../services/evaluations'
+import XFilterDemographicItems from '../components/filter-demographic-items.vue'
 
 export default Vue.extend({
   name: 'generate-demographic-report',
   components: {
-    //
+    XFilterDemographicItems
   },
   props: {
     pollId: String,
-    demographicsFetched: Boolean,
-    demographicItems: Object,
-    additionalSegmentation: Object,
     disableButton: Boolean,
     lang: String
   },
   data () {
     return {
-      timeout: null,
+      cutsSelected: {},
+      demographicsSelects: {},
+      loadingFilters: false,
+      showModal: false,
       loadingBtn: false,
       showModalConfirm: false,
       disableButtonModal: true,
+      disableGenerateButton: true,
       noBalanceResponse: false,
-      tableItems: [],
       balance: 0,
-      price: 0,
-      dictionary: {
-        age: 'birthdate',
-        gender: 'genderId',
-        antiquity: 'admission',
-        departments: 'departmentId',
-        charge: 'chargeId',
-        jobTypes: 'jobTypeId',
-        country: 'countryId',
-        headquarter: 'headquarterId',
-        academicDegree: 'academicDegreeId',
-        optionalDemo1: 'additionalDemographic1Id',
-        optionalDemo2: 'additionalDemographic2Id'
-      },
-      optionalAnswerCount: {}
+      price: 0
     }
   },
   watch: {
     disableButton (val) {
       this.disableButtonModal = val
-    },
-    demographicItems: {
-      handler (val) {
-        const keys = Object.keys(val)
-        const demographics = [{
-          id: 0,
-          type: 'header',
-          label: this.$t('Views.Evaluations.report.demographic.demographic_cuts')
-        }]
-        for (const key of keys) {
-          demographics.push({
-            id: val[key].id,
-            type: 'demographic',
-            code: key,
-            field: this.dictionary[key],
-            selected: false,
-            is_optional: val[key].optional,
-            label: val[key].label
-          })
-        }
-        demographics.sort((a, b) => a.id - b.id)
-        this.tableItems = [...this.tableItems, ...demographics]
-      },
-      immediate: true,
-      deep: true
-    },
-    additionalSegmentation: {
-      handler (val) {
-        const keys = Object.keys(val)
-        const segmentations = [{
-          id: 0,
-          type: 'header',
-          label: this.$t('Views.Evaluations.report.demographic.additional_segmentation')
-        }]
-        let segCnt = 0
-        for (const key of keys) {
-          if (val[key].selected) {
-            segmentations.push({
-              id: val[key].id,
-              type: 'segmentation',
-              code: key,
-              selected: false,
-              is_optional: true,
-              label: val[key].trans[this.lang].label
-            })
-            segCnt++
-          }
-        }
-
-        if (segCnt) {
-          segmentations.sort((a, b) => a.id - b.id)
-          this.tableItems = [...this.tableItems, ...segmentations]
-        }
-      },
-      immediate: true,
-      deep: true
-    },
-    demographicsFetched: {
-      handler (val) {
-        if (val) {
-          setTimeout(() => {
-            this.optionalDemographics = this.tableItems.filter(x => {
-              return x.is_optional && x.type === 'demographic'
-            })
-            if (this.optionalDemographics.length > 0) {
-              this.countOptionalAnswers('demographic', this.optionalDemographics)
-            }
-
-            this.optionalSegmentation = this.tableItems.filter(x => {
-              return x.is_optional && x.type === 'segmentation'
-            })
-            if (this.optionalSegmentation.length > 0) {
-              this.countOptionalAnswers('segmentation', this.optionalSegmentation)
-            }
-          }, 140)
-        }
-      },
-      immediate: true
     }
   },
   computed: {
-    selectedFiltersCount () {
-      const selected = this.tableItems.filter(x => x.selected === true)
-      return selected.length
-    }
+    //
   },
   methods: {
     openDialog () {
@@ -238,16 +141,8 @@ export default Vue.extend({
       }
     },
     runGenerateReport () {
-      const selectedTableItems = this.tableItems.filter(item => item.selected === true).map(x => {
-        return {
-          id: x.id,
-          type: x.type,
-          code: x.code,
-          field: x.field
-        }
-      })
       this.$store.dispatch('loading/show')
-      return evaluationsService.generateReportDemographic(this.pollId, selectedTableItems)
+      return evaluationsService.generateReportDemographic(this.pollId, this.cutsSelected.listOfDemographics)
         .then(() => {
           this.$store.dispatch(
             'alert/success',
@@ -294,6 +189,16 @@ export default Vue.extend({
         this.loadingBtn = false
       }
       this.showModalConfirm = false
+    },
+    handleReceiversModified (e) {
+      this.disableGenerateButton = !e
+    },
+    setDemographicsFiltered (e) {
+      this.demographicsFiltered = e
+    },
+    handleReportButton (e) {
+      this.disableGenerateButton = !e
+      this.showModal = e
     },
     countOptionalAnswers (type, data) {
       evaluationsService.countAnswersByOptionalCuts(this.pollId, type, data)
