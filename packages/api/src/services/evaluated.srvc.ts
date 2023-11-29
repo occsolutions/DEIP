@@ -48,6 +48,46 @@ class EvaluatedService {
     }, select);
   }
 
+  async getCompletedDemographicsByEvaluation(evaluationRef: any): Promise<EvaluatedType[]> {
+    return EvaluatedRepository.aggregate([
+      {
+        $match: {
+          $and: [
+            { evaluationRef: new ObjectID(evaluationRef) },
+            { status: 'completed' }
+          ]
+        }
+      },
+      { $unwind: '$employee' },
+      { $unwind: '$employee.employeeEnterprise' },
+      {
+        $project: {
+          _id: 0,
+          employee: {
+            employeeEnterprise: {
+              academicDegreeId: 1,
+              additionalDemographic1Id: 1,
+              additionalDemographic2Id: 1,
+              admission: 1,
+              birthdate: 1,
+              chargeId: 1,
+              countryId: 1,
+              departmentId: 1,
+              genderId: 1,
+              headquarterId: 1,
+              jobTypeId: 1
+            }
+          }
+        }
+      },
+      {
+        $replaceRoot: {
+          newRoot: '$employee.employeeEnterprise'
+        }
+      }
+    ]);
+  }
+
   async getAtLeastOneActiveParticipant(evaluationRef: any): Promise<EvaluatedType|null> {
     return EvaluatedRepository.findOne({
       evaluationRef: new ObjectID(evaluationRef),
@@ -63,6 +103,14 @@ class EvaluatedService {
     return EvaluatedRepository.countDocuments({
       evaluationRef: new ObjectID(evaluationRef),
       status: 'completed'
+    });
+  }
+
+  async countByEvaluationIdAndFilterItems(evaluationId: any, filters: any): Promise<number> {
+    return EvaluatedRepository.countDocuments({
+      evaluationRef: new ObjectID(evaluationId),
+      status: 'completed',
+      ...filters
     });
   }
 
