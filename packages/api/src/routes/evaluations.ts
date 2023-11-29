@@ -75,6 +75,11 @@ export default (middlewares, services) => {
   );
 
   EvaluationsRouter.get(
+    '/get-participants-by-poll/:pollId',
+    EvaluationsController.getParticipantsByPoll
+  );
+
+  EvaluationsRouter.get(
     '/get-count-evaluated/:slug',
     EvaluationsController.getCountEvaluatedsByTeam
   );
