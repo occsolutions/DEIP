@@ -367,6 +367,16 @@ class EvaluationsController {
     res.send(oldEvaluation);
   }
 
+  async getParticipantsByPoll(req: IRequest, res: Response) {
+    const evaluation: any = await EvaluationsService.findById(req.params.pollId, 'enterpriseId');
+    if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
+      throw new BadRequestException('evaluation-not-found');
+    }
+
+    const completedPolls = await EvaluatedService.getCompletedDemographicsByEvaluation(evaluation._id);
+    res.send(completedPolls);
+  }
+
   async getCountEvaluatedsByTeam(req: IRequest, res: Response) {
     const evaluation: any = await EvaluationsService.findOneBySlug(req.params.slug, 'enterpriseId populationCount');
     if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
@@ -509,36 +519,63 @@ class EvaluationsController {
         throw new BadRequestException('evaluation-not-completed');
       }
 
-      const filters: any = {
-        $or: []
+      const demographicIds = {
+        academicDegrees: 'academicDegreeId',
+        additionalDemographics1: 'additionalDemographic1Id',
+        additionalDemographics2: 'additionalDemographic2Id',
+        charges: 'chargeId',
+        countries: 'countryId',
+        departments: 'departmentId',
+        headquarters: 'headquarterId',
+        jobTypes: 'jobTypeId'
       };
-      for (const segment of req.body.criteria) {
-        if (segment.type === 'demographic') {
-          const demoFilters: any = {};
-          demoFilters[`demographicItems.${segment.field}`] = { $ne: null };
-          filters.$or.push(demoFilters);
-        }
 
-        if (segment.type === 'segmentation') {
-          const segFilters: any = {
-            $and: []
-          };
-          const tmpObj1 = {};
-          tmpObj1['segmentation.segmentationId'] = segment.id;
-          segFilters.$and.push(tmpObj1);
-          const tmpObj2 = {};
-          tmpObj2['segmentation.detailId'] = { $ne: -1 };
-          segFilters.$and.push(tmpObj2);
+      const calcDates = (rng1, rng2) => {
+        const dateOne = new Date();
+        const dateTwo = new Date();
+        dateOne.setHours(0,0,0,0);
+        dateTwo.setHours(0,0,0,0);
+        dateOne.setMonth(dateOne.getMonth() - rng1 * 12);
+        dateTwo.setMonth(dateTwo.getMonth() - rng2 * 12);
 
-          filters.$or.push(segFilters);
+        return { dateOne, dateTwo };
+      };
+
+      const filters: any = {
+        $and: []
+      };
+      const criteria = req.body.criteria;
+      for (const key of Object.keys(criteria)) {
+        const demoFilters: any = {};
+        switch (key) {
+          case 'age':
+            const ageDates = calcDates(criteria[key][0], criteria[key][1]);
+            demoFilters['employee.employeeEnterprise.birthdate'] = {
+              $gte: ageDates.dateTwo.toISOString().slice(0, 10),
+              $lt: ageDates.dateOne.toISOString().slice(0, 10)
+            };
+            break;
+          case 'antiquity':
+            const antiquityDates = calcDates(criteria[key][0], criteria[key][1]);
+            demoFilters['employee.employeeEnterprise.admission'] = {
+              $gte: antiquityDates.dateTwo.toISOString().slice(0, 10),
+              $lt: antiquityDates.dateOne.toISOString().slice(0, 10)
+            };
+            break;
+          case 'genders':
+            demoFilters['employee.employeeEnterprise.genderId'] = { $in: [criteria[key]] };
+            break;
+          default:
+            demoFilters[`employee.employeeEnterprise.${demographicIds[key]}`] = { $in: criteria[key] };
+            break;
         }
+        filters.$and.push(demoFilters);
       }
 
-      const filteredAnswersCount = 0;
-      // const filteredAnswersCount = await EvaluationAnswersService.countByEvaluationIdAndFilterItems(
-      //   evaluation._id,
-      //   filters
-      // );
+      const filteredAnswersCount = await EvaluatedService.countByEvaluationIdAndFilterItems(
+        evaluation._id,
+        filters
+      );
       if (!filteredAnswersCount) {
         throw new BadRequestException('evaluation-no-answers');
       }
@@ -572,7 +609,6 @@ class EvaluationsController {
           evaluationSlug: evaluation.slug,
           operations: spend,
           enterpriseId: evaluation.enterpriseId,
-          questionnaire: evaluation.questionnaire.slug,
           answeredCount: evaluation.populationCompletedCount,
           filteredAnswersCount,
           type: 'by_demographic',
