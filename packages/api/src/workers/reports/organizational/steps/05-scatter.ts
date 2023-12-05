@@ -1,46 +1,12 @@
 
 import { IDimensionScatter } from '../contracts/scatter-dimension';
+import AnswersUtils from '../utils/answers';
 
 export default async (
   answersForScatter: IDimensionScatter
 ) => {
-
-  const getInitAttribute = () => ({
-    // scatter: 0,
-    questions: {
-      question_1: {
-        scatter: 0
-      },
-      question_2: {
-        scatter: 0
-      },
-      question_3: {
-        scatter: 0
-      },
-      question_4: {
-        scatter: 0
-      }
-    }
-  });
-
-  const getInitDimension = () => ({
-    // scatter: 0,
-    variables: {
-      var_1: getInitAttribute(),
-      var_2: getInitAttribute(),
-      var_3: getInitAttribute()
-    }
-  });
-
-  const initScatterDimension = () => ({
-    physical: getInitDimension(),
-    mental: getInitDimension(),
-    emotional: getInitDimension(),
-    professional: getInitDimension()
-  });
-
   // Init final Scatter structure
-  const scatterDimension = initScatterDimension();
+  const scatterDimension = await AnswersUtils.iniAnswersForScatter(true);
 
   const getScatter = (scores: Array<number>, media: number) => {
     let distanceSum = 0;
@@ -56,26 +22,47 @@ export default async (
   // Dimensions
   for (const dimKey of Object.keys(answersForScatter)) {
 
-    // Variables
-    const dimVariables = answersForScatter[dimKey].variables;
-    for (const varKey of Object.keys(dimVariables)) {
+    if (dimKey !== 'leader') {
+      // Attributes
+      const dimAttributes = answersForScatter[dimKey].attrs;
+      for (const attrKey of Object.keys(dimAttributes)) {
 
-      // Questions
-      const varQuestions = answersForScatter[dimKey].variables[varKey].questions;
-      for (const qKey of Object.keys(varQuestions)) {
-        const data = answersForScatter[dimKey].variables[varKey].questions[qKey].scatter;
-        const media = data.average;
-        const scores = data.scores;
-        const scatter = getScatter(scores, media);
+        // Questions
+        const attrQuestions = answersForScatter[dimKey].attrs[attrKey].questions;
+        for (const qKey of Object.keys(attrQuestions)) {
+          const scatterData = answersForScatter[dimKey].attrs[attrKey].questions[qKey].scatter;
+          const scores = scatterData.scores;
+          if (scores.length) {
+            const media = scatterData.average;
+            const scatter = getScatter(scores, media);
 
-        higherLower.push({
-          dimension: dimKey,
-          attribute: varKey,
-          question: qKey,
-          scatter
-        });
+            higherLower.push({
+              dimension: dimKey,
+              attribute: attrKey,
+              question: qKey,
+              scatter
+            });
 
-        scatterDimension[dimKey].variables[varKey].questions[qKey].scatter = scatter;
+            scatterDimension[dimKey].attrs[attrKey].questions[qKey].scatter = scatter;
+          }
+        }
+      }
+    } else {
+      for (const qKey of Object.keys(answersForScatter[dimKey])) {
+        const scatterData = answersForScatter[dimKey][qKey].scatter;
+        const scores = scatterData.scores;
+        if (scores.length) {
+          const media = scatterData.average;
+          const scatter = getScatter(scores, media);
+
+          higherLower.push({
+            dimension: dimKey,
+            question: qKey,
+            scatter
+          });
+
+          scatterDimension[dimKey][qKey].scatter = scatter;
+        }
       }
     }
   }

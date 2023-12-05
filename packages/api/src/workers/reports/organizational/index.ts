@@ -1,8 +1,6 @@
 
 import { default as OperationThreadsService } from '../../../services/operation-threads.srvc';
 
-import AnswersUtils from './utils/answers';
-
 import StepOne from './steps/01-answers';
 import StepTwo from './steps/02-previous';
 import StepThree from './steps/03-previous-answers';
@@ -36,7 +34,8 @@ class ReportMethods {
             threadData._evaluation,
             threadData.tempData.alreadyProcessedAnswers,
             threadData.answersForScatter,
-            threadData.answersDimension
+            threadData.answersDimension,
+            threadData.populationLeaders
           );
 
           threadData.tempData.alreadyProcessedAnswers += tempStepOne.processedAnswers;
@@ -70,12 +69,12 @@ class ReportMethods {
           }
           break;
         case 3: // Get Previous Answers
-
           const tempStepThree = await StepThree(
             threadData.previous._id,
             threadData.tempData.previous.alreadyProcessedAnswers,
             threadData.answersForScatter,
-            threadData.answersDimension
+            threadData.answersDimension,
+            threadData.populationLeaders
           );
 
           threadData.tempData.previous.alreadyProcessedAnswers += tempStepThree.processedAnswers;
@@ -116,7 +115,7 @@ class ReportMethods {
           break;
       }
 
-      const status = threadData.step === 6 && threadData.progress === 100 ? 'completed' : 'in_progress';
+      const status = threadData.progress === 100 ? 'completed' : 'in_progress';
 
       await OperationThreadsService.findOneAndUpdateStatusData(pendingOperationThread._id, status, threadData);
 
