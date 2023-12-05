@@ -513,6 +513,10 @@ class AnswersUtils {
             const question = answers[dimCnt].attribute[qCnt];
             answersDimension[dimKey].attrs[attrKey].questions[qKey].qType = question.qType;
             if (['closed', 'likert'].includes(question.qType)) {
+              if (question.qType === 'closed' && ![0, 1].includes(question.score[0])) {
+                // Closed questions that were not answered with yes o no, worth zero (0)
+                question.score[0] = 0;
+              }
               answersDimension[dimKey].attrs[attrKey].questions[qKey].general[dynamicKey] += question.score[0];
               if (!previous) {
                 answersForScatter[dimKey].attrs[attrKey].questions[qKey].scatter.scores.push(question.score[0]);
@@ -532,6 +536,10 @@ class AnswersUtils {
             const question = answers[dimCnt].attribute[qCnt];
             answersDimension[dimKey][qKey].qType = question.qType;
             if (['closed', 'likert'].includes(question.qType)) {
+              if (question.qType === 'closed' && ![0, 1].includes(question.score[0])) {
+                // Closed questions that were not answered with yes o no, worth zero (0)
+                question.score[0] = 0;
+              }
               answersDimension[dimKey][qKey].general[dynamicKey] += question.score[0];
               if (!previous) {
                 answersForScatter[dimKey][qKey].scatter.scores.push(question.score[0]);
