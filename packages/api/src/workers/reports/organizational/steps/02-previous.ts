@@ -15,7 +15,7 @@ export default async (
   res.previous = await EvaluationsService.findOnePrevious(evaluationId, enterpriseId, current.questionnaire, current.deliveredAt, 'slug');
 
   if (res.previous && res.previous._id) {
-    res.answerCount = await EvaluatedService.countByEvaluationRef(res.previous._id);
+    res.answerCount = await EvaluatedService.countCompletedByEvaluationRef(res.previous._id);
   }
 
   return res;

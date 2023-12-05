@@ -10,18 +10,20 @@ export default async (
   evaluationId: string,
   alreadyProcessedAnswersCount: number,
   answersForScatter: IDimensionScatter,
-  answersDimension: IAnswersDimension
+  answersDimension: IAnswersDimension,
+  populationLeaders: Array<number>
 ) => {
   const chunkSize = 100;
-  const fields = 'temp';
-  const answersBatch: any = await EvaluatedService.findByBatchByEvaluationId(evaluationId, alreadyProcessedAnswersCount, chunkSize, fields);
+  const fields = 'indEmpEntId temp.evaluations';
+  const answersBatch: any = await EvaluatedService.findByBatchByEvaluationIdAndStatusCompleted(evaluationId, alreadyProcessedAnswersCount, chunkSize, fields);
 
   // Run Answers Dimension
   for (let i = 0; i < answersBatch.length; i++) {
     const temp = AnswersUtils.runAnswersDimension(
-      answersBatch[i].temp,
+      answersBatch[i].temp.evaluations,
       answersForScatter,
       answersDimension,
+      populationLeaders.includes(answersBatch[i].indEmpEntId),
       false
     );
     answersForScatter = temp.scatter;
