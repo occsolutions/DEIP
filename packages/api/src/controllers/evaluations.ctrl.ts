@@ -476,7 +476,7 @@ class EvaluationsController {
         throw new BadRequestException('evaluation-not-completed');
       }
 
-      const answeredCount = await EvaluatedService.countByEvaluationRef(evaluation._id);
+      const answeredCount: number = await EvaluatedService.countCompletedByEvaluationRef(evaluation._id);
       if (!answeredCount) {
         throw new BadRequestException('evaluation-no-answers');
       }
@@ -489,7 +489,6 @@ class EvaluationsController {
           _evaluation: evaluation._id,
           evaluationSlug: evaluation.slug,
           enterpriseId: evaluation.enterpriseId,
-          questionnaire: evaluation.questionnaire.slug,
           answeredCount,
           type: 'organizational'
         }
