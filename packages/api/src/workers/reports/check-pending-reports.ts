@@ -1,5 +1,6 @@
 
 import { default as OperationThreadsService } from '../../services/operation-threads.srvc';
+import { default as EvaluationsService } from '../../services/evaluations.srvc';
 
 import InitOrganizational from './organizational/steps/00-init-data';
 import InitByPopulation from './by-population/steps/00-init-data';
@@ -23,6 +24,9 @@ class ReportChecker {
     const threadData = pendingOperationThread.data;
     threadData.step = 1;
     threadData.progress = 10;
+
+    const evaluation: any = await EvaluationsService.findById(threadData._evaluation, 'populationLeaders');
+    threadData.populationLeaders = evaluation ? evaluation.populationLeaders : [];
 
     switch (threadData.type) {
       case 'organizational':
