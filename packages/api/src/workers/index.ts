@@ -5,8 +5,8 @@ import CreatePopulationWorker from './evaluation/create-population';
 import EditPopulationWorker from './evaluation/edit-population';
 import EvaluationWorker from './evaluation/check-start-end-dates';
 import EvaluationEmailsWorker from './evaluation/send-emails';
-// import ReportCheck from './reports/check-pending-reports';
-// import ProcessReportOrganizational from './reports/organizational';
+import ReportCheck from './reports/check-pending-reports';
+import ProcessReportOrganizational from './reports/organizational';
 // import ProcessReportByPopulation from './reports/by-population';
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -17,7 +17,6 @@ export default () => {
   const minutes = '5m';
   const seconds = '30s';
 
-  /*
   setInterval(() => {
     ReportCheck.checkReportRequests().then((res) => {
       // tslint:disable-next-line: no-console
@@ -36,6 +35,7 @@ export default () => {
       // tslint:disable-next-line: no-console
       console.log('Processing Report error:', error);
     });
+    /*
     ProcessReportByPopulation.processReportResults().then((res) => {
       // tslint:disable-next-line: no-console
       console.log('Processed Segmented Report:', res);
@@ -43,8 +43,8 @@ export default () => {
       // tslint:disable-next-line: no-console
       console.log('Processing Segmented Report error:', error);
     });
+    */
   }, ms(seconds));
-  */
 
   setInterval(async () => {
     CreatePopulationWorker.checkCreatePopulation().then((res) => {
