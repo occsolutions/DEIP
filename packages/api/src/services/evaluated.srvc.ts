@@ -106,10 +106,27 @@ class EvaluatedService {
     });
   }
 
+  async countCompletedByEvaluationRefInIds(evaluationRef: any, ids: Array<number>): Promise<number> {
+    return EvaluatedRepository.countDocuments({
+      evaluationRef: new ObjectID(evaluationRef),
+      status: 'completed',
+      indEmpEntId: { $in: ids }
+    });
+  }
+
   async countByEvaluationIdAndFilterItems(evaluationId: any, filters: any): Promise<number> {
     return EvaluatedRepository.countDocuments({
       evaluationRef: new ObjectID(evaluationId),
       status: 'completed',
+      ...filters
+    });
+  }
+
+  async countCompletedByEvaluationRefInIdsAndFilterItems(evaluationId: any, filters: any, ids: Array<number>): Promise<number> {
+    return EvaluatedRepository.countDocuments({
+      evaluationRef: new ObjectID(evaluationId),
+      status: 'completed',
+      indEmpEntId: { $in: ids },
       ...filters
     });
   }
