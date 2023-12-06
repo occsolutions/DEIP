@@ -468,7 +468,7 @@ class EvaluationsController {
 
   async generateOrganizationalReport(req: IRequest, resp: Response) {
     try {
-      const evaluation: any = await EvaluationsService.findById(req.params.id, 'name displayName questionnaire status enterpriseId enterprise deliveredAt validUntil');
+      const evaluation: any = await EvaluationsService.findById(req.params.id, 'name displayName questionnaire status enterpriseId enterprise deliveredAt validUntil populationLeaders');
       if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
         throw new BadRequestException('evaluation-not-found');
       }
@@ -480,6 +480,7 @@ class EvaluationsController {
       if (!answeredCount) {
         throw new BadRequestException('evaluation-no-answers');
       }
+      const answeredLeadersCount: number = await EvaluatedService.countCompletedByEvaluationRefInIds(evaluation._id, evaluation.populationLeaders);
 
       await OperationThreadsService.save({
         operation: 'DownloadReport',
@@ -489,8 +490,9 @@ class EvaluationsController {
           _evaluation: evaluation._id,
           evaluationSlug: evaluation.slug,
           enterpriseId: evaluation.enterpriseId,
+          type: 'organizational',
           answeredCount,
-          type: 'organizational'
+          answeredLeadersCount
         }
       });
 
@@ -593,6 +595,12 @@ class EvaluationsController {
         productService: productService.code
       });
 
+      const filteredLeadersAnswersCount: number = await EvaluatedService.countCompletedByEvaluationRefInIdsAndFilterItems(
+        evaluation._id,
+        filters,
+        evaluation.populationLeaders
+      );
+
       const usr: any = {
         ...req.user,
         token: req.header('Authorization')!.replace('Bearer ', ''),
@@ -608,9 +616,10 @@ class EvaluationsController {
           evaluationSlug: evaluation.slug,
           operations: spend,
           enterpriseId: evaluation.enterpriseId,
-          answeredCount: evaluation.populationCompletedCount,
-          filteredAnswersCount,
           type: 'by_demographic',
+          answeredCount: evaluation.populationCompletedCount,
+          answeredLeadersCount: filteredLeadersAnswersCount,
+          filteredAnswersCount,
           criteria: req.body.criteria
         }
       });
