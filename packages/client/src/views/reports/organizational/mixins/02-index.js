@@ -11,10 +11,11 @@ export default {
             body: [
               [
                 {
-                  text: this.$t('engagementReport.index'),
+                  text: this.$t('Views.Evaluations.report.toc.index'),
                   font: 'League Spartan',
                   bold: true,
                   fontSize: 40,
+                  color: '#222222',
                   margin: [50, 6, 0, 0]
                 }
               ]

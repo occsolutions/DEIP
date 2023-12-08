@@ -1,6 +1,7 @@
 
 import occLogoBase64 from '../../base64files/0-occ-logo'
-import headerBase64 from '../../base64files/cover-header'
+import deipLogoBase64 from '../../base64files/0a-deip-logo'
+import inspiraLogoBase64 from '../../base64files/0b-inspirandoT-logo'
 import bgBase64 from '../../base64files/cover-bg'
 
 const fontSizeBylength = [
@@ -23,27 +24,30 @@ export default {
   },
   methods: {
     $generateCover () {
-      const limitItemsCover = 314
-      const fontSize = getFontSizeBylength((this.currentPoll.name || '').length)
-      const fontSizeItems = getFontSizeBylength((this.itemsCover || '').length)
+      const nameFontSize = getFontSizeBylength((this.evaluationData.name || '').length)
 
       return [
         {
-          image: headerBase64,
-          absolutePosition: { x: 0, y: 44 }
+          margin: [20, 10, 0, 0],
+          text: 'Índice Evolucion DEIP',
+          color: '#222222',
+          characterSpacing: -1,
+          fontSize: 30,
+          bold: true
         },
         {
-          margin: [20, 65, 0, 0],
-          text: this.$t('engagementReport.commitment_belonging'),
-          fontSize: 26
+          margin: [20, -7, 0, 0],
+          text: 'Enfoque Diferencial e Interseccional',
+          color: '#222222',
+          fontSize: 22
         },
         {
-          image: occLogoBase64,
-          fit: [77, 77],
+          image: deipLogoBase64,
+          fit: [80, 80],
           absolutePosition: { x: 467, y: 57 }
         },
         {
-          margin: [23, 0, 0, 0],
+          margin: [23, 2, 0, 0],
           text: this.user.enterprise.name.toUpperCase(),
           font: 'League Spartan',
           color: '#1999da',
@@ -52,28 +56,30 @@ export default {
         },
         {
           image: bgBase64,
-          absolutePosition: { x: 30.5, y: 195.5 }
+          absolutePosition: { x: 31, y: 194 }
         },
         {
-          margin: [6, 452, 0, 0],
-          text: this.$t(`engagementReport.cover.${this.rtype}`),
+          margin: [6, 500, 0, 0],
+          text: this.$t('Views.Evaluations.report.organizational.title'),
           color: '#222222',
           fontSize: 20
         },
-        this.itemsCover
-          ? {
-            margin: [6, 4, 0, 0],
-            text: this.itemsCover.length > limitItemsCover ? `${this.itemsCover.slice(0, limitItemsCover)}...` : this.itemsCover,
-            color: '#AAAAAA',
-            fontSize: fontSizeItems
-          }
-          : null,
         {
-          margin: [6, 4, 0, 0],
-          text: this.currentPoll.name,
+          margin: [6, 5, 0, 0],
+          text: this.evaluationData.name,
           color: '#222222',
-          fontSize: fontSize,
+          fontSize: nameFontSize,
           bold: true
+        },
+        {
+          image: inspiraLogoBase64,
+          width: 100,
+          absolutePosition: { x: 370, y: 710 }
+        },
+        {
+          image: occLogoBase64,
+          fit: [60, 60],
+          absolutePosition: { x: 487, y: 707 }
         }
       ]
     }
