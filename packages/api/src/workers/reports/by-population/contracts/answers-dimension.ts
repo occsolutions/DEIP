@@ -36,52 +36,52 @@ export interface IAnswersDimension {
     general: IScore;
     filtered: IScore;
     attrs: {
-      d1_attr_1: {
+      d1_attr1: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d1_attr_1_q1: IQuestion;
-          d1_attr_1_q2: IQuestion;
-          d1_attr_1_q3: IQuestion;
+          d1_attr1_q1: IQuestion;
+          d1_attr1_q2: IQuestion;
+          d1_attr1_q3: IQuestion;
         }
       },
-      d1_attr_2: {
+      d1_attr2: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d1_attr_2_q1: IQuestion;
-          d1_attr_2_q2: IQuestion;
+          d1_attr2_q1: IQuestion;
+          d1_attr2_q2: IQuestion;
         }
       },
-      d1_attr_3: {
+      d1_attr3: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d1_attr_3_q1: IQuestion;
+          d1_attr3_q1: IQuestion;
         }
       },
-      d1_attr_4: {
+      d1_attr4: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d1_attr_4_q1: IQuestion;
+          d1_attr4_q1: IQuestion;
         }
       },
-      d1_attr_5: {
+      d1_attr5: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d1_attr_5_q1: IQuestion;
-          d1_attr_5_q2: IQuestion;
-          d1_attr_5_q3: IQuestion;
+          d1_attr5_q1: IQuestion;
+          d1_attr5_q2: IQuestion;
+          d1_attr5_q3: IQuestion;
         }
       },
-      d1_attr_6: {
+      d1_attr6: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d1_attr_6_q1: IQuestion;
-          d1_attr_6_q2: IQuestion;
+          d1_attr6_q1: IQuestion;
+          d1_attr6_q2: IQuestion;
         }
       }
     }
@@ -90,58 +90,58 @@ export interface IAnswersDimension {
     general: IScore;
     filtered: IScore;
     attrs: {
-      d2_attr_1: {
+      d2_attr1: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d2_attr_1_q1: IQuestion;
+          d2_attr1_q1: IQuestion;
         }
       },
-      d2_attr_2: {
+      d2_attr2: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d2_attr_2_q1: IQuestion;
+          d2_attr2_q1: IQuestion;
         }
       },
-      d2_attr_3: {
+      d2_attr3: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d2_attr_3_q1: IQuestion;
-          d2_attr_3_q2: IQuestion;
-          d2_attr_3_q3: IQuestion;
+          d2_attr3_q1: IQuestion;
+          d2_attr3_q2: IQuestion;
+          d2_attr3_q3: IQuestion;
         }
       },
-      d2_attr_4: {
+      d2_attr4: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d2_attr_4_q1: IQuestion;
-          d2_attr_4_q2: IQuestion;
+          d2_attr4_q1: IQuestion;
+          d2_attr4_q2: IQuestion;
         }
       },
-      d2_attr_5: {
+      d2_attr5: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d2_attr_5_q1: IQuestion;
+          d2_attr5_q1: IQuestion;
         }
       },
-      d2_attr_6: {
+      d2_attr6: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d2_attr_6_q1: IQuestion;
-          d2_attr_6_q2: IQuestion;
-          d2_attr_6_q3: IQuestion;
+          d2_attr6_q1: IQuestion;
+          d2_attr6_q2: IQuestion;
+          d2_attr6_q3: IQuestion;
         }
       },
-      d2_attr_7: {
+      d2_attr7: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d2_attr_7_q1: IQuestion;
+          d2_attr7_q1: IQuestion;
         }
       }
     }
@@ -150,52 +150,52 @@ export interface IAnswersDimension {
     general: IScore;
     filtered: IScore;
     attrs: {
-      d3_attr_1: {
+      d3_attr1: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d3_attr_1_q1: IQuestion;
+          d3_attr1_q1: IQuestion;
         }
       },
-      d3_attr_2: {
+      d3_attr2: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d3_attr_2_q1: IQuestion;
-          d3_attr_2_q2: IQuestion;
-          d3_attr_2_q3: IQuestion;
+          d3_attr2_q1: IQuestion;
+          d3_attr2_q2: IQuestion;
+          d3_attr2_q3: IQuestion;
         }
       },
-      d3_attr_3: {
+      d3_attr3: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d3_attr_3_q1: IQuestion;
-          d3_attr_3_q2: IQuestion;
-          d3_attr_3_q3: IQuestion;
+          d3_attr3_q1: IQuestion;
+          d3_attr3_q2: IQuestion;
+          d3_attr3_q3: IQuestion;
         }
       },
-      d3_attr_4: {
+      d3_attr4: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d3_attr_4_q1: IQuestion;
-          d3_attr_4_q2: IQuestion;
-          d3_attr_4_q3: IQuestion;
+          d3_attr4_q1: IQuestion;
+          d3_attr4_q2: IQuestion;
+          d3_attr4_q3: IQuestion;
         }
       },
-      d3_attr_5: {
+      d3_attr5: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d3_attr_5_q1: IQuestion;
+          d3_attr5_q1: IQuestion;
         }
       },
-      d3_attr_6: {
+      d3_attr6: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d3_attr_6_q1: IQuestion;
+          d3_attr6_q1: IQuestion;
         }
       }
     }
@@ -204,56 +204,56 @@ export interface IAnswersDimension {
     general: IScore;
     filtered: IScore;
     attrs: {
-      d4_attr_1: {
+      d4_attr1: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d4_attr_1_q1: IQuestion;
-          d4_attr_1_q2: IQuestion;
+          d4_attr1_q1: IQuestion;
+          d4_attr1_q2: IQuestion;
         }
       },
-      d4_attr_2: {
+      d4_attr2: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d4_attr_2_q1: IQuestion;
+          d4_attr2_q1: IQuestion;
         }
       },
-      d4_attr_3: {
+      d4_attr3: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d4_attr_3_q1: IQuestion;
+          d4_attr3_q1: IQuestion;
         }
       },
-      d4_attr_4: {
+      d4_attr4: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d4_attr_4_q1: IQuestion;
-          d4_attr_4_q2: IQuestion;
+          d4_attr4_q1: IQuestion;
+          d4_attr4_q2: IQuestion;
         }
       },
-      d4_attr_5: {
+      d4_attr5: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d4_attr_5_q1: IQuestion;
+          d4_attr5_q1: IQuestion;
         }
       },
-      d4_attr_6: {
+      d4_attr6: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d4_attr_6_q1: IQuestion;
+          d4_attr6_q1: IQuestion;
         }
       },
-      d4_attr_7: {
+      d4_attr7: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d4_attr_7_q1: IQuestion;
-          d4_attr_7_q2: IQuestion;
+          d4_attr7_q1: IQuestion;
+          d4_attr7_q2: IQuestion;
         }
       }
     }
@@ -262,44 +262,44 @@ export interface IAnswersDimension {
     general: IScore;
     filtered: IScore;
     attrs: {
-      d5_attr_1: {
+      d5_attr1: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d5_attr_1_q1: IQuestion;
+          d5_attr1_q1: IQuestion;
         }
       },
-      d5_attr_2: {
+      d5_attr2: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d5_attr_2_q1: IQuestion;
-          d5_attr_2_q2: IQuestion;
+          d5_attr2_q1: IQuestion;
+          d5_attr2_q2: IQuestion;
         }
       },
-      d5_attr_3: {
+      d5_attr3: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d5_attr_3_q1: IQuestion;
-          d5_attr_3_q2: IQuestion;
-          d5_attr_3_q3: IQuestion;
+          d5_attr3_q1: IQuestion;
+          d5_attr3_q2: IQuestion;
+          d5_attr3_q3: IQuestion;
         }
       },
-      d5_attr_4: {
+      d5_attr4: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d5_attr_4_q1: IQuestion;
-          d5_attr_4_q2: IQuestion;
+          d5_attr4_q1: IQuestion;
+          d5_attr4_q2: IQuestion;
         }
       },
-      d5_attr_5: {
+      d5_attr5: {
         general: IScore;
         filtered: IScore;
         questions: {
-          d5_attr_5_q1: IQuestion;
-          d5_attr_5_q2: IQuestion;
+          d5_attr5_q1: IQuestion;
+          d5_attr5_q2: IQuestion;
         }
       }
     }

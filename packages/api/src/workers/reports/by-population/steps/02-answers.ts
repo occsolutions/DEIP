@@ -11,10 +11,11 @@ export default async (
   alreadyProcessedAnswersCount: number,
   answersDimension: IAnswersDimension,
   criteria: any,
-  segmentedAnswers: any
+  segmentedAnswers: any,
+  populationLeaders: Array<number>
 ) => {
   const chunkSize = 100;
-  const fields = 'demographicItems segmentation evaluations';
+  const fields = 'indEmpEntId employee.employeeEnterprise temp.segmentation temp.evaluations';
   let filteredIds: any = [];
 
   const answersBatch: any = await EvaluatedService.findByBatchByEvaluationId(evaluationId, alreadyProcessedAnswersCount, chunkSize, fields);
@@ -55,8 +56,9 @@ export default async (
 
     // Process ALL answers
     const temp = AnswersUtils.runAnswersDimension(
-      answersBatch[i].temp,
+      answersBatch[i].temp.evaluations,
       answersDimension,
+      populationLeaders.includes(answersBatch[i].indEmpEntId),
       isFiltered
     );
     answersDimension = temp.evaluations;
@@ -67,7 +69,8 @@ export default async (
       const tmp2 = SegmentsUtils.groupSegmentedAnswers(
         answersBatch[i],
         criteria,
-        segmentedAnswers
+        segmentedAnswers,
+        populationLeaders
       );
       segmentedAnswers = tmp2;
     }

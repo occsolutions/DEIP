@@ -534,8 +534,8 @@ class EvaluationsController {
       const calcDates = (rng1, rng2) => {
         const dateOne = new Date();
         const dateTwo = new Date();
-        dateOne.setHours(0,0,0,0);
-        dateTwo.setHours(0,0,0,0);
+        dateOne.setHours(0, 0, 0, 0);
+        dateTwo.setHours(0, 0, 0, 0);
         dateOne.setMonth(dateOne.getMonth() - rng1 * 12);
         dateTwo.setMonth(dateTwo.getMonth() - rng2 * 12);
 

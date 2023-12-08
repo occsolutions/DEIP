@@ -1,8 +1,6 @@
 
 import { default as OperationThreadsService } from '../../../services/operation-threads.srvc';
 
-import AnswersUtils from './utils/answers';
-
 import StepOne from './steps/01-segments';
 import StepTwo from './steps/02-answers';
 import StepThree from './steps/03-averages';
@@ -51,7 +49,8 @@ class ReportMethods {
             threadData.tempData.alreadyProcessedAnswers,
             threadData.answersDimension,
             threadData.criteria,
-            threadData.segmentedAnswers
+            threadData.segmentedAnswers,
+            threadData.populationLeaders
           );
 
           threadData.tempData.alreadyProcessedAnswers += tempStepTwo.processedAnswers;

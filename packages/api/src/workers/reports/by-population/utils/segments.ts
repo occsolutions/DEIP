@@ -97,7 +97,8 @@ class SegmentsUtils {
   public groupSegmentedAnswers (
     participation: any,
     criteria: Array<any>,
-    segmentedAnswers: any
+    segmentedAnswers: any,
+    populationLeaders: Array<number>
   ) {
 
     for (const segmentId of Object.keys(segmentedAnswers)) {
@@ -127,6 +128,7 @@ class SegmentsUtils {
         const temp = AnswersUtils.runAnswersDimension(
           participation.evaluations,
           segmentedAnswers[segmentId].answersDimension,
+          populationLeaders.includes(participation.indEmpEntId),
           true
         );
         segmentedAnswers[segmentId].count++;
