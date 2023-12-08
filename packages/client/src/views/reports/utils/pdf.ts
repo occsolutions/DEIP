@@ -1,21 +1,31 @@
 
 export default {
-  generateHeaderTitle (title: string, isToc = true, customWidth = 368) {
+  generateTitle: (title: string, margin?: number[] | number, pageBreak?: string, fontSize?: number, color?: string, isToc = true, isSubToc = false, isBold = true): object => {
     return {
-      pageBreak: 'before',
+      pageBreak: pageBreak || '',
       layout: 'noBorders',
       table: {
-        widths: [customWidth, 0],
+        widths: [400, 0],
         body: [
           [
-            { text: title, bold: true, color: '#444444', margin: [22, 21, 22, 18], fontSize: 20 },
+            {
+              text: title,
+              font: 'League Spartan',
+              bold: isBold,
+              color: color || '#222222',
+              margin: margin || [0, 20],
+              fontSize: fontSize || 37
+            },
             // ToC text
-            isToc ? { text: title, fontSize: 0, tocItem: 'mainToc', tocMargin: [0, 8, 0, 0] } : {}
+            isToc ? {
+              text: title,
+              fontSize: 0,
+              tocItem: isSubToc ? ['mainToc', 'subToc'] : 'mainToc',
+              tocMargin: isSubToc ? [34, 8, 0, 0] : [0, 8, 0, 0]
+            } : {}
           ]
         ]
-      },
-      alignment: 'left',
-      margin: [25, -100, 0, 0]
+      }
     }
   },
   generateScoreWithHeatMap (score: string, color: string, cellMargin: Array<number>, leftMargin = -4) {
