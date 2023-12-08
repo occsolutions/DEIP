@@ -16,19 +16,31 @@ class AveragesUtils {
       answersDimension[dimKey].general = this.getAverage(answersDimension[dimKey].general, total);
       answersDimension[dimKey].filtered = this.getAverage(answersDimension[dimKey].filtered, totalFiltered);
 
-      // Variables
-      const dimVariables = answersDimension[dimKey].variables;
-      for (const varKey of Object.keys(dimVariables)) {
-        answersDimension[dimKey].variables[varKey].general = this.getAverage(answersDimension[dimKey].variables[varKey].general, total);
-        answersDimension[dimKey].variables[varKey].filtered = this.getAverage(answersDimension[dimKey].variables[varKey].filtered, totalFiltered);
+      if (dimKey !== 'leader') {
+        // Attributes
+        const dimAttributes = answersDimension[dimKey].attrs;
+        for (const attrKey of Object.keys(dimAttributes)) {
+          answersDimension[dimKey].attrs[attrKey].general = this.getAverage(answersDimension[dimKey].attrs[attrKey].general, total);
+          answersDimension[dimKey].attrs[attrKey].filtered = this.getAverage(answersDimension[dimKey].attrs[attrKey].filtered, totalFiltered);
 
+          // Questions
+          const attrQuestions = answersDimension[dimKey].attrs[attrKey].questions;
+          for (const qKey of Object.keys(attrQuestions)) {
+            const gralAvg = this.getAverage(answersDimension[dimKey].attrs[attrKey].questions[qKey].general, total);
+            const filtAvg = this.getAverage(answersDimension[dimKey].attrs[attrKey].questions[qKey].filtered, totalFiltered);
+            answersDimension[dimKey].attrs[attrKey].questions[qKey].general = gralAvg;
+            answersDimension[dimKey].attrs[attrKey].questions[qKey].filtered = filtAvg;
+          }
+        }
+      } else {
         // Questions
-        const varQuestions = answersDimension[dimKey].variables[varKey].questions;
-        for (const qKey of Object.keys(varQuestions)) {
-          const gralAvg = this.getAverage(answersDimension[dimKey].variables[varKey].questions[qKey].general, total);
-          const filtAvg = this.getAverage(answersDimension[dimKey].variables[varKey].questions[qKey].filtered, totalFiltered);
-          answersDimension[dimKey].variables[varKey].questions[qKey].general = gralAvg;
-          answersDimension[dimKey].variables[varKey].questions[qKey].filtered = filtAvg;
+        for (const qKey of Object.keys(answersDimension[dimKey])) {
+          if (!['general', 'filtered'].includes(qKey)) {
+            const gralAvg = this.getAverage(answersDimension[dimKey][qKey].general, total);
+            const filtAvg = this.getAverage(answersDimension[dimKey][qKey].filtered, totalFiltered);
+            answersDimension[dimKey][qKey].general = gralAvg;
+            answersDimension[dimKey][qKey].filtered = filtAvg;
+          }
         }
       }
     }
