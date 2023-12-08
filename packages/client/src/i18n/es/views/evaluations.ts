@@ -377,10 +377,10 @@ export default {
     open_question_select_label: 'Seleccione una pregunta',
     please_wait: 'Por favor espere',
     select_report_type: 'Seleccione el tipo de reporte que desea generar',
-    general_title: 'Reporte Organizacional',
+    general_title: 'Reporte General',
     general_desc: 'Este reporte muestra los resultados de la apreciación de todos los participantes de la medición.',
     no_members: 'No hubo participación de los miembros',
-    demographic_title: 'Reporte por corte demográfico',
+    demographic_title: 'Reporte por población',
     demographic_desc: 'En este reporte podrás escoger y filtrar los puntajes de los diferentes cortes demográficos que hayas configurado al momento de crear la medición.',
     demographic_desc2: 'Este reporte cuenta con los puntajes de la población filtrada por los cortes demográficos que selecciones a continuación:',
     generate_report: 'Generar reporte',
@@ -395,19 +395,20 @@ export default {
     confirm_report_title: 'Confirme la generación del reporte',
     report_cost: 'Costo del reporte',
     organizational: {
-      title: 'Reporte Organizacional',
-      subject: 'Reporte Organizacional DEIP',
+      title: 'Reporte General',
+      subject: 'Reporte General DEIP',
       already_generated_report: 'Este reporte ya ha sido generado. Puedes descargarlo en la parte inferior, donde se encuentran todos los reportes generados.',
-      operation_init: 'Se ha dado inicio a un proceso de descarga "Reporte Organizacional". Este proceso puede tardar varios minutos',
+      operation_init: 'Se ha dado inicio a un proceso de descarga "Reporte General". Este proceso puede tardar varios minutos',
       of_population: 'De la población',
-      total_expected: 'Total Esperadas:',
-      total_obtained: 'Total respondidas:',
+      total_expected: 'Total Esperadas',
+      total_obtained: 'Total respondidas',
+      curr_score: 'Puntaje Actual',
       prev_score: 'Puntaje Anterior',
       previous: 'Anterior',
       trend: 'Tendencia'
     },
     demographic: {
-      title: 'Reporte por corte Demográfico',
+      title: 'Reporte por población',
       subject: 'Reporte por Población DEIP',
       selected: 'Seleccionado(s)',
       demographic_cuts: 'Cortes Demográficos',
@@ -433,7 +434,7 @@ export default {
     ],
     // Table of Contents
     toc: {
-      index: 'ÍNDICE',
+      index: 'Índice',
       introduction: 'Introducción',
       methodology: 'Metodología',
       model: 'Modelo DEIP',
@@ -477,10 +478,6 @@ export default {
         bad: 'Deficiente: 2.9 - 2.0',
         very_bad: 'Crítica: 1.9 - 1.0'
       }
-    },
-    burnout_index: 'El índice de riesgo de burnout, o Síndrome de Desgaste Ocupacional según la OMS, es un conjunto de síntomas en respuesta a un estrés laboral crónico, caracterizado por fatiga física y emocional extrema, que se refleja en una actitud negativa hacia el trabajo, agotamiento constante, baja autoestima y pérdida de interés en los resultados.' +
-      '\n\nZona segura (verde): los resultados indican que no existe riesgo cercano de incurrir en burnout ya que el promedio de los indicadores individuales y de los indicadores organizacionales se encuentran en un nivel de excelencia. Se sugiere mantener los hábitos y prácticas que actualmente le permiten ubicarse en esta zona.' +
-      '\n\nZona intermedia (amarilla): los resultados se ubican en una zona intermedia que no permiten afirmar que existe un alto o bajo riesgo de incurrir en burnout. Se sugiere identificar las variables bajo su control con resultado más bajo y definir acciones de mejoramiento que le permitan evolucionar a la zona segura.' +
-      '\n\nZona crítica (naranja): los resultados indican que existe un alto riesgo de incurrir en burnout ya que el promedio de los indicadores individuales y de los indicadores organizacionales son insatisfactorios. Se sugiere revisar en detalle las diferentes variables e iniciar acciones inmediatas en los aspectos bajo su control.'
+    }
   }
 }
