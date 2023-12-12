@@ -53,13 +53,13 @@ export default {
         },
         {
           text: '*Enfoque Diferencial: Aristas de la diversidad (Género, diversidad sexual, etnia, origen, nivel socioeconómico, disCapacidad, entre otras).',
-          margin: [0, 300, 280, 0],
-          fontSize
+          margin: [0, 300, 290, 0],
+          fontSize: 7.5
         },
         {
           text: '*Interseccional: El cruce de diversidades (aristas, dimensiones) que hacen único a cada ser humano.',
-          margin: [0, 30, 280, 0],
-          fontSize
+          margin: [0, 30, 290, 0],
+          fontSize: 7.5
         },
         {
           image: bottomBase64,

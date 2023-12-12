@@ -9,7 +9,7 @@ export default {
       const leaderRateValues = [
         this.expectedLeaders,
         this.completedLeaders,
-        `${this.$round((this.completedLeaders / this.expectedLeaders) * 100)}%`
+        this.expectedLeaders ? `${this.$round((this.completedLeaders / this.expectedLeaders) * 100)}%` : '--'
       ]
       const row = []
 

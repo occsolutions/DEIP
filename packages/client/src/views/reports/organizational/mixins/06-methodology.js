@@ -116,7 +116,7 @@ export default {
           fontSize
         },
         {
-          text: 'De acuerdo a este promedio, cada dimensión es clasiﬁcada dentro de una franja baja (0 - 0,3), media (0,4 - 0,6), alta (0,7 - 1), según su resultado. (ver tabla 1)',
+          text: 'De acuerdo a este promedio, cada dimensión es clasiﬁcada dentro de una franja baja (0 - 0.39), media (0.4 - 0.69), alta (0.7 - 1), según su resultado. (ver tabla 1)',
           margin: [0, 10, 30, 0],
           fontSize
         },

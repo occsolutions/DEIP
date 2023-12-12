@@ -69,8 +69,7 @@ export default {
               text: 'Líderes con personas a cargo',
               font: 'League Spartan',
               color: '#222222',
-              fontSize: 24,
-              bold: true
+              fontSize: 24
             },
             {
               text: this.evaluationData.questionnaire.evaluations.leader[qKey].label[this.user.lang],

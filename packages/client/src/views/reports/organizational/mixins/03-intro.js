@@ -61,13 +61,13 @@ export default {
         },
         {
           text: '*Organización Internacional del Trabajo (OIT)',
-          margin: [212, 33, 0, 0],
-          fontSize
+          margin: [212, 147, 0, 0],
+          fontSize: 7.5
         },
         {
-          text: 'Fuente: https://n9.cl/uyp7s',
+          text: [{ text: 'Fuente:' }, { text: 'https://n9.cl/uyp7s', link: 'https://n9.cl/uyp7s' }],
           margin: [212, 0, 0, 0],
-          fontSize
+          fontSize: 7.5
         }
       ]
     }
