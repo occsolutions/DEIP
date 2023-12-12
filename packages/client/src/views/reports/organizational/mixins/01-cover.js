@@ -29,7 +29,7 @@ export default {
       return [
         {
           margin: [20, 10, 0, 0],
-          text: 'Índice Evolucion DEIP',
+          text: 'Índice Evolución DEIP',
           color: '#222222',
           characterSpacing: -1,
           fontSize: 30,

@@ -66,7 +66,7 @@ export default {
           return [
             {
               columns: [
-                { text: currentPage > 2 ? `${Number(currentPage - 2).toString()}` : '', color: '#000000', width: 14 },
+                { text: currentPage > 2 ? `${currentPage}` : '', color: '#000000', width: 14 },
                 { text: currentPage !== 2 ? 'Creado por: InspirandoT SAS BIC y OCC Solutions' : '', color: '#777777', width: '*' }
               ],
               fontSize: 9,

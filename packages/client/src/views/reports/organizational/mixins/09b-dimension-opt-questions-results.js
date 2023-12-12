@@ -75,8 +75,7 @@ export default {
                     text: this.evaluationData.questionnaire.evaluations[dimKey].label[this.user.lang].replace(/\((.*?)\)/g, '').replace(' *', ''),
                     font: 'League Spartan',
                     color: '#222222',
-                    fontSize: 24,
-                    bold: true
+                    fontSize: 24
                   },
                   {
                     text: this.evaluationData.questionnaire.evaluations[dimKey].attrs[attrKey].questions[qKey].label[this.user.lang],
