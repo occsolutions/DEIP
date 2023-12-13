@@ -13,6 +13,8 @@ import formatItemsGeneral from '../../../utils/form-format-items-list'
 
 import resolver from '../../../utils/resolver'
 
+import XFilterAdditionalSegmentation from './filter-additional-segmentation'
+
 const formatRes = items => {
   return items.map((item) => {
     return {
@@ -33,10 +35,14 @@ const formatEnterprisesValue = items => {
 }
 
 export default {
+  components: {
+    XFilterAdditionalSegmentation
+  },
   data () {
     return {
       totalDemographicFiltered: [],
       demographicFilter: {},
+      segmentationKeys: [],
       genders: [],
       min: 0,
       max: 100,
@@ -55,6 +61,7 @@ export default {
     }
   },
   props: {
+    additionalSegmentation: Object,
     cutsSelected: Object,
     pollId: String
   },
@@ -129,10 +136,8 @@ export default {
       this.$set(this.cutsSelected, 'demographics', this.totalDemographicFiltered)
       this.$emit('receivers-modified', this.cutsSelected.totalReceivers > 0)
     },
-    calculatePopulation (initial = false) {
-      if (!initial) {
-        this.setTotalReceivers()
-      }
+    calculatePopulation () {
+      this.setTotalReceivers()
     },
     calculateTotal (event, key) {
       this.demographicFilter[key] = event
@@ -148,39 +153,46 @@ export default {
       }
       this.updateTotalDemographicFiltered()
     },
-    updateTotalDemographicFiltered (isInitial = false) {
+    updateTotalDemographicFiltered () {
       this.totalDemographicFiltered = []
       this.totalDemographicFiltered = this.cutsSelected.totalPopulation.filter(demographic => {
-        let flat = false
+        let flag = false
         for (const key in this.demographicFilter) {
           if (key === 'departments') {
-            flat = this.demographicFilter[key].includes(demographic.departmentId)
+            flag = this.demographicFilter[key].includes(demographic.departmentId)
           } else if (key === 'jobTypes') {
-            flat = this.demographicFilter[key].includes(demographic.jobTypeId)
+            flag = this.demographicFilter[key].includes(demographic.jobTypeId)
           } else if (key === 'genders') {
-            flat = this.demographicFilter[key] === demographic.genderId
+            flag = this.demographicFilter[key] === demographic.genderId
           } else if (key === 'countries') {
-            flat = this.demographicFilter[key].includes(demographic.countryId)
+            flag = this.demographicFilter[key].includes(demographic.countryId)
           } else if (key === 'headquarters') {
-            flat = this.demographicFilter[key].includes(demographic.headquarterId)
+            flag = this.demographicFilter[key].includes(demographic.headquarterId)
           } else if (key === 'charges') {
-            flat = this.demographicFilter[key].includes(demographic.chargeId)
+            flag = this.demographicFilter[key].includes(demographic.chargeId)
           } else if (key === 'academicDegrees') {
-            flat = this.demographicFilter[key].includes(demographic.academicDegreeId)
+            flag = this.demographicFilter[key].includes(demographic.academicDegreeId)
           } else if (key === 'additionalDemographics1') {
-            flat = this.demographicFilter[key].includes(demographic.additionalDemographic1Id)
+            flag = this.demographicFilter[key].includes(demographic.additionalDemographic1Id)
           } else if (key === 'additionalDemographics2') {
-            flat = this.demographicFilter[key].includes(demographic.additionalDemographic2Id)
+            flag = this.demographicFilter[key].includes(demographic.additionalDemographic2Id)
           } else if (key === 'age') {
-            flat = demographic.age >= this.demographicFilter[key][0] && demographic.age < this.demographicFilter[key][1]
+            flag = demographic.age >= this.demographicFilter[key][0] && demographic.age < this.demographicFilter[key][1]
           } else if (key === 'antiquity') {
-            flat = demographic.antiquity >= this.demographicFilter[key][0] && demographic.antiquity < this.demographicFilter[key][1]
+            flag = demographic.antiquity >= this.demographicFilter[key][0] && demographic.antiquity < this.demographicFilter[key][1]
           }
 
-          if (!flat) {
+          if (!flag) {
             break
           }
         }
+
+        this.segmentationKeys.forEach(key => {
+          if (this.demographicFilter[key]) {
+            flag = this.demographicFilter[key].includes(demographic[key])
+          }
+        })
+
         this.$emit('demographics-filtered', this.demographicFilter)
         this.$emit('demographics-selects', {
           additionalDemographics1: this.additionalDemographics1,
@@ -197,10 +209,10 @@ export default {
           raw_headquarters: this.raw_headquarters
         })
 
-        return flat
+        return flag
       })
 
-      this.calculatePopulation(isInitial)
+      this.calculatePopulation()
     },
     getHeadquarters (id) {
       headquartersService.list(id).then((res) => {
@@ -220,25 +232,9 @@ export default {
       const diff = new Date().getTime() - new Date(date).getTime()
       return diff / (1000 * 60 * 60 * 24 * 365.25)
     },
-    isAnyCutSelected () {
-      if (!Object.prototype.hasOwnProperty.call(this.cutsSelected, 'listOfDemographics')) {
-        return false
-      } else if (
-        Object.prototype.hasOwnProperty.call(this.cutsSelected.listOfDemographics, 'additionalDemographics1') ||
-        Object.prototype.hasOwnProperty.call(this.cutsSelected.listOfDemographics, 'additionalDemographics2') ||
-        Object.prototype.hasOwnProperty.call(this.cutsSelected.listOfDemographics, 'departments') ||
-        Object.prototype.hasOwnProperty.call(this.cutsSelected.listOfDemographics, 'charges') ||
-        Object.prototype.hasOwnProperty.call(this.cutsSelected.listOfDemographics, 'academicDegrees') ||
-        Object.prototype.hasOwnProperty.call(this.cutsSelected.listOfDemographics, 'jobTypes') ||
-        Object.prototype.hasOwnProperty.call(this.cutsSelected.listOfDemographics, 'genders') ||
-        Object.prototype.hasOwnProperty.call(this.cutsSelected.listOfDemographics, 'antiquity') ||
-        Object.prototype.hasOwnProperty.call(this.cutsSelected.listOfDemographics, 'age') ||
-        Object.prototype.hasOwnProperty.call(this.cutsSelected.listOfDemographics, 'countries') ||
-        Object.prototype.hasOwnProperty.call(this.cutsSelected.listOfDemographics, 'headquarters')
-      ) {
-        return true
-      } else {
-        return false
+    setSegmentationKey (e) {
+      if (!this.segmentationKeys.includes(`segmentation${e}Id`)) {
+        this.segmentationKeys.push(`segmentation${e}Id`)
       }
     },
     getOthersTag (n) {
@@ -267,10 +263,13 @@ export default {
         this.countries = formatItemsGeneral(res.countries.items)
         this.totalAnswers = res.participants.length
 
-        this.cutsSelected.totalPopulation = res.participants.map(demographic => {
-          demographic.age = this.calculatedAge(demographic.birthdate)
-          demographic.antiquity = this.calculateAntiquity(demographic.admission)
-          return demographic
+        this.cutsSelected.totalPopulation = res.participants.map(item => {
+          item.segmentation.forEach(x => {
+            item.demographics[`segmentation${x.segmentationId}Id`] = x.detailId
+          })
+          item.demographics.age = this.calculatedAge(item.demographics.birthdate)
+          item.demographics.antiquity = this.calculateAntiquity(item.demographics.admission)
+          return item.demographics
         })
 
         this.genders = formatEnterprisesValue(res.genders.items)
@@ -278,8 +277,6 @@ export default {
         this.departments = formatEnterprisesValue(res.departments.items)
         this.charges = formatEnterprisesValue(res.charges.items)
         this.raw_headquarters = res.rawHeadquarters
-
-        this.updateTotalDemographicFiltered(true)
 
         this.$emit('answers-fetched', !this.totalAnswers)
         this.$emit('loading', false)
