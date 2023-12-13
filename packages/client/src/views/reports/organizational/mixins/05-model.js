@@ -65,7 +65,7 @@ export default {
         list: [
           'Valores Corporativos',
           'Nivel de Conocimiento DEIP',
-          'Estrategia de Comunicación',
+          'Estrategia de Comunicación DEIP (Interna/Externa)',
           'Comportamientos Deseados DEIP',
           'Plan de Reconocimiento',
           'Acciones Aﬁrmativas'
@@ -134,7 +134,7 @@ export default {
                 },
                 {
                   stack: [{ text: dimensions2[2].name, bold: true, fontSize: 11 }, { ul: dimensions2[2].list, margin: [-9.5, 0, 0, 0] }],
-                  margin: [107, 0, 0, 0]
+                  margin: [107, -14, 0, 0]
                 }
               ],
               [
