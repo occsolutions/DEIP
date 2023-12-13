@@ -155,10 +155,5 @@ export default (middlewares, services) => {
     EvaluationsController.close
   );
 
-  EvaluationsRouter.post(
-    '/count-segmented-answers/:evaluationId',
-    EvaluationsController.countSegmentedAnswers
-  );
-
   return EvaluationsRouter;
 };

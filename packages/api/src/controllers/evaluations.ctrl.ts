@@ -567,7 +567,14 @@ class EvaluationsController {
             demoFilters['employee.employeeEnterprise.genderId'] = { $in: [criteria[key]] };
             break;
           default:
-            demoFilters[`employee.employeeEnterprise.${demographicIds[key]}`] = { $in: criteria[key] };
+            if (!key.startsWith('segmentation')) {
+              demoFilters[`employee.employeeEnterprise.${demographicIds[key]}`] = { $in: criteria[key] };
+            } else {
+              // Filter by Additional Segmentation
+              const segmentationId = parseInt(key.replace(/[^0-9]/g, ''));
+              demoFilters['temp.segmentation.segmentationId'] = { $in: [segmentationId] };
+              demoFilters['temp.segmentation.detailId'] = { $in: criteria[key] };
+            }
             break;
         }
         filters.$and.push(demoFilters);
@@ -850,35 +857,6 @@ class EvaluationsController {
     } catch (error) {
       res.status(400);
       res.send({ error });
-    }
-  }
-
-  async countSegmentedAnswers (req: IRequest, res: Response) {
-    try {
-      const countRes: any = {};
-      const type = req.body.type;
-      const data = req.body.data;
-      const filters = {};
-
-      for (const segment of data) {
-        if (type === 'demographic') {
-          filters[`demographicItems.${segment.field}`] = { $ne: null };
-        }
-        if (type === 'segmentation') {
-          filters['segmentation.segmentationId'] = segment.id;
-          filters['segmentation.detailId'] = { $ne: -1 };
-        }
-
-        countRes[segment.code] = 0;
-        // countRes[segment.code] = await EvaluationAnswersService.countByEvaluationIdAndFilterItems(
-        //   req.params.evaluationId,
-        //   filters
-        // );
-      }
-
-      res.send(countRes);
-    } catch (error) {
-      res.status(400).send({ error });
     }
   }
 }
