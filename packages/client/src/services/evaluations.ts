@@ -98,8 +98,5 @@ export default {
   },
   checkBalance: (key: string) => {
     return service.get(`check-balance/${key}`)
-  },
-  countAnswersByOptionalCuts: (evaluationId: any, type: string, data: any) => {
-    return service.post(`count-segmented-answers/${evaluationId}`, { type, data })
   }
 }
