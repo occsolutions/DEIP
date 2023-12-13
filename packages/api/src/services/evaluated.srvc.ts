@@ -60,6 +60,7 @@ class EvaluatedService {
       },
       { $unwind: '$employee' },
       { $unwind: '$employee.employeeEnterprise' },
+      { $unwind: '$temp' },
       {
         $project: {
           _id: 0,
@@ -77,12 +78,18 @@ class EvaluatedService {
               headquarterId: 1,
               jobTypeId: 1
             }
+          },
+          temp: {
+              segmentation: 1
           }
         }
       },
       {
         $replaceRoot: {
-          newRoot: '$employee.employeeEnterprise'
+          newRoot: {
+            demographics: '$employee.employeeEnterprise',
+            segmentation: '$temp.segmentation'
+          }
         }
       }
     ]);
@@ -128,6 +135,15 @@ class EvaluatedService {
       status: 'completed',
       indEmpEntId: { $in: ids },
       ...filters
+    });
+  }
+
+  async countCompletedBySegmentation(evaluationId: any, segmentationId: number, segmentationDetail: number): Promise<number> {
+    return EvaluatedRepository.countDocuments({
+      evaluationRef: new ObjectID(evaluationId),
+      status: 'completed',
+      'temp.segmentation.segmentationId': segmentationId ,
+      'temp.segmentation.detailId': segmentationDetail
     });
   }
 
