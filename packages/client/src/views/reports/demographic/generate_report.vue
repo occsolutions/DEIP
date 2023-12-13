@@ -6,6 +6,7 @@
     <!------------------------------------------------------------------------>
     <v-col cols="12" class="pt-0 px-4">
       <x-filter-demographic-items
+        :additional-segmentation="additionalSegmentation"
         :cuts-selected="cutsSelected"
         :poll-id="$route.params.id"
         @receivers-modified="handleReceiversModified($event)"
@@ -106,6 +107,7 @@ export default Vue.extend({
   },
   props: {
     pollId: String,
+    additionalSegmentation: Object,
     disableButton: Boolean,
     lang: String
   },
@@ -199,21 +201,6 @@ export default Vue.extend({
     handleReportButton (e) {
       this.disableGenerateButton = !e
       this.showModal = e
-    },
-    countOptionalAnswers (type, data) {
-      evaluationsService.countAnswersByOptionalCuts(this.pollId, type, data)
-        .then((res) => {
-          this.optionalAnswerCount = {
-            ...this.optionalAnswerCount,
-            ...res
-          }
-        })
-        .catch((err) => {
-          this.$store.dispatch('alert/error', this.$t(`errors.${err.code}`))
-        })
-        .finally(() => {
-          this.$store.dispatch('loading/hide')
-        })
     }
   }
 })

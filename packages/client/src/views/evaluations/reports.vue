@@ -59,6 +59,7 @@
             <p>{{ $t('Views.Evaluations.report.demographic_desc') }}</p>
             <x-generate-demographic-report
               :poll-id="$route.params.id"
+              :additional-segmentation="evaluation.additionalSegmentation"
               :disable-button="disableNoAnswers"
               :lang="user.lang"
               @reportGenerated="demographicReportGenerated"

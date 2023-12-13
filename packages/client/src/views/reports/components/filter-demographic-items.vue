@@ -17,13 +17,9 @@
             v-bind:style="'margin-right:auto'"
           >
             <template>
-              <v-autocomplete
-                multiple
-                outlined
-                :items="departments"
-                persistent-hint
+              <v-autocomplete light outlined multiple
                 v-model="cutsSelected.departmentIds"
-                light
+                :items="departments"
                 :label="$t('Views.Evaluations.stepEvaluatedSelection.demographic_cuts.departments')"
                 name="departments"
                 @change="calculateTotal($event, 'departments')"
@@ -47,13 +43,9 @@
             v-bind:style="'margin-right:auto'"
           >
             <template>
-              <v-autocomplete
-                multiple
-                outlined
-                :items="charges"
-                persistent-hint
+              <v-autocomplete light outlined multiple
                 v-model="cutsSelected.chargeIds"
-                light
+                :items="charges"
                 :label="$t('Views.Evaluations.stepEvaluatedSelection.demographic_cuts.charges')"
                 name="charges"
                 @change="calculateTotal($event, 'charges')"
@@ -77,13 +69,9 @@
             v-bind:style="'margin-right:auto'"
           >
             <template>
-              <v-autocomplete
-                multiple
-                outlined
-                :items="academicDegrees"
-                persistent-hint
+              <v-autocomplete light outlined multiple
                 v-model="cutsSelected.academicDegreeIds"
-                light
+                :items="academicDegrees"
                 :label="$t('Views.Evaluations.stepEvaluatedSelection.demographic_cuts.academic_degrees')"
                 name="academic_degrees"
                 @change="calculateTotal($event, 'academicDegrees')"
@@ -107,13 +95,9 @@
             v-bind:style="'margin-right:auto'"
           >
             <template>
-              <v-autocomplete
-                multiple
-                outlined
-                :items="jobTypes"
-                persistent-hint
+              <v-autocomplete light outlined multiple
                 v-model="cutsSelected.jobTypeIds"
-                light
+                :items="jobTypes"
                 :label="$t('Views.Evaluations.stepEvaluatedSelection.demographic_cuts.job_types')"
                 name="job_types"
                 @change="calculateTotal($event, 'jobTypes')"
@@ -137,12 +121,9 @@
             v-bind:style="'margin-right:auto'"
           >
             <template>
-              <v-autocomplete
-                outlined
-                :items="getSelectAge"
+              <v-autocomplete light outlined clearable
                 v-model="cutsSelected.rangeAge"
-                persistent-hint
-                light clearable
+                :items="getSelectAge"
                 :label="$t('Views.Evaluations.stepEvaluatedSelection.demographic_cuts.select_age_range')"
                 name="select_age_range"
                 @change="calculateTotal($event, 'age')"
@@ -156,12 +137,9 @@
             v-bind:style="'margin-right:auto'"
           >
             <template>
-              <v-autocomplete
-                outlined
-                :items="getSelectAntiquity"
+              <v-autocomplete light outlined clearable
                 v-model="cutsSelected.rangeAntiquity"
-                persistent-hint
-                light clearable
+                :items="getSelectAntiquity"
                 :label="$t('Views.Evaluations.stepEvaluatedSelection.demographic_cuts.select_antiquity_range')"
                 name="select_antiquity_range"
                 @change="calculateTotal($event, 'antiquity')"
@@ -175,12 +153,9 @@
             v-bind:style="'margin-right:auto'"
           >
             <template>
-              <v-autocomplete
-                outlined
-                :items="genders"
-                persistent-hint
+              <v-autocomplete light outlined clearable
                 v-model="cutsSelected.genderId"
-                light clearable
+                :items="genders"
                 :label="$t('Views.Evaluations.stepEvaluatedSelection.demographic_cuts.genders')"
                 name="genders"
                 @change="calculateTotal($event, 'genders')"
@@ -198,13 +173,9 @@
             v-bind:style="'margin-right:auto'"
           >
             <template>
-              <v-autocomplete
-                outlined
-                multiple
-                :items="countries"
-                persistent-hint
+              <v-autocomplete light outlined multiple
                 v-model="cutsSelected.countrySelect"
-                light
+                :items="countries"
                 :label="$t('Views.Evaluations.stepEvaluatedSelection.demographic_cuts.countries')"
                 name="countries"
                 @change="getHeadquarters($event); calculateTotal($event, 'countries');"
@@ -228,13 +199,9 @@
             v-bind:style="'margin-right:auto'"
           >
             <template>
-              <v-autocomplete
-                outlined
-                multiple
-                :items="headquarters"
-                persistent-hint
+              <v-autocomplete light outlined multiple persistent-hint
                 v-model="cutsSelected.headquarterSelect"
-                light
+                :items="headquarters"
                 :label="$t('Views.Evaluations.stepEvaluatedSelection.demographic_cuts.headquarter')"
                 name="headquarters"
                 :disabled="headquarterDisabled"
@@ -264,13 +231,9 @@
             v-bind:style="'margin-right:auto'"
           >
             <template>
-              <v-autocomplete
-                multiple
-                outlined
-                :items="additionalDemographics1"
-                persistent-hint
+              <v-autocomplete light outlined multiple
                 v-model="cutsSelected.additionalDemographics1Ids"
-                light
+                :items="additionalDemographics1"
                 :label="$t('Views.Evaluations.stepEvaluatedSelection.demographic_cuts.optionalDemo1')"
                 name="additional_demographics_1"
                 @change="calculateTotal($event, 'additionalDemographics1')"
@@ -294,13 +257,9 @@
             v-bind:style="'margin-right:auto'"
           >
             <template>
-              <v-autocomplete
-                multiple
-                outlined
-                :items="additionalDemographics2"
-                persistent-hint
+              <v-autocomplete light outlined multiple
                 v-model="cutsSelected.additionalDemographics2Ids"
-                light
+                :items="additionalDemographics2"
                 :label="$t('Views.Evaluations.stepEvaluatedSelection.demographic_cuts.optionalDemo2')"
                 name="additional_demographics_2"
                 @change="calculateTotal($event, 'additionalDemographics2')"
@@ -319,6 +278,14 @@
           </v-col>
           <!------------------------------>
         </v-row>
+
+        <!-- Additional Segmentation -->
+          <x-filter-additional-segmentation
+            :additional-segmentation="additionalSegmentation"
+            :calculate-total="calculateTotal"
+            @set-segmentation-key="setSegmentationKey"
+          />
+        <!----------------------------->
       </v-container>
 
       <v-row row wrap>
