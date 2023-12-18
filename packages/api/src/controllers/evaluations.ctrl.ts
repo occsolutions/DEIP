@@ -512,7 +512,7 @@ class EvaluationsController {
 
   async generateDemographicReport(req: IRequest, resp: Response) {
     try {
-      const evaluation: any = await EvaluationsService.findById(req.params.id, 'name displayName questionnaire status enterpriseId enterprise deliveredAt validUntil populationCompletedCount');
+      const evaluation: any = await EvaluationsService.findById(req.params.id, 'name displayName questionnaire status enterpriseId enterprise deliveredAt validUntil populationCompletedCount populationLeaders');
       if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
         throw new BadRequestException('evaluation-not-found');
       }
@@ -580,12 +580,13 @@ class EvaluationsController {
         filters.$and.push(demoFilters);
       }
 
-      const filteredAnswersCount = await EvaluatedService.countByEvaluationIdAndFilterItems(
+      const filteredAnswersCount = await EvaluatedService.countCompletedByEvaluationIdAndFilterItems(
         evaluation._id,
         filters
       );
-      if (!filteredAnswersCount) {
-        throw new BadRequestException('evaluation-no-answers');
+
+      if (filteredAnswersCount < 2) {
+        throw new BadRequestException('demographic_report/006');
       }
 
       const spend = await SpendRequest(req, 'REPORTE DEIP POR POBLACION', 1);
@@ -613,6 +614,13 @@ class EvaluationsController {
         token: req.header('Authorization')!.replace('Bearer ', ''),
       };
 
+      const filteredExpectedCount = await EvaluatedService.countByEvaluationIdAndFilterItems(evaluation._id, filters);
+      const filteredExpectedLeadersCount: number = await EvaluatedService.countByEvaluationRefInIdsAndFilterItems(
+        evaluation._id,
+        filters,
+        evaluation.populationLeaders
+      );
+
       await OperationThreadsService.save({
         operation: 'DownloadReport',
         status: 'pending',
@@ -624,9 +632,13 @@ class EvaluationsController {
           operations: spend,
           enterpriseId: evaluation.enterpriseId,
           type: 'by_demographic',
+          // General
           answeredCount: evaluation.populationCompletedCount,
           answeredLeadersCount: filteredLeadersAnswersCount,
+          // Filtered
           filteredAnswersCount,
+          filteredExpectedCount,
+          filteredExpectedLeadersCount,
           criteria: req.body.criteria
         }
       });
