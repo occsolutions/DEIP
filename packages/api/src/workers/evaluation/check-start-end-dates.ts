@@ -62,7 +62,7 @@ class EvaluationMethods {
 
       // Update participation count (answered polls)
       for (const expiredEvaluationId of expiredEvaluationsIds) {
-        const totalAnswered = await EvaluatedService.countByEvaluationRef(expiredEvaluationId);
+        const totalAnswered = await EvaluatedService.countCompletedByEvaluationRef(expiredEvaluationId);
         await EvaluationService.updateAnsweredCount(expiredEvaluationId, totalAnswered);
       }
     }
