@@ -43,11 +43,17 @@ class ReportChecker {
         };
         break;
       case 'by_demographic':
-        const initByPopulation = await InitByPopulation();
+        const initByPopulation = await InitByPopulation(threadData.criteria);
         threadData.answersDimension = initByPopulation.answersDimension;
-        threadData.segments = initByPopulation.segments;
-        threadData.segmentedAnswers = initByPopulation.segmentedAnswers;
-        threadData.tempData = { alreadyProcessedAnswers: 0 };
+        threadData.answersForScatter = initByPopulation.answersForScatter;
+        threadData.tempData = {
+          alreadyProcessedAnswers: 0,
+          previous: {
+            alreadyProcessedAnswers: 0,
+            answeredCount: 0
+          },
+          filterString: initByPopulation.filterString
+        };
         break;
     }
 
