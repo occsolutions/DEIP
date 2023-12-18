@@ -7,12 +7,12 @@ import EvaluationWorker from './evaluation/check-start-end-dates';
 import EvaluationEmailsWorker from './evaluation/send-emails';
 import ReportCheck from './reports/check-pending-reports';
 import ProcessReportOrganizational from './reports/organizational';
-// import ProcessReportByPopulation from './reports/by-population';
+import ProcessReportByPopulation from './reports/by-population';
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export default () => {
-  setInterval(() => { console.log('Updated at 2023-12-13 11:00'); }, ms('5m'));
+  setInterval(() => { console.log('Updated at 2023-12-18 12:00'); }, ms('5m'));
   const quarter = '15m';
   const minutes = '5m';
   const seconds = '30s';
@@ -27,23 +27,24 @@ export default () => {
     });
   }, ms('2m'));
 
-  setInterval(() => {
+  setInterval(async () => {
     ProcessReportOrganizational.processReportResults().then((res) => {
       // tslint:disable-next-line: no-console
-      console.log('Processed Report:', res);
+      console.log('Processed General Report:', res);
     }).catch((error) => {
       // tslint:disable-next-line: no-console
-      console.log('Processing Report error:', error);
+      console.log('Processing General Report error:', error);
     });
-    /*
+
+    await sleep(ms('14s'));
+
     ProcessReportByPopulation.processReportResults().then((res) => {
       // tslint:disable-next-line: no-console
-      console.log('Processed Segmented Report:', res);
+      console.log('Processed Population Report:', res);
     }).catch((error) => {
       // tslint:disable-next-line: no-console
-      console.log('Processing Segmented Report error:', error);
+      console.log('Processing Population Report error:', error);
     });
-    */
   }, ms(seconds));
 
   setInterval(async () => {
