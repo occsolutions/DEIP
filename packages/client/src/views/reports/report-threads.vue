@@ -74,6 +74,7 @@
               :thread="thread"
               :evaluation-data="evaluation"
               :demographic-cuts="demographics"
+              :criteria-labels="getDemographicChip(thread.data.criteria)"
               @pdfRenderedDemo="demoKey++"
             ></x-download-demographic-report>
           </v-col>
