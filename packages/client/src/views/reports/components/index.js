@@ -134,7 +134,7 @@ export default {
       this.totalReceivers = this.totalDemographicFiltered.length
       this.cutsSelected.totalReceivers = this.totalDemographicFiltered.length
       this.$set(this.cutsSelected, 'demographics', this.totalDemographicFiltered)
-      this.$emit('receivers-modified', this.cutsSelected.totalReceivers > 0)
+      this.$emit('receivers-modified', Object.keys(this.cutsSelected.listOfDemographics).length > 0)
     },
     calculatePopulation () {
       this.setTotalReceivers()

@@ -1,8 +1,8 @@
 
 <template>
   <v-form lazy-validation data-vv-scope="form-2">
-    <v-container class="pt-0">
-      <v-container grid-list-md class="pt-0">
+    <v-container class="py-0">
+      <v-container grid-list-md class="py-0">
         <v-row row wrap
           align="center"
           justify="center"
@@ -288,6 +288,7 @@
         <!----------------------------->
       </v-container>
 
+      <!--
       <v-row row wrap>
         <v-col :key="totalReceivers" xs6 sm="6" class="pa-3 headline">
           {{ $t('Views.Evaluations.stepEvaluatedSelection.population') }}:
@@ -296,6 +297,7 @@
           <v-spacer></v-spacer>
         </v-col>
       </v-row>
+      -->
     </v-container>
   </v-form>
 </template>
