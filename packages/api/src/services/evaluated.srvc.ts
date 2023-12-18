@@ -124,7 +124,24 @@ class EvaluatedService {
   async countByEvaluationIdAndFilterItems(evaluationId: any, filters: any): Promise<number> {
     return EvaluatedRepository.countDocuments({
       evaluationRef: new ObjectID(evaluationId),
+      status: { $ne: 'excluded' },
+      ...filters
+    });
+  }
+
+  async countCompletedByEvaluationIdAndFilterItems(evaluationId: any, filters: any): Promise<number> {
+    return EvaluatedRepository.countDocuments({
+      evaluationRef: new ObjectID(evaluationId),
       status: 'completed',
+      ...filters
+    });
+  }
+
+  async countByEvaluationRefInIdsAndFilterItems(evaluationId: any, filters: any, ids: Array<number>): Promise<number> {
+    return EvaluatedRepository.countDocuments({
+      evaluationRef: new ObjectID(evaluationId),
+      status: { $ne: 'excluded' },
+      indEmpEntId: { $in: ids },
       ...filters
     });
   }
@@ -252,6 +269,14 @@ class EvaluatedService {
       select || undefined,
       { skip: Number(skip * qty), limit: Number(qty) }
     );
+  }
+
+  async findByEvaluationIdAndFilterItems(evaluationId: any, filters: any, select?: undefined|any): Promise<EvaluatedType[]> {
+    return EvaluatedRepository.find({
+      evaluationRef: new ObjectID(evaluationId),
+      status: 'completed',
+      ...filters
+    }, select || undefined);
   }
 
   async findAdditionalByQuestion(evaluationId: any, value: string): Promise<any> {
