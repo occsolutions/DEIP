@@ -55,7 +55,7 @@ export default {
                               fillColor: '#d6dcfc'
                             },
                             {
-                              text: `${x.value}%`,
+                              text: `${this.$round(x.value)}%`,
                               margin: [0, 0, 0, 0],
                               bold: true
                             }
