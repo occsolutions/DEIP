@@ -106,9 +106,9 @@ export default {
           this.$generateDimensionDetails(),
           this.$generateDimensionOptQuestions(),
           // 10 Leaders Dimension Results
-          this.$generateLeadersResults(),
-          this.$generateLeadersDetails(),
-          this.$generateLeadersOptQuestions(),
+          this.completedLeaders ? this.$generateLeadersResults() : '',
+          this.completedLeaders ? this.$generateLeadersDetails() : '',
+          this.completedLeaders ? this.$generateLeadersOptQuestions() : '',
           // 11 Highest/Lowest Scores
           this.$generateQuestionsRanking(),
           // 12 Highest/Lowest Scatter
