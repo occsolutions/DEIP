@@ -14,7 +14,7 @@ export default async (
   const higherLower: any = [];
 
   const getAverage = (item: IScore, isFltrd: boolean): IScore => {
-    const ttl = isFltrd ? totalFilteredAnswers : totalGeneralAnswers
+    const ttl = isFltrd ? totalFilteredAnswers : totalGeneralAnswers;
     item.score = (item.score / ttl);
     if (hasPrevious) {
       item.previous = (item.previous / totalPreviousAnswers);
