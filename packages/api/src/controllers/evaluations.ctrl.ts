@@ -603,6 +603,7 @@ class EvaluationsController {
         productService: productService.code
       });
 
+      const answeredLeadersCount: number = await EvaluatedService.countCompletedByEvaluationRefInIds(evaluation._id, evaluation.populationLeaders);
       const filteredLeadersAnswersCount: number = await EvaluatedService.countCompletedByEvaluationRefInIdsAndFilterItems(
         evaluation._id,
         filters,
@@ -634,7 +635,8 @@ class EvaluationsController {
           type: 'by_demographic',
           // General
           answeredCount: evaluation.populationCompletedCount,
-          answeredLeadersCount: filteredLeadersAnswersCount,
+          answeredLeadersCount,
+          filteredLeadersAnswersCount,
           // Filtered
           filteredAnswersCount,
           filteredExpectedCount,
