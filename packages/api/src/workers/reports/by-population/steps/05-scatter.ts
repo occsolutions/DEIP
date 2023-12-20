@@ -15,6 +15,9 @@ export default async (
     }
     // Samples must divide by (scores.length - 1)
     const ttl = isFltrd ? scores.length - 1 : scores.length;
+    if (ttl === 0) {
+      return 0;
+    }
     return Math.sqrt(distanceSum / ttl);
   };
 

@@ -4,7 +4,8 @@ import { default as EvaluatedService } from '../../../../services/evaluated.srvc
 
 export default async (
   evaluationId: string,
-  enterpriseId: number
+  enterpriseId: number,
+  demoFilters: any
 ) => {
   const res: any = {
     previous: undefined,
@@ -16,6 +17,7 @@ export default async (
 
   if (res.previous && res.previous._id) {
     res.answerCount = await EvaluatedService.countCompletedByEvaluationRef(res.previous._id);
+    res.filteredAnswerCount = await EvaluatedService.countCompletedByEvaluationIdAndFilterItems(evaluationId, demoFilters);
   }
 
   return res;

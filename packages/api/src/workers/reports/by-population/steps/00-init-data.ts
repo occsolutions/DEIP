@@ -24,12 +24,15 @@ export default async (criteria) => {
     return { dateOne, dateTwo };
   };
 
+  const rates: any = {};
+
   const filterString: any = {
     $and: []
   };
 
   for (const key of Object.keys(criteria)) {
     const demoFilters: any = {};
+    rates[key] = {};
     switch (key) {
       case 'age':
         const ageDates = calcDates(criteria[key][0], criteria[key][1]);
@@ -37,6 +40,7 @@ export default async (criteria) => {
           $gte: ageDates.dateTwo.toISOString().slice(0, 10),
           $lt: ageDates.dateOne.toISOString().slice(0, 10)
         };
+        rates[key][`${criteria[key][0]}-${criteria[key][1]}`] = 0;
         break;
       case 'antiquity':
         const antiquityDates = calcDates(criteria[key][0], criteria[key][1]);
@@ -44,18 +48,26 @@ export default async (criteria) => {
           $gte: antiquityDates.dateTwo.toISOString().slice(0, 10),
           $lt: antiquityDates.dateOne.toISOString().slice(0, 10)
         };
+        rates[key][`${criteria[key][0]}-${criteria[key][1]}`] = 0;
         break;
       case 'genders':
         demoFilters['employee.employeeEnterprise.genderId'] = { $in: [criteria[key]] };
+        rates[key][criteria[key]] = 0;
         break;
       default:
         if (!key.startsWith('segmentation')) {
           demoFilters[`employee.employeeEnterprise.${demographicIds[key]}`] = { $in: criteria[key] };
+          for (const demoId of criteria[key]) {
+            rates[key][demoId] = 0;
+          }
         } else {
           // Filter by Additional Segmentation
           const segmentationId = parseInt(key.replace(/[^0-9]/g, ''));
           demoFilters['temp.segmentation.segmentationId'] = { $in: [segmentationId] };
           demoFilters['temp.segmentation.detailId'] = { $in: criteria[key] };
+          for (const detailId of criteria[key]) {
+            rates[key][detailId] = 0;
+          }
         }
         break;
     }
@@ -65,6 +77,7 @@ export default async (criteria) => {
   return {
     answersForScatter: await AnswersUtils.iniAnswersForScatter(),
     answersDimension: await AnswersUtils.iniAnswersDimension(),
+    rates,
     filterString
   };
 };

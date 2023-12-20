@@ -36,10 +36,13 @@ class ReportMethods {
             threadData.answersForScatter,
             threadData.answersDimension,
             threadData.populationLeaders,
+            threadData.criteria,
+            threadData.answersRateDetails,
             threadData.tempData.filterString
           );
 
           threadData.tempData.alreadyProcessedAnswers += tempStepOne.processedAnswers;
+          threadData.answersRateDetails = tempStepOne.answersRateDetails;
           threadData.answersForScatter = tempStepOne.answersForScatter;
           threadData.answersDimension = tempStepOne.answersDimension;
 
@@ -51,7 +54,8 @@ class ReportMethods {
         case 2: // Get Previous
           const tempStepTwo = await StepTwo(
             threadData._evaluation,
-            threadData.enterpriseId
+            threadData.enterpriseId,
+            threadData.tempData.filterString
           );
 
           if (!tempStepTwo.previous) {
@@ -63,6 +67,7 @@ class ReportMethods {
             threadData.previous = tempStepTwo.previous;
             threadData.tempData.previous = {
               answeredCount: tempStepTwo.answerCount,
+              filteredAnsweredCount: tempStepTwo.filteredAnswerCount,
               alreadyProcessedAnswers: 0
             };
             threadData.step = 3;
@@ -94,7 +99,10 @@ class ReportMethods {
             threadData.answersDimension,
             threadData.answeredCount,
             threadData.filteredAnswersCount,
-            threadData.hasPrevious ? threadData.tempData.previous.answeredCount : 1
+            threadData.answeredLeadersCount,
+            threadData.filteredLeadersAnswersCount,
+            threadData.hasPrevious ? threadData.tempData.previous.answeredCount : 1,
+            threadData.hasPrevious ? threadData.tempData.previous.filteredAnsweredCount : 1
           );
 
           threadData.answersForScatter = tempStepFour.answersForScatter;
