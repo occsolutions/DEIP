@@ -7,15 +7,15 @@ export default {
     getEvolutionIndex (score) {
       let text, width
       switch (true) {
-        case (score >= 1 && score < 1.99):
+        case (score >= 1 && score < 2):
           text = 'Básico'
           width = 42
           break
-        case (score >= 2 && score < 2.99):
+        case (score >= 2 && score < 3):
           text = 'Emergente'
           width = 71
           break
-        case (score >= 3 && score < 3.99):
+        case (score >= 3 && score < 4):
           text = 'En Evolución'
           width = 82
           break
@@ -31,10 +31,10 @@ export default {
       score = Number(parseFloat(score).toFixed(2))
       let color
       switch (true) {
-        case (score >= 0 && score < 0.39):
-          color = '#C05251'
+        case (score >= 0 && score < 0.4):
+          color = '#CF6463'
           break
-        case (score >= 0.4 && score < 0.69):
+        case (score >= 0.4 && score < 0.7):
           color = '#FFd87C'
           break
         case (score >= 0.7 && score <= 1):
