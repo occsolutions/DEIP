@@ -148,6 +148,12 @@ export default {
           labels.push(this.demographics[demographicKeys[key]]?.label)
         } else {
           // Segmentation
+          const segmentationId = parseInt(key.replace(/[^0-9]/g, ''))
+          for (const key in this.evaluation.additionalSegmentation) {
+            if (this.evaluation.additionalSegmentation[key].id === segmentationId) {
+              labels.push(this.evaluation.additionalSegmentation[key].trans[this.user.lang].label)
+            }
+          }
         }
       }
       return labels
