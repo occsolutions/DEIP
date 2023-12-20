@@ -45,6 +45,15 @@ import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts.js'
 
 import evaluationsService from '../../../services/evaluations'
+import additionalDemographics1Service from '../../../services/additional-demographics1'
+import additionalDemographics2Service from '../../../services/additional-demographics2'
+import countriesService from '../../../services/countries'
+import headquartersService from '../../../services/headquarters'
+import academicDegreesService from '../../../services/academic-degrees'
+import gendersService from '../../../services/genders'
+import jobTypesService from '../../../services/job-types'
+import departmentsService from '../../../services/departments'
+import chargesService from '../../../services/charges'
 
 import initial from './mixins/00-initial'
 import cover from './mixins/01-cover'
@@ -67,6 +76,8 @@ import dimensionRanking from './mixins/11-ranking-questions'
 import dimensionScatter from './mixins/12-scatter-questions'
 import dimensionTrend from './mixins/13a-trend-dim'
 import questionTrend from './mixins/13b-trend-questions'
+
+import resolver from '../../../utils/resolver'
 
 const origin = window.location.origin
 pdfMake.fonts = {
@@ -93,6 +104,15 @@ pdfMake.fonts = {
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 const echarts = require('echarts')
 require('echarts-wordcloud')
+
+const formatEnterprisesValue = (items, isHeadquarter = false) => {
+  return items.map((item) => {
+    return {
+      id: item.id,
+      label: isHeadquarter ? item.name : item.translate.label
+    }
+  })
+}
 
 export default {
   name: 'download-demographic-report',
@@ -135,6 +155,8 @@ export default {
       previous: {},
       questionnaire: {},
       answersDimension: {},
+      answersRateDetails: {},
+      demographicCutsDetails: {},
       gralScore: 0,
       gralPrevScore: 0,
       completedPolls: 0,
@@ -156,19 +178,47 @@ export default {
     async openPdf () {
       this.$store.dispatch('loading/show')
       this.lockPdfButton = true
-      await evaluationsService.getOneReportByThreadId(this.thread._id, this.pollId)
+      resolver.all({
+        thread: evaluationsService.getOneReportByThreadId(this.thread._id, this.pollId),
+        academicDegrees: academicDegreesService.listFromSuite(),
+        additionalDemographics1: additionalDemographics1Service.list(),
+        additionalDemographics2: additionalDemographics2Service.list(),
+        charges: chargesService.list(),
+        countries: countriesService.listByEnterprise(),
+        departments: departmentsService.list(),
+        genders: gendersService.list(),
+        headquarters: headquartersService.fetchByEnterprise(),
+        jobTypes: jobTypesService.list()
+      })
         .then((res) => {
-          this.expectedPolls = res.data.filteredExpectedCount
-          this.completedPolls = res.data.filteredAnswersCount
-          this.expectedLeaders = res.data.filteredExpectedLeadersCount
-          this.completedLeaders = res.data.answeredLeadersCount
-          this.answersDimension = res.data.answersDimension
-          this.scatterDimension = res.data.scatterDimension
-          this.highestScores = res.data.highestScores
-          this.lowestScores = res.data.lowestScores
-          this.highestScatter = res.data.highestScatter
-          this.lowestScatter = res.data.lowestScatter
-          this.hasPrevious = res.data.hasPrevious
+          // Thread Data
+          this.expectedPolls = res.thread.data.filteredExpectedCount
+          this.completedPolls = res.thread.data.filteredAnswersCount
+          this.expectedLeaders = res.thread.data.filteredExpectedLeadersCount
+          this.completedLeaders = res.thread.data.filteredLeadersAnswersCount
+          this.answersDimension = res.thread.data.answersDimension
+          this.scatterDimension = res.thread.data.scatterDimension
+          this.highestScores = res.thread.data.highestScores
+          this.lowestScores = res.thread.data.lowestScores
+          this.highestScatter = res.thread.data.highestScatter
+          this.lowestScatter = res.thread.data.lowestScatter
+          this.hasPrevious = res.thread.data.hasPrevious
+          this.answersRateDetails = res.thread.data.answersRateDetails
+
+          // Set Demographics
+          this.demographicCutsDetails = {
+            academicDegrees: formatEnterprisesValue(res.academicDegrees.items),
+            additionalDemographics1: formatEnterprisesValue(res.additionalDemographics1.items),
+            additionalDemographics2: formatEnterprisesValue(res.additionalDemographics2.items),
+            charges: formatEnterprisesValue(res.charges.items),
+            countries: formatEnterprisesValue(res.countries.items),
+            departments: formatEnterprisesValue(res.departments.items),
+            genders: formatEnterprisesValue(res.genders.items),
+            headquarters: formatEnterprisesValue(res.headquarters, true),
+            jobTypes: formatEnterprisesValue(res.jobTypes.items)
+          }
+
+          // Assemble PDF
           this.renderPdf()
         })
         .catch((err) => {
@@ -180,14 +230,16 @@ export default {
       this.$emit('render-pdf')
       const configuration = await this.$getConfiguration()
       if (this.downloadPdf) {
+        const demoLabels = this.criteriaLabels.join(', ').replace(/_/g, ' ')
+
         if (is.edge() || is.ie()) {
           const pdfDocGenerator = pdfMake.createPdf(configuration)
           pdfDocGenerator.getBlob((blob) => {
-            window.navigator.msSaveBlob(blob, `${this.evaluationData.name} - Población.pdf`)
+            window.navigator.msSaveBlob(blob, `${this.evaluationData.name} - Poblacion (${demoLabels}).pdf`)
             this.closeRenderPdf()
           })
         } else {
-          pdfMake.createPdf(configuration).download(`${this.evaluationData.name} - Población.pdf`, () => {
+          pdfMake.createPdf(configuration).download(`${this.evaluationData.name} - Poblacion (${demoLabels}).pdf`, () => {
             this.closeRenderPdf()
           })
         }

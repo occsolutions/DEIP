@@ -91,7 +91,7 @@ export default {
           this.$generateMethodology(),
           // 07 Response Rate
           this.$generateResponseRate(),
-          // this.$generateResponseRateDetails(),
+          this.$generateResponseRateDetails(),
           // 08 General Scores
           this.$generateGeneralResults(),
           // 09 Dimensions Results
@@ -113,10 +113,12 @@ export default {
       }
     },
     $round (num) {
-      // let result = (Math.round(num * 10) / 10).toFixed(2)
       let result = parseFloat(num).toFixed(2)
       if (result === '0.00') result = '0'
       if (result === '100.00') result = '100'
+      if (Number.isInteger(result)) {
+        result = result.toFixed(0)
+      }
       return result
     }
   }
