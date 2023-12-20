@@ -17,11 +17,11 @@ export default async (
   const chunkSize = 100;
   const fields = 'indEmpEntId temp.evaluations';
   const answersBatch: any = await EvaluatedService.findByBatchByEvaluationId(previousEvaluationId, alreadyProcessedAnswersCount, chunkSize, fields);
-  const filtered: any = await EvaluatedService.findByEvaluationIdAndFilterItems(previousEvaluationId, demoFilters, 'indEmpEntId');
+  const filtered: any = await EvaluatedService.findCompletedByEvaluationIdAndFilterItems(previousEvaluationId, demoFilters, 'indEmpEntId');
 
   // Run Answers Dimension
   for (let i = 0; i < answersBatch.length; i++) {
-    const temp = AnswersUtils.runAnswersDimension(
+    const temp = await AnswersUtils.runAnswersDimension(
       answersBatch[i].temp.evaluations,
       answersForScatter,
       answersDimension,

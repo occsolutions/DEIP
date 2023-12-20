@@ -46,6 +46,7 @@ class ReportChecker {
         const initByPopulation = await InitByPopulation(threadData.criteria);
         threadData.answersDimension = initByPopulation.answersDimension;
         threadData.answersForScatter = initByPopulation.answersForScatter;
+        threadData.answersRateDetails = initByPopulation.rates;
         threadData.tempData = {
           alreadyProcessedAnswers: 0,
           previous: {

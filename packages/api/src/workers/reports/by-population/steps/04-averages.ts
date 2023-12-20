@@ -8,16 +8,25 @@ export default async (
   answersDimension: IAnswersDimension,
   totalGeneralAnswers,
   totalFilteredAnswers,
-  totalPreviousAnswers
+  totalGeneralLeadersAnswers,
+  totalFilteredLeadersAnswers,
+  totalPreviousAnswers,
+  totalFilteredPreviousAnswers
 ) => {
 
   const higherLower: any = [];
 
-  const getAverage = (item: IScore, isFltrd: boolean): IScore => {
-    const ttl = isFltrd ? totalFilteredAnswers : totalGeneralAnswers;
+  const getAverage = (item: IScore, isFltrd: boolean, isLdr: boolean): IScore => {
+    let ttl = isLdr ? totalGeneralLeadersAnswers : totalGeneralAnswers;
+
+    if (isFltrd) {
+      ttl = isLdr ? totalFilteredLeadersAnswers : totalFilteredAnswers;
+    }
+
     item.score = (item.score / ttl);
     if (hasPrevious) {
-      item.previous = (item.previous / totalPreviousAnswers);
+      const ttl2 = isFltrd ? totalFilteredPreviousAnswers : totalPreviousAnswers;
+      item.previous = (item.previous / ttl2);
     }
     return JSON.parse(JSON.stringify(item));
   };
@@ -31,12 +40,14 @@ export default async (
   for (const dimKey of Object.keys(answersDimension)) {
     const avgForGeneralDim: Array<number> = [];
     const avgForFilteredDim: Array<number> = [];
+    const avgForPreviousFilteredDim: Array<number> = [];
     if (dimKey !== 'leader') {
       // Attributes
       const dimAttributes = answersDimension[dimKey].attrs;
       for (const attrKey of Object.keys(dimAttributes)) {
         const avgForGeneralAttr: Array<number> = [];
         const avgForFilteredAttr: Array<number> = [];
+        const avgForPreviousFilteredAttr: Array<number> = [];
 
         // Questions
         const attrQuestions = answersDimension[dimKey].attrs[attrKey].questions;
@@ -44,15 +55,16 @@ export default async (
           const questionType = answersDimension[dimKey].attrs[attrKey].questions[qKey].qType;
           if (['closed', 'likert'].includes(questionType)) {
             // General Avg.
-            const avg = getAverage(answersDimension[dimKey].attrs[attrKey].questions[qKey].general, false);
+            const avg = getAverage(answersDimension[dimKey].attrs[attrKey].questions[qKey].general, false, false);
             answersDimension[dimKey].attrs[attrKey].questions[qKey].general = avg;
-            answersForScatter[dimKey].attrs[attrKey].questions[qKey].general.scatter.average = avg.score;
+            answersForScatter[dimKey].attrs[attrKey].questions[qKey].general.scatter.average = arrAvg(answersForScatter[dimKey].attrs[attrKey].questions[qKey].general.scatter.scores);
             avgForGeneralAttr.push(avg.score);
             // Filtered Avg.
-            const filteredAvg = getAverage(answersDimension[dimKey].attrs[attrKey].questions[qKey].filtered, true);
+            const filteredAvg = getAverage(answersDimension[dimKey].attrs[attrKey].questions[qKey].filtered, true, false);
             answersDimension[dimKey].attrs[attrKey].questions[qKey].filtered = filteredAvg;
-            answersForScatter[dimKey].attrs[attrKey].questions[qKey].filtered.scatter.average = filteredAvg.score;
+            answersForScatter[dimKey].attrs[attrKey].questions[qKey].filtered.scatter.average = arrAvg(answersForScatter[dimKey].attrs[attrKey].questions[qKey].filtered.scatter.scores);
             avgForFilteredAttr.push(filteredAvg.score);
+            avgForPreviousFilteredAttr.push(filteredAvg.previous);
             // For ranking, based on filtered avg.
             higherLower.push({
               type: questionType,
@@ -88,29 +100,37 @@ export default async (
         const attrFilteredAvg = arrAvg(avgForFilteredAttr);
         answersDimension[dimKey].attrs[attrKey].filtered.score = attrFilteredAvg;
         avgForFilteredDim.push(attrFilteredAvg);
+        // Filtered Previous Attribute Average
+        const attrPreviousFilteredAvg = arrAvg(avgForPreviousFilteredAttr);
+        answersDimension[dimKey].attrs[attrKey].filtered.previous = attrPreviousFilteredAvg;
+        avgForPreviousFilteredDim.push(attrPreviousFilteredAvg);
       }
     } else {
+      // Leader dimension
       for (const qKey of Object.keys(answersDimension[dimKey])) {
         if (!['general', 'filtered'].includes(qKey)) {
           const questionType = answersDimension[dimKey][qKey].qType;
           if (['closed', 'likert'].includes(questionType)) {
             // General Avg.
-            const avg = getAverage(answersDimension[dimKey][qKey].general, false);
+            const avg = getAverage(answersDimension[dimKey][qKey].general, false, true);
             answersDimension[dimKey][qKey].general = avg;
-            answersForScatter[dimKey][qKey].general.scatter.average = avg.score;
+            answersForScatter[dimKey][qKey].general.scatter.average = arrAvg(answersForScatter[dimKey][qKey].general.scatter.scores);
             avgForGeneralDim.push(avg.score);
             // Filtered Avg.
-            const filteredAvg = getAverage(answersDimension[dimKey][qKey].filtered, true);
+            const filteredAvg = getAverage(answersDimension[dimKey][qKey].filtered, true, true);
             answersDimension[dimKey][qKey].filtered = filteredAvg;
-            answersForScatter[dimKey][qKey].filtered.scatter.average = filteredAvg.score;
+            answersForScatter[dimKey][qKey].filtered.scatter.average = arrAvg(answersForScatter[dimKey][qKey].filtered.scatter.scores);
             avgForFilteredDim.push(filteredAvg.score);
+            avgForPreviousFilteredDim.push(filteredAvg.previous);
             // For ranking, based on filtered avg.
-            higherLower.push({
-              type: questionType,
-              dimension: dimKey,
-              question: qKey,
-              score: filteredAvg.score
-            });
+            if (totalFilteredLeadersAnswers) {
+              higherLower.push({
+                type: questionType,
+                dimension: dimKey,
+                question: qKey,
+                score: filteredAvg.score
+              });
+            }
           } else {
             // General
             const gCounts = {};
@@ -135,6 +155,7 @@ export default async (
     answersDimension[dimKey].general.score = arrAvg(avgForGeneralDim);
     // Filtered Dimension Average
     answersDimension[dimKey].filtered.score = arrAvg(avgForFilteredDim);
+    answersDimension[dimKey].filtered.previous = arrAvg(avgForPreviousFilteredDim);
   }
 
   const highest = higherLower.sort((a, b) => b.score - a.score).slice(0, 6);
