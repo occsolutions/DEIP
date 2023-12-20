@@ -271,10 +271,17 @@ class EvaluatedService {
     );
   }
 
-  async findByEvaluationIdAndFilterItems(evaluationId: any, filters: any, select?: undefined|any): Promise<EvaluatedType[]> {
+  async findCompletedByEvaluationIdAndFilterItems(evaluationId: any, filters: any, select?: undefined|any): Promise<EvaluatedType[]> {
     return EvaluatedRepository.find({
       evaluationRef: new ObjectID(evaluationId),
       status: 'completed',
+      ...filters
+    }, select || undefined);
+  }
+
+  async findByEvaluationIdAndFilterItems(evaluationId: any, filters: any, select?: undefined|any): Promise<EvaluatedType[]> {
+    return EvaluatedRepository.find({
+      evaluationRef: new ObjectID(evaluationId),
       ...filters
     }, select || undefined);
   }
