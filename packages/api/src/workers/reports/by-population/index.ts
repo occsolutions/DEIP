@@ -38,7 +38,7 @@ class ReportMethods {
             threadData.populationLeaders,
             threadData.criteria,
             threadData.answersRateDetails,
-            threadData.tempData.filterString
+            JSON.parse(threadData.tempData.filterString)
           );
 
           threadData.tempData.alreadyProcessedAnswers += tempStepOne.processedAnswers;
@@ -55,7 +55,7 @@ class ReportMethods {
           const tempStepTwo = await StepTwo(
             threadData._evaluation,
             threadData.enterpriseId,
-            threadData.tempData.filterString
+            JSON.parse(threadData.tempData.filterString)
           );
 
           if (!tempStepTwo.previous) {
@@ -81,7 +81,7 @@ class ReportMethods {
             threadData.answersForScatter,
             threadData.answersDimension,
             threadData.populationLeaders,
-            threadData.tempData.filterString
+            JSON.parse(threadData.tempData.filterString)
           );
 
           threadData.tempData.previous.alreadyProcessedAnswers += tempStepThree.processedAnswers;

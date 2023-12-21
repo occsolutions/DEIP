@@ -66,6 +66,7 @@ export default {
           ? this.answersDimension[x.dimension][x.question].general.score
           : this.answersDimension[x.dimension].attrs[x.attribute].questions[x.question].general.score
 
+        const trend = x.score - previous
         const gap = x.score - organization
 
         rows.push([
@@ -92,11 +93,11 @@ export default {
             color: '#222222'
           },
           {
-            text: this.hasPrevious ? this.$round(x.score - previous) : '--',
+            text: this.hasPrevious && trend ? this.$round(trend) : '--',
             margin: [0, 8, 0, 2],
             alignment: 'center',
             fontSize: 11.5,
-            bold: this.hasPrevious,
+            bold: this.hasPrevious && trend,
             color: '#222222'
           },
           {
