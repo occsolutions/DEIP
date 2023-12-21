@@ -53,7 +53,7 @@ class ReportChecker {
             alreadyProcessedAnswers: 0,
             answeredCount: 0
           },
-          filterString: initByPopulation.filterString
+          filterString: JSON.stringify(initByPopulation.filterString)
         };
         break;
     }
