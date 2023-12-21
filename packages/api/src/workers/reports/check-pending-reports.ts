@@ -20,14 +20,12 @@ class ReportChecker {
       return;
     }
     await OperationThreadsService.findOneAndUpdateStatus(pendingOperationThread._id, 'in_action');
-    console.log('* * * * STEP 1-1 * * * *');
 
     const threadData = pendingOperationThread.data;
     threadData.step = 1;
     threadData.progress = 10;
 
     const evaluation: any = await EvaluationsService.findById(threadData._evaluation, 'populationLeaders');
-    console.log('* * * * STEP 1-2 * * * *');
     threadData.populationLeaders = evaluation ? evaluation.populationLeaders : [];
 
     switch (threadData.type) {
@@ -46,7 +44,6 @@ class ReportChecker {
         break;
       case 'by_demographic':
         const initByPopulation = await InitByPopulation(threadData.criteria);
-        console.log('* * * * STEP 1-3 * * * *');
         threadData.answersDimension = initByPopulation.answersDimension;
         threadData.answersForScatter = initByPopulation.answersForScatter;
         threadData.answersRateDetails = initByPopulation.rates;
@@ -61,7 +58,6 @@ class ReportChecker {
         break;
     }
 
-    console.log('* * * * STEP 1-4 * * * *');
     await OperationThreadsService.findOneAndUpdateStatusData(pendingOperationThread._id, 'in_progress', threadData);
 
     return pendingOperationThread._id;
