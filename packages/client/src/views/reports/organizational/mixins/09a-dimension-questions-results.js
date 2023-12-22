@@ -25,7 +25,8 @@ export default {
             Object.keys(this.answersDimension[dimKey].attrs[attrKey].questions).forEach(qKey => {
               const question = this.answersDimension[dimKey].attrs[attrKey].questions[qKey]
               if (question.qType !== 'options') {
-                const trend = question.general.score - question.general.previous
+                const previous = question.general.previous || 0
+                const trend = question.general.score - previous
 
                 // Assemble questions rows
                 rows.push([
@@ -53,8 +54,8 @@ export default {
                     color: '#222222'
                   },
                   {
-                    text: this.hasPrevious ? this.$round(question.general.previous) : '--',
-                    fillColor: this.hasPrevious ? this.getFillColor(question.general.previous) : '',
+                    text: this.hasPrevious ? this.$round(previous) : '--',
+                    fillColor: this.hasPrevious ? this.getFillColor(previous) : '',
                     margin: [0, 14, 0, 8],
                     alignment: 'center',
                     fontSize: 12,
@@ -62,11 +63,11 @@ export default {
                     color: '#222222'
                   },
                   {
-                    text: this.hasPrevious ? this.$round(trend) : '--',
+                    text: this.hasPrevious && trend ? this.$round(trend) : '--',
                     margin: [0, 14, 0, 8],
                     alignment: 'center',
                     fontSize: 12,
-                    bold: this.hasPrevious,
+                    bold: this.hasPrevious && trend,
                     color: '#222222'
                   }
                 ])

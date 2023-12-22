@@ -218,7 +218,7 @@ export default {
     closeRenderPdf () {
       this.$store.dispatch('loading/hide')
       this.lockPdfButton = false
-      this.$emit('pdfRenderedOrg')
+      this.$emit('reportGenerated')
     },
     preloadFont1 () {
       const canvas = document.createElement('canvas')
@@ -312,20 +312,6 @@ export default {
       }
 
       xhr.send()
-    },
-    getDateString () {
-      const today = new Date()
-      const monthName = this.$t(`Views.Evaluations.report.months.${[today.getMonth()]}`)
-      return `${monthName} - ${today.getFullYear()}`
-    },
-    round (value, decimals = 2) {
-      if (isNaN(Number(value))) {
-        return '--'
-      }
-      if ((value * 100) < 1 && (value * 100) > -1) {
-        value = 0
-      }
-      return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals).toFixed(decimals)
     }
   }
 }

@@ -45,8 +45,10 @@ export default {
           : this.evaluationData.questionnaire.evaluations[x.dimension].attrs[x.attribute].questions[x.question].label[this.user.lang]
 
         const previous = x.dimension === 'leader'
-          ? this.answersDimension[x.dimension][x.question].general.previous
-          : this.answersDimension[x.dimension].attrs[x.attribute].questions[x.question].general.previous
+          ? this.answersDimension[x.dimension][x.question].general.previous || 0
+          : this.answersDimension[x.dimension].attrs[x.attribute].questions[x.question].general.previous || 0
+
+        const trend = x.score - previous
 
         rows.push([
           {
@@ -72,11 +74,11 @@ export default {
             color: '#222222'
           },
           {
-            text: this.hasPrevious ? this.$round(x.score - previous) : '--',
+            text: this.hasPrevious && trend ? this.$round(trend) : '--',
             margin: [0, 10, 0, 4],
             alignment: 'center',
             fontSize: 12,
-            bold: this.hasPrevious,
+            bold: this.hasPrevious && trend,
             color: '#222222'
           }
         ])
