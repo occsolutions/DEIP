@@ -80,7 +80,7 @@ class ReportMethods {
             threadData.tempData.previous.alreadyProcessedAnswers,
             threadData.answersForScatter,
             threadData.answersDimension,
-            threadData.populationLeaders,
+            threadData.previous.populationLeaders,
             JSON.parse(threadData.tempData.filterString)
           );
 
