@@ -5,7 +5,7 @@ export default {
   data () {
     return {
       heatMapMeaning: [
-        { value: '0 - 0.39', meaning: 'Franja Baja', color: '#C05251' },
+        { value: '0 - 0.39', meaning: 'Franja Baja', color: '#CF6463' },
         { value: '0.4 - 0.69', meaning: 'Franja Media', color: '#FFd87C' },
         { value: '0.7 - 1', meaning: 'Franja Alta', color: '#93D379' }
       ],

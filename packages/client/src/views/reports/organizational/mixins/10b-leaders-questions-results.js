@@ -21,10 +21,8 @@ export default {
         if (qKey !== 'general') {
           const question = this.answersDimension.leader[qKey]
           if (question.qType !== 'options') {
-            const trend = question.general.score - question.general.previous
-            // const questionnaireAttrKey = attrKey.replace(/_([^_]*)$/, '$1')
-            // const parts = qKey.split('_')
-            // const questionnaireQuestionKey = `${parts[0]}_${parts[1]}${parts[2]}_${parts[3]}`
+            const previous = question.general.previous
+            const trend = question.general.score - previous
 
             // Assemble questions rows
             rows.push([
@@ -52,20 +50,20 @@ export default {
                 color: '#222222'
               },
               {
-                text: this.hasPrevious ? this.$round(question.general.previous) : '--',
-                fillColor: this.hasPrevious ? this.getFillColor(question.general.previous) : '',
+                text: this.hasPrevious && previous ? this.$round(previous) : '--',
+                fillColor: this.hasPrevious && previous ? this.getFillColor(previous) : '',
                 margin: [0, 14, 0, 8],
                 alignment: 'center',
                 fontSize: 12,
-                bold: this.hasPrevious,
+                bold: this.hasPrevious && previous,
                 color: '#222222'
               },
               {
-                text: this.hasPrevious ? this.$round(trend) : '--',
+                text: this.hasPrevious && trend ? this.$round(trend) : '--',
                 margin: [0, 14, 0, 8],
                 alignment: 'center',
                 fontSize: 12,
-                bold: this.hasPrevious,
+                bold: this.hasPrevious && trend,
                 color: '#222222'
               }
             ])

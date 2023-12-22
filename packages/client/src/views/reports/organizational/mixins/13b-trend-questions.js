@@ -69,11 +69,12 @@ export default {
                     color: '#222222'
                   },
                   {
-                    text: this.hasPrevious ? this.$round(variation) : '--',
+                    value: variation,
+                    text: this.hasPrevious && variation ? this.$round(variation) : '--',
                     margin: [0, 9, 0, 4],
                     alignment: 'center',
                     fontSize: 12,
-                    bold: this.hasPrevious,
+                    bold: this.hasPrevious && variation,
                     color: '#222222'
                   }
                 ])
@@ -84,13 +85,13 @@ export default {
       })
 
       const sortedRows = type === 'high'
-        ? rows.sort((a, b) => Number(b[b.length - 1].text) - Number(a[a.length - 1].text)).slice(0, 6)
-        : rows.sort((a, b) => Number(a[a.length - 1].text) - Number(b[b.length - 1].text)).slice(0, 6)
+        ? rows.sort((a, b) => Number(b[b.length - 1].value) - Number(a[a.length - 1].value)).slice(0, 6)
+        : rows.sort((a, b) => Number(a[a.length - 1].value) - Number(b[b.length - 1].value)).slice(0, 6)
 
       if (type === 'low') {
         sortedRows.forEach(row => {
           // Hide non-negative values
-          if (Number(row[3].text) >= 0) {
+          if (Number(row[3].value) >= 0) {
             row.forEach(col => {
               col.text = '--'
               col.bold = false

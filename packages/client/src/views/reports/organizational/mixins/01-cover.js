@@ -17,11 +17,6 @@ const fontSizeBylength = [
 const getFontSizeBylength = (l) => fontSizeBylength.find((fsbl) => fsbl.min <= l && fsbl.max >= l).fontSize
 
 export default {
-  data () {
-    return {
-      today: new Date()
-    }
-  },
   methods: {
     $generateCover () {
       const nameFontSize = getFontSizeBylength((this.evaluationData.name || '').length)

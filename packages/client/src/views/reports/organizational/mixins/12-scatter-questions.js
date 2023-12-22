@@ -37,9 +37,9 @@ export default {
           ? this.evaluationData.questionnaire.evaluations[x.dimension][x.question].label[this.user.lang]
           : this.evaluationData.questionnaire.evaluations[x.dimension].attrs[x.attribute].questions[x.question].label[this.user.lang]
 
-        // const previous = x.dimension === 'leader'
-        //   ? this.scatterDimension[x.dimension][x.question].previous
-        //   : this.scatterDimension[x.dimension].attrs[x.attribute].questions[x.question].previous
+        const previous = x.dimension === 'leader'
+          ? this.scatterDimension[x.dimension][x.question].previous
+          : this.scatterDimension[x.dimension].attrs[x.attribute].questions[x.question].previous
 
         rows.push([
           {
@@ -57,12 +57,11 @@ export default {
             color: '#222222'
           },
           {
-            text: this.hasPrevious ? '--' : '--',
-            // text: this.hasPrevious ? this.$round(previous) : '--',
+            text: this.hasPrevious && previous ? this.$round(previous) : '--',
             margin: [0, 10, 0, 4],
             alignment: 'center',
             fontSize: 12,
-            bold: this.hasPrevious,
+            bold: this.hasPrevious && previous,
             color: '#222222'
           }
         ])

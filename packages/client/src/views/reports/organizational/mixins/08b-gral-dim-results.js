@@ -33,11 +33,11 @@ export default {
               color: '#222222'
             },
             {
-              text: this.hasPrevious ? this.$round(trend) : '--',
+              text: this.hasPrevious && trend ? this.$round(trend) : '--',
               margin: [0, 3.5, 0, 0],
               alignment: 'center',
               fontSize: 12,
-              bold: this.hasPrevious,
+              bold: this.hasPrevious && trend,
               color: '#222222'
             }
           ])
