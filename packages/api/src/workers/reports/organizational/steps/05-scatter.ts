@@ -13,7 +13,9 @@ export default async (
     for (const score of scores) {
       distanceSum += Math.pow(score - media, 2);
     }
-    // Beware: by population must divide (scores.length - 1)
+    if (!scores.length) {
+      return 0;
+    }
     return Math.sqrt(distanceSum / scores.length);
   };
 
@@ -21,15 +23,14 @@ export default async (
 
   // Dimensions
   for (const dimKey of Object.keys(answersForScatter)) {
-
     if (dimKey !== 'leader') {
       // Attributes
       const dimAttributes = answersForScatter[dimKey].attrs;
       for (const attrKey of Object.keys(dimAttributes)) {
-
         // Questions
         const attrQuestions = answersForScatter[dimKey].attrs[attrKey].questions;
         for (const qKey of Object.keys(attrQuestions)) {
+          // Current
           const scatterData = answersForScatter[dimKey].attrs[attrKey].questions[qKey].scatter;
           const scores = scatterData.scores;
           if (scores.length) {
@@ -45,10 +46,20 @@ export default async (
 
             scatterDimension[dimKey].attrs[attrKey].questions[qKey].scatter = scatter;
           }
+
+          // Previous
+          const scatterPreviousData = answersForScatter[dimKey].attrs[attrKey].questions[qKey].previous;
+          const scoresPrevious = scatterPreviousData.scores;
+          if (scoresPrevious.length) {
+            const media = scatterPreviousData.average;
+            const scatterPrevious = getScatter(scoresPrevious, media);
+            scatterDimension[dimKey].attrs[attrKey].questions[qKey].previous = scatterPrevious;
+          }
         }
       }
     } else {
       for (const qKey of Object.keys(answersForScatter[dimKey])) {
+        // Current
         const scatterData = answersForScatter[dimKey][qKey].scatter;
         const scores = scatterData.scores;
         if (scores.length) {
@@ -62,6 +73,15 @@ export default async (
           });
 
           scatterDimension[dimKey][qKey].scatter = scatter;
+        }
+
+        // Previous
+        const scatterPreviousData = answersForScatter[dimKey][qKey].previous;
+        const scoresPrevious = scatterPreviousData.scores;
+        if (scoresPrevious.length) {
+          const media = scatterPreviousData.average;
+          const scatterPrevious = getScatter(scoresPrevious, media);
+          scatterDimension[dimKey][qKey].previous = scatterPrevious;
         }
       }
     }

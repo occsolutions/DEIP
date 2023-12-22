@@ -3,6 +3,10 @@ interface IScatter {
   scatter: number | {
     average: number;
     scores: Array<number>;
+  },
+  previous: number | {
+    average: number;
+    scores: Array<number>;
   }
 }
 

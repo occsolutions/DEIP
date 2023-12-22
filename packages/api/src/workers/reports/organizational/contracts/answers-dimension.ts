@@ -8,6 +8,7 @@ interface IScores {
   score: number;
   scores: Array<number>;
   previous: number;
+  previousScores: Array<number>;
 }
 
 interface IQuestion {
