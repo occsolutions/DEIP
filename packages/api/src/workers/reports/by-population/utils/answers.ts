@@ -600,6 +600,10 @@ class AnswersUtils {
                 // Closed questions that were not answered with yes o no, worth zero (0)
                 question.score[0] = 0;
               }
+              if (question.qType === 'likert' && ![0, 0.25, 0.5, 0.75, 1].includes(question.score[0])) {
+                // Likert questions that were not answered, worth zero (0)
+                question.score[0] = 0;
+              }
               answersDimension[dimKey][qKey].general[dynamicKey] += question.score[0];
               if (isFiltered) {
                 answersDimension[dimKey][qKey].filtered[dynamicKey] += question.score[0];
