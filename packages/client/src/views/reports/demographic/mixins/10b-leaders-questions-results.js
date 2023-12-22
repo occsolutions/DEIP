@@ -21,7 +21,8 @@ export default {
         if (!['general', 'filtered'].includes(qKey)) {
           const question = this.answersDimension.leader[qKey]
           if (question.qType !== 'options') {
-            const trend = question.filtered.score - question.filtered.previous
+            const previous = question.filtered.previous
+            const trend = question.filtered.score - previous
             const gap = question.filtered.score - question.general.score
 
             // Assemble questions rows
@@ -50,12 +51,12 @@ export default {
                 color: '#222222'
               },
               {
-                text: this.hasPrevious ? this.$round(question.filtered.previous) : '--',
-                fillColor: this.hasPrevious ? this.getFillColor(question.filtered.previous) : '',
+                text: this.hasPrevious && previous ? this.$round(previous) : '--',
+                fillColor: this.hasPrevious && previous ? this.getFillColor(previous) : '',
                 margin: [0, 14, 0, 8],
                 alignment: 'center',
                 fontSize: 12,
-                bold: this.hasPrevious,
+                bold: this.hasPrevious && previous,
                 color: '#222222'
               },
               {

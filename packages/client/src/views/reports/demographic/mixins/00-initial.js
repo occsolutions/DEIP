@@ -116,8 +116,8 @@ export default {
       let result = parseFloat(num).toFixed(2)
       if (result === '0.00') result = '0'
       if (result === '100.00') result = '100'
-      if (Number.isInteger(result)) {
-        result = result.toFixed(0)
+      if (Number.isInteger(Number(result))) {
+        result = result.toFixed()
       }
       return result
     }
