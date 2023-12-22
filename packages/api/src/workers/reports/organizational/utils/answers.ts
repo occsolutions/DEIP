@@ -6,7 +6,10 @@ class AnswersUtils {
 
   // Answers for Scatter Initializer
   public iniAnswersForScatter (isFinal = false): IDimensionScatter {
-    const getInitScatter = () => ({ scatter: isFinal ? 0 : { average: 0, scores: [] } });
+    const getInitScatter = () => ({
+      scatter: isFinal ? 0 : { average: 0, scores: [] },
+      previous: isFinal ? 0 : { average: 0, scores: [] }
+    });
 
     const getInitLeaderScatter = () => ({
       leader_q1: getInitScatter(),
@@ -231,7 +234,7 @@ class AnswersUtils {
   // Questionnaire Answers Initializer
   public iniAnswersDimension (): IAnswersDimension {
     const getInitScore = () => ({ score: 0, previous: 0 });
-    const getInitScores = () => ({ score: 0, scores: [], previous: 0 });
+    const getInitScores = () => ({ score: 0, scores: [], previous: 0, previousScores: [] });
     const getInitQuestion = () => ({ qType: '', general: getInitScores() });
     const getInitLeaderDimension = () => ({
       general: getInitScore(),
@@ -498,6 +501,8 @@ class AnswersUtils {
     previous: boolean
   ) {
     const dynamicKey = previous ? 'previous' : 'score';
+    const dynamicKey2 = previous ? 'previous' : 'scatter';
+    const dynamicKey3 = previous ? 'previousScores' : 'scores';
 
     // Dimensions
     let dimCnt = 0;
@@ -522,16 +527,14 @@ class AnswersUtils {
                 question.score[0] = 0;
               }
               answersDimension[dimKey].attrs[attrKey].questions[qKey].general[dynamicKey] += question.score[0];
-              if (!previous) {
-                answersForScatter[dimKey].attrs[attrKey].questions[qKey].scatter.scores.push(question.score[0]);
-              }
+              answersForScatter[dimKey].attrs[attrKey].questions[qKey][dynamicKey2].scores.push(question.score[0]);
             } else {
               // Options questions
               if ([-1].includes(question.score[0])) {
                 // Options questions that were not answered, worth zero (0)
                 question.score[0] = 0;
               }
-              answersDimension[dimKey].attrs[attrKey].questions[qKey].general.scores.push(...question.score);
+              answersDimension[dimKey].attrs[attrKey].questions[qKey].general[dynamicKey3].push(...question.score);
             }
             qCnt++;
           }
@@ -548,13 +551,15 @@ class AnswersUtils {
                 // Closed questions that were not answered with yes o no, worth zero (0)
                 question.score[0] = 0;
               }
-              answersDimension[dimKey][qKey].general[dynamicKey] += question.score[0];
-              if (!previous) {
-                answersForScatter[dimKey][qKey].scatter.scores.push(question.score[0]);
+              if (question.qType === 'likert' && ![0, 0.25, 0.5, 0.75, 1].includes(question.score[0])) {
+                // Likert questions that were not answered, worth zero (0)
+                question.score[0] = 0;
               }
+              answersDimension[dimKey][qKey].general[dynamicKey] += question.score[0];
+              answersForScatter[dimKey][qKey][dynamicKey2].scores.push(question.score[0]);
             } else {
               // Options questions
-              answersDimension[dimKey][qKey].general.scores.push(...question.score);
+              answersDimension[dimKey][qKey].general[dynamicKey3].push(...question.score);
             }
             qCnt++;
           }

@@ -62,6 +62,7 @@ class ReportMethods {
             threadData.previous = tempStepTwo.previous;
             threadData.tempData.previous = {
               answeredCount: tempStepTwo.answerCount,
+              leadersAnsweredCount: tempStepTwo.leadersAnswerCount,
               alreadyProcessedAnswers: 0
             };
             threadData.step = 3;
@@ -74,7 +75,7 @@ class ReportMethods {
             threadData.tempData.previous.alreadyProcessedAnswers,
             threadData.answersForScatter,
             threadData.answersDimension,
-            threadData.populationLeaders
+            threadData.previous.populationLeaders
           );
 
           threadData.tempData.previous.alreadyProcessedAnswers += tempStepThree.processedAnswers;
@@ -91,7 +92,9 @@ class ReportMethods {
             threadData.answersForScatter,
             threadData.answersDimension,
             threadData.answeredCount,
-            threadData.hasPrevious ? threadData.tempData.previous.answeredCount : 1
+            threadData.populationLeaders.length || 1,
+            threadData.hasPrevious ? threadData.tempData.previous.answeredCount : 1,
+            threadData.hasPrevious ? threadData.tempData.previous.leadersAnsweredCount : 1
           );
 
           threadData.answersForScatter = tempStepFour.answersForScatter;

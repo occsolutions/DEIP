@@ -12,10 +12,11 @@ export default async (
   };
 
   const current: any = await EvaluationsService.findById(evaluationId, 'questionnaire deliveredAt');
-  res.previous = await EvaluationsService.findOnePrevious(evaluationId, enterpriseId, current.questionnaire, current.deliveredAt, 'slug');
+  res.previous = await EvaluationsService.findOnePrevious(evaluationId, enterpriseId, current.questionnaire, current.deliveredAt, 'slug populationLeaders');
 
   if (res.previous && res.previous._id) {
     res.answerCount = await EvaluatedService.countCompletedByEvaluationRef(res.previous._id);
+    res.leadersAnswerCount = await EvaluatedService.countCompletedByEvaluationRefInIds(res.previous._id, res.previous.populationLeaders);
   }
 
   return res;
