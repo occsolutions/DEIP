@@ -5,6 +5,7 @@ import { IAnswersDimension } from '../contracts/answers-dimension';
 class AnswersUtils {
   // Answers for Scatter Initializer
   public iniAnswersForScatter (isFinal = false): IDimensionScatter {
+    console.log('* * * * STEP 3-1-1 * * * *');
     const getInitScatter = () => ({ scatter: isFinal ? 0 : { average: 0, scores: [] } });
     const getInitQuestionScatter = () => ({ general: getInitScatter(), filtered: getInitScatter() });
 
@@ -23,6 +24,7 @@ class AnswersUtils {
       leader_q12: getInitQuestionScatter()
     });
 
+    console.log('* * * * STEP 3-1-2 * * * *');
     return {
       d1: {
         attrs: {
@@ -230,6 +232,7 @@ class AnswersUtils {
 
   // Questionnaire Answers Initializer
   public iniAnswersDimension (): IAnswersDimension {
+    console.log('* * * * STEP 3-2-1 * * * *');
     const getInitScore = () => ({ score: 0, previous: 0 });
     const getInitScores = () => ({ score: 0, scores: [], previous: 0, previousScores: [] });
     const getInitQuestion = () => ({ qType: '', general: getInitScores(), filtered: getInitScores() });
@@ -250,6 +253,7 @@ class AnswersUtils {
       leader_q12: getInitQuestion()
     });
 
+    console.log('* * * * STEP 3-2-2 * * * *');
     return {
       d1: {
         general: getInitScore(),
