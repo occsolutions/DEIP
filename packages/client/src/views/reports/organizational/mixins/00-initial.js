@@ -125,7 +125,7 @@ export default {
       if (result === '0.00') result = '0'
       if (result === '100.00') result = '100'
       if (Number.isInteger(Number(result))) {
-        result = result.toFixed()
+        result = parseInt(result).toFixed()
       }
       return result
     }
