@@ -91,8 +91,34 @@
                   <!-- Answer options -->
                   <v-col cols="12" class="pt-0">
                     <ValidationProvider rules="required">
-                      <!-- Type Closed / Likert -->
-                      <div v-if="['closed', 'likert'].includes(item.type)">
+                      <!-- Type Likert -->
+                      <v-row no-gutters
+                        v-if="item.type === 'likert'"
+                      >
+                        <v-text-field v-show="false"
+                          v-model="evaluated.temp.evaluations[computedQuestionnairePages - 1].attribute[i].score"
+                          class="hidden-field"
+                        ></v-text-field>
+                        <v-col cols="12" xs="12" sm="4" md="1"
+                          v-for="(option, $i) in questionsTypes.find(qT => qT.type === item.type).options"
+                          :key="`face-${$i}`"
+                          class="mb-n2 pt-7 mx-auto text-center"
+                        >
+                          <v-btn icon large
+                            :ripple="false"
+                            :class="evaluated.temp.evaluations[computedQuestionnairePages - 1].attribute[i].score[0] === option.value ? faces[parseFloat(option.value)].class : 'grey'"
+                            @click="setFaceAnswer(i, option.value)"
+                          >
+                            <v-icon color="white" x-large>{{ faces[parseFloat(option.value)].icon }}</v-icon>
+                          </v-btn>
+                          <div v-html="option.label[lang]"
+                            class="pt-1 cursor-pointer"
+                            @click="setFaceAnswer(i, option.value)"
+                          ></div>
+                        </v-col>
+                      </v-row>
+                      <!-- Type Closed -->
+                      <div v-else-if="item.type === 'closed'">
                         <v-radio-group dense hide-details
                           v-model="evaluated.temp.evaluations[computedQuestionnairePages - 1].attribute[i].score"
                           class="mt-4 justify-left"
@@ -252,6 +278,26 @@
 <style scoped>
   .v-slider__tick--filled {
     background-color: none;
+  }
+  .hidden-field {
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
+  }
+  .angry {
+    background-color: #BB3E3E !important;
+  }
+  .sad {
+    background-color: #B8663D !important;
+  }
+  .neutral {
+    background-color: #C2B147 !important;
+  }
+  .happy {
+    background-color: #B6C144 !important;
+  }
+  .veryhappy {
+    background-color: #44C156 !important;
   }
 </style>
 

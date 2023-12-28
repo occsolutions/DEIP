@@ -37,6 +37,13 @@ export default Vue.extend({
       lang: '',
       completed: false,
       progress: 0,
+      faces: {
+        0: { icon: 'mdi-emoticon-angry-outline', class: 'angry' },
+        0.25: { icon: 'mdi-emoticon-sad-outline', class: 'sad' },
+        0.5: { icon: 'mdi-emoticon-neutral-outline', class: 'neutral' },
+        0.75: { icon: 'mdi-emoticon-happy-outline', class: 'happy' },
+        1: { icon: 'mdi-emoticon-outline', class: 'veryhappy' }
+      },
       // Modals
       outIntervalDialog: false,
       dialogIcon: '',
@@ -356,6 +363,10 @@ export default Vue.extend({
         answer.score = [-1]
       }
       return false
+    },
+    setFaceAnswer (index, val) {
+      this.evaluated.temp.evaluations[this.currentPage].attribute[index].score = [val]
+      this.saveAnswers()
     },
     saveAnswers () {
       this.$store.dispatch('loading/show')
