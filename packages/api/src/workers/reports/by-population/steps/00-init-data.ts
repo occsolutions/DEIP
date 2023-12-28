@@ -30,7 +30,9 @@ export default async (criteria) => {
     $and: []
   };
 
+  console.log('* * * * STEP 2-1 * * * *');
   for (const key of Object.keys(criteria)) {
+    console.log('* * * * STEP 2-2 * * * *', key);
     const demoFilters: any = {};
     rates[key] = {};
     switch (key) {
@@ -56,12 +58,14 @@ export default async (criteria) => {
         break;
       default:
         if (!key.startsWith('segmentation')) {
+          console.log('* * * * STEP 2-3-1 * * * *');
           demoFilters[`employee.employeeEnterprise.${demographicIds[key]}`] = { $in: criteria[key] };
           for (const demoId of criteria[key]) {
             rates[key][demoId] = 0;
           }
         } else {
           // Filter by Additional Segmentation
+          console.log('* * * * STEP 2-3-2 * * * *');
           const segmentationId = parseInt(key.replace(/[^0-9]/g, ''));
           demoFilters['temp.segmentation.segmentationId'] = { $in: [segmentationId] };
           demoFilters['temp.segmentation.detailId'] = { $in: criteria[key] };
