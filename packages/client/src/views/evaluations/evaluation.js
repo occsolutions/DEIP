@@ -365,7 +365,7 @@ export default Vue.extend({
       return false
     },
     setFaceAnswer (index, val) {
-      this.evaluated.temp.evaluations[this.currentPage].attribute[index].score = [val]
+      this.evaluated.temp.evaluations[this.computedQuestionnairePages - 1].attribute[index].score = [val]
       this.saveAnswers()
     },
     saveAnswers () {
