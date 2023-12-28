@@ -3,7 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- develop
+- master
 
 resources:
 - repo: self
@@ -13,11 +13,11 @@ variables:
   dockerRegistryServiceConnection: '26a23d5c-e820-47e4-b509-7169b8ad447d'
   containerRegistry: 'acrocc1.azurecr.io'
   imageRepository_server: 'occsolutionsdeipserver'
-  dockerfilePath_server: '$(Build.SourcesDirectory)/packages/api/Dockerfile.qa'
-  tag_server: 'qa'
+  dockerfilePath_server: '$(Build.SourcesDirectory)/packages/api/Dockerfile.prod'
+  tag_server: 'prod'
   imageRepository_client: 'occsolutionsdeipclient'
-  dockerfilePath_client: '$(Build.SourcesDirectory)/packages/client/Dockerfile.qa'
-  tag_client: 'qa'
+  dockerfilePath_client: '$(Build.SourcesDirectory)/packages/client/Dockerfile.prod'
+  tag_client: 'prod'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
