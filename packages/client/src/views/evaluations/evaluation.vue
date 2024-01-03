@@ -146,10 +146,7 @@
                           class="mt-2 justify-left"
                           :class="computedQuestionnairePages > 1 ? 'mx-11' : 'mx-7'"
                           style="max-width: fit-content;"
-                          :disabled="item.limit
-                            ? evaluated.temp.evaluations[computedQuestionnairePages - 1].attribute[i].score.length >= item.limit && evaluated.temp.evaluations[computedQuestionnairePages - 1].attribute[i].score.indexOf(parseFloat(option.value)) === -1
-                            : false
-                          "
+                          :disabled="isOptLimited(item, option, i) || isOptExclusive(option, i)"
                           @change="saveAnswers()"
                         />
                       </div>
