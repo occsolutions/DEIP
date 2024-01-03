@@ -154,7 +154,7 @@
                     "es": "No sabe/Prefiere no responder",
                     "en": "Don't know/Prefer not to answer"
                   },
-                  "value": "0.07"
+                  "value": "0.99"
                 }
               ]
             }
@@ -250,7 +250,7 @@
                     "es": "Ninguna de las anteriores",
                     "en": "None of the above"
                   },
-                  "value": "0.11"
+                  "value": "0.98"
                 }
               ]
             }
@@ -396,14 +396,14 @@
                     "es": "Ninguna de las anteriores",
                     "en": "None of the above"
                   },
-                  "value": "0.06"
+                  "value": "0.98"
                 },
                 {
                   "label": {
                     "es": "No sabe/Prefiere no responder",
                     "en": "Don't know/Prefer not to answer"
                   },
-                  "value": "0.07"
+                  "value": "0.99"
                 }
               ]
             },
@@ -522,7 +522,7 @@
                     "es": "No reconozco champions",
                     "en": "I don't recognize champions"
                   },
-                  "value": "0.10"
+                  "value": "0.97"
                 }
               ]
             }
@@ -737,14 +737,14 @@
                     "es": "Ninguna de las anteriores",
                     "en": "None of the above"
                   },
-                  "value": "0.06"
+                  "value": "0.98"
                 },
                 {
                   "label": {
                     "es": "No sabe/Prefiere no responder",
                     "en": "Don't know/Prefer not to answer"
                   },
-                  "value": "0.07"
+                  "value": "0.99"
                 }
               ]
             },
@@ -811,14 +811,14 @@
                     "es": "Ninguna de las anteriores",
                     "en": "None of the above"
                   },
-                  "value": "0.06"
+                  "value": "0.98"
                 },
                 {
                   "label": {
                     "es": "No sabe/Prefiere no responder",
                     "en": "Don't know/Prefer not to answer"
                   },
-                  "value": "0.07"
+                  "value": "0.99"
                 }]
             }
           }
@@ -996,7 +996,7 @@
                     "es": "Ninguna de las anteriores",
                     "en": "None of the above"
                   },
-                  "value": "0.11"
+                  "value": "0.98"
                 }
               ]
             }
@@ -1043,14 +1043,14 @@
                     "es": "No se ha comunicado la estrategia",
                     "en": "The strategy has not been communicated"
                   },
-                  "value": "0.04"
+                  "value": "0.96"
                 },
                 {
                   "label": {
                     "es": "No sabe/Prefiere no responder",
                     "en": "Don't know/Prefer not to answer"
                   },
-                  "value": "0.05"
+                  "value": "0.99"
                 }
               ]
             },
@@ -1176,14 +1176,14 @@
                     "es": "Ninguna de las anteriores",
                     "en": "None of the above"
                   },
-                  "value": "0.07"
+                  "value": "0.98"
                 },
                 {
                   "label": {
                     "es": "No sabe/Prefiere no responder",
                     "en": "Don't know/Prefer not to answer"
                   },
-                  "value": "0.08"
+                  "value": "0.99"
                 }
               ]
             }
@@ -1455,14 +1455,14 @@
                     "es": "Ninguna de las anteriores",
                     "en": "None of the above"
                   },
-                  "value": "0.08"
+                  "value": "0.98"
                 },
                 {
                   "label": {
                     "es": "No sabe/Prefiere no responder",
                     "en": "Don't know/Prefer not to answer"
                   },
-                  "value": "0.09"
+                  "value": "0.99"
                 }
               ]
             }
@@ -1539,7 +1539,7 @@
                     "es": "No sabe/Prefiere no responder",
                     "en": "Don't know/Prefer not to answer"
                   },
-                  "value": "0.05"
+                  "value": "0.99"
                 }
               ]
             },
@@ -1627,7 +1627,7 @@
                     "es": "No se cuenta con una Política en Diversidad, Equidad e Inclusión",
                     "en": "There is no Policy on Diversity, Equity and Inclusion"
                   },
-                  "value": "0.11"
+                  "value": "0.95"
                 }
               ]
             }
@@ -1681,7 +1681,7 @@
                     "es": "No sabe/Prefiere no responder",
                     "en": "Don't know/Prefer not to answer"
                   },
-                  "value": "0.05"
+                  "value": "0.99"
                 }
               ]
             },
@@ -1853,7 +1853,7 @@
                     "es": "No se cuentan con grupos de afinidad",
                     "en": "There are no affinity groups"
                   },
-                  "value": "0.11"
+                  "value": "0.94"
                 }
               ]
             },
@@ -1899,14 +1899,14 @@
                     "es": "Ninguna de las anteriores",
                     "en": "None of the above"
                   },
-                  "value": "0.05"
+                  "value": "0.98"
                 },
                 {
                   "label": {
                     "es": "No sabe/Prefiere no responder",
                     "en": "Don't know/Prefer not to answer"
                   },
-                  "value": "0.06"
+                  "value": "0.99"
                 }
               ]
             }
@@ -2045,7 +2045,7 @@
               "es": "Ninguna de las anteriores",
               "en": "None of the above"
             },
-            "value": "0.09"
+            "value": "0.98"
           }
         ]
       },
@@ -2091,14 +2091,14 @@
               "es": "No existen indicadores aún",
               "en": "There are no indicators yet"
             },
-            "value": "0.05"
+            "value": "0.93"
           },
           {
             "label": {
               "es": "No sabe/Prefiere no responder",
               "en": "Don't know/Prefer not to answer"
             },
-            "value": "0.06"
+            "value": "0.99"
           }
         ]
       },
@@ -2158,7 +2158,7 @@
               "es": "Ninguna de las anteriores",
               "en": "None of the above"
             },
-            "value": "0.07"
+            "value": "0.99"
           }
         ]
       },
@@ -2260,14 +2260,14 @@
               "es": "Ninguna de las anteriores",
               "en": "None of the above"
             },
-            "value": "0.08"
+            "value": "0.98"
           },
           {
             "label": {
               "es": "No Sabe/Prefiero no responder",
               "en": "Don't know/prefer not to answer"
             },
-            "value": "0.09"
+            "value": "0.99"
           }
         ]
       }
