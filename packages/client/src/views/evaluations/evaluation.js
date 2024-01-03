@@ -349,6 +349,22 @@ export default Vue.extend({
         this.setProgress(true)
       }
     },
+    isOptLimited (question, option, index) {
+      const answer = this.evaluated.temp.evaluations[this.computedQuestionnairePages - 1].attribute[index]
+      return question.limit
+        ? (answer.score.length >= question.limit) && !answer.score.includes(parseFloat(option.value))
+        : false
+    },
+    isOptExclusive (option, index) {
+      const answer = this.evaluated.temp.evaluations[this.computedQuestionnairePages - 1].attribute[index]
+      const val = parseFloat(option.value)
+
+      if (val > 0.9) {
+        return answer.score.length > 0 && !answer.score.includes(val)
+      } else {
+        return answer.score.length > 0 && answer.score.some(x => x > 0.9)
+      }
+    },
     parentAnsweredTrue (parentId, answer) {
       const parts = parentId.split('_')
       const dimIdx = parts[0].match(/(\d+)/)[1] - 1
