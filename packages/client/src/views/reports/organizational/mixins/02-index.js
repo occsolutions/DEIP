@@ -1,4 +1,5 @@
 
+import dotsBase64 from '../../base64files/intro-header'
 import footerBase64 from '../../base64files/index-footer'
 
 export default {
@@ -43,7 +44,13 @@ export default {
           lineHeight: 0.8
         },
         {
+          image: dotsBase64,
+          fit: [90, 33],
+          absolutePosition: { x: 380, y: 768 }
+        },
+        {
           image: footerBase64,
+          fit: [470, 104],
           absolutePosition: { x: -1, y: 658 }
         }
       ]

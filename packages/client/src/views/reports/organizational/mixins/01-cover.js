@@ -2,7 +2,12 @@
 import occLogoBase64 from '../../base64files/0-occ-logo'
 import deipLogoBase64 from '../../base64files/0a-deip-logo'
 import inspiraLogoBase64 from '../../base64files/0b-inspirandoT-logo'
-import bgBase64 from '../../base64files/cover-bg'
+import bg1Base64 from '../../base64files/cover-bg1'
+import bg2Base64 from '../../base64files/cover-bg2'
+import bg3Base64 from '../../base64files/cover-bg3'
+import bg4Base64 from '../../base64files/cover-bg4'
+import dotsBase64 from '../../base64files/cover-dots'
+import stripesBase64 from '../../base64files/cover-stripes'
 
 const fontSizeBylength = [
   { min: 0, max: 30, fontSize: 20 },
@@ -49,10 +54,41 @@ export default {
           fontSize: 13,
           bold: true
         },
+        // -------------- Images -------------- //
         {
-          image: bgBase64,
-          absolutePosition: { x: 31, y: 194 }
+          image: bg3Base64,
+          fit: [289, 108],
+          absolutePosition: { x: 247, y: 305 }
         },
+        {
+          image: bg2Base64,
+          fit: [82.5, 116.5],
+          absolutePosition: { x: 412, y: 194 }
+        },
+        {
+          image: dotsBase64,
+          fit: [54.5, 88],
+          absolutePosition: { x: 363.5, y: 234.8 }
+        },
+        {
+          image: bg1Base64,
+          fit: [246, 246],
+          absolutePosition: { x: 60, y: 194 }
+        },
+        {
+          image: dotsBase64,
+          fit: [54.5, 88],
+          absolutePosition: { x: 31, y: 403.2 }
+        },
+        {
+          image: bg4Base64,
+          absolutePosition: { x: 59, y: 455 }
+        },
+        {
+          image: stripesBase64,
+          absolutePosition: { x: 475, y: 388 }
+        },
+        // ------------------------------------ //
         {
           margin: [6, 500, 0, 0],
           text: this.$t('Views.Evaluations.report.organizational.title'),

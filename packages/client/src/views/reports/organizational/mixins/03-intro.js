@@ -22,7 +22,7 @@ export default {
           bold: true
         },
         {
-          text: 'En los últimos 30 años, en el lugar de trabajo se ha promovido: La reducción signiﬁcativa de la brecha de género, aumento de la diversidad étnica; mayores esfuerzos para incluir a las personas con discapacidad y una fuerza de trabajo más multigeneracional, entre otras iniciativas. De esta manera, se genera una conciencia mundial en la que las personas tienen derecho a un lugar de trabajo digno y respetuoso, independientemente de su diversidad.',
+          text: 'En los últimos 30 años, en el lugar de trabajo se ha promovido la reducción signiﬁcativa de la brecha de género, el aumento de la diversidad étnica, mayores esfuerzos para incluir a las personas con discapacidad y una fuerza de trabajo más multigeneracional, entre otras iniciativas. De esta manera, se genera una conciencia mundial en la que las personas tienen derecho a un lugar de trabajo digno y respetuoso, independientemente de su diversidad.',
           margin: [0, 15, 290, 0],
           fontSize
         },
@@ -37,7 +37,7 @@ export default {
           fontSize
         },
         {
-          text: 'De esta manera, trabajar cada vez más en DEIP tiene un impacto signiﬁcativo en la gestión y desempeño organizacional, además de cambios perdurables en el tiempo en innovación, creatividad, toma de decisiones, liderazgo, reputación y ﬁdelización del talento.',
+          text: 'De esta manera, trabajar cada vez más en DEIP (Diversidad, Equidad, Inclusión, Pertenencia) tiene un impacto signiﬁcativo en la gestión y desempeño organizacional, además de cambios perdurables en el tiempo en innovación, creatividad, toma de decisiones, liderazgo, reputación y ﬁdelización del talento.',
           margin: [0, 15, 20, 0],
           fontSize
         },
@@ -56,19 +56,21 @@ export default {
         },
         {
           image: footerBase64,
-          fit: [287, 170],
+          fit: [241, 161],
           absolutePosition: { x: 0, y: 545 }
         },
         {
-          text: '*Organización Internacional del Trabajo (OIT)',
+          text: [{ text: '*' }, { text: 'Organización Internacional del Trabajo (OIT)', link: 'https://n9.cl/uyp7s' }],
           margin: [212, 147, 0, 0],
           fontSize: 7.5
-        },
+        }
+        /*
         {
           text: [{ text: 'Fuente:' }, { text: 'https://n9.cl/uyp7s', link: 'https://n9.cl/uyp7s' }],
           margin: [212, 0, 0, 0],
           fontSize: 7.5
         }
+        */
       ]
     }
   }
