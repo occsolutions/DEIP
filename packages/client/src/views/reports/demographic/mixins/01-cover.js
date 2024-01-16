@@ -83,6 +83,7 @@ export default {
         },
         {
           image: bg4Base64,
+          fit: [477, 114],
           absolutePosition: { x: 59, y: 455 }
         },
         {
