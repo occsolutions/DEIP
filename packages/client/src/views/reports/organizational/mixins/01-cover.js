@@ -58,7 +58,7 @@ export default {
         {
           image: bg3Base64,
           fit: [289, 108],
-          absolutePosition: { x: 247, y: 305 }
+          absolutePosition: { x: 247, y: 310.7 }
         },
         {
           image: bg2Base64,
@@ -68,7 +68,7 @@ export default {
         {
           image: dotsBase64,
           fit: [54.5, 88],
-          absolutePosition: { x: 363.5, y: 234.8 }
+          absolutePosition: { x: 363.5, y: 237 }
         },
         {
           image: bg1Base64,

@@ -1,5 +1,6 @@
 
 import pdfUtils from '../../utils/pdf'
+import dotsBase64 from '../../base64files/objectives-dots'
 import bottomBase64 from '../../base64files/objectives'
 
 export default {
@@ -63,7 +64,13 @@ export default {
         },
         {
           image: bottomBase64,
-          absolutePosition: { x: 210, y: 414 }
+          fit: [268, 380],
+          absolutePosition: { x: 290, y: 414 }
+        },
+        {
+          image: dotsBase64,
+          fit: [77, 143],
+          absolutePosition: { x: 210, y: 434 }
         }
       ]
     }
