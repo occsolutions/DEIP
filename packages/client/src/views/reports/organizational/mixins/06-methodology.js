@@ -5,15 +5,15 @@ export default {
   data () {
     return {
       heatMapMeaning: [
-        { value: '0 - 0.39', meaning: 'Franja Baja', color: '#CF6463' },
-        { value: '0.4 - 0.69', meaning: 'Franja Media', color: '#FFd87C' },
-        { value: '0.7 - 1', meaning: 'Franja Alta', color: '#93D379' }
+        { value: '0.00 - 0.39', meaning: 'Franja Baja', color: '#CF6463' },
+        { value: '0.40 - 0.69', meaning: 'Franja Media', color: '#FFd87C' },
+        { value: '0.70 - 1.00', meaning: 'Franja Alta', color: '#93D379' }
       ],
       deipIndexMeaning: [
-        { value: '1 - 1.99', meaning: 'Básico' },
-        { value: '2 - 2.99', meaning: 'Emergente' },
-        { value: '3 - 3.99', meaning: 'En Evolución' },
-        { value: '4 - 5', meaning: 'Referente' }
+        { value: '1.00 - 1.99', meaning: 'Básico' },
+        { value: '2.00 - 2.99', meaning: 'Emergente' },
+        { value: '3.00 - 3.99', meaning: 'En Evolución' },
+        { value: '4.00 - 5.00', meaning: 'Referente' }
       ],
       questionItems: [
         '9 preguntas sociodemográﬁcas para conocer el perﬁl del encuestado(a) (anónima y 100% conﬁdencial)',
@@ -116,7 +116,7 @@ export default {
           fontSize
         },
         {
-          text: 'De acuerdo a este promedio, cada dimensión es clasiﬁcada dentro de una franja baja (0 - 0.39), media (0.4 - 0.69), alta (0.7 - 1), según su resultado. (ver tabla 1)',
+          text: 'De acuerdo a este promedio, cada dimensión es clasiﬁcada dentro de una franja baja (0.00 - 0.39), media (0.40 - 0.69), alta (0.70 - 1.00), según su resultado. (ver tabla 1)',
           margin: [0, 10, 30, 0],
           fontSize
         },
