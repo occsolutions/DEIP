@@ -25,7 +25,7 @@ export default {
       }, {
         text: [
           { text: 'Ciclo de Talento Incluyente', bold: true },
-          ': Mide el nivel de consciencia de la inclusión a través de todo el ciclo de desarrollo de talento, como motor de ﬂorecimiento, engagement (Compromiso) y ﬁdelización.'
+          ': Mide el nivel de consciencia de la inclusión a través de todo el ciclo de desarrollo de talento, como motor de ﬂorecimiento, engagement (compromiso) y ﬁdelización.'
         ]
       }, {
         text: [

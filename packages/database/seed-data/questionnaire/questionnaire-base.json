@@ -1056,7 +1056,7 @@
             },
             "d3_attr3_q2": {
               "label":{
-                "es": "La comunicación interna de su organización (e - mailing, carteleras, pantallas, reuniones, entre otras) utiliza un lenguaje que promueve la igualdad y no discriminación",
+                "es": "La comunicación interna de su organización (correos electrónicos, carteleras, pantallas, reuniones, entre otras) utiliza un lenguaje que promueve la igualdad y no discriminación",
                 "en": "Your organization's internal communication (e-mailing, billboards, screens, meetings, among others) uses language that promotes equality and non-discrimination"
               },
               "type": "likert"

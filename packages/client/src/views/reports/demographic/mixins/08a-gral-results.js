@@ -227,7 +227,7 @@ export default {
                   bold: true
                 },
                 {
-                  text: 'Descripción Nivel En Evolución',
+                  text: 'Descripción Nivel\nEn Evolución',
                   margin: [0, 2, 0, 0],
                   alignment: 'center',
                   fillColor: '#f5afa6',
