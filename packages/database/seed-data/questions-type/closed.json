@@ -28,8 +28,8 @@
     },
     {
       "label": {
-        "es": "No sabe / Prefiere no responder",
-        "en": "Does not know / Prefer not to answer"
+        "es": "No sabe/Prefiere no responder",
+        "en": "Does not know/Prefer not to answer"
       },
       "value": 0.01
     }

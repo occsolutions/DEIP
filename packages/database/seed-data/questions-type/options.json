@@ -10,5 +10,5 @@
   },
   "editable": ["options", "min", "limit"],
   "min": 1,
-  "limit": 1
+  "limit": null
 }
