@@ -18,7 +18,7 @@ export default {
       questionItems: [
         '9 preguntas sociodemográﬁcas para conocer el perﬁl del encuestado(a) (anónima y 100% conﬁdencial)',
         '5 dimensiones, con un total de 31 atributos y 56 preguntas (promedio de 11 preguntas especíﬁcas por atributo); de las cuales, 23 de ellas son descriptivas.',
-        '12 preguntas adicionales para Líderes con personas a cargo, de las cuales 5 preguntas son descriptivas.'
+        '12 preguntas adicionales para Líderes de equipos, de las cuales 5 preguntas son descriptivas.'
       ]
     }
   },

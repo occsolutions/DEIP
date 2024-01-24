@@ -74,7 +74,7 @@ export default {
     generateLeadersDescriptionTableRows () {
       return [[
         {
-          text: 'Líder con personas a cargo',
+          text: this.$t('Views.Evaluations.stepQuestion.leader'),
           margin: [2, 3, 0, 0],
           color: '#777777'
         },
@@ -131,7 +131,7 @@ export default {
                 {
                   text: 'Descripción Franja Baja',
                   margin: [0, 3.5, 0, 1],
-                  fillColor: '#c15252',
+                  fillColor: '#CF6463',
                   alignment: 'center',
                   color: '#222222',
                   fontSize: 9.5,
@@ -140,7 +140,7 @@ export default {
                 {
                   text: 'Descripción Franja Media',
                   margin: [0, 3.5, 0, 1],
-                  fillColor: '#ffd97b',
+                  fillColor: '#FFd87C',
                   alignment: 'center',
                   color: '#222222',
                   fontSize: 9.5,
@@ -149,7 +149,7 @@ export default {
                 {
                   text: 'Descripción Franja Alta',
                   margin: [0, 3.5, 0, 1],
-                  fillColor: '#93d379',
+                  fillColor: '#93D379',
                   alignment: 'center',
                   color: '#222222',
                   fontSize: 9.5,

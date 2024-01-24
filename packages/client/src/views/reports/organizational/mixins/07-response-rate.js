@@ -151,7 +151,7 @@ export default {
           bold: true
         },
         {
-          text: 'Tasa de respuesta líderes con personas a cargo',
+          text: 'Tasa de respuesta líderes de equipos',
           margin: [0, 144, 0, 0],
           characterSpacing: 0,
           color: '#111111',

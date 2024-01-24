@@ -27,7 +27,7 @@ export default {
             // Assemble questions rows
             rows.push([
               i === 0 ? {
-                text: 'Líder con personas a cargo',
+                text: this.$t('Views.Evaluations.stepQuestion.leader'),
                 margin: [7, 14, 0, 8],
                 fontSize: 10.5,
                 rowSpan: cntNoOptType,
