@@ -47,7 +47,7 @@ export default {
     title: 'Editar preguntas del cuestionario',
     btn_back: 'Atras',
     dimentions: 'Dimensiones',
-    leader: 'Líderes de equipos',
+    leader: 'Líderes de Equipos',
     tooltip_info: 'Debe presionar ENTER para editar',
     options: 'Opciones',
     input_option_label: 'Indique texto de la opción (se visualiza al responder)',

@@ -1,7 +1,7 @@
 
 export default {
   title: 'Instructivo OCC Solutions - DEIP: Módulo de carga masiva de participantes.',
-  title_leaders: 'Instructivo OCC Solutions - DEIP: Módulo de carga masiva de participantes líderes de equipos.',
+  title_leaders: 'Instructivo OCC Solutions - DEIP: Módulo de carga masiva de participantes Líderes de Equipos.',
   title_body: 'Este instructivo tiene como finalidad orientar al usuario final, en la forma correcta de ' +
     'ingresar el formato de carga masiva, para prevenir errores en la carga de datos de usuarios.',
   example: 'Ejemplo:',

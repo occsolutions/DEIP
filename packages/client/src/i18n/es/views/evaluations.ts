@@ -77,7 +77,7 @@ export default {
     questionnaire_e: 'Cuestionario DEIP',
     pdf_explained: 'Este archivo contiene las preguntas del cuestionario "{name}" agrupadas por dimensión.',
     questionnaire_title: 'OCC - Reporte DEIP',
-    leader: 'Líderes de equipos',
+    leader: 'Líderes de Equipos',
     copyright: 'Copyright por OCC - Todos los derechos reservados',
     autoEvaluation: 'Autovaloración',
     generalEvaluation: 'Valoración del equipo',
@@ -171,8 +171,8 @@ export default {
       age_range: 'De {n} a {p} años',
       age_upper: 'Más de {n} años'
     },
-    leader_title: 'Participantes líderes de equipos',
-    leader_desc: 'Entre los participantes previamente elegidos, indica quienes son líderes de equipos, estos líderes tendrán una sección especial en la medición. Este paso no es obligatorio.',
+    leader_title: 'Participantes Líderes de Equipos',
+    leader_desc: 'Entre los participantes previamente elegidos, indica quienes son Líderes de Equipos, estos líderes tendrán una sección especial en la medición. Este paso no es obligatorio.',
     leader_want_massive: '¿Desea realizar la seleción de líderes via carga masiva?',
     leader_add_evaluated: 'Selécionar más líderes'
   },
@@ -303,7 +303,7 @@ export default {
   evaluation: {
     evaluate: 'Participante',
     information_1: 'Bienvenido(a) a la encuesta DEIP',
-    information_2: 'El Índice de Evolución DEIP (Enfoque diferencial e interseccional), es una medición que permite identificar el nivel de consciencia, conocimiento y madurez de la organización y su estrategia de Diversidad, Equidad, Inclusión y Pertenencia; a través de 5 dimensiones: Estrategia/Compromiso, Gobernanza/Liderazgo CSI, Cultura CSI, Ciclo de Talento Incluyente, Ecosistema DI y una dimensión adicional para Líderes de equipos.',
+    information_2: 'El Índice de Evolución DEIP (Enfoque diferencial e interseccional), es una medición que permite identificar el nivel de consciencia, conocimiento y madurez de la organización y su estrategia de Diversidad, Equidad, Inclusión y Pertenencia; a través de 5 dimensiones: Estrategia/Compromiso, Gobernanza/Liderazgo CSI, Cultura CSI, Ciclo de Talento Incluyente, Ecosistema DI y una dimensión adicional para Líderes de Equipos.',
     information_3: 'Le invitamos a contestar de manera totalmente honesta cada una de las siguientes preguntas.',
     score_label1: 'Nunca',
     score_label2: 'Casi nunca',
@@ -329,7 +329,7 @@ export default {
     input_next: 'Siguiente',
     answer: 'Respuesta',
     wellcomeDialog: {
-      wellcome_instructions: 'El Índice de Evolución DEIP (Enfoque diferencial e interseccional), es una medición que permite identificar el nivel de consciencia,<br />conocimiento y madurez de la organización y su estrategia de Diversidad, Equidad, Inclusión y Pertenencia; a través de 5 dimensiones:<br />Estrategia/Compromiso, Gobernanza/Liderazgo CSI, Cultura CSI, Ciclo de Talento Incluyente, Ecosistema DI y una dimensión adicional para Líderes de equipos.' +
+      wellcome_instructions: 'El Índice de Evolución DEIP (Enfoque diferencial e interseccional), es una medición que permite identificar el nivel de consciencia,<br />conocimiento y madurez de la organización y su estrategia de Diversidad, Equidad, Inclusión y Pertenencia; a través de 5 dimensiones:<br />Estrategia/Compromiso, Gobernanza/Liderazgo CSI, Cultura CSI, Ciclo de Talento Incluyente, Ecosistema DI y una dimensión adicional para Líderes de Equipos.' +
       '<br/><br/>Le invitamos a contestar de manera totalmente honesta cada una de las siguientes preguntas.' +
       '<br/><br/>El plazo máximo para completar la encuesta es: {deadline}',
       must_accept_policy_to_continue: 'Para continuar con la encuesta es indispensable que por favor acepte nuestra política de tratamiento de datos:',
