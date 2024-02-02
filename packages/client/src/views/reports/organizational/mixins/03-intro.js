@@ -55,22 +55,69 @@ export default {
           lineHeight: 1.4
         },
         {
-          image: footerBase64,
-          fit: [241, 161],
-          absolutePosition: { x: 0, y: 545 }
+          text: [{ text: '*', fontSize: 9.5 }, { text: 'Organización Internacional del Trabajo (OIT)', link: 'https://n9.cl/uyp7s' }],
+          margin: [50, 30, 0, 0],
+          fontSize: 7.5
         },
         {
-          text: [{ text: '*' }, { text: 'Organización Internacional del Trabajo (OIT)', link: 'https://n9.cl/uyp7s' }],
-          margin: [212, 147, 0, 0],
-          fontSize: 7.5
-        }
-        /*
+          image: footerBase64,
+          fit: [241, 161],
+          absolutePosition: { x: 0, y: 580 }
+        },
         {
-          text: [{ text: 'Fuente:' }, { text: 'https://n9.cl/uyp7s', link: 'https://n9.cl/uyp7s' }],
-          margin: [212, 0, 0, 0],
-          fontSize: 7.5
+          margin: [245, -4.4, 0, 0],
+          fontSize: 9,
+          table: {
+            body: [
+              [
+                {
+                  text: [
+                    { text: 'Diversidad', bold: true },
+                    { text: ': Todas las posibles diferencias entre los seres humanos. Medir la representación de grupos, poblaciones o comunidades específicos.' }
+                  ]
+                }
+              ],
+              [
+                {
+                  text: [
+                    { text: 'Equidad', bold: true },
+                    { text: ': Dar a cada persona lo que realmente necesita para garantizar igualdad de oportunidades de acceso y desarrollo.' }
+                  ]
+                }
+              ],
+              [
+                {
+                  text: [
+                    { text: 'Inclusión', bold: true },
+                    { text: ': El arte de gestionar conscientemente las diferencias individuales, fortalecer el talento e inspirar a cada integrante a dar lo mejor, generando bienestar, construyendo colectivamente e impactando a nivel social, ambiental y económico.' }
+                  ]
+                }
+              ],
+              [
+                {
+                  text: [
+                    { text: 'Pertenencia', bold: true },
+                    { text: ': Un ser humano que se siente respetado, valorado, reconocido por sus diversidades/talentos y que puede ser quien quiere ser, es testimonio de inspiración, engagement, fidelidad, liderazgo y orgullo por su SER, su impacto y el de su equipo.' }
+                  ]
+                }
+              ]
+            ]
+          },
+          layout: {
+            hLineWidth: () => {
+              return 1
+            },
+            vLineWidth: () => {
+              return 1
+            },
+            hLineColor: () => {
+              return '#BBBBBB'
+            },
+            vLineColor: () => {
+              return '#BBBBBB'
+            }
+          }
         }
-        */
       ]
     }
   }
