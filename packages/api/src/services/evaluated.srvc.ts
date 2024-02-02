@@ -339,6 +339,74 @@ class EvaluatedService {
       { new: true}
     );
   }
+
+  async getBatchByEvaluationId(evaluationId: string, skip: number): Promise<any> {
+    const ObjectID = require('mongodb').ObjectID;
+    return EvaluatedRepository.aggregate([
+      {
+        $match: {
+          $and: [
+            { evaluationRef: new ObjectID(evaluationId) },
+            { status: 'completed' }
+          ]
+        }
+      },
+      { $skip: skip },
+      { $limit: 100 },
+      {
+        $project: {
+          _id: 0,
+          employee: {
+            email: 1,
+            employeeEnterprise: {
+              academicDegreeId: 1,
+              birthdate: 1,
+              admission: 1,
+              chargeId: 1,
+              countryId: 1,
+              departmentId: 1,
+              genderId: 1,
+              headquarterId: 1,
+              jobTypeId: 1,
+              additionalDemographic1Id: 1,
+              additionalDemographic2Id: 1
+            }
+          },
+          temp: {
+            segmentation: {
+              segmentationId: 1,
+              detailId: 1
+            },
+            evaluations: {
+              attribute: {
+                key: 1,
+                qType: 1,
+                score: 1
+              }
+            }
+          },
+          participant: {
+            id: '$_id',
+            email: '$employee.email',
+            firstName: '$employee.employeeEnterprise.firstName',
+            lastName: '$employee.employeeEnterprise.lastName',
+            identifyTypeId: '$employee.employeeEnterprise.identifyTypeId',
+            identifyDocument: '$employee.employeeEnterprise.identifyDocument',
+          }
+        }
+      },
+      {
+        $replaceRoot: {
+          newRoot: {
+            demographicItems: '$employee.employeeEnterprise',
+            segmentation: '$temp.segmentation',
+            participant: '$participant',
+            evaluations: '$temp.evaluations'
+          }
+        }
+      }
+    ]);
+  }
 }
 
 export default new EvaluatedService();
