@@ -32,7 +32,10 @@ export default {
           absolutePosition: { x: 334, y: 120 }
         },
         {
-          text: 'Esto, ayuda a crear empresas más innovadoras, productivas y resilientes porque aprovechan al máximo el poder de la diversidad y la inclusión, impulsando el éxito económico y competitivo organizacional*.',
+          text: [
+            { text: 'Esto, ayuda a crear empresas más innovadoras, productivas y resilientes porque aprovechan al máximo el poder de la diversidad y la inclusión, impulsando el éxito económico y competitivo organizacional.\n' },
+            { text: 'Organización Internacional del Trabajo (OIT)', italics: true, link: 'https://n9.cl/uyp7s', fontSize: 8 }
+          ],
           margin: [0, 20, 0, 0],
           fontSize
         },
@@ -55,17 +58,12 @@ export default {
           lineHeight: 1.4
         },
         {
-          text: [{ text: '*', fontSize: 9.5 }, { text: 'Organización Internacional del Trabajo (OIT)', link: 'https://n9.cl/uyp7s' }],
-          margin: [50, 30, 0, 0],
-          fontSize: 7.5
-        },
-        {
           image: footerBase64,
           fit: [241, 161],
           absolutePosition: { x: 0, y: 580 }
         },
         {
-          margin: [245, -4.4, 0, 0],
+          margin: [245, 25.8, 0, 0],
           fontSize: 9,
           table: {
             body: [

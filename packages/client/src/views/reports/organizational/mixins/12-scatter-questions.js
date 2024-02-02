@@ -74,7 +74,7 @@ export default {
 
       return [
         pdfUtils.generateTitle('Dispersión', [0, -4, 0, 0], 'before', 44, '#222222', true),
-        pdfUtils.generateTitle('Dispersión por pregunta', [0, 8, 0, 0], '', 24, '#222222', true, true),
+        pdfUtils.generateTitle('Dispersión por Pregunta', [0, 8, 0, 0], '', 24, '#222222', true, true),
         {
           text: 'Preguntas con dispersión más alta',
           margin: [0, 10, 0, 0],

@@ -56,7 +56,7 @@ export default {
 
       return [
         pdfUtils.generateTitle('Resultados', [0, 0], 'before', 1, '#FFFFFF', true),
-        pdfUtils.generateTitle('Tasa de respuesta', [0, 0], '', 1, '#FFFFFF', true, true),
+        pdfUtils.generateTitle('Tasa de Respuesta', [0, 0], '', 1, '#FFFFFF', true, true),
         {
           image: verticalTitle('Tasa de'),
           absolutePosition: { x: 404, y: 370 }
@@ -67,8 +67,8 @@ export default {
         },
         {
           image: cornerBase64,
-          fit: [324, 485],
-          absolutePosition: { x: 290, y: -1 }
+          width: 352,
+          absolutePosition: { x: 260, y: 144 }
         },
         {
           margin: [0, -10, 0, 0],
@@ -151,7 +151,7 @@ export default {
           bold: true
         },
         {
-          text: 'Tasa de respuesta líderes de equipos',
+          text: 'Tasa de respuesta Líderes de Equipos',
           margin: [0, 144, 0, 0],
           characterSpacing: 0,
           color: '#111111',

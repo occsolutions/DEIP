@@ -12,7 +12,7 @@ export default {
           ...pdfUtils.generateTitle('Resultados', [0, -4, 0, 0], 'before', 44, '#222222', false),
           pageOrientation: 'portrait'
         },
-        pdfUtils.generateTitle('Resultados líderes de equipos', [0, 20, -20, 0], '', 24, '#222222', true),
+        pdfUtils.generateTitle('Resultados Líderes de Equipos', [0, 20, -20, 0], '', 24, '#222222', true),
         pdfUtils.generateTitle(this.$t('Views.Evaluations.report.toc.dimension_results'), [0, 0, 0, 0], '', 1, '#FFFFFF', true, true),
         // * ------------------------ *
         // * DIMENSIONS RESULTS TABLE *

@@ -34,7 +34,7 @@ export default {
         ]
       }, {
         text: [
-          { text: 'Dimensión Adicional - Líderes de equipos', bold: true },
+          { text: 'Dimensión Adicional - Líderes de Equipos', bold: true },
           ': Las preguntas de esta dimensión son respondidas por aquellas personas que gestionan equipos de trabajo y son seleccionados por el cliente.'
         ]
       }]
@@ -55,7 +55,7 @@ export default {
           'Áreas Gestoras',
           'Champions',
           'Comité DEIP',
-          'Voluntariado Corporativo/ Impacto Comunidad',
+          'Voluntariado Corporativo/Impacto Comunidad',
           'Líderes y Responsabilidad de Triple Impacto/DEIP',
           'Perﬁl y Atributos de Liderazgo CSI*',
           'Acciones Aﬁrmativas'
@@ -100,7 +100,7 @@ export default {
           absolutePosition: { x: 200, y: 460 }
         },
         {
-          text: 'El modelo Índice de Evolución DEIP, se compone de 5 dimensiones y una dimensión adicional para los Líderes a cargo:',
+          text: 'El modelo Índice de Evolución DEIP, se compone de 5 dimensiones y una dimensión adicional para los Líderes de Equipos:',
           margin: [0, 35, 40, 0],
           fontSize,
           lineHeight: 1.4
