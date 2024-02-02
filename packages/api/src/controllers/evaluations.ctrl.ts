@@ -399,7 +399,7 @@ class EvaluationsController {
   }
 
   async getOneToShow(req: IRequest, res: Response) {
-    const evaluation: any = await EvaluationsService.findOneBySlug(req.params.slug, 'name displayName slug status timeZone deliveredAt validUntil reminders enterpriseId populationCount populationCompletedCount');
+    const evaluation: any = await EvaluationsService.findOneBySlug(req.params.slug, 'name displayName slug status questionnaire.evaluations timeZone deliveredAt validUntil reminders enterpriseId populationCount populationCompletedCount additionalSegmentation');
     if (!evaluation || evaluation.enterpriseId !== req.user.enterprise.id) {
       throw new BadRequestException('evaluation-not-found');
     }
@@ -871,6 +871,47 @@ class EvaluationsController {
     } catch (error) {
       res.status(400);
       res.send({ error });
+    }
+  }
+
+  async getTotalAnswers(req: Request, resp: Response) {
+    try {
+      const count = await EvaluatedService.countCompletedByEvaluationRef(req.params.id);
+
+      resp.send({count});
+    } catch (error) {
+      if (error._httpCode) {
+        resp.status(error._httpCode);
+      } else {
+        resp.status(400);
+      }
+
+      resp.send({
+        code: error._code,
+        err: error.toString()
+      });
+    }
+  }
+
+  async answersWithParticipant(req: Request, resp: Response) {
+    try {
+      const answers = await EvaluatedService.getBatchByEvaluationId(
+        req.params.id,
+        Number(req.params.skip)
+      );
+
+      resp.send(answers);
+    } catch (error) {
+      if (error._httpCode) {
+        resp.status(error._httpCode);
+      } else {
+        resp.status(400);
+      }
+
+      resp.send({
+        code: error._code,
+        err: error.toString()
+      });
     }
   }
 }
