@@ -32,12 +32,18 @@ export default {
           absolutePosition: { x: 334, y: 120 }
         },
         {
-          text: [
-            { text: 'Esto, ayuda a crear empresas más innovadoras, productivas y resilientes porque aprovechan al máximo el poder de la diversidad y la inclusión, impulsando el éxito económico y competitivo organizacional.\n' },
-            { text: 'Organización Internacional del Trabajo (OIT)', italics: true, link: 'https://n9.cl/uyp7s', fontSize: 8 }
-          ],
+          text: 'Esto, ayuda a crear empresas más innovadoras, productivas y resilientes porque aprovechan al máximo el poder de la diversidad y la inclusión, impulsando el éxito económico y competitivo organizacional.',
           margin: [0, 20, 0, 0],
           fontSize
+        },
+        {
+          text: 'Organización Internacional del Trabajo (OIT)',
+          link: 'https://n9.cl/uyp7s',
+          alignment: 'right',
+          margin: [0, 10, 0, 0],
+          italics: true,
+          fontSize: 8,
+          bold: true
         },
         {
           text: 'De esta manera, trabajar cada vez más en DEIP (Diversidad, Equidad, Inclusión, Pertenencia) tiene un impacto signiﬁcativo en la gestión y desempeño organizacional, además de cambios perdurables en el tiempo en innovación, creatividad, toma de decisiones, liderazgo, reputación y ﬁdelización del talento.',
@@ -63,7 +69,7 @@ export default {
           absolutePosition: { x: 0, y: 580 }
         },
         {
-          margin: [245, 25.8, 0, 0],
+          margin: [245, 18, 0, 0],
           fontSize: 9,
           table: {
             body: [
