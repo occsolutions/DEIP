@@ -64,9 +64,9 @@ export default {
 
           // Render pages
           pages.push(
-            pdfUtils.generateTitle('Resultados preguntas descriptivas', [0, -5, 0, 0], 'before', 24, '#222222', i === 0, i === 0),
+            pdfUtils.generateTitle('Resultados Preguntas Descriptivas', [0, -5, 0, 0], 'before', 24, '#222222', i === 0, i === 0),
             {
-              text: 'Líderes con personas a cargo',
+              text: this.$t('Views.Evaluations.stepQuestion.leader'),
               font: 'League Spartan',
               color: '#222222',
               fontSize: 24

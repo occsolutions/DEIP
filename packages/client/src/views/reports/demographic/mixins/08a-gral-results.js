@@ -73,7 +73,7 @@ export default {
           width: evolutionIndex.width,
           height: 2.2
         },
-        pdfUtils.generateTitle('Resultado Índice de evolución DEIP', [0, 0], '', 1, '#FFFFFF', true, true),
+        pdfUtils.generateTitle('Resultado Índice de Evolución DEIP', [0, 0], '', 1, '#FFFFFF', true, true),
         {
           text: 'Indice Evolución DEIP',
           margin: [0, 19, 0, 0],

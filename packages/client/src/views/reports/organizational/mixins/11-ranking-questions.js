@@ -94,7 +94,7 @@ export default {
           ...pdfUtils.generateTitle('Ranking', [0, -4, 0, 0], 'before', 44, '#222222', true),
           pageOrientation: 'portrait'
         },
-        pdfUtils.generateTitle('Ranking de las preguntas', [0, 8, 0, 0], '', 24, '#222222', true, true),
+        pdfUtils.generateTitle('Ranking de las Preguntas', [0, 8, 0, 0], '', 24, '#222222', true, true),
         {
           text: 'Preguntas con puntaje actual más alto',
           margin: [0, 10, 0, 0],

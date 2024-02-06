@@ -37,6 +37,13 @@
           </template>
           <v-list>
             <v-list-item
+              v-if="evaluation.status === 'completed' && user.origin"
+              @click="showJsonModal = true"
+            >
+              <v-icon color="success darken-2" class="mt-n1 ml-n1 mr-1" size="19">mdi-file-excel</v-icon>
+              <v-list-item-title>Sábana de Datos</v-list-item-title>
+            </v-list-item>
+            <v-list-item
               v-if="evaluation.status === 'completed'"
               @click="$router.push(`/evaluations/reports/${evaluation._id}`)"
             >
@@ -223,6 +230,16 @@
     >
       <template v-slot:question>{{ typeModal !== 'close' ? $t('Views.Evaluations.show.send_reminders_q') : $t('Views.Evaluations.show.close_evaluation_q') }}</template>
     </x-confirmation-modal>
+
+    <x-json-modal
+      :showDialog="showJsonModal"
+      :evaluationId="evaluation._id"
+      :questionnaire="evaluation.questionnaire"
+      :additionalSegmentation="evaluation.additionalSegmentation"
+      @close="showJsonModal = false"
+    >
+    </x-json-modal>
+
     <v-dialog v-model="showModalChip" width="500">
       <v-card>
         <v-toolbar light flat class="text-center">
@@ -255,14 +272,19 @@
 
 import Vue from 'vue'
 import { mapState } from 'vuex'
+import XJsonModal from '@/components/dialogs/spreadsheet-json'
 
 import evaluationsService from '../../services/evaluations'
 import evaluatedService from '../../services/evaluated'
 import identifyTypesService from '../../services/identify-types'
 
 export default Vue.extend({
+  components: {
+    XJsonModal
+  },
   data () {
     return {
+      showJsonModal: false,
       evaluation: {
         reminders: [],
         evaluated: []

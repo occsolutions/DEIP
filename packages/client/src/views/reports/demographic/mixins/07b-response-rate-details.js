@@ -36,7 +36,7 @@ export default {
   methods: {
     $generateResponseRateDetails () {
       return [
-        pdfUtils.generateTitle('Detalle Tasa de respuesta', [0, 0], 'before', 24, '#222222', true, true),
+        pdfUtils.generateTitle('Detalle Tasa de Respuesta', [0, 0], 'before', 24, '#222222', true, true),
         {
           text: 'Esta tabla presenta la cantidad de personas que se incluyeron en el proceso y de ese grupo cuáles completaron la medición.',
           margin: [0, 10, 0, -5]
