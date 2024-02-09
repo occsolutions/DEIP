@@ -70,7 +70,7 @@ export default {
                 // Render pages
                 const showInToc = dimIndex === 0 && i === 0
                 pages.push(
-                  pdfUtils.generateTitle('Resultados preguntas descriptivas', [0, -5, 0, 0], 'before', 24, '#222222', showInToc, showInToc),
+                  pdfUtils.generateTitle('Resultados Preguntas Descriptivas', [0, -5, 0, 0], 'before', 24, '#222222', showInToc, showInToc),
                   {
                     text: this.evaluationData.questionnaire.evaluations[dimKey].label[this.user.lang].replace(/\((.*?)\)/g, '').replace(' *', ''),
                     font: 'League Spartan',

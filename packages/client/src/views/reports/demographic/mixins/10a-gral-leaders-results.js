@@ -12,7 +12,7 @@ export default {
           ...pdfUtils.generateTitle('Resultados', [0, -4, 0, 0], 'before', 44, '#222222', false),
           pageOrientation: 'portrait'
         },
-        pdfUtils.generateTitle('Resultados líderes con personas a cargo', [0, 20, -20, 0], '', 24, '#222222', true),
+        pdfUtils.generateTitle('Resultados Líderes de Equipos', [0, 20, -20, 0], '', 24, '#222222', true),
         pdfUtils.generateTitle(this.$t('Views.Evaluations.report.toc.dimension_results'), [0, 0, 0, 0], '', 1, '#FFFFFF', true, true),
         // * ------------------------ *
         // * DIMENSIONS RESULTS TABLE *
@@ -71,7 +71,7 @@ export default {
               // Body
               [
                 {
-                  text: 'Líder con personas a cargo',
+                  text: this.$t('Views.Evaluations.stepQuestion.leader'),
                   margin: [2, 7.5, 0, 3],
                   color: '#444444'
                 },

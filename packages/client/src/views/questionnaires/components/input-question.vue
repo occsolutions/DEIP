@@ -93,19 +93,19 @@
                         <small>{{ $t('Views.Questionnaires.edit.selection') }}</small>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <v-text-field
+                        <v-text-field disabled
                           v-model.number="min"
                           :label="$t('Views.Questionnaires.edit.input_min')"
                           :readonly="!isMinEditable"
-                          :disabled="!isMinEditable"
+                          Cdisabled="!isMinEditable"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <v-text-field
+                        <v-text-field disabled
                           v-model.number="limit"
                           :label="$t('Views.Questionnaires.edit.input_limit')"
                           :readonly="!isLimitEditable"
-                          :disabled="!isLimitEditable"
+                          Cdisabled="!isLimitEditable"
                         ></v-text-field>
                       </v-col>
                     </v-row>
@@ -233,13 +233,10 @@ export default Vue.extend({
       if (this.min <= 0) {
         return 'option_edit_valid_min'
       }
-      if (this.limit < this.min) {
-        return 'option_edit_valid_limit'
-      }
       if (this.options.length < this.min) {
         return 'option_edit_valid_length'
       }
-      if (!Number.isInteger(this.min) || !Number.isInteger(this.limit)) {
+      if (this.limit && (!Number.isInteger(this.min) || !Number.isInteger(this.limit))) {
         return 'option_edit_valid_interget'
       }
       const exist = []
@@ -265,7 +262,7 @@ export default Vue.extend({
         key: this.questionKey,
         lang: this.lang,
         min: this.min,
-        limit: this.limit,
+        limit: this.limit || undefined,
         options: this.options
       })
         .then(() => {

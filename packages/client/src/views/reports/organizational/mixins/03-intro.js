@@ -32,9 +32,18 @@ export default {
           absolutePosition: { x: 334, y: 120 }
         },
         {
-          text: 'Esto, ayuda a crear empresas más innovadoras, productivas y resilientes porque aprovechan al máximo el poder de la diversidad y la inclusión, impulsando el éxito económico y competitivo organizacional*.',
+          text: 'Esto, ayuda a crear empresas más innovadoras, productivas y resilientes porque aprovechan al máximo el poder de la diversidad y la inclusión, impulsando el éxito económico y competitivo organizacional.',
           margin: [0, 20, 0, 0],
           fontSize
+        },
+        {
+          text: 'Organización Internacional del Trabajo (OIT)',
+          link: 'https://n9.cl/uyp7s',
+          alignment: 'right',
+          margin: [0, 10, 0, 0],
+          italics: true,
+          fontSize: 8,
+          bold: true
         },
         {
           text: 'De esta manera, trabajar cada vez más en DEIP (Diversidad, Equidad, Inclusión, Pertenencia) tiene un impacto signiﬁcativo en la gestión y desempeño organizacional, además de cambios perdurables en el tiempo en innovación, creatividad, toma de decisiones, liderazgo, reputación y ﬁdelización del talento.',
@@ -57,20 +66,62 @@ export default {
         {
           image: footerBase64,
           fit: [241, 161],
-          absolutePosition: { x: 0, y: 545 }
+          absolutePosition: { x: 0, y: 580 }
         },
         {
-          text: [{ text: '*' }, { text: 'Organización Internacional del Trabajo (OIT)', link: 'https://n9.cl/uyp7s' }],
-          margin: [212, 147, 0, 0],
-          fontSize: 7.5
+          margin: [245, 18, 0, 0],
+          fontSize: 9,
+          table: {
+            body: [
+              [
+                {
+                  text: [
+                    { text: 'Diversidad', bold: true },
+                    { text: ': Todas las posibles diferencias entre los seres humanos. Medir la representación de grupos, poblaciones o comunidades específicos.' }
+                  ]
+                }
+              ],
+              [
+                {
+                  text: [
+                    { text: 'Equidad', bold: true },
+                    { text: ': Dar a cada persona lo que realmente necesita para garantizar igualdad de oportunidades de acceso y desarrollo.' }
+                  ]
+                }
+              ],
+              [
+                {
+                  text: [
+                    { text: 'Inclusión', bold: true },
+                    { text: ': El arte de gestionar conscientemente las diferencias individuales, fortalecer el talento e inspirar a cada integrante a dar lo mejor, generando bienestar, construyendo colectivamente e impactando a nivel social, ambiental y económico.' }
+                  ]
+                }
+              ],
+              [
+                {
+                  text: [
+                    { text: 'Pertenencia', bold: true },
+                    { text: ': Un ser humano que se siente respetado, valorado, reconocido por sus diversidades/talentos y que puede ser quien quiere ser, es testimonio de inspiración, engagement, fidelidad, liderazgo y orgullo por su SER, su impacto y el de su equipo.' }
+                  ]
+                }
+              ]
+            ]
+          },
+          layout: {
+            hLineWidth: () => {
+              return 1
+            },
+            vLineWidth: () => {
+              return 1
+            },
+            hLineColor: () => {
+              return '#BBBBBB'
+            },
+            vLineColor: () => {
+              return '#BBBBBB'
+            }
+          }
         }
-        /*
-        {
-          text: [{ text: 'Fuente:' }, { text: 'https://n9.cl/uyp7s', link: 'https://n9.cl/uyp7s' }],
-          margin: [212, 0, 0, 0],
-          fontSize: 7.5
-        }
-        */
       ]
     }
   }

@@ -31,10 +31,9 @@
             </v-col>
             <v-col cols="12" sm="5" class="pt-6 text-right">
               <v-btn dark small
-                     class="white--text"
-                     color="primary"
-                     style="margin-right:100%;"
-                     @click="getPdf(item)"
+                color="primary"
+                class="ml-auto white--text"
+                @click="getPdf(item)"
               >
                 {{$t('Views.Evaluations.stepQuestion.inputDownload')}}
                 <v-icon dark right small>mdi-file-pdf</v-icon>
@@ -213,7 +212,7 @@
     </v-card>
 
     <img
-      src="/img/20220621_occ_energy_logo_x.png"
+      src="/img/20231120_occ_deip_logo.png"
       style="visibility:hidden;"
       id="occDeipLogo"
       width="0"
@@ -250,8 +249,8 @@ export default {
       maxOpenQuestion: 3,
       minOptionOpenQuestion: 2,
       maxOptionOpenQuestion: 5,
-      energyLogoSrc: null,
-      energyLogoBase64: null
+      deipLogoSrc: null,
+      deipLogoBase64: null
     }
   },
   watch: {
@@ -265,10 +264,10 @@ export default {
         }
       }
     },
-    energyLogoSrc (newVal) {
+    deipLogoSrc (newVal) {
       if (newVal) {
-        this.toDataURL(this.energyLogoSrc, (dataURL) => {
-          this.energyLogoBase64 = dataURL
+        this.toDataURL(this.deipLogoSrc, (dataURL) => {
+          this.deipLogoBase64 = dataURL
         })
       }
     }
@@ -450,10 +449,9 @@ export default {
         },
         header: () => {
           return [{
-            image: this.energyLogoBase64,
-            height: 44,
-            width: 114,
-            margin: [20, 7, 0, 0]
+            image: this.deipLogoBase64,
+            fit: [47, 47],
+            margin: [17, 14, 0, 0]
           }]
         },
         footer: () => {
@@ -533,7 +531,7 @@ export default {
     })
   },
   mounted () {
-    this.energyLogoSrc = document.getElementById('occDeipLogo').src
+    this.deipLogoSrc = document.getElementById('occDeipLogo').src
   }
 }
 </script>

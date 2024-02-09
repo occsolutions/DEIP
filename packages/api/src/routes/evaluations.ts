@@ -155,5 +155,15 @@ export default (middlewares, services) => {
     EvaluationsController.close
   );
 
+  EvaluationsRouter.get(
+    '/get-total-answers/:id',
+    EvaluationsController.getTotalAnswers
+  );
+
+  EvaluationsRouter.get(
+    '/answers-with-participant/:id/:skip',
+    EvaluationsController.answersWithParticipant
+  );
+
   return EvaluationsRouter;
 };

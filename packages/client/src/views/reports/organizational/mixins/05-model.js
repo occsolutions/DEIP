@@ -9,12 +9,12 @@ export default {
       const lineHeight = 1.2
       const dimensions = [{
         text: [
-          { text: 'Estrategia / Compromiso', bold: true },
+          { text: 'Estrategia/Compromiso', bold: true },
           ': Mide el nivel de consciencia/madurez de DEI como estrategia y su conexión con el propósito superior y sostenibilidad de la organización.'
         ]
       }, {
         text: [
-          { text: 'Gobernanza / Liderazgo CSI (Consciente, Sostenible e Incluyente)', bold: true },
+          { text: 'Gobernanza/Liderazgo CSI (Consciente, Sostenible e Incluyente)', bold: true },
           ': Mide el nivel de dirección estructurada y la responsabilidad/compromiso de parte del liderazgo de la organización.'
         ]
       }, {
@@ -34,13 +34,13 @@ export default {
         ]
       }, {
         text: [
-          { text: 'Dimensión Adicional - Líder con Personas a Cargo', bold: true },
+          { text: 'Dimensión Adicional - Líderes de Equipos', bold: true },
           ': Las preguntas de esta dimensión son respondidas por aquellas personas que gestionan equipos de trabajo y son seleccionados por el cliente.'
         ]
       }]
 
       const dimensions2 = [{
-        name: 'Estrategia / Compromiso',
+        name: 'Estrategia/Compromiso',
         list: [
           'Propósito Superior',
           'Conexión Sostenibilidad',
@@ -50,12 +50,12 @@ export default {
           'Impacto Marca Empleadora'
         ]
       }, {
-        name: 'Gobernanza / Liderazgo CSI',
+        name: 'Gobernanza/Liderazgo CSI',
         list: [
           'Áreas Gestoras',
           'Champions',
           'Comité DEIP',
-          'Voluntariado Corporativo/ Impacto Comunidad',
+          'Voluntariado Corporativo/Impacto Comunidad',
           'Líderes y Responsabilidad de Triple Impacto/DEIP',
           'Perﬁl y Atributos de Liderazgo CSI*',
           'Acciones Aﬁrmativas'
@@ -100,7 +100,7 @@ export default {
           absolutePosition: { x: 200, y: 460 }
         },
         {
-          text: 'El modelo Índice de Evolución DEIP, se compone de 5 dimensiones y una dimensión adicional para los Líderes a cargo:',
+          text: 'El modelo Índice de Evolución DEIP, se compone de 5 dimensiones y una dimensión adicional para los Líderes de Equipos:',
           margin: [0, 35, 40, 0],
           fontSize,
           lineHeight: 1.4

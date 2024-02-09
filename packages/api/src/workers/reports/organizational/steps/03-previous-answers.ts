@@ -15,7 +15,7 @@ export default async (
 ) => {
   const chunkSize = 100;
   const fields = 'indEmpEntId temp.evaluations';
-  const answersBatch: any = await EvaluatedService.findByBatchByEvaluationId(previousEvaluationId, alreadyProcessedAnswersCount, chunkSize, fields);
+  const answersBatch: any = await EvaluatedService.findByBatchByEvaluationIdAndStatusCompleted(previousEvaluationId, alreadyProcessedAnswersCount, chunkSize, fields);
 
   // Run Answers Dimension
   for (let i = 0; i < answersBatch.length; i++) {
