@@ -272,7 +272,7 @@ export default {
               // Closed & Likert
               score = attr.score[0]
               if (score === -1) {
-                score = ''
+                score = 0.001
               }
               if (attr.qType === 'closed' && score === 0.01) {
                 score = 0
