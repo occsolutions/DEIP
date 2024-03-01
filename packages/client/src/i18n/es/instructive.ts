@@ -13,7 +13,7 @@ export default {
   description_leaders: 'Al descargar el formato de carga masiva obtendrá un archivo en formato .csv, dentro de este archivo ' +
   'podrá observar una columna, en la cual tendra la cabecera email. ' +
   'En esta columna se deben ingresar los correos electrónicos de los Colaboradores activos de su empresa previamente seleccionados a participar en la valoración.' +
-  'Los cuales tendrán el rol de líder con persona a cargo. Es importante destacar que si se indica el correo electrónico de un Colaborador activo que no esté entre los seleccionados para realizar la valoración, será considerado como un error.',
+  'Los cuales tendrán el rol de Líderes de Equipos. Es importante destacar que si se indica el correo electrónico de un Colaborador activo que no esté entre los seleccionados para realizar la valoración, será considerado como un error.',
   step1: 'Paso 1',
   step1_desc: 'Abrir Excel.',
   step2: 'Paso 2',
