@@ -19,6 +19,63 @@ export default {
         '9 preguntas sociodemográﬁcas para conocer el perﬁl del encuestado(a) (anónima y 100% conﬁdencial)',
         '5 dimensiones, con un total de 31 atributos y 56 preguntas (promedio de 11 preguntas especíﬁcas por atributo); de las cuales, 23 de ellas son descriptivas.',
         '12 preguntas adicionales para Líderes de Equipos, de las cuales 5 preguntas son descriptivas.'
+      ],
+      levelNamesBg: '#9cd3ef',
+      levelNames: [
+        'Descripción Nivel\nBásico',
+        'Descripción Nivel\nEmergente',
+        'Descripción Nivel\nEn Evolución',
+        'Descripción Nivel\nReferente'
+      ],
+      levelDescriptions: [
+        // Básico
+        [
+          'Bajo nivel de conciencia y poco conocimiento.',
+          'Acciones incipientes y esporádicas.',
+          'No involucramiento directo de los(as) líderes.',
+          'Mínima representación de talento diverso.'
+        ],
+        // Emergente
+        [
+          'Despertando consciencia y ampliando conocimiento.',
+          'Baja representación de talento diverso.',
+          'Inicio sensibilización y educación.',
+          'Involucramiento limitado de los(as) líderes.',
+          'Enfoque sólo en una arista de la diversidad.',
+          'Acciones y comunicación aisladas y tácticas.',
+          'Monitoreo y métricas DEIP incipientes.',
+          'Existencia de Comités desarticulados.',
+          'Presupuesto incipiente.'
+        ],
+        // En Evolución
+        [
+          'Evolucionando en nivel de consciencia y conocimiento.',
+          'Representación visible de talento diverso (orgánico).',
+          'Articulación con la estrategia de sostenibilidad.',
+          'Líderes corresponsables y sensibilizados (Sponsors - Champions).',
+          'Declaración de compromiso y política inicial.',
+          'Enfoque diferencial DEIP.',
+          'Articulación con la estrategia de comunicación.',
+          'Plan de sensibilización y formación (audiencias claves).',
+          'Comités oficiales con hoja de ruta.',
+          'Medición y monitoreo cualitativo.'
+        ],
+        // Referente
+        [
+          'Mayor nivel de conocimiento, madurez y conciencia.',
+          'DEIP como manifestación estratégica del Propósito Superior.',
+          'Representación visible de talento diverso (intencional).',
+          'Líderes movilizadores del ecosistema (Sponsors Champions influencers).',
+          'Evidencia de Ciclo de Talento CSI*.',
+          'Declaración de compromiso y política/protocolos con enfoque diferencial.',
+          'Enfoque diferencial/interseccional DEIP.',
+          'Estrategia de comunicación CSI (Interna y Externa).',
+          'Plan de sensibilización y formación (toda la organización).',
+          'Comités/ERGs oficiales y equipados.',
+          'Medición y monitoreo cualitativo y cuantitativo (KPIs).',
+          'Presupuesto estratégico multidimensional.',
+          'Articulación de ecosistemas.'
+        ]
       ]
     }
   },

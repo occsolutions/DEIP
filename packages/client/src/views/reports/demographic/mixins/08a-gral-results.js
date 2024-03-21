@@ -206,60 +206,61 @@ export default {
         {
           margin: [1, 24, 0, 0],
           color: '#222222',
-          fontSize: 9.5,
+          fontSize: 9,
+          lineHeight: 1.1,
           table: {
             widths: ['*', '*', '*', '*'],
             body: [
               // Headers
               [
                 {
-                  text: 'Descripción Nivel\nBásico',
+                  text: this.levelNames[0],
                   margin: [0, 2, 0, 0],
                   alignment: 'center',
-                  fillColor: '#f5afa6',
+                  fillColor: this.levelNamesBg,
                   bold: true
                 },
                 {
-                  text: 'Descripción Nivel Emergente',
+                  text: this.levelNames[1],
                   margin: [0, 2, 0, 0],
                   alignment: 'center',
-                  fillColor: '#f5afa6',
+                  fillColor: this.levelNamesBg,
                   bold: true
                 },
                 {
-                  text: 'Descripción Nivel\nEn Evolución',
+                  text: this.levelNames[2],
                   margin: [0, 2, 0, 0],
                   alignment: 'center',
-                  fillColor: '#f5afa6',
+                  fillColor: this.levelNamesBg,
                   bold: true
                 },
                 {
-                  text: 'Descripción Nivel Referente',
+                  text: this.levelNames[3],
                   margin: [0, 2, 0, 0],
                   alignment: 'center',
-                  fillColor: '#f5afa6',
+                  fillColor: this.levelNamesBg,
                   bold: true
                 }
               ],
               // Body
               [
                 {
-                  text: 'La organización se encuentra en un bajo nivel de conciencia con referencia a DEI. Hay poco conocimiento sobre el tema. Las acciones sobre DEI son incipientes y esporádicas. No existe involucramiento directo de los(as) líderes y se evidencia mínima representación visible de la diversidad.',
+                  ul: this.levelDescriptions[0],
                   margin: [2, 3, 2, 3],
                   fontSize: 9
                 },
                 {
-                  text: 'La organización se encuentra iniciando el despertar de consciencia con referencia a DEI. Los procesos de sensibilización y educación apenas comienzan. El conocimiento sobre DEI es básico y como cumplimiento de la normatividad. Comunicaciones y acciones aisladas y tácticas. Involucramiento limitado de los(as) líderes. Comités desarticulados. Comités voluntarios. Presupuesto incipiente. Enfoque en una arista de la diversidad. Baja representación visible de la diversidad. Monitoreo y métricas incipientes.',
+                  ul: this.levelDescriptions[1],
                   margin: [2, 3, 2, 3],
                   fontSize: 9
                 },
                 {
-                  text: 'La organización se encuentra evolucionando en su nivel de consciencia con referencia a DEI. Implementación de mejores prácticas. Mayor nivel de conocimiento. Conocimiento intermedio y avanzado sobre DEI. DEI como programa o proyecto. Ventaja competitiva. Comunicación a nivel estratégico. Acciones innovadoras. Líderes corresponsables (Sponsors - Champions). Equipamiento de líderes. Comités con Plan de Lanzamiento y Caja de Herramientas. Intervenciones estratégicas. Planeación y presupuesto inicial. Alta representación de visible la diversidad. Monitoreo cualitativo. Se evidencia el sentido de pertenencia por parte del/la colaborador(a).',
+                  ul: this.levelDescriptions[2],
                   margin: [2, 3, 2, 3],
                   fontSize: 9
                 },
                 {
-                  text: 'La organización cuenta con un mayor nivel de conocimiento, madurez y conciencia sobre DEI. Prácticas sostenibles y estratégicas. Creatividad e innovación en los programas e iniciativas. Ventaja cooperativa. Comunicación asertiva. Acciones referentes. Líderes movilizadores (Sponsors Champions). Líderes multiplicadores para el ecosistema, cadena de valor. Comités estratégicos. Promotores de prácticas para la industria en el sector. Presupuesto estratégico multidimensional. Enfoque diferencial e interseccional. Excepcional representación visible de la diversidad. Monitoreo y métricas cuantitativas y cualitativas. Se evidencia el sentido de pertenencia por parte del/la colaborador(a). Impactos marca empleadora y reputación corporativa.',
+                  ul: this.levelDescriptions[3],
                   margin: [2, 3, 2, 3],
                   fontSize: 9
                 }

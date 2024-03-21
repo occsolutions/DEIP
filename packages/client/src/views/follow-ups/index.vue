@@ -118,7 +118,9 @@
         class="mt-5 elevation-1 px-4 py-2"
       >
          <template v-slot:item="{ item, index }">
-          <tr :class="{ 'font-weight-bold': index + 1 === results.length }">
+          <tr v-if="item.total"
+            :class="{ 'font-weight-bold': index + 1 === results.length }"
+          >
             <td :class="{ 'text-right ': index + 1 === results.length, 'py-1': true }">
               {{ $te(`Views.FollowUpReport.${item.demo1}`) ? $t(`Views.FollowUpReport.${item.demo1}`) : item.demo1 }}
             </td>

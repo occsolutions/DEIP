@@ -167,21 +167,23 @@ export default {
 
       const data = []
       for (const result of this.results) {
-        data.push({
-          ...{
-            [`${this.selectedLabels[0]}`]: this.$te(`Views.FollowUpReport.${result.demo1}`)
-              ? this.$t(`Views.FollowUpReport.${result.demo1}`)
-              : result.demo1
-          },
-          ...(result.demo2 && {
-            [`${this.selectedLabels[1]}`]: this.$te(`Views.FollowUpReport.${result.demo2}`)
-              ? this.$t(`Views.FollowUpReport.${result.demo2}`)
-              : result.demo2
-          }),
-          ...{ [`${this.$t('Views.FollowUpReport.total_participants')}`]: result.total },
-          ...{ [`${this.$t('Views.FollowUpReport.total_completed')}`]: result.obtained },
-          ...{ [`${this.$t('Views.FollowUpReport.total_remaining')}`]: result.total - result.obtained }
-        })
+        if (result.total) {
+          data.push({
+            ...{
+              [`${this.selectedLabels[0]}`]: this.$te(`Views.FollowUpReport.${result.demo1}`)
+                ? this.$t(`Views.FollowUpReport.${result.demo1}`)
+                : result.demo1
+            },
+            ...(result.demo2 && {
+              [`${this.selectedLabels[1]}`]: this.$te(`Views.FollowUpReport.${result.demo2}`)
+                ? this.$t(`Views.FollowUpReport.${result.demo2}`)
+                : result.demo2
+            }),
+            ...{ [`${this.$t('Views.FollowUpReport.total_participants')}`]: result.total },
+            ...{ [`${this.$t('Views.FollowUpReport.total_completed')}`]: result.obtained },
+            ...{ [`${this.$t('Views.FollowUpReport.total_remaining')}`]: result.total - result.obtained }
+          })
+        }
       }
 
       // Add percents row
