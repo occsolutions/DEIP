@@ -92,7 +92,7 @@ class ReportMethods {
             threadData.answersForScatter,
             threadData.answersDimension,
             threadData.answeredCount,
-            threadData.populationLeaders.length || 1,
+            threadData.answeredLeadersCount || 1,
             threadData.hasPrevious ? threadData.tempData.previous.answeredCount : 1,
             threadData.hasPrevious ? threadData.tempData.previous.leadersAnsweredCount : 1
           );
