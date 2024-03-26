@@ -16,7 +16,7 @@ export default {
           const qOptions = []
           this.evaluationData.questionnaire.evaluations.leader[qKey].options.forEach(opt => {
             const optResponseCount = this.answersDimension.leader[qKey].general.scores[0][opt.value] || 0
-            const responseRate = (100 * optResponseCount) / this.completedPolls
+            const responseRate = (100 * optResponseCount) / (this.completedLeaders || 1)
             qOptions.push({
               text: opt.label[this.user.lang],
               value: responseRate
