@@ -12,7 +12,7 @@ import ProcessReportByPopulation from './reports/by-population';
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 export default () => {
-  setInterval(() => { console.log('Updated at 2024-03-24 16:00'); }, ms('5m'));
+  setInterval(() => { console.log('Updated at 2024-04-04 13:00'); }, ms('5m'));
   const quarter = '15m';
   const minutes = '5m';
   const seconds = '30s';
