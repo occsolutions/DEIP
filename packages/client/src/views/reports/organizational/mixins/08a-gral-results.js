@@ -72,7 +72,7 @@ export default {
         },
         pdfUtils.generateTitle('Resultado Índice de Evolución DEIP', [0, 0], '', 1, '#FFFFFF', true, true),
         {
-          text: 'Indice Evolución DEIP',
+          text: 'Índice de Evolución DEIP',
           margin: [0, 19, 0, 0],
           color: '#111111',
           fontSize: 18,
