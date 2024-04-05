@@ -6,6 +6,7 @@ import StepTwo from './steps/02-previous';
 import StepThree from './steps/03-previous-answers';
 import StepFour from './steps/04-averages';
 import StepFive from './steps/05-scatter';
+import StepSix from './steps/06-segments';
 
 class ReportMethods {
 
@@ -113,6 +114,16 @@ class ReportMethods {
           threadData.scatterDimension = tempStepFive.scatter;
           threadData.highestScatter = tempStepFive.highest;
           threadData.lowestScatter = tempStepFive.lowest;
+
+          threadData.step = 6;
+          threadData.progress = 90;
+          break;
+        case 6: // Segmentation rate
+          const tempStepSix = await StepSix(
+            threadData._evaluation
+          );
+
+          threadData.segmentationRate = tempStepSix;
 
           threadData.progress = 100;
           break;

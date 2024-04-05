@@ -216,7 +216,7 @@ export default {
           'Nivel Académico': item.demographicItems.academicDegree,
           Genero: item.demographicItems.gender,
           'ID Interno': `ObjectId(${item.participant.id})`,
-          'Documento de Identidad': parseInt(item.participant.identifyDocument),
+          'Documento de Identidad': item.participant.identifyDocument,
           Correo: item.participant.email,
           Edad: await this.getRange(item.demographicItems.birthdate, 'age'),
           Antigüedad: await this.getRange(item.demographicItems.admission, 'antiquity'),
