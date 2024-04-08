@@ -12,6 +12,7 @@ export default {
   },
   methods: {
     $generateResponseRateDetails () {
+      if (!this.segmentationRate || !Object.keys(this.segmentationRate).length) return
       return [
         pdfUtils.generateTitle('% de Respuestas por Segmentación', [0, 0], 'before', 24, '#222222', true, true),
         {
