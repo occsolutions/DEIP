@@ -43,7 +43,7 @@ export default {
         name: 'Estrategia/Compromiso',
         list: [
           'Propósito Superior',
-          'Conexión Sostenibilidad',
+          'Conexión Sostenibilidad/ASG',
           'Caso de Negocio (aristas de la diversidad)',
           'Declaración Compromiso/Política DDHH',
           'Conciliación Vida - Trabajo',
@@ -53,22 +53,22 @@ export default {
         name: 'Gobernanza/Liderazgo CSI',
         list: [
           'Áreas Gestoras',
-          'Champions',
+          'Champions (Líderes)',
           'Comité DEIP',
           'Voluntariado Corporativo/Impacto Comunidad',
           'Líderes y Responsabilidad de Triple Impacto/DEIP',
           'Perﬁl y Atributos de Liderazgo CSI*',
-          'Acciones Aﬁrmativas'
+          'Acciones Aﬁrmativas de los Líderes'
         ]
       }, {
         name: 'Cultura CSI',
         list: [
           'Valores Corporativos',
-          'Nivel de Conocimiento DEIP',
+          'Sensibilización - Educación DEIP',
           'Estrategia de Comunicación DEIP (Interna/Externa)',
           'Comportamientos Deseados DEIP',
           'Plan de Reconocimiento',
-          'Acciones Aﬁrmativas'
+          'Acciones Aﬁrmativas para Generar Cultura'
         ]
       }, {
         name: 'Ecosistema DI',
@@ -77,18 +77,17 @@ export default {
           'Declaraciones y Políticas',
           'Protocolos de Violencias',
           'Reputación Corporativa',
-          'Acciones Aﬁrmativas'
+          'Acciones Aﬁrmativas con los\nGrupos de Interés'
         ]
       }, {
         name: 'Ciclo de Talento Incluyente',
         list: [
-          'Proceso de Atracción Incluyente',
-          'Proceso de Selección Incluyente',
+          'Proceso de Atracción y Selección Incluyente',
           'Proceso de Inducción Incluyente',
           'Proceso de Desarrollo de Carrera Incluyente',
-          'Beneﬁcios Incluyentes',
+          'Compensación y Beneficios Incluyentes',
           'Momentos de la Verdad (Fidelización-Engagement)',
-          'Acciones Aﬁrmativas'
+          'Acciones Aﬁrmativas para el Desarrollo del Talento'
         ]
       }]
 
@@ -144,7 +143,7 @@ export default {
                 },
                 {
                   stack: [{ text: dimensions2[4].name, bold: true, fontSize: 11 }, { ul: dimensions2[4].list, margin: [-9.5, 0, 0, 0] }],
-                  margin: [-14, 42, 0, 0]
+                  margin: [-14, 30, 0, 0]
                 }
               ]
             ]
