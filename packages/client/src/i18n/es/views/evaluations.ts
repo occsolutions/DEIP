@@ -303,8 +303,6 @@ export default {
   evaluation: {
     evaluate: 'Participante',
     information_1: 'Bienvenido(a) a la encuesta DEIP',
-    information_2: 'El Índice de Evolución DEIP (Enfoque diferencial e interseccional), es una medición que permite identificar el nivel de consciencia, conocimiento y madurez de la organización y su estrategia de Diversidad, Equidad, Inclusión y Pertenencia; a través de 5 dimensiones: Estrategia/Compromiso, Gobernanza/Liderazgo CSI (Consciente, Sostenible e Incluyente), Cultura CSI, Ciclo de Talento Incluyente, Ecosistema DI (Diferencial e Interseccional) y una dimensión adicional para Líderes de Equipos.',
-    information_3: 'Le invitamos a contestar de manera totalmente honesta cada una de las siguientes preguntas.',
     score_label1: 'Nunca',
     score_label2: 'Casi nunca',
     score_label3: 'Ocasionalmente',
@@ -330,6 +328,7 @@ export default {
     answer: 'Respuesta',
     wellcomeDialog: {
       wellcome_instructions: 'El Índice de Evolución DEIP (Enfoque diferencial e interseccional), es una medición que permite identificar el nivel de consciencia,<br />conocimiento y madurez de la organización y su estrategia de Diversidad, Equidad, Inclusión y Pertenencia; a través de 5 dimensiones:<br />Estrategia/Compromiso, Gobernanza/Liderazgo CSI (Consciente, Sostenible e Incluyente), Cultura CSI, Ciclo de Talento Incluyente, Ecosistema DI (Diferencial e Interseccional) y una dimensión adicional para Líderes de Equipos.' +
+      '<br/><br/>Puedes dar click sobre las palabras en azul para tener más información del concepto.' +
       '<br/><br/>Le invitamos a contestar de manera totalmente honesta cada una de las siguientes preguntas.' +
       '<br/><br/>El plazo máximo para completar la encuesta es: {deadline}',
       must_accept_policy_to_continue: 'Para continuar con la encuesta es indispensable que por favor acepte nuestra política de tratamiento de datos:',
