@@ -345,7 +345,7 @@ export default {
     const url = new URL(urlString)
     const updatedAt = url.searchParams.get('updatedAt')
     if (updatedAt) {
-      console.log('Updated at 2024-04-11 11:00')
+      console.log('Updated at 2024-04-30 18:00')
     }
   }
 }
