@@ -61,6 +61,7 @@ import objectives from './mixins/04-objectives'
 import model from './mixins/05-model'
 import methodology from './mixins/06-methodology'
 import responseRate from './mixins/07-response-rate'
+import additionalSegmentationRate from './mixins/07b-response-rate-details'
 import gralResults from './mixins/08a-gral-results'
 import gralDimResults from './mixins/08b-gral-dim-results'
 import gralDimDesc from './mixins/08c-gral-dim-desc'
@@ -111,6 +112,7 @@ export default {
     model,
     methodology,
     responseRate,
+    additionalSegmentationRate,
     gralResults,
     gralDimResults,
     gralDimDesc,
@@ -182,6 +184,7 @@ export default {
           this.completedPolls = res.data.answeredCount
           this.expectedLeaders = this.evaluationData.populationLeaders.length
           this.completedLeaders = res.data.answeredLeadersCount
+          this.segmentationRate = res.data.segmentationRate
           this.answersDimension = res.data.answersDimension
           this.scatterDimension = res.data.scatterDimension
           this.highestScores = res.data.highestScores

@@ -159,8 +159,12 @@ class EvaluatedService {
     return EvaluatedRepository.countDocuments({
       evaluationRef: new ObjectID(evaluationId),
       status: 'completed',
-      'temp.segmentation.segmentationId': segmentationId ,
-      'temp.segmentation.detailId': segmentationDetail
+      'temp.segmentation': {
+        $elemMatch: {
+          'segmentationId': segmentationId,
+          'detailId': segmentationDetail
+        }
+      }
     });
   }
 

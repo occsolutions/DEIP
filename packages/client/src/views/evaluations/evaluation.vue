@@ -18,18 +18,6 @@
         <v-col cols="12" class="pb-2 text-center">
           <v-card flat>
             <h1 class="display-1">{{ evaluation.displayName || evaluation.name }}</h1>
-            <!--
-            <p class="mt-7 mb-2 text-center font-weight-bold">
-              {{ $t('Views.Evaluations.evaluation.information_1') }}
-            </p>
-            <p class="text-center">
-              <br/>
-              {{ $t('Views.Evaluations.evaluation.information_2') }}
-              <v-spacer/>
-              <br/>
-              {{ $t('Views.Evaluations.evaluation.information_3') }}
-            </p>
-            -->
           </v-card>
         </v-col>
       </v-row>

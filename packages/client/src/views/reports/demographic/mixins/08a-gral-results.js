@@ -4,49 +4,6 @@ import evolutionBarBase64 from '../../base64files/evolution-bar'
 
 export default {
   methods: {
-    getEvolutionIndex (score) {
-      let text, width
-      switch (true) {
-        case (score >= 1 && score < 2):
-          text = 'Básico'
-          width = 42
-          break
-        case (score >= 2 && score < 3):
-          text = 'Emergente'
-          width = 71
-          break
-        case (score >= 3 && score < 4):
-          text = 'En Evolución'
-          width = 82
-          break
-        case (score >= 4 && score <= 5):
-          text = 'Referente'
-          width = 62.5
-          break
-      }
-
-      return { text, width }
-    },
-    getFillColor (score) {
-      score = Number(parseFloat(score).toFixed(2))
-      let color
-      switch (true) {
-        case (score >= 0 && score < 0.4):
-          color = '#CF6463'
-          break
-        case (score >= 0.4 && score < 0.7):
-          color = '#FFd87C'
-          break
-        case (score >= 0.7 && score <= 1):
-          color = '#93D379'
-          break
-        default:
-          color = '#FF6600'
-          break
-      }
-
-      return color
-    },
     $generateGeneralResults () {
       let sumCurrentFiltered = 0
       let sumCurrentGeneral = 0
@@ -75,7 +32,7 @@ export default {
         },
         pdfUtils.generateTitle('Resultado Índice de Evolución DEIP', [0, 0], '', 1, '#FFFFFF', true, true),
         {
-          text: 'Indice Evolución DEIP',
+          text: 'Índice de Evolución DEIP',
           margin: [0, 19, 0, 0],
           color: '#111111',
           fontSize: 18,

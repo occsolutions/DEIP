@@ -59,6 +59,9 @@ export default async (
             answersForScatter[dimKey].attrs[attrKey].questions[qKey].previous.average = arrAvg(answersForScatter[dimKey].attrs[attrKey].questions[qKey].previous.scores);
             avgForAttr.push(avg.score);
             avgForPreviousAttr.push(avg.previous);
+            // Directly get Dimension avg from questions, instead of Attributes
+            avgForDim.push(avg.score);
+            avgForPreviousDim.push(avg.previous);
           } else {
             // Options questions
             const counts = {};
@@ -75,10 +78,14 @@ export default async (
         const attrPreviousAvg = arrAvg(avgForPreviousAttr);
         answersDimension[dimKey].attrs[attrKey].general.score = attrAvg;
         answersDimension[dimKey].attrs[attrKey].general.previous = attrPreviousAvg;
+        // As of 2024-03-24, Dimension avg is calculated straight from questions, not Attributes
+        /*
         avgForDim.push(attrAvg);
         avgForPreviousDim.push(attrPreviousAvg);
+        */
       }
     } else {
+      // Leader dimension
       for (const qKey of Object.keys(answersDimension[dimKey])) {
         if (!['general', 'filtered'].includes(qKey)) {
           const questionType = answersDimension[dimKey][qKey].qType;

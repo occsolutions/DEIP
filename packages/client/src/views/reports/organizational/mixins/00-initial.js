@@ -99,6 +99,7 @@ export default {
           this.$generateMethodology(),
           // 07 Response Rate
           this.$generateResponseRate(),
+          this.$generateResponseRateDetails(),
           // 08 General Scores
           this.$generateGeneralResults(),
           // 09 Dimensions Results

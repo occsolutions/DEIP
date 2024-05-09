@@ -5,10 +5,8 @@ export default {
   methods: {
     $generateLeadersOptQuestions () {
       const pages = []
-      // const barsWidth = 325
-      // const barsHeight = 50
+      const cols = []
 
-      let i = 0
       Object.keys(this.answersDimension.leader).forEach(qKey => {
         const question = this.answersDimension.leader[qKey]
         if (question.qType === 'options') {
@@ -16,14 +14,14 @@ export default {
           const qOptions = []
           this.evaluationData.questionnaire.evaluations.leader[qKey].options.forEach(opt => {
             const optResponseCount = this.answersDimension.leader[qKey].filtered.scores[0][opt.value] || 0
-            const responseRate = (100 * optResponseCount) / this.completedPolls
+            const responseRate = (100 * optResponseCount) / (this.completedLeaders || 1)
             qOptions.push({
               text: opt.label[this.user.lang],
               value: responseRate
             })
           })
 
-          // Sort & assemble results
+          // Sort & assemble results (Bars)
           const resultRows = []
           qOptions.sort((a, b) => Number(b.value) - Number(a.value)).forEach(x => {
             resultRows.push(
@@ -32,12 +30,12 @@ export default {
                 value: x.value,
                 margin: [4, 7, 0, 0],
                 color: '#777777',
-                fontSize: 8.5
+                fontSize: 8
               },
               {
-                margin: [0, 1, 440, 0],
+                margin: [0, 1, 100, 0],
                 color: '#111111',
-                fontSize: 9,
+                fontSize: 8,
                 lineHeight: 0.9,
                 table: {
                   widths: [`${x.value}%`, '*'],
@@ -62,23 +60,34 @@ export default {
             )
           })
 
-          // Render pages
-          pages.push(
-            pdfUtils.generateTitle('Resultados Preguntas Descriptivas', [0, -5, 0, 0], 'before', 24, '#222222', i === 0, i === 0),
+          cols.push({
+            dim: this.$t('Views.Evaluations.stepQuestion.leader'),
+            q: this.evaluationData.questionnaire.evaluations.leader[qKey].label[this.user.lang],
+            graph: JSON.parse(JSON.stringify(resultRows))
+          })
+        }
+      })
+
+      // Render pages
+      cols.forEach((col, i) => {
+        const isOdd = i % 2 === 0
+        const showInToc = i === 0
+
+        if (isOdd) {
+          pages.push([
+            pdfUtils.generateTitle('Resultados Preguntas Descriptivas', [0, -5, 0, 0], 'before', 22, '#222222', showInToc, showInToc),
             {
-              text: this.$t('Views.Evaluations.stepQuestion.leader'),
-              font: 'League Spartan',
-              color: '#222222',
-              fontSize: 24
-            },
-            {
-              text: this.evaluationData.questionnaire.evaluations.leader[qKey].label[this.user.lang],
-              margin: [0, 25, 0, 10],
-              color: '#666666'
-            },
-            ...JSON.parse(JSON.stringify(resultRows))
-          )
-          i++
+              columns: [
+                [...this.getDimAndQuestion(col)],
+                [/* Empty if isOdd */]
+              ]
+            }
+          ])
+        } else {
+          // Fill previous second column
+          pages[pages.length - 1][1].columns[1].push([
+            ...this.getDimAndQuestion(col, 1)
+          ])
         }
       })
 

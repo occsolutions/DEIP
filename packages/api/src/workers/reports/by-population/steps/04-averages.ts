@@ -65,6 +65,11 @@ export default async (
             answersForScatter[dimKey].attrs[attrKey].questions[qKey].filtered.scatter.average = arrAvg(answersForScatter[dimKey].attrs[attrKey].questions[qKey].filtered.scatter.scores);
             avgForFilteredAttr.push(filteredAvg.score);
             avgForPreviousFilteredAttr.push(filteredAvg.previous);
+            // Directly get Dimension avg from questions, instead of Attributes
+            avgForGeneralDim.push(avg.score);
+            avgForFilteredDim.push(filteredAvg.score);
+            avgForPreviousFilteredDim.push(filteredAvg.previous);
+
             // For ranking, based on filtered avg.
             higherLower.push({
               type: questionType,
@@ -95,15 +100,24 @@ export default async (
         // General Attribute Average
         const attrGeneralAvg = arrAvg(avgForGeneralAttr);
         answersDimension[dimKey].attrs[attrKey].general.score = attrGeneralAvg;
+        /*
         avgForGeneralDim.push(attrGeneralAvg);
+        */
+
         // Filtered Attribute Average
         const attrFilteredAvg = arrAvg(avgForFilteredAttr);
         answersDimension[dimKey].attrs[attrKey].filtered.score = attrFilteredAvg;
+        /*
         avgForFilteredDim.push(attrFilteredAvg);
+        */
+
         // Filtered Previous Attribute Average
         const attrPreviousFilteredAvg = arrAvg(avgForPreviousFilteredAttr);
         answersDimension[dimKey].attrs[attrKey].filtered.previous = attrPreviousFilteredAvg;
+        /*
         avgForPreviousFilteredDim.push(attrPreviousFilteredAvg);
+        */
+        // As of 2024-03-24, Dimension avg is calculated straight from questions, not Attributes
       }
     } else {
       // Leader dimension
