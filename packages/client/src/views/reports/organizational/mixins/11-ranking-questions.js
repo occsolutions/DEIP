@@ -48,7 +48,7 @@ export default {
           ? this.answersDimension[x.dimension][x.question].general.previous || 0
           : this.answersDimension[x.dimension].attrs[x.attribute].questions[x.question].general.previous || 0
 
-        const trend = x.score - previous
+        const trend = this.$round(x.score) - this.$round(previous)
 
         rows.push([
           {

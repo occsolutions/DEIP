@@ -7,7 +7,7 @@ export default {
       const rows = []
       Object.keys(this.answersDimension).forEach(key => {
         if (key !== 'leader') {
-          const trend = this.answersDimension[key].general.score - this.answersDimension[key].general.previous
+          const trend = this.$round(this.answersDimension[key].general.score) - this.$round(this.answersDimension[key].general.previous)
           rows.push([
             {
               text: this.evaluationData.questionnaire.evaluations[key].label[this.user.lang].replace(/\((.*?)\)/g, '').replace(' *', ''),

@@ -7,8 +7,8 @@ export default {
       const rows = []
       Object.keys(this.answersDimension).forEach(key => {
         if (key !== 'leader') {
-          const variation = this.answersDimension[key].filtered.score - this.answersDimension[key].filtered.previous
-          const gap = this.answersDimension[key].filtered.score - this.answersDimension[key].general.score
+          const variation = this.$round(this.answersDimension[key].filtered.score) - this.$round(this.answersDimension[key].filtered.previous)
+          const gap = this.$round(this.answersDimension[key].filtered.score) - this.$round(this.answersDimension[key].general.score)
 
           rows.push([
             {

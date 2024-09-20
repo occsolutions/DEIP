@@ -44,7 +44,7 @@ export default {
             Object.keys(this.answersDimension[dimKey].attrs[attrKey].questions).forEach(qKey => {
               const question = this.answersDimension[dimKey].attrs[attrKey].questions[qKey]
               if (question.qType !== 'options') {
-                const variation = question.general.score - question.general.previous
+                const variation = this.$round(question.general.score) - this.$round(question.general.previous)
                 rows.push([
                   {
                     text: this.hasPrevious ? this.evaluationData.questionnaire.evaluations[dimKey].attrs[attrKey].questions[qKey].label[this.user.lang] : '--',

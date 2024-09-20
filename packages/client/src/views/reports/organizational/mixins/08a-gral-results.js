@@ -15,7 +15,7 @@ export default {
         }
       })
 
-      const trend = sumCurrent - sumPrevious
+      const trend = this.$round(sumCurrent) - this.$round(sumPrevious)
 
       const evolutionIndex = this.getEvolutionIndex(sumCurrent)
 

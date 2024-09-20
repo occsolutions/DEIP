@@ -58,8 +58,8 @@ export default {
             Object.keys(this.answersDimension[dimKey].attrs[attrKey].questions).forEach(qKey => {
               const question = this.answersDimension[dimKey].attrs[attrKey].questions[qKey]
               if (question.qType !== 'options') {
-                const variation = question.filtered.score - question.filtered.previous
-                const gap = question.filtered.score - question.general.score
+                const variation = this.$round(question.filtered.score) - this.$round(question.filtered.previous)
+                const gap = this.$round(question.filtered.score) - this.$round(question.general.score)
 
                 rows.push([
                   {
