@@ -88,7 +88,7 @@ export default {
 
         for (const demoKey in this.answersRateDetails[cutKey]) {
           const value = this.answersRateDetails[cutKey][demoKey]
-          const percent = this.$round((value / this.completedPolls) * 100)
+          const percent = this.$round((value / this.expectedPolls) * 100)
 
           body.push([
             {
