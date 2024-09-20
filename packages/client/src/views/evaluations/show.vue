@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row align="center" justify="start" fill-height>
+    <v-row align="center" justify="start">
       <v-col xs="12">
         <h4 class="display-1 left">{{ evaluation.name }}</h4>
         <v-chip
@@ -13,7 +13,7 @@
       </v-col>
     </v-row>
 
-    <v-card class="my-4">
+    <v-card class="mt-4">
       <v-toolbar color="primary" flat class="white--text">
         <v-btn icon to="/evaluations" color="primary" large>
           <v-icon color="white">fa-chevron-left</v-icon>
@@ -81,7 +81,7 @@
           </v-list>
         </v-menu>
       </v-toolbar>
-      <v-row class="px-8 py-4 my-5">
+      <v-row class="px-8 py-4 mt-5 mb-0">
         <v-col xs="12" sm="4" align="center">
           <v-progress-circular
             :rotate="-90"
@@ -162,6 +162,7 @@
           </v-list>
         </v-col>
       </v-row>
+      <!--
       <v-divider></v-divider>
       <v-row class="text-center">
         <v-col cols="12">
@@ -218,6 +219,7 @@
           </div>
         </v-col>
       </v-row>
+      -->
     </v-card>
 
     <x-confirmation-modal
@@ -335,6 +337,8 @@ export default Vue.extend({
     }
   },
   created () {
+    return this.getEvaluation()
+    /*
     this.$store.dispatch('loading/show')
     identifyTypesService.list()
       .then(res => {
@@ -344,6 +348,7 @@ export default Vue.extend({
         this.$store.dispatch('loading/hide')
         return this.getEvaluation()
       })
+    */
   },
   methods: {
     getInitials (text) {
