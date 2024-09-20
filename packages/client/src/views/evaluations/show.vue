@@ -278,7 +278,7 @@ import XJsonModal from '@/components/dialogs/spreadsheet-json'
 
 import evaluationsService from '../../services/evaluations'
 import evaluatedService from '../../services/evaluated'
-import identifyTypesService from '../../services/identify-types'
+// import identifyTypesService from '../../services/identify-types'
 
 export default Vue.extend({
   components: {
