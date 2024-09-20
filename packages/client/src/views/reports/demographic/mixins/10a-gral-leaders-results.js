@@ -4,8 +4,8 @@ import pdfUtils from '../../utils/pdf'
 export default {
   methods: {
     $generateLeadersResults () {
-      const trend = this.answersDimension.leader.filtered.score - this.answersDimension.leader.filtered.previous
-      const gap = this.answersDimension.leader.filtered.score - this.answersDimension.leader.general.score
+      const trend = this.$round(this.answersDimension.leader.filtered.score) - this.$round(this.answersDimension.leader.filtered.previous)
+      const gap = this.$round(this.answersDimension.leader.filtered.score) - this.$round(this.answersDimension.leader.general.score)
 
       return [
         {
