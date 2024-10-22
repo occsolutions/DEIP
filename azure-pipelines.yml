@@ -10,7 +10,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '0de883d2-2f37-4723-997e-a1a6bf5a37c4'
+  dockerRegistryServiceConnection: '160409ec-5eb3-4bdb-92be-8333547098ce'
   containerRegistry: 'acrocc1.azurecr.io'
   imageRepository_server: 'occsolutionsdeipserver'
   dockerfilePath_server: '$(Build.SourcesDirectory)/packages/api/Dockerfile.prod'
