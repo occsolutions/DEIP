@@ -13,7 +13,7 @@ export default async (
   answersDimension: IAnswersDimension,
   populationLeaders: Array<number>
 ) => {
-  const chunkSize = 100;
+  const chunkSize = 200;
   const fields = 'indEmpEntId temp.evaluations';
   const answersBatch: any = await EvaluatedService.findByBatchByEvaluationIdAndStatusCompleted(evaluationId, alreadyProcessedAnswersCount, chunkSize, fields);
 

@@ -17,8 +17,8 @@ export default {
         }
       })
 
-      const trend = sumCurrentFiltered - sumPreviousFiltered
-      const gap = sumCurrentFiltered - sumCurrentGeneral
+      const trend = this.$round(sumCurrentFiltered) - this.$round(sumPreviousFiltered)
+      const gap = this.$round(sumCurrentFiltered) - this.$round(sumCurrentGeneral)
 
       const evolutionIndex = this.getEvolutionIndex(sumCurrentGeneral)
 

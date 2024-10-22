@@ -26,7 +26,7 @@ export default {
               const question = this.answersDimension[dimKey].attrs[attrKey].questions[qKey]
               if (question.qType !== 'options') {
                 const previous = question.general.previous || 0
-                const trend = question.general.score - previous
+                const trend = this.$round(question.general.score) - this.$round(previous)
 
                 // Assemble questions rows
                 rows.push([

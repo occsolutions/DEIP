@@ -66,8 +66,8 @@ export default {
           ? this.answersDimension[x.dimension][x.question].general.score
           : this.answersDimension[x.dimension].attrs[x.attribute].questions[x.question].general.score
 
-        const trend = x.score - previous
-        const gap = x.score - organization
+        const trend = this.$round(x.score) - this.$round(previous)
+        const gap = this.$round(x.score) - this.$round(organization)
 
         rows.push([
           {
