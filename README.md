@@ -1,4 +1,4 @@
-# DEIP
+# DEIP 
 
 Identify the level of knowledge, awareness and maturity regarding the DEIP strategy and to inspire and monitor their evolution in organizations, through the perceptions of leaders and collaborators.
 
