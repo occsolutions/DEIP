@@ -38,7 +38,7 @@ export default async (
   answersRateDetails: any,
   demoFilters: any
 ) => {
-  const chunkSize = 100;
+  const chunkSize = 200;
   const fields = 'indEmpEntId temp.evaluations temp.segmentation employee.employeeEnterprise';
   const answersBatch: any = await EvaluatedService.findByBatchByEvaluationIdAndStatusCompleted(evaluationId, alreadyProcessedAnswersCount, chunkSize, fields);
   const filtered: any = await EvaluatedService.findCompletedByEvaluationIdAndFilterItems(evaluationId, demoFilters, 'indEmpEntId');
