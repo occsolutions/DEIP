@@ -259,11 +259,11 @@ class EvaluatedService {
     );
   }
 
-  async findByBatchByEvaluationIdAndStatusCompleted(evaluationId: any, skip: number, qty: number, select?: undefined|any): Promise<EvaluatedType[]> {
+  async findByBatchByEvaluationIdAndStatusCompleted(evaluationId: any, skip: number, limit: number, select?: undefined|any): Promise<EvaluatedType[]> {
     return EvaluatedRepository.find(
       { evaluationRef: evaluationId, status: 'completed' },
       select || undefined,
-      { skip: Number(skip * qty), limit: Number(qty) }
+      { skip, limit }
     );
   }
 
